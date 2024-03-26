@@ -32,11 +32,12 @@ public class BoardEntity extends BaseTime {
     @Column(columnDefinition = "longtext" )
     private String bcontent; //내용
 
+    @Column
     @ColumnDefault("0")
-    private  int bview; //조회수
+    private int bview; //조회수
 
     //================ FK 필드
-   @JoinColumn(name="mno_fk") //fk 필드명
+    @JoinColumn(name="mno_fk") //fk 필드명
     @ManyToOne // 해당 필드 참조
     private MemberEntity memberEntity;
 
@@ -46,6 +47,7 @@ public class BoardEntity extends BaseTime {
                 .bno(this.bno)
                 .bcontent(this.bcontent)
                 .bview(this.bview)
+                .memberEntity(this.memberEntity)
                 .build();
     }
 }
