@@ -1,12 +1,10 @@
 package connectweb.connect_back.model.entity.member;
 
+import connectweb.connect_back.model.dto.MemberDto;
 import connectweb.connect_back.model.entity.BaseTime;
-import connectweb.connect_back.model.entity.board.BoardEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="member")
@@ -51,8 +49,8 @@ public class MemberEntity extends BaseTime {
     @Column(columnDefinition = "date")
     private String mbirth;	//생년월일
 
-  /*  //- 엔티티를 dto로 변환하는 메소드
-    public MemberDto toMDto(){
+   //- 엔티티를 dto로 변환하는 메소드
+    public MemberDto toDto(){
         return MemberDto.builder()
                 .mno(this.mno)
                 .mid(this.mid)
@@ -63,7 +61,7 @@ public class MemberEntity extends BaseTime {
                 .mphone(this.mphone)
                 .mbirth(this.mbirth)
                 .build();
-    }*/
+    }
 
   /* //양방향 :게시물fk @OneToMany(mappedBy = "해당테이블 fk필드명")
     @OneToMany(mappedBy = "memberEntity")
