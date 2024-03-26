@@ -1,0 +1,104 @@
+/* 초기값 */
+ul {list-style: none; padding: 0; margin: 0;}
+p {padding: 0; margin: 0;}
+
+/* 레이아웃 */
+#container {
+    width: 480px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+.innerContainer {
+    width: 90%;
+    margin: 0 auto;
+}
+.header {
+    height: 50px;
+    border: 1px solid red;;
+}
+.footer{
+    height: 50px;
+    border: 1px solid red;
+}
+
+
+/* myInfo */
+.myInfo{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+.myInfo .imgBox {
+    border: 1px solid red;
+    border-radius: 50%;
+    width:150px;
+    height: 140px;
+    margin-right: 100px;
+}
+
+/* content */
+.content {
+    height: 500px;
+    margin: 0 auto;
+}
+.content ul {
+    padding: 0;
+}
+.content ul li {
+    border : 1px solid red;
+    height: 450px;
+    margin: 10px;
+}
+
+/* maincontent */
+.mainContent .topInfo {
+    display: flex;
+    margin-top: 20px;
+}
+.mainContent .topInfo p {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.mainContent .topImg {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid red;
+}
+.mainContent ul li {
+    margin: 10px auto;
+}
+.btmBox {
+    border: 1px solid red;
+    margin: 20px auto;
+}
+
+.btmBox ul li:nth-child(1) {
+    font-size: 20px;
+}
+.btmBox p {padding: 20px 0;}
+
+.btmInfo {
+    display: flex;
+}
+
+/* subcontent */
+.subContent {
+    width: 100%;
+    margin: 0 auto;
+}
+.subContent ul{
+    display: flex;
+    justify-content: center;
+}
+.subContent ul li {
+    width: 100%;
+}
+.replyBox{
+    padding: 20px 0;
+    margin: 20px auto;
+    border: 1px solid red;
+}
+
+
+/* ㅇㅇㅇ */
