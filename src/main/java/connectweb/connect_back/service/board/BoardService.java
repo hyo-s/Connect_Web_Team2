@@ -1,7 +1,6 @@
 package connectweb.connect_back.service.board;
 
 import connectweb.connect_back.model.repository.board.BoardEntityRepository;
-import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
