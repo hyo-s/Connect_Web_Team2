@@ -1,11 +1,11 @@
 package connectweb.connect_back.model.entity.board;
 
+import connectweb.connect_back.model.dto.BoardDto;
 import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 
@@ -40,12 +40,12 @@ public class BoardEntity extends BaseTime {
     @ManyToOne // 해당 필드 참조
     private MemberEntity memberEntity;
 
-     /*  //- 엔티티를 dto로 변환하는 메소드
-    public BoardDto toBDto(){
+   //- 엔티티를 dto로 변환하는 메소드
+    public BoardDto toDto(){
         return BoardDto.builder()
-                .mno(this.mno)
                 .bno(this.bno)
+                .bcontent(this.bcontent)
                 .bview(this.bview)
                 .build();
-    }*/
+    }
 }
