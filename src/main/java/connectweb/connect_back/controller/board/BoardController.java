@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/conn/b")
 @CrossOrigin("http://localhost:3000")
 public class BoardController {
+    //장혜란 최초커밋
     @Autowired
     BoardService boardService;
 

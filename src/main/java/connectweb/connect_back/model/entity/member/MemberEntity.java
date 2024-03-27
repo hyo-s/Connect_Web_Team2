@@ -38,7 +38,7 @@ public class MemberEntity extends BaseTime {
     private String mname; // 이름
 
     @Column(length = 30)
-    private String mNikname; // 닉네임
+    private String mkikname; // 닉네임
 
     @Column(length = 50 , unique = true)
     private String memail; //이메일
@@ -56,7 +56,7 @@ public class MemberEntity extends BaseTime {
                 .mid(this.mid)
                 .mpw(this.mpw)
                 .mname(this.mname)
-                .mNikname(this.mNikname)
+                .mkikname(this.mkikname)
                 .memail(this.memail)
                 .mphone(this.mphone)
                 .mbirth(this.mbirth)

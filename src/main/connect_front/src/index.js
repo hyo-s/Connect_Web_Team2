@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MainBoard from './board/MainBoard'
+import SignUp from './member/SignUp';
 
+// 회원가입 signup
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MainBoard />
   </React.StrictMode>
 );
 
