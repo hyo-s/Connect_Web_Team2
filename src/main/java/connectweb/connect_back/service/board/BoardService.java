@@ -1,9 +1,12 @@
 package connectweb.connect_back.service.board;
 
 import connectweb.connect_back.model.dto.BoardDto;
+import connectweb.connect_back.model.dto.GalleryDto;
 import connectweb.connect_back.model.entity.board.BoardEntity;
+import connectweb.connect_back.model.entity.board.GalleryEntity;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.board.BoardEntityRepository;
+import connectweb.connect_back.model.repository.board.GalleryEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ public class BoardService {
 
     @Autowired
     MemberEntityRepository memberEntityRepository;
+    @Autowired
+    GalleryEntityRepository galleryEntityRepository;
 
     @Transactional
     public int doPostBoard(BoardDto boardDto){
@@ -34,6 +39,7 @@ public class BoardService {
         boardEntityRepository.save(boardDto.toEntity());
         return 0;
     }
+
 
     @Transactional
     public List<BoardDto> doGetBoard(){
