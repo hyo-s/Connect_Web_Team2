@@ -12,12 +12,13 @@ import java.util.List;
 @RequestMapping("/conn/b")
 @CrossOrigin("http://localhost:3000")
 public class BoardController {
-    //장혜란 최초커밋
+
     @Autowired
     BoardService boardService;
 
     @PostMapping("/post.do")
-    public int doPostBoard(BoardDto boardDto){
+    public int doPostBoard(@RequestBody BoardDto boardDto){
+        System.out.println("boardDto = " + boardDto);
         return boardService.doPostBoard(boardDto);
     }
 
@@ -27,10 +28,11 @@ public class BoardController {
     }
 
     @PutMapping("/put.do")
-    public int doPutBoard(int bno){
-        return boardService.doPutBoard(bno);
+    public int doPutBoard(@RequestBody BoardDto boardDto){
+        return boardService.doPutBoard(boardDto);
     }
 
+    @DeleteMapping("/delete.do")
     public int doDeleteBoard(int bno){
         return boardService.doDeleteBoard(bno);
     }
