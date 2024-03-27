@@ -1,3 +1,4 @@
+import styles from './Board.css';
 export default function MainBoard(props){
     return(<>
         <section id="container">
