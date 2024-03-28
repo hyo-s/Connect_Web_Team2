@@ -1,7 +1,9 @@
 package connectweb.connect_back.controller.board;
 
 import connectweb.connect_back.model.dto.BoardDto;
+import connectweb.connect_back.model.dto.GalleryDto;
 import connectweb.connect_back.model.entity.board.BoardEntity;
+import connectweb.connect_back.model.entity.board.GalleryEntity;
 import connectweb.connect_back.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class BoardController {
         System.out.println("boardDto = " + boardDto);
         return boardService.doPostBoard(boardDto);
     }
+
 
     @GetMapping("/get.do")
     public List<BoardDto> doGetBoard(){
