@@ -28,6 +28,7 @@ public class BoardService {
     @Transactional
     public int doPostBoard(BoardDto boardDto){
         System.out.println("boardDto = " + boardDto);
+
         MemberEntity memberEntity = MemberEntity.builder()
                 .mno(1)
                 .mid("aaa")
@@ -52,8 +53,8 @@ public class BoardService {
     }
 
     @Transactional
-    public int doPutBoard(int bno){
-        BoardEntity boardEntity = boardEntityRepository.findById(bno).get();
+    public int doPutBoard(BoardDto boardDto){
+        BoardEntity boardEntity = boardEntityRepository.findById(boardDto.getBno()).get();
         boardEntity.setBcontent("수정합니다.");
         return 0;
     }

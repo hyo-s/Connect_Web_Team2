@@ -13,38 +13,25 @@ export default function SignUp(props){
                 .memail(this.memail)
                 .mphone(this.mphone)
                 .mbirth(this.mbirth) */
-
-    const[mid,setMid]=useState('');             //아이디
-    const[mpw,setMpw]=useState('');             //비밀번호
-    const[mname,setMname]=useState('');         //이름
-    const[mNikname,setMNikname]=useState('');   //닉네임
-    const[memail,setMemail]=useState('');       //이메일    
-    const[mphone,setMphone]=useState('');       //전화번호
-    const[mbirth,setMbirth]=useState('');       //생년월일
-
+    
     const onSignup = (e)=>{
-        let info={
-            mid:mid,
-            mname:mname,
-            memail:memail,
-            mpw:mpw, 
-            mkikname:mNikname,
-            mphone:mphone,
-            mbirth:mbirth
-        }
-        axios.post("http://localhost:80/conn/m/signup" , info)
-            .then(response=>{console.log(response)})
+        const axiosForm=document.querySelector('#signupForm')
+        const axiosFormData= new FormData(axiosForm)
+        axios.post('http://localhost:80/conn/m/signup',axiosFormData)
+            .then(response=>{console.log(response);})
+            .catch(error=>{console.log(error);})
     }
 
     return(<>
-        <form>
-            이름 : <input value={mname} type="text" onChange={(e)=> setMname(e.target.value)}/> <br/>
-            아이디 : <input value={mid} type="text" onChange={(e)=> setMid(e.target.value)}/><br/>
-            비밀번호 : <input value={mpw} type="text" onChange={(e)=> setMpw(e.target.value)}/><br/>
-            닉네임 : <input value={mNikname} type="text" onChange={(e)=> setMNikname(e.target.value)}/><br/>
-            이메일 : <input value={memail} type="text" onChange={(e)=> setMemail(e.target.value)}/><br/>
-            전화번호 : <input value={mphone} type="text" onChange={(e)=> setMphone(e.target.value)}/><br/>
-            생년월일 : <input value={mbirth} type="date" onChange={(e)=> setMbirth(e.target.value)}/><br/>
+        <form id='signupForm'>
+            프로필 사진 등록: <input name="mfile"type='file' /><br/>
+            이름 : <input name="mname" type="text"/> <br/>
+            아이디 : <input name="mid" type="text"/><br/>
+            비밀번호 : <input name="mpw" type="text"/><br/>
+            닉네임 : <input name="mNikname" type="text"/><br/>
+            이메일 : <input name="memail" type="text"/><br/>
+            전화번호 : <input name="mphone" type="text"/><br/>
+            생년월일 : <input name="mbirth" type="date"/><br/>
         </form>
         <button type="button" onClick={onSignup} >Signup</button>
     </>);
