@@ -18,7 +18,7 @@ public class MemberDto {
     private String mid; // 아이디
     private String mpw; //비밀번호
     private String mname; // 이름
-    private String mnikname; // 닉네임
+    private String mnickname; // 닉네임
     private String memail; //이메일
     private String mphone;// 전화번호
     private String mbirth;	//생년월일
@@ -32,7 +32,7 @@ public class MemberDto {
                 .mid(this.mid)
                 .mpw(this.mpw)
                 .mname(this.mname)
-                .mnikname(this.mnikname)
+                .mnickname(this.mnickname)
                 .memail(this.memail)
                 .mphone(this.mphone)
                 .mbirth(this.mbirth)

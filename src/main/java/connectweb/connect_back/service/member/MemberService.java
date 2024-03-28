@@ -63,4 +63,49 @@ public class MemberService {
         }
         return false;
     }
+
+// ======================================== 아이디 중복검사 ======================================== //
+    public boolean checkId(String mid){
+        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
+        for(int i=0; i<memberEntityList.size(); i++){
+            MemberEntity m=memberEntityList.get(i);
+            if(m.getMid().equals(mid)){
+                return true;
+            }
+        }
+        return false;
+    }
+// ======================================== 닉네임 중복검사 ======================================== //
+    public boolean checkNickName(String nickName){
+        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
+        for(int i=0; i<memberEntityList.size(); i++){
+            MemberEntity m=memberEntityList.get(i);
+            if(m.getMnickname().equals(nickName)){
+                return true;
+            }
+        }
+        return false;
+    }
+// ======================================== 이메일 중복검사 ======================================== //
+    public boolean checkEmail(String email){
+        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
+        for(int i=0; i<memberEntityList.size(); i++){
+            MemberEntity m=memberEntityList.get(i);
+            if(m.getMemail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+// ======================================== 전화번호 중복검사 ======================================== //
+    public boolean checkPhoneNumber(String phoneNumber){
+        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
+        for(int i=0; i<memberEntityList.size(); i++){
+            MemberEntity m=memberEntityList.get(i);
+            if(m.getMphone().equals(phoneNumber)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
