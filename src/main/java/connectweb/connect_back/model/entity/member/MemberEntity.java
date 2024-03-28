@@ -38,7 +38,7 @@ public class MemberEntity extends BaseTime {
     private String mname; // 이름
 
     @Column(length = 30)
-    private String mkikname; // 닉네임
+    private String mnikname; // 닉네임
 
     @Column(length = 50 , unique = true)
     private String memail; //이메일
@@ -49,6 +49,8 @@ public class MemberEntity extends BaseTime {
     @Column(columnDefinition = "date")
     private String mbirth;	//생년월일
 
+    private String mimg; // 회원 사진
+
    //- 엔티티를 dto로 변환하는 메소드
     public MemberDto toDto(){
         return MemberDto.builder()
@@ -56,10 +58,11 @@ public class MemberEntity extends BaseTime {
                 .mid(this.mid)
                 .mpw(this.mpw)
                 .mname(this.mname)
-                .mkikname(this.mkikname)
+                .mnikname(this.mnikname)
                 .memail(this.memail)
                 .mphone(this.mphone)
                 .mbirth(this.mbirth)
+                .mimg(this.mimg)
                 .build();
     }
 

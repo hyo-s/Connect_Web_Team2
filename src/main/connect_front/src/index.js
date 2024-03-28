@@ -15,6 +15,7 @@ root.render(
     {/* <MainBoard /> */}
     {/* <BoardWrite/> */}
     <Board/>
+//    <SignUp />
   </React.StrictMode>
 );
 
