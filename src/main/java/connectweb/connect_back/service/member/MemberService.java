@@ -1,11 +1,14 @@
 package connectweb.connect_back.service.member;
 
 import connectweb.connect_back.model.dto.MemberDto;
+import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import connectweb.connect_back.service.FileService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MemberService {
@@ -42,6 +45,22 @@ public class MemberService {
     //로그인
     public boolean loginGet (MemberDto memberDto){
 
+        //1. 리포지토리를 통한 모든 회원엔티티 호출
+        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
+
+        //2. dto와 동일한 아이디/패스워드 찾는다
+        for(int i=0; i<memberEntityList.size(); i++){
+            MemberEntity m=memberEntityList.get(i);
+            //3. 만약에 아이디가 동일하면(엔티티와 dto)
+            if(m.getMemail().equals(memberDto.getMemail())){
+                //4. 만약에 비밀번호가 동일하면
+                if(m.getMpw().equals((memberDto.getMpw()))){
+                    //5. 세션 저장
+                    request.getSession().setAttribute("loginInfo",memberDto);
+                    return true;
+                }
+            }
+        }
         return false;
     }
 }
