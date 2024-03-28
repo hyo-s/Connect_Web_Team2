@@ -28,7 +28,7 @@ export default function SignUp(props){
             이름 : <input name="mname" type="text"/> <br/>
             아이디 : <input name="mid" type="text"/><br/>
             비밀번호 : <input name="mpw" type="text"/><br/>
-            닉네임 : <input name="mNikname" type="text"/><br/>
+            닉네임 : <input name="mnikname" type="text"/><br/>
             이메일 : <input name="memail" type="text"/><br/>
             전화번호 : <input name="mphone" type="text"/><br/>
             생년월일 : <input name="mbirth" type="date"/><br/>

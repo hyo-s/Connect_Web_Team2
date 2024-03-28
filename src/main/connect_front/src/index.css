@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* 초기값 */
+ul {list-style: none; padding: 0; margin: 0;}
+p {padding: 0; margin: 0;}
+
+/* 레이아웃 */
+#container {
+    width: 480px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+.innerContainer {
+    width: 90%;
+    margin: 0 auto;
+}
+.header {
+    height: 50px;
+    border: 1px solid red;;
+}
+.footer{
+    height: 50px;
+    border: 1px solid red;
+}
