@@ -25,7 +25,6 @@ public class MemberController {
 
     @GetMapping("/login") // 로그인
     public boolean loginGet (MemberDto memberDto){
-
         return memberService.loginGet(memberDto);
     }
 
