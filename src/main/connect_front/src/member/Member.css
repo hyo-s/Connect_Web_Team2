@@ -1,0 +1,21 @@
+#totalBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    
+}
+#loginBox{
+    border: solid 1px red;
+}
+#loginBox input{
+    margin-bottom: 10px;
+    height: 30px;
+}
+#loginBox button{
+    width: 177px;
+    height: 30px;
+}
+#logoImg{
+    margin-bottom: 10px;
+}

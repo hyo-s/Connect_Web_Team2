@@ -7,14 +7,18 @@ import MainBoard from './board/MainBoard'
 import SignUp from './member/SignUp';
 import BoardWrite from './board/BoardWrite';
 import Board from './board/Board';
+import Login from './member/Login';
 
 // 회원가입 signup
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
+
 root.render(
   <React.StrictMode>
     {/* <MainBoard /> */}
     {/* <BoardWrite/> */}
-    <Board/>
+    <Login/>
 {/*    <SignUp /> */}
   </React.StrictMode>
 );
