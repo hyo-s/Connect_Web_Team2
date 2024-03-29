@@ -3,6 +3,10 @@ package connectweb.connect_back.model.dto;
 import connectweb.connect_back.model.entity.board.BoardEntity;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,14 +19,18 @@ public class BoardDto {
     private int bno; // 게시물 번호
     private String bcontent; //내용
     private int bview; //조회수
-    private MemberEntity memberEntity;
+    private List<MultipartFile> gfile;
+
+
+
+
+    private List<GalleryDto> galleryDtoList = new ArrayList<>();
 
     public BoardEntity toEntity(){
         return BoardEntity.builder()
                 .bno(this.bno)
                 .bcontent(this.bcontent)
                 .bview(this.bview)
-                .memberEntity(this.memberEntity)
                 .build();
     }
 }

@@ -8,6 +8,7 @@ import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.board.BoardEntityRepository;
 import connectweb.connect_back.model.repository.board.GalleryEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
+import connectweb.connect_back.service.FileService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,13 @@ public class BoardService {
     MemberEntityRepository memberEntityRepository;
     @Autowired
     GalleryEntityRepository galleryEntityRepository;
+    @Autowired
+    FileService fileService;
 
     @Transactional
     public int doPostBoard(BoardDto boardDto){
-        System.out.println("boardDto = " + boardDto);
+
+        //------------------------------------------------
 
         MemberEntity memberEntity = MemberEntity.builder()
                 .mno(1)
@@ -35,9 +39,29 @@ public class BoardService {
                 .mpw("aaa")
                 .mname("aaa")
                 .build();
-        memberEntityRepository.save(memberEntity);
-        boardDto.setMemberEntity(memberEntity);
-        boardEntityRepository.save(boardDto.toEntity());
+        MemberEntity saveMember = memberEntityRepository.save(memberEntity);
+        BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
+
+        boardEntity.setMemberEntity(saveMember);
+
+        System.out.println("boardDto = " + boardDto);
+
+        //피드이미지----------------------------------------
+
+        boardDto.getGfile().forEach((uploadFile)->{
+            String fileName = fileService.FileUpload(uploadFile);
+
+            GalleryEntity galleryEntity = GalleryEntity.builder()
+                    .gname(fileName)
+                    .boardEntity(boardEntity)
+                    .build();
+
+            galleryEntityRepository.save(galleryEntity);
+            System.out.println("fileName = " + fileName);
+        });
+
+
+
         return 0;
     }
 

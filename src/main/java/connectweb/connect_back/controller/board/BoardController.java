@@ -18,8 +18,9 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+
     @PostMapping("/post.do")
-    public int doPostBoard(@RequestBody BoardDto boardDto){
+    public int doPostBoard( BoardDto boardDto){
         System.out.println("boardDto = " + boardDto);
         return boardService.doPostBoard(boardDto);
     }
