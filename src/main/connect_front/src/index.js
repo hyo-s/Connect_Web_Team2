@@ -8,17 +8,18 @@ import SignUp from './member/SignUp';
 import BoardWrite from './board/BoardWrite';
 import Board from './board/Board';
 import Check from './member/Check';
+import Login from './member/Login';
 
 // 회원가입 signup
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  // <React.StrictMode>
-  //   {/* <MainBoard /> */}
-  //   {/* <BoardWrite/> */}
-  //   {/* <Board/> */}
-  // <SignUp />
-  // </React.StrictMode>
-  <Check/>
+  <React.StrictMode>
+    {/* <MainBoard /> */}
+    {/* <BoardWrite/> */}
+    <Login/>
+{/*    <SignUp /> */}
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
