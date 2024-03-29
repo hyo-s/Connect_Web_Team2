@@ -47,7 +47,6 @@ public class BoardEntity extends BaseTime {
                 .bno(this.bno)
                 .bcontent(this.bcontent)
                 .bview(this.bview)
-                .memberEntity(this.memberEntity)
                 .build();
     }
 }

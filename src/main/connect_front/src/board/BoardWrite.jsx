@@ -10,8 +10,13 @@ export default function BoardWrite(props){
     }
     
     const onSubmit = (e)=>{
-        const info = {bcontent : bcontent}
-        axios.post("/conn/b/post.do", info)
+        const contentForm = document.querySelector(".innerContainer");
+        const contentFormData = new FormData(contentForm);
+        console.log(contentFormData);
+
+        contentFormData.set("bcontent", bcontent)
+
+        axios.post("/conn/b/post.do", contentFormData)
         .then(response => {
             console.log(response);
         })
@@ -21,7 +26,7 @@ export default function BoardWrite(props){
 
     return(<>
         <section id="container">
-            <div className="innerContainer">
+            <form className="innerContainer">
                 <div className="header">
                     HEADER
                     <button type="button" onClick={onSubmit}>쓰기</button>
@@ -32,7 +37,7 @@ export default function BoardWrite(props){
                     </ul>
                 </div>
                 <div className="btmBox">
-                    <input type="File"/>
+                    <input type="file" name="gfile" multiple/>
                 </div>
                 <div className="btmBox">
                     <textarea value={bcontent} onChange={onChangeBcontent}></textarea>
@@ -40,7 +45,7 @@ export default function BoardWrite(props){
                 <div className="footer">
                     FOOTER
                 </div>
-            </div>
+            </form>
         </section>
     </>)
 }
