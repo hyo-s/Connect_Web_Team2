@@ -1,5 +1,6 @@
 package connectweb.connect_back.service.member;
 
+import connectweb.connect_back.model.dto.LoginDto;
 import connectweb.connect_back.model.dto.MemberDto;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -19,8 +21,26 @@ public class MemberService {
     //로그인
     @Autowired private HttpServletRequest request;
 
-    // 회원가입
-    public boolean SignupPost (MemberDto memberDto){
+// ========================= [ 현재 로그인 정보 호출 ] ========================= //
+    public MemberDto loginInfo(){
+        Object object = request.getSession().getAttribute("loginInfo");
+        if (object != null){
+            return (MemberDto)object;
+        }
+        return null;
+    }
+// ========================= [ 로그인 된 회원 Entity 호출] ========================= //
+    public MemberEntity loginEntity(){
+        MemberDto loginDto = loginInfo();
+        if(loginDto==null) return null;
+        Optional<MemberEntity> optionalMemberEntity = memberEntityRepository.findById(loginDto.getMno());
+        if(!optionalMemberEntity.isPresent()) return null;
+        MemberEntity memberEntity = optionalMemberEntity.get();
+        System.out.println("memberEntity = " + memberEntity);
+        return memberEntity;
+    }
+// ========================= [회원가입] ========================= //
+    public boolean signUpPost (MemberDto memberDto){
         System.out.println("memberDto = " + memberDto);
 
         //프로필 파일 처리
@@ -41,71 +61,33 @@ public class MemberService {
         memberEntityRepository.save(memberDto.toEntity());
         return false;
     }
-
-    //로그인
-    public boolean loginGet (MemberDto memberDto){
-
-        //1. 리포지토리를 통한 모든 회원엔티티 호출
-        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
-
-        //2. dto와 동일한 아이디/패스워드 찾는다
-        for(int i=0; i<memberEntityList.size(); i++){
-            MemberEntity m=memberEntityList.get(i);
-            //3. 만약에 아이디가 동일하면(엔티티와 dto)
-            if(m.getMemail().equals(memberDto.getMemail())){
-                //4. 만약에 비밀번호가 동일하면
-                if(m.getMpw().equals((memberDto.getMpw()))){
-                    //5. 세션 저장
-                    request.getSession().setAttribute("loginInfo",memberDto);
-                    return true;
-                }
-            }
-        }
-        return false;
+// ========================= [로그인] ========================= //
+    public boolean loginPost (LoginDto loginDto){
+        MemberEntity loginConfirm = memberEntityRepository.findByLoginSQL(loginDto.getMid(), loginDto.getMpw());
+        if(loginConfirm == null)return false;
+        request.getSession().setAttribute("loginInfo", loginConfirm.toDto());
+        return true;
     }
-
-// ======================================== 아이디 중복검사 ======================================== //
+// ========================= [로그아웃] ========================= //
+    public boolean doLogOutGet(){
+        request.getSession().setAttribute("loginInfo",null);
+        return true;
+    }
+// ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
     public boolean checkId(String mid){
-        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
-        for(int i=0; i<memberEntityList.size(); i++){
-            MemberEntity m=memberEntityList.get(i);
-            if(m.getMid().equals(mid)){
-                return true;
-            }
-        }
-        return false;
+        boolean result = memberEntityRepository.existsByMid(mid);
+        return result;
     }
-// ======================================== 닉네임 중복검사 ======================================== //
     public boolean checkNickName(String nickName){
-        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
-        for(int i=0; i<memberEntityList.size(); i++){
-            MemberEntity m=memberEntityList.get(i);
-            if(m.getMnickname().equals(nickName)){
-                return true;
-            }
-        }
-        return false;
+        boolean result = memberEntityRepository.existsByMnickname(nickName);
+        return result;
     }
-// ======================================== 이메일 중복검사 ======================================== //
     public boolean checkEmail(String email){
-        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
-        for(int i=0; i<memberEntityList.size(); i++){
-            MemberEntity m=memberEntityList.get(i);
-            if(m.getMemail().equals(email)){
-                return true;
-            }
-        }
-        return false;
+        boolean result = memberEntityRepository.existsByMemail(email);
+        return result;
     }
-// ======================================== 전화번호 중복검사 ======================================== //
     public boolean checkPhoneNumber(String phoneNumber){
-        List<MemberEntity> memberEntityList= memberEntityRepository.findAll();
-        for(int i=0; i<memberEntityList.size(); i++){
-            MemberEntity m=memberEntityList.get(i);
-            if(m.getMphone().equals(phoneNumber)){
-                return true;
-            }
-        }
-        return false;
+        boolean result = memberEntityRepository.existsByMphone(phoneNumber);
+        return result;
     }
 }

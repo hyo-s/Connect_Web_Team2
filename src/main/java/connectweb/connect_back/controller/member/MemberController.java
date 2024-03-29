@@ -1,5 +1,6 @@
 package connectweb.connect_back.controller.member;
 
+import connectweb.connect_back.model.dto.LoginDto;
 import connectweb.connect_back.model.dto.MemberDto;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.service.member.MemberService;
@@ -10,25 +11,39 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/conn/m")
-@CrossOrigin("http://localhost:3000")
+//@CrossOrigin("http://localhost:3000")
 public class MemberController {
+
     @Autowired
     MemberService memberService;
 
-    @PostMapping("/signup")// 회원가입
-    public boolean SignupPost (@ModelAttribute MemberDto memberDto){
-        System.out.println("memberDto = " + memberDto);
-        return memberService.SignupPost(memberDto);
+// ========================= [ 현재 로그인 정보 호출 ] ========================= //
+    @GetMapping("/login/info/get.do")
+    public MemberDto loginInfo(){
+        return memberService.loginInfo();
     }
 
-    @GetMapping("/mView") // 회원출력
+// ========================= [회원가입] ========================= //
+    @PostMapping("/signup.do")// 회원가입
+    public boolean signUpPost (@ModelAttribute MemberDto memberDto){
+        return memberService.signUpPost(memberDto);
+    }
+
+// ========================= [로그인] ========================= //
+    @PostMapping("/login.do") // 로그인
+    public boolean loginPost (LoginDto loginDto){
+        return memberService.loginPost(loginDto);
+    }
+
+// ======================== [로그아웃] ======================== //
+    @GetMapping("/logout/get.do")
+    public boolean doLogOutGet(){
+        return memberService.doLogOutGet();
+    }
+
+    @GetMapping("/mview") // 회원출력
     public boolean memberView (){
         return false;
-    }
-
-    @GetMapping("/login") // 로그인
-    public boolean loginGet (MemberDto memberDto){
-        return memberService.loginGet(memberDto);
     }
 
     @PutMapping("/mUpdate") // 회원수정
@@ -41,21 +56,20 @@ public class MemberController {
         return false;
     }
 
-    @GetMapping("/check.id") // 아이디 중복검사
+// ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
+    @GetMapping("/check.id")
     public boolean checkId(String mid){
-        System.out.println("mid = " + mid);
         return memberService.checkId(mid);
     }
-
-    @GetMapping("/check.nickname") // 닉네임 중복검사
+    @GetMapping("/check.nickname")
     public boolean checkNickName(String nickName){
         return memberService.checkNickName(nickName);
     }
-    @GetMapping("/check.email") // 이메일 중복검사
+    @GetMapping("/check.email")
     public boolean checkEmail(String email){
         return memberService.checkEmail(email);
     }
-    @GetMapping("/check.phonenumber") // 전화번호 중복검사
+    @GetMapping("/check.phonenumber")
     public boolean checkPhoneNumber(String phoneNumber){
         return memberService.checkPhoneNumber(phoneNumber);
     }
