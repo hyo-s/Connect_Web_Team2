@@ -23,9 +23,6 @@ public class BoardDto {
 
 
 
-
-    private List<GalleryDto> galleryDtoList = new ArrayList<>();
-
     public BoardEntity toEntity(){
         return BoardEntity.builder()
                 .bno(this.bno)
