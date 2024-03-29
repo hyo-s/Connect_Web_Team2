@@ -6,7 +6,6 @@ let checkArray = [false, false, false, false]
 export default function Check(props){
 
     const [findId, setFindId] = useState('');
-    const [checkId, setCheckId] = useState(false);
     const [findNickName, setFindNickName    ] = useState('');
     const [findEmail, setFindEmail] = useState('');
     const [findPhoneNumber, setFindPhoneNumber] = useState('');
