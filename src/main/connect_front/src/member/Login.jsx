@@ -11,8 +11,7 @@ export default function Login(props){
                     <input type="text" /><br/>
                     <button type="button">로그인</button>
                 </div>
-            </div>            
-            
+            </div>
          </div>
     </>)
 }

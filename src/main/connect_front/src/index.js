@@ -17,7 +17,7 @@ root.render(
   <React.StrictMode>
     {/* <MainBoard /> */}
     {/* <BoardWrite/> */}
-    <BoardWrite/>
+    <Login/>
 {/*    <SignUp /> */}
   </React.StrictMode>
 );
