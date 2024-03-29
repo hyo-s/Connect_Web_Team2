@@ -24,7 +24,6 @@ public class BoardController {
         return boardService.doPostBoard(boardDto);
     }
 
-
     @GetMapping("/get.do")
     public List<BoardDto> doGetBoard(){
         return boardService.doGetBoard();
