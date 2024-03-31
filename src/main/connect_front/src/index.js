@@ -3,23 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MainBoard from './board/MainBoard'
 import SignUp from './member/SignUp';
-import BoardWrite from './board/BoardWrite';
-import Board from './board/Board';
-import Check from './member/Check';
-import Login from './member/Login';
+
 
 // 회원가입 signup
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-    {/* <MainBoard /> */}
-    {/* <BoardWrite/> */}
-    <Login/>
-{/*    <SignUp /> */}
-  </React.StrictMode>
+  <SignUp/>
 );
 
 // If you want to start measuring performance in your app, pass a function
