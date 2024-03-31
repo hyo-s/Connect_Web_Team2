@@ -24,12 +24,16 @@ code {
 ul {list-style: none; padding: 0; margin: 0;}
 p {padding: 0; margin: 0;}
 
-/* 레이아웃 */
+/* 레이아웃 (width,height 가운데 정렬) */
 #container {
     width: 480px;
-    height: 850px;
+    height: 800px;
     margin: 0 auto;
     border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 
 }
 .innerContainer {
@@ -40,7 +44,15 @@ p {padding: 0; margin: 0;}
     height: 50px;
     border: 1px solid red;;
 }
+.header ul {
+    display: flex;
+    justify-content: end;
+}
+.header ul li {
+    margin-left: 10px;
+}
 .footer{
     height: 50px;
     border: 1px solid red;
+    text-align: center;
 }

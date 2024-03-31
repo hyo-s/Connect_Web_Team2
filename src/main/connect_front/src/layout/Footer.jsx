@@ -1,5 +1,7 @@
 export default function Footer(props){
     return(<>
-        푸터영역
+       <div className="footer">
+            FOOTER
+        </div>
     </>)
 }
