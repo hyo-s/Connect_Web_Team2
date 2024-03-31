@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './board.css';
+import './Board.css';
 export default function Board(props){
 
     // const [boardInfo, setBoardInfo] = useState('');

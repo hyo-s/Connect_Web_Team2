@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Header(props){
     return(<>
-        <div>
+        <div className="header">
             <ul>
                 <li><Link to="/">홈</Link></li>
                 <li><Link to="/member/signup">회원가입</Link></li>
