@@ -1,4 +1,4 @@
-import './board.css';
+import './Board.css';
 export default function MainBoard(props){
     return(<>
         <section id="container">
