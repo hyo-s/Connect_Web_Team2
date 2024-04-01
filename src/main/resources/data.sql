@@ -21,5 +21,9 @@ insert into reply(rcontent,bno_fk,mno_fk) values
 
 insert into follow(tofollow, fromfollow) values
 (1, 2),
+(1, 3),
+(1, 4),
 (2, 1),
-(2, 3);
+(2, 3),
+(3, 1),
+(4, 1);

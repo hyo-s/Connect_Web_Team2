@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/conn/m")
@@ -26,9 +27,14 @@ public class FollowController {
     public boolean doFollowDelete(@RequestParam int fno){
         return followService.doFollowDelete(fno);
     }
-    // ======================== [팔로우 확인] ======================== //
-    @GetMapping("/follow/get.do")
-    public List<FollowDto> doFollowGet(){
-        return followService.doFollowGet();
+    // ======================== [ 팔로워 확인] ======================== //
+    @GetMapping("/follower/get.do")
+    public List<Map<Object,Object>> doFollowerGet(int mno){
+        return followService.doFollowerGet(mno);
+    }
+    // ======================== [ 팔로잉 확인] ======================== //
+    @GetMapping("/following/get.do")
+    public List<Map<Object,Object>> doFollowingGet(int mno){
+        return followService.doFollowingGet(mno);
     }
 }
