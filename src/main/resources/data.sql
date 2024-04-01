@@ -18,3 +18,8 @@ insert into reply(rcontent,bno_fk,mno_fk) values
 ('댓글내용4',4,4),
 ('댓글내용5',1,2),
 ('댓글내용6',2,3);
+
+insert into follow(tofollow, fromfollow) values
+(1, 2),
+(2, 1),
+(2, 3);

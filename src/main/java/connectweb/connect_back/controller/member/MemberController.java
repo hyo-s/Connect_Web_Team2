@@ -1,5 +1,6 @@
 package connectweb.connect_back.controller.member;
 
+import connectweb.connect_back.model.dto.FollowDto;
 import connectweb.connect_back.model.dto.LoginDto;
 import connectweb.connect_back.model.dto.MemberDto;
 import connectweb.connect_back.model.entity.member.MemberEntity;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/conn/m")
-//@CrossOrigin("http://localhost:3000")
+@CrossOrigin("http://localhost:3000")
 public class MemberController {
 
     @Autowired
@@ -40,6 +41,7 @@ public class MemberController {
     public boolean doLogOutGet(){
         return memberService.doLogOutGet();
     }
+
 
     @GetMapping("/mview") // 회원출력
     public boolean memberView (){
