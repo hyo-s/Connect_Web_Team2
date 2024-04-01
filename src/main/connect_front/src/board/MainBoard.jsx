@@ -3,9 +3,7 @@ export default function MainBoard(props){
     return(<>
         <section id="container">
             <div className="innerContainer">
-                <div className="header">
-                    HEADER
-                </div>
+                
                 <div className="content mainContent">
                     <div className="topInfo">
                         <div className="topImg"></div>
@@ -27,11 +25,9 @@ export default function MainBoard(props){
                 <div className="replyBox">
                     <p>댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</p>
                     <p><input type="text" /></p>
+                    <button type='button'>등록</button>
                 </div>
 
-                <div className="footer">
-                    FOOTER
-                </div>
             </div>
         </section>
     

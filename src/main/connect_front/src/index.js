@@ -9,6 +9,9 @@ import BoardWrite from './board/BoardWrite';
 import Board from './board/Board';
 import Check from './member/Check';
 import Login from './member/Login';
+import Index from './index/Index';
+
+
 
 // 회원가입 signup
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +20,7 @@ root.render(
   <React.StrictMode>
     {/* <MainBoard /> */}
     {/* <BoardWrite/> */}
-    <MainBoard/>
+    <Index/>
 {/*    <SignUp /> */}
   </React.StrictMode>
 );
