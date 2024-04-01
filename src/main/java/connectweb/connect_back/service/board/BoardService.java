@@ -33,20 +33,15 @@ public class BoardService {
     FileService fileService;
     @Autowired
     MemberService memberService;
-    MemberDto loginDto = memberService.loginInfo();
-    //로그인된 회원 엔티티찾기
-    Optional<MemberEntity> optionalMemberEntity = memberEntityRepository.findById(loginDto.getMno());
+
 
     //게시물등록(0은 실패 1은 성공)
     @Transactional
     public int doPostBoard(BoardDto boardDto){
-        //로그인 안됐으면 실패
-        if (loginDto == null) return 0;
 
-        //2. 찾은 엔티티가 존재하지 않으면 실패
-        if(!optionalMemberEntity.isPresent()) return 0;
-        //3. 멤버엔티티 꺼내기
-        MemberEntity memberEntity = optionalMemberEntity.get();
+        MemberEntity memberEntity = memberService.loginEntity();
+
+
         //글쓰기
         BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
 
@@ -82,10 +77,8 @@ public class BoardService {
     }
 
     public List<Map<Object,Object>> getMyBoardList(){
-        //로그인 안됐으면 실패
-        if (loginDto == null) return null;
 
-        List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(loginDto.getMno());
+        List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.loginEntity().getMno());
         return list;
 
     }
