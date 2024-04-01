@@ -38,12 +38,17 @@ public class MemberController {
     public boolean doLogOutGet(){
         return memberService.doLogOutGet();
     }
-// ======================== [마이페이지] ======================== //
-    @GetMapping("/mypage/get.do")
-    public boolean memberView (){
-        return false;
+// ======================== [회원리스트] ======================== //
+    @GetMapping("/list/get.do")
+    public List<MemberDto> memberList (){
+        return memberService.memberList();
     }
-
+// ======================== [개인페이지 출력할 회원정보] ======================== //
+    @GetMapping("/page/get.do")
+    public MemberDto memberView (@RequestParam String mnickname){
+        System.out.println("mnickname = " + mnickname);
+        return memberService.memberView(mnickname);
+    }
     @PutMapping("/mypage/put.do") // 회원수정
     public boolean memberUpdate (){
         return false;

@@ -8,12 +8,13 @@ import java.util.UUID;
 
 @Service
 public class FileService {
-    String upload="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\img\\mimg\\";
+
+    String buildUpload="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\img\\mimg\\";
     // 프로필 사진 업데이트
     public String FileUpload(MultipartFile multipartFile){
         String uuid= UUID.randomUUID().toString();
         String filename =uuid+"_"+multipartFile.getOriginalFilename().replace("_","-");
-        File file= new File(upload+filename);
+        File file= new File(buildUpload+filename);
         System.out.println("file = " + file);
         System.out.println("file.exists() = " + file.exists());
         //2.
