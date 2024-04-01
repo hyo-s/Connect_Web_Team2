@@ -15,7 +15,6 @@
 
 /* content */
 .content {
-    height: 500px;
     margin: 0 auto;
 }
 .content ul {
@@ -23,8 +22,8 @@
 }
 .content ul li {
     border : 1px solid red;
-    height: 450px;
     margin: 10px;
+    height: 100px;
 }
 
 /* maincontent */
@@ -44,6 +43,7 @@
 }
 .mainContent ul li {
     margin: 10px auto;
+    height: 300px;
 }
 .btmBox {
     border: 1px solid red;
