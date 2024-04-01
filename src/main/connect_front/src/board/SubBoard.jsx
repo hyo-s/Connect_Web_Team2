@@ -29,16 +29,17 @@ export default function SubBoard(props) {
             </div>
             <div>
             {myBoard.map((r)=>{
-                console.log(r)
+                return(<>
+                    <ul className='potoList'>
+                    <li>{r.gname}</li>
+                    </ul>
+                </>)                
+            
             })}
             </div>
             <div className="content subContent">
                 
-                <ul className='potoList'>
-                    <li>img1</li>
-                    <li>img2</li>
-                    <li>img3</li>
-                </ul>
+                
                 <ul className='potoList'>
                     <li>img1</li>
                     <li>img2</li>
