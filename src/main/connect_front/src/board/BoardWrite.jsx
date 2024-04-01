@@ -21,9 +21,7 @@ export default function BoardWrite(props){
             console.log(response);
         })
         .catch(error => {console.log(error)})
-
     }
-
     return(<>
         <section id="container">
             <form className="innerContainer">
