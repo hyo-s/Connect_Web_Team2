@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/conn/b")
@@ -28,6 +29,11 @@ public class BoardController {
     @GetMapping("/get.do")
     public List<BoardDto> doGetBoard(){
         return boardService.doGetBoard();
+    }
+
+    @GetMapping("/myboard/get.do")
+    public List<Map<Object,Object>> getMyBoardList(){
+        return boardService.getMyBoardList();
     }
 
     @PutMapping("/put.do")
