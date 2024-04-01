@@ -7,6 +7,7 @@ import MainBoard from './board/MainBoard'
 import SignUp from './member/SignUp';
 import BoardWrite from './board/BoardWrite';
 import Board from './board/Board';
+import SubBoard from './board/SubBoard';
 
 import Login from './member/Login';
 import Index from './index/Index';
@@ -20,7 +21,7 @@ root.render(
   <React.StrictMode>
     {/* <MainBoard /> */}
     {/* <BoardWrite/> */}
-    <BoardWrite/>
+    <Index/>
 {/*    <SignUp /> */}
   </React.StrictMode>
 );

@@ -4,6 +4,7 @@ import Header from "../layout/Header";
 import SignUp from "../member/SignUp";
 import Login from "../member/Login";
 import MainBoard from "../board/MainBoard";
+import SubBoard from "../board/SubBoard";
 
 export default function Index(props){
     return(<>
@@ -13,6 +14,7 @@ export default function Index(props){
                 <Route path="/" element={<MainBoard/>}/>
                 <Route path="/member/signup" element ={<SignUp/>}/>
                 <Route path="/member/login" element ={<Login/>}/>
+                <Route path="/board/myboard" element={<SubBoard/>}></Route>
             </Routes>
             <Footer/>
         </BrowserRouter>

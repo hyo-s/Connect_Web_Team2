@@ -1,6 +1,20 @@
+import { useEffect, useState } from 'react';
 import './board.css';
+import axios from 'axios';
+
 
 export default function SubBoard(props) {
+
+    const [myBoard, setMyBoard] = useState([]);
+
+    useEffect(()=>{
+        axios.get('/conn/b/myboard/get.do')
+            .then((r)=>{
+                console.log(r)
+                setMyBoard(r.data);
+            })
+    },[])
+
     return(<>
         <section id="container">
             <div className='header'>HEADER</div>
@@ -13,7 +27,13 @@ export default function SubBoard(props) {
                    <button>팔로워</button>
                 </ul>
             </div>
+            <div>
+            {myBoard.map((r)=>{
+                console.log(r)
+            })}
+            </div>
             <div className="content subContent">
+                
                 <ul className='potoList'>
                     <li>img1</li>
                     <li>img2</li>
