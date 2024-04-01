@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Board.css';
+import './board.css';
 import axios from 'axios';
 export default function BoardWrite(props){
 
@@ -21,9 +21,7 @@ export default function BoardWrite(props){
             console.log(response);
         })
         .catch(error => {console.log(error)})
-
     }
-
     return(<>
         <section id="container">
             <form className="innerContainer">

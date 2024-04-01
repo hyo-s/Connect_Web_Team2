@@ -1,4 +1,4 @@
-import './Board.css';
+import './board.css';
 
 export default function SubBoard(props) {
     return(<>
