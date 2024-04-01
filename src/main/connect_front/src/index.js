@@ -10,6 +10,7 @@ import Board from './board/Board';
 
 import Login from './member/Login';
 import Index from './index/Index';
+import SubBoard from './board/SubBoard';
 
 
 
@@ -20,7 +21,7 @@ root.render(
   <React.StrictMode>
     {/* <MainBoard /> */}
     {/* <BoardWrite/> */}
-    <BoardWrite/>
+    <MainBoard/>
 {/*    <SignUp /> */}
   </React.StrictMode>
 );

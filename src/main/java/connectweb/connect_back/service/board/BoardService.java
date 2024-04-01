@@ -41,7 +41,6 @@ public class BoardService {
 
         MemberEntity memberEntity = memberService.loginEntity();
 
-
         //글쓰기
         BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
 
@@ -82,7 +81,6 @@ public class BoardService {
         return list;
 
     }
-
 
 
     @Transactional
