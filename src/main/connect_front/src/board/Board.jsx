@@ -1,5 +1,6 @@
 import axios from 'axios';
-import './board.css';
+import './Board.css';
+import Reply from './Reply.jsx';
 export default function Board(props){
 
     // const [boardInfo, setBoardInfo] = useState('');
@@ -23,9 +24,10 @@ export default function Board(props){
                         <li>이미지 미리보기</li>
                     </ul>
                 </div>
-                <div className="btmBox">
+                <div className="btmInfo">
                 </div>
-                <div className="btmBox">
+                <div className="replyBox">
+                    <Reply />
                 </div>
                 <div className="footer">
                     FOOTER

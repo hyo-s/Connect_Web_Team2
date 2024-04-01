@@ -45,4 +45,25 @@ public class BoardController {
     public int doDeleteBoard(int bno){
         return boardService.doDeleteBoard(bno);
     }
+
+    //=========================== 댓글 등록 ==========================//
+    @PostMapping("/r/post.do")
+    public boolean doPostReply(){
+        return false;
+    }
+    //=========================== 댓글 출력 ==========================//
+    @GetMapping("/r/get.do")
+    public boolean doGetReply(){
+        return false;
+    }
+    //=========================== 댓글 수정 ==========================//
+    @PutMapping("/r/put.do")
+    public boolean doPutReply(){
+        return false;
+    }
+    //=========================== 댓글 삭제 ==========================//
+    @DeleteMapping("/r/delete.do")
+    public boolean doDeleteReply(){
+        return false;
+    }
 }

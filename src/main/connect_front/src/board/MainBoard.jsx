@@ -1,4 +1,5 @@
-import './board.css';
+import './Board.css';
+import Reply from './Reply.jsx';
 export default function MainBoard(props){
     return(<>
         <section id="container">
@@ -23,9 +24,7 @@ export default function MainBoard(props){
                     </ul>
                 </div>
                 <div className="replyBox">
-                    <p>댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글</p>
-                    <p><input type="text" /></p>
-                    <button type='button'>등록</button>
+                    <Reply />
                 </div>
 
             </div>

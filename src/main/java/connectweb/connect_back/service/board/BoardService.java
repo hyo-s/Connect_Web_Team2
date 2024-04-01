@@ -97,4 +97,25 @@ public class BoardService {
         boardEntityRepository.deleteById(bno);
         return 0;
     }
+
+    //=========================== 댓글 등록 ==========================//
+    @Transactional
+    public boolean doPostReply(){
+        return false;
+    }
+    //=========================== 댓글 출력 ==========================//
+    @Transactional
+    public boolean doGetReply(){
+        return false;
+    }
+    //=========================== 댓글 수정 ==========================//
+    @Transactional
+    public boolean doPutReply(){
+        return false;
+    }
+    //=========================== 댓글 삭제 ==========================//
+    @Transactional
+    public boolean doDeleteReply(){
+        return false;
+    }
 }
