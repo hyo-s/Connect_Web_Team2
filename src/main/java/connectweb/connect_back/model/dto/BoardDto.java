@@ -19,6 +19,8 @@ public class BoardDto {
     private int bno; // 게시물 번호
     private String bcontent; //내용
     private int bview; //조회수
+    private String mnickname; // 작성자 닉네임
+//    private int mno_fk;     // (memberEntity) 회원 번호
     private List<MultipartFile> gfile;
 
 

@@ -9,6 +9,7 @@ export default function Reply (props){
     </>)
 }
 
+
 export function ReplyView(props){
       //1. useState 변수
       const [replyList , setReplyList]=useState( [] );

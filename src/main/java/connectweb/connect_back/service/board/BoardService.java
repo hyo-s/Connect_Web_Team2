@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
@@ -67,12 +68,29 @@ public class BoardService {
 
     @Transactional
     public List<BoardDto> doGetBoard(){
-        List<BoardEntity> entityList = boardEntityRepository.findAll();
+        List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
+        List<BoardDto> boardDtoList=new ArrayList<>();
+        list1.forEach((data)->{
+            BoardDto boardDto=BoardDto.builder()
+                    .bno((Integer) list1.get(0).get("bno"))
+                    .bcontent((String) list1.get(0).get("bcontent"))
+                    .mnickname((String) list1.get(0).get("mnickname"))
+                    .build();
+            boardDtoList.add(boardDto);
+
+        });
+        return boardDtoList;
+       /* return boardEntityRepository.findAll().stream().map(((boardEntity)->{
+            return boardEntity.toDto();
+        })).collect(Collectors.toList());*/
+        /*List<BoardEntity> entityList = boardEntityRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
         entityList.forEach( (data)->{
             boardDtoList.add( data.toDto() );
         } );
-        return boardDtoList;
+        return boardDtoList;*/
+
+
     }
 
     //개별출력

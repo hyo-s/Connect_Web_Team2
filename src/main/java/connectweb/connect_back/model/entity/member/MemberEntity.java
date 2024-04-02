@@ -2,8 +2,12 @@ package connectweb.connect_back.model.entity.member;
 
 import connectweb.connect_back.model.dto.MemberDto;
 import connectweb.connect_back.model.entity.BaseTime;
+import connectweb.connect_back.model.entity.board.BoardEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -65,7 +69,7 @@ public class MemberEntity extends BaseTime {
                 .build();
     }
 
-  /* //양방향 :게시물fk @OneToMany(mappedBy = "해당테이블 fk필드명")
+   /*//양방향 :게시물fk @OneToMany(mappedBy = "해당테이블 fk필드명")
     @OneToMany(mappedBy = "memberEntity")
     @ToString.Exclude // 해당 객체 호출시 해당 필드는 호출하지 않는다.
     @Builder.Default // 빌더패턴 사용해서 객체생성시 해당 필드의 초기값을 빌더 초기값으로 사용
