@@ -24,27 +24,27 @@ public class FollowController {
     }
     // ======================== [언팔로우] ======================== //
     @DeleteMapping("/follow/delete.do")
-    public boolean doFollowDelete(@RequestParam int fno){
+    public boolean doFollowDelete(int fno){
         return followService.doFollowDelete(fno);
     }
     // ======================== [ 팔로워 수 ] ======================== //
     @GetMapping("/follower/get.do")
-    public int doFollowerGet(@RequestParam int mno) {
+    public int doFollowerGet(String mno) {
         return followService.doFollowerGet(mno);
     }
     // ======================== [ 팔로워 이름 요청 ] ======================== //
     @GetMapping("/follower/name/get.do")
-    public List<FollowDto> doFollowerNameGet(@RequestParam int mno){
+    public List<FollowDto> doFollowerNameGet(String mno){
         return followService.doFollowerNameGet(mno);
     }
     // ======================== [ 팔로잉 수 ] ======================== //
     @GetMapping("/following/get.do")
-    public int doFollowingGet(@RequestParam int mno){
+    public int doFollowingGet(String mno){
         return followService.doFollowingGet(mno);
     }
     // ======================== [ 팔로잉 이름 요청 ] ======================== //
     @GetMapping("/following/name/get.do")
-    public List<FollowDto> doFollowingNameGet(@RequestParam int mno){
+    public List<FollowDto> doFollowingNameGet(String mno){
         return followService.doFollowingNameGet(mno);
     }
 }

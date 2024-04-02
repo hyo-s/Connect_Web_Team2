@@ -46,7 +46,6 @@ public class MemberController {
 // ======================== [개인페이지 출력할 회원정보] ======================== //
     @GetMapping("/page/get.do")
     public MemberDto memberView (@RequestParam String mnickname){
-        System.out.println("mnickname = " + mnickname);
         return memberService.memberView(mnickname);
     }
     @PutMapping("/mypage/put.do") // 회원수정

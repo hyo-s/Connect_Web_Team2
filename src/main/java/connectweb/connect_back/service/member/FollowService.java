@@ -37,11 +37,11 @@ public class FollowService {
         return true;
     }
     // ======================== [팔로워 수 ] ======================== //
-    public int doFollowerGet(int mno){
+    public int doFollowerGet(String mno){
         return followEntityRepository.doFollowerGet(mno);
     }
     // ======================== [팔로워 이름 ] ======================== //
-    public List<FollowDto> doFollowerNameGet(int mno){
+    public List<FollowDto> doFollowerNameGet(String mno){
         List<Map<Object,Object>> mapList = followEntityRepository.doFollowerNameGet(mno);
         List<FollowDto> followList = new ArrayList<>();
         for (int i=0; i<mapList.size(); i++){
@@ -57,11 +57,11 @@ public class FollowService {
         return followList;
     }
     // ======================== [ 팔로잉 수 ] ======================== //
-    public int doFollowingGet(int mno){
+    public int doFollowingGet(String mno){
         return followEntityRepository.doFollowingGet(mno);
     }
     // ======================== [ 팔로잉 확인 ] ======================== //
-    public List<FollowDto> doFollowingNameGet(int mno){
+    public List<FollowDto> doFollowingNameGet(String mno){
         List<Map<Object,Object>> mapList = followEntityRepository.doFollowingNameGet(mno);
         List<FollowDto> followList = new ArrayList<>();
         for (int i=0; i<mapList.size(); i++){

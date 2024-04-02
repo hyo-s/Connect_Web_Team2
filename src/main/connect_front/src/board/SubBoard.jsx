@@ -12,7 +12,7 @@ export default function SubBoard(props) {
     const [following, setFollowing] = useState();
 
     useEffect( ()=>{
-        axios.get("/conn/m/page/get.do",{params:{mnickname:mnickname}})
+        axios.get("/conn/m/page/get.do",{params:{'mnickname':mnickname}})
         .then(response=>{
             setUser(response.data);
             setMno(response.data.mno);
@@ -21,14 +21,14 @@ export default function SubBoard(props) {
 
     },[])
     useEffect(()=>{
-        axios.get("/conn/m/follower/get.do",{params:{mno:mno}})
+        axios.get("/conn/m/follower/get.do",{params:{'mno':mno}})
         .then(response=>{
             setFollower(response.data);
         })
         .catch(error=>{console.log(error)})
     },[mno])
     useEffect(()=>{
-        axios.get("/conn/m/following/get.do",{params:{mno:mno}})
+        axios.get("/conn/m/following/get.do",{params:{'mno':mno}})
         .then(response=>{
             setFollowing(response.data);
         })
