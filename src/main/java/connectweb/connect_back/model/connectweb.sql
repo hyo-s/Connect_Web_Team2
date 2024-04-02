@@ -8,4 +8,9 @@ select * from gallery;
 select * from reply;
 select * from follow;
 
-select * from follow f inner join member m on f.fromfollow = m.mno where tofollow = 2;
+# 팔로워
+select f.fno, m.mno, m.mname, m.mnickname from follow f join member m on m.mno = f.fromfollow where f.tofollow = 1;
+select count(*) from follow f join member m on m.mno = f.fromfollow where f.tofollow = 1;
+# 팔로잉
+select f.fno, m.mno, m.mname, m.mnickname from follow f join member m on m.mno = f.tofollow where f.fromfollow = 1;
+select count(*) from follow f join member m on m.mno = f.tofollow where f.fromfollow = 1;

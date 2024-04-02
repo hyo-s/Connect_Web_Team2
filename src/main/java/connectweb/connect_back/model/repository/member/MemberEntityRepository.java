@@ -11,6 +11,9 @@ public interface MemberEntityRepository extends JpaRepository<MemberEntity, Inte
     @Query(value = "select * from member where mid = :mid and mpw = :mpw", nativeQuery = true)
     MemberEntity findByLoginSQL(String mid, String mpw);
 
+// ======================== [개인페이지 출력할 회원정보] ======================== //
+    MemberEntity findByMnickname(String mnickname);
+
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
     boolean existsByMid(String mid);
     boolean existsByMnickname(String mnickname);

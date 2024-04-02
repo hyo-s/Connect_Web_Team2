@@ -21,11 +21,16 @@ insert into reply(rcontent,bno_fk,mno_fk) values
 
 insert into follow(tofollow, fromfollow) values
 (1, 2),
+(1, 3),
+(1, 4),
 (2, 1),
-(2, 3);
+(2, 3),
+(3, 1),
+(4, 1);
 
 /*anonym_board 샘플*/
 insert into anonym_board(abcontent, mno_fk) values
 ("내용1", 1);
 insert into anonym_board(abcontent, mno_fk) values
 ("내용2", 2);
+

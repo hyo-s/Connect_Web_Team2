@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/conn/m")
@@ -23,12 +24,27 @@ public class FollowController {
     }
     // ======================== [언팔로우] ======================== //
     @DeleteMapping("/follow/delete.do")
-    public boolean doFollowDelete(@RequestParam int fno){
+    public boolean doFollowDelete(int fno){
         return followService.doFollowDelete(fno);
     }
-    // ======================== [팔로우 확인] ======================== //
-    @GetMapping("/follow/get.do")
-    public List<FollowDto> doFollowGet(){
-        return followService.doFollowGet();
+    // ======================== [ 팔로워 수 ] ======================== //
+    @GetMapping("/follower/get.do")
+    public int doFollowerGet(String mno) {
+        return followService.doFollowerGet(mno);
+    }
+    // ======================== [ 팔로워 이름 요청 ] ======================== //
+    @GetMapping("/follower/name/get.do")
+    public List<FollowDto> doFollowerNameGet(String mno){
+        return followService.doFollowerNameGet(mno);
+    }
+    // ======================== [ 팔로잉 수 ] ======================== //
+    @GetMapping("/following/get.do")
+    public int doFollowingGet(String mno){
+        return followService.doFollowingGet(mno);
+    }
+    // ======================== [ 팔로잉 이름 요청 ] ======================== //
+    @GetMapping("/following/name/get.do")
+    public List<FollowDto> doFollowingNameGet(String mno){
+        return followService.doFollowingNameGet(mno);
     }
 }

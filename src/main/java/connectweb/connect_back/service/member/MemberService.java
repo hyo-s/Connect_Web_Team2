@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,23 +49,7 @@ public class MemberService {
     }
 // ========================= [회원가입] ========================= //
     public boolean signUpPost (MemberDto memberDto){
-        System.out.println("memberDto = " + memberDto);
-
-//        //프로필 파일 처리
-//        String fileName="";
-//        System.out.println("employeeDto.getMfile() = " + memberDto.getMfile());
-//        if(!memberDto.getMfile().isEmpty()) {
-//            fileName = fileService.FileUpload(memberDto.getMfile());
-//            if (fileName == null) { // 업로드 성공했으면
-//                return false;
-//            }
-//        }
-//        //dto에 업로드 성공한 파일명을 대입한다
-//        memberDto.setMimg(fileName);
-
-        //-- Dao 안니 엔티티 이용한 레코드 저장하는 방법
-        //1. 엔티티를 만든다
-        //2. 리포지토리 통한 엔티티를 저장한다
+        memberDto.setMimg("default.png");
         MemberEntity memberEntity = memberEntityRepository.save(memberDto.toEntity());
         if(memberEntity.getMno()>0)return true;
         return false;
@@ -79,6 +65,22 @@ public class MemberService {
     public boolean doLogOutGet(){
         request.getSession().setAttribute("loginInfo",null);
         return true;
+    }
+// ======================== [회원리스트] ======================== //
+    public List<MemberDto> memberList (){
+        List<MemberEntity> memberEntityList = memberEntityRepository.findAll();
+        List<MemberDto> memberDtoList = new ArrayList<>();
+        for(int i=0; i<memberEntityList.size(); i++){
+            MemberDto memberDto = memberEntityList.get(i).toDto();
+            memberDtoList.add(memberDto);
+        }
+        return memberDtoList;
+    }
+// ======================== [개인페이지 출력할 회원정보] ======================== //
+    public MemberDto memberView (String mnickname){
+        MemberDto memberDto = memberEntityRepository.findByMnickname(mnickname).toDto();
+        memberDto.setMimg("/img/default.png");
+        return memberDto;
     }
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
     public boolean checkId(String mid){

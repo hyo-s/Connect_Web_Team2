@@ -16,6 +16,10 @@ public class FollowDto {
     public int fromfollow;
     public int tofollow;
 
+    public int mno;
+    public String mname;
+    public String mnickname;
+
     public FollowEntity toEntity(){
         return FollowEntity.builder()
                 .fno(this.fno)

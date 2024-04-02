@@ -7,23 +7,16 @@ import MainBoard from './board/MainBoard'
 import SignUp from './member/SignUp';
 import BoardWrite from './board/BoardWrite';
 import Board from './board/Board';
-
 import Login from './member/Login';
 import Index from './index/Index';
 import SubBoard from './board/SubBoard';
 
 
 
-// 회원가입 signup
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-    {/* <MainBoard /> */}
-    {/* <BoardWrite/> */}
-    <MainBoard/>
-{/*    <SignUp /> */}
-  </React.StrictMode>
+  <Index/>
 );
 
 // If you want to start measuring performance in your app, pass a function

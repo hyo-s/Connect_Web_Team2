@@ -23,37 +23,37 @@ public class MemberController {
     public MemberDto loginInfo(){
         return memberService.loginInfo();
     }
-
 // ========================= [회원가입] ========================= //
     @PostMapping("/signup.do")// 회원가입
     public boolean signUpPost (@ModelAttribute MemberDto memberDto){
         return memberService.signUpPost(memberDto);
     }
-
 // ========================= [로그인] ========================= //
     @PostMapping("/login.do") // 로그인
     public boolean loginPost (LoginDto loginDto){
         return memberService.loginPost(loginDto);
     }
-
 // ======================== [로그아웃] ======================== //
     @GetMapping("/logout/get.do")
     public boolean doLogOutGet(){
         return memberService.doLogOutGet();
     }
-
-
-    @GetMapping("/mview") // 회원출력
-    public boolean memberView (){
-        return false;
+// ======================== [회원리스트] ======================== //
+    @GetMapping("/list/get.do")
+    public List<MemberDto> memberList (){
+        return memberService.memberList();
     }
-
-    @PutMapping("/mUpdate") // 회원수정
+// ======================== [개인페이지 출력할 회원정보] ======================== //
+    @GetMapping("/page/get.do")
+    public MemberDto memberView (@RequestParam String mnickname){
+        return memberService.memberView(mnickname);
+    }
+    @PutMapping("/mypage/put.do") // 회원수정
     public boolean memberUpdate (){
         return false;
     }
 
-    @DeleteMapping("/mDelete") // 회원삭제
+    @DeleteMapping("/mypage/put.do") // 회원삭제
     public boolean memberDelete (){
         return false;
     }
