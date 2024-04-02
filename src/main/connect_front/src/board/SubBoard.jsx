@@ -5,6 +5,17 @@ import axios from 'axios';
 
 export default function SubBoard(props) {
 
+    const [myBoard, setMyBoard] = useState([]);
+
+    useEffect(()=>{
+        axios.get('/conn/b/myboard/get.do')
+            .then((r)=>{
+                console.log(r)
+                setMyBoard(r.data);
+            })
+    },[])
+
+
     const {mnickname} = useParams();
     const [user, setUser] = useState({});
     const [mno, setMno] = useState();
@@ -38,34 +49,24 @@ export default function SubBoard(props) {
 
     return(<>
         <section id="container">
-            <div>
-                <div className="myInfo">
-                    <div className='imgBox'><img src={user.mimg} alt="" /></div>
-                    <ul>
-                    <li>{user.mname}</li>
-                    <li>{user.mnickname}</li>
-                    <li>{user.memail}</li>
-                    <span>팔로우{following}명</span>
-                    <span>팔로워{follower}명</span>
-                    </ul>
-                </div>
-                <div className="content subContent">
-                    <ul className='potoList'>
-                        <li>img1</li>
-                        <li>img2</li>
-                        <li>img3</li>
-                    </ul>
-                    <ul className='potoList'>
-                        <li>img1</li>
-                        <li>img2</li>
-                        <li>img3</li>
-                    </ul>
-                    <ul className='potoList'>
-                        <li>img1</li>
-                        <li>img2</li>
-                        <li>img3</li>
-                    </ul>
-                </div>
+            <div className="myInfo">
+                <div className='imgBox'><img src={user.mimg} alt="" /></div>
+                <ul>
+                <li>{user.mname}</li>
+                <li>{user.mnickname}</li>
+                <li>{user.memail}</li>
+                <span>팔로우{following}명</span>
+                <span>팔로워{follower}명</span>
+            </div>
+            <div className="content subContent">
+                {myBoard.map((r)=>{
+                    return(<>
+                        <ul className='potoList'>
+                        <li>{r.gname}</li>
+                        </ul>
+                    </>)
+
+                })}
             </div>
         </section>
     </>)

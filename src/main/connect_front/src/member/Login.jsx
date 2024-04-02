@@ -15,6 +15,7 @@ export default function Login(props){
             console.log(r);
             if(r.data){
                 alert('로그인성공');
+                window.location.href = "/board/myboard"
                 
             }else{
                 alert('로그인실패');

@@ -9,7 +9,6 @@ import BoardWrite from './board/BoardWrite';
 import Board from './board/Board';
 import Login from './member/Login';
 import Index from './index/Index';
-import SubBoard from './board/SubBoard';
 
 
 

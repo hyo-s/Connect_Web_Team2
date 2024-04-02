@@ -19,6 +19,12 @@ export default function BoardWrite(props){
         axios.post("/conn/b/post.do", contentFormData)
         .then(response => {
             console.log(response);
+            if(response){
+                alert('등록성공')
+                window.location.href = '/board/myboard'
+            }else{
+                alert('등록실패')
+            }
         })
         .catch(error => {console.log(error)})
     }
