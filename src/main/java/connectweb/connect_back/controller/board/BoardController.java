@@ -49,21 +49,21 @@ public class BoardController {
     //=========================== 댓글 등록 ==========================//
     @PostMapping("/r/post.do")
     public boolean doPostReply(){
-        return false;
+        return boardService.doPostReply();
     }
     //=========================== 댓글 출력 ==========================//
     @GetMapping("/r/get.do")
     public boolean doGetReply(){
-        return false;
+        return boardService.doGetReply();
     }
     //=========================== 댓글 수정 ==========================//
     @PutMapping("/r/put.do")
     public boolean doPutReply(){
-        return false;
+        return boardService.doPutReply();
     }
     //=========================== 댓글 삭제 ==========================//
     @DeleteMapping("/r/delete.do")
     public boolean doDeleteReply(){
-        return false;
+        return boardService.doDeleteReply();
     }
 }
