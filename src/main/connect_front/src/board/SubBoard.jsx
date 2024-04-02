@@ -49,24 +49,27 @@ export default function SubBoard(props) {
 
     return(<>
         <section id="container">
-            <div className="myInfo">
-                <div className='imgBox'><img src={user.mimg} alt="" /></div>
-                <ul>
-                <li>{user.mname}</li>
-                <li>{user.mnickname}</li>
-                <li>{user.memail}</li>
-                <span>팔로우{following}명</span>
-                <span>팔로워{follower}명</span>
-            </div>
-            <div className="content subContent">
-                {myBoard.map((r)=>{
-                    return(<>
-                        <ul className='potoList'>
-                        <li>{r.gname}</li>
-                        </ul>
-                    </>)
+            <div>
+                <div className="myInfo">
+                    <div className='imgBox'><img src={user.mimg} alt="" /></div>
+                    <ul>
+                        <li>{user.mname}</li>
+                        <li>{user.mnickname}</li>
+                        <li>{user.memail}</li>
+                    </ul>
+                    <span>팔로우{following}명</span>
+                    <span>팔로워{follower}명</span>
+                </div>
+                <div className="content subContent">
+                    {myBoard.map((r)=>{
+                        return(<>
+                            <ul className='potoList'>
+                            <li>{r.gname}</li>
+                            </ul>
+                        </>)
 
-                })}
+                    })}
+                </div>
             </div>
         </section>
     </>)

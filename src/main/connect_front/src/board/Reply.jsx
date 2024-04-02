@@ -1,7 +1,7 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function Reply (props){
-
-
-
     return(<>
         <div>{props.mnikname}</div>
         <input type="text"/>

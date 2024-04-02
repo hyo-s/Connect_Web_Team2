@@ -78,7 +78,6 @@ public class BoardService {
     //개별출력
     public List<GalleryDto> getMyBoardList(){
 
-
         List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.loginEntity().getMno());
         List<GalleryDto> galleryDtoList = new ArrayList<>();
         System.out.println("list = " + list);
