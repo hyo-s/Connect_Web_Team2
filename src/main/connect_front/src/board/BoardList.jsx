@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Reply from "./Reply";
+import MediaCard from "./MediaCard";
 
 export default function BoardList(props){
    
@@ -32,7 +33,9 @@ export default function BoardList(props){
                                             <p>{board.mnickname}</p>
                                         </div>
                                         <ul>
-                                            <li>img1</li>
+                                            <li>
+                                               d
+                                            </li>
                                         </ul>
                                     </div>
                                     <div className="btmBox">

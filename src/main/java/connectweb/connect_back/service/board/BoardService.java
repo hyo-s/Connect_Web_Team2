@@ -65,19 +65,18 @@ public class BoardService {
         return 0;
     }
 
-
+    // 전체 게시글 출력
     @Transactional
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
         List<BoardDto> boardDtoList=new ArrayList<>();
         list1.forEach((data)->{
             BoardDto boardDto=BoardDto.builder()
-                    .bno((Integer) list1.get(0).get("bno"))
-                    .bcontent((String) list1.get(0).get("bcontent"))
-                    .mnickname((String) list1.get(0).get("mnickname"))
+                    .bno((Integer)data.get("bno"))
+                    .bcontent((String) data.get("bcontent"))
+                    .mnickname((String)data.get("mnickname"))
                     .build();
             boardDtoList.add(boardDto);
-
         });
         return boardDtoList;
        /* return boardEntityRepository.findAll().stream().map(((boardEntity)->{

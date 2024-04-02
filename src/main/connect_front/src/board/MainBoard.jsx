@@ -4,7 +4,7 @@ import Reply from './Reply.jsx';
 import BoardList from './BoardList.jsx';
 export default function MainBoard(props){
 
-    axios.get('/conn/b/get.do')
+    //axios.get('/conn/b/get.do')
 
 
     return(<>
