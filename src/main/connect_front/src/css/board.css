@@ -12,15 +12,10 @@
     height: 140px;
     margin-right: 100px;
 }
-.myInfo .imgBox > img{
-    border-radius: 50%;
-    width:150px;
-    height: 140px;
-    margin-right: 100px;
-}
 
 /* content */
 .content {
+    height: 500px;
     margin: 0 auto;
 }
 .content ul {
@@ -28,8 +23,8 @@
 }
 .content ul li {
     border : 1px solid red;
+    height: 450px;
     margin: 10px;
-    height: 100px;
 }
 
 /* maincontent */
@@ -49,7 +44,6 @@
 }
 .mainContent ul li {
     margin: 10px auto;
-    height: 300px;
 }
 .btmBox {
     border: 1px solid red;

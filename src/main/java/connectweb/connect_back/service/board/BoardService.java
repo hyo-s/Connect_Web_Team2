@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
@@ -84,10 +85,10 @@ public class BoardService {
         for(int i = 0; i< list.size();i++){
             Object object = list.get(i).get("bno");
             List<Map<Object,Object>> list1 = boardEntityRepository.findBno(object);
+            System.out.println("list1 = " + list1);
             for(int j=0; j<list1.size(); j++){
                 GalleryDto galleryDto = GalleryDto.builder()
                         .gname((String)list1.get(j).get("gname"))
-                        .gno((Integer) list1.get(j).get("gno"))
                         .boardEntity(BoardEntity.builder()
                                 .bno((Integer) list1.get(j).get("bno")).build())
                         .build();

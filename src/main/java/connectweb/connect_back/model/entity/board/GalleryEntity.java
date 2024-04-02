@@ -4,6 +4,8 @@ import connectweb.connect_back.model.dto.GalleryDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "gallery")
 @AllArgsConstructor @NoArgsConstructor
@@ -11,22 +13,19 @@ import lombok.*;
 public class GalleryEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int gno; //갤러리번호 (pk)
-
-    @Column(columnDefinition = "varchar(255)")
     private String gname; //주소
 
     @JoinColumn(name = "bno_fk")
     @ManyToOne
     private BoardEntity boardEntity; //게시물번호 (fk)
 
+
+
     //엔티티를 dto로 변환
     public GalleryDto toGalleryDto(){
         return GalleryDto.builder()
                 .boardEntity(this.boardEntity)
                 .gname(this.gname)
-                .gno(this.gno)
                 .build();
     }
 
