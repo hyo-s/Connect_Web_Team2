@@ -37,7 +37,7 @@
     display: flex;
     margin-top: 20px;
 }
-.mainContent .topInfo p {
+.mainContent .topInfo p { 
     margin-top: 5px;
     margin-left: 5px;
 }

@@ -1,27 +1,26 @@
 package connectweb.connect_back.model.entity.board;
 
-import connectweb.connect_back.model.dto.anonymBoardDto;
-import connectweb.connect_back.model.entity.BaseTime;
+import connectweb.connect_back.model.dto.BirthBoardDto;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
+
 @Entity
-@Table(name="anonymBoard")
+@Table(name = "birthboard")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
-public class anonymBoardEntity extends BaseTime {
+public class BirthBoardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int abno; // 익명게시판 번호
+    private int bbno; // 익명게시판 번호
 
     @Column(columnDefinition = "longtext")
-    private String abcontent; // 게시판 내용
+    private String bbcontent; // 게시판 내용
 
 
     //Fk 필드
@@ -30,10 +29,10 @@ public class anonymBoardEntity extends BaseTime {
     private MemberEntity memberEntity;
 
 
-    public anonymBoardDto abDto(){
-        return anonymBoardDto.builder()
-                .abno(this.abno)
-                .abcontent(this.abcontent)
+    public BirthBoardDto birthDto(){
+        return BirthBoardDto.builder()
+                .bbno(this.bbno)
+                .bbcontent(this.bbcontent)
                 .build();
     }
 }

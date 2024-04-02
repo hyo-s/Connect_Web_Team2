@@ -8,6 +8,7 @@ import SubBoard from "../board/SubBoard";
 import BoardWrite from "../board/BoardWrite";
 import Board from "../board/Board";
 import Member from "../member/Member";
+import BirthBoardWrite from "../birthBoard/BirthBoardWrite";
 
 export default function Index(props){
     return(<>
@@ -21,6 +22,7 @@ export default function Index(props){
                 <Route path="/board/write" element={<BoardWrite/>}/>
                 <Route path="/board" element={<Board/>}/>
                 <Route path="/member" element={<Member/>}/>
+                <Route path="/birthboard/post" element={<BirthBoardWrite/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

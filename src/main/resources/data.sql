@@ -32,9 +32,9 @@ insert into follow(tofollow, fromfollow) values
 (3, 1),
 (4, 1);
 
-/*anonym_board 샘플*/
-insert into anonym_board(abcontent, mno_fk) values
-("내용1", 1);
-insert into anonym_board(abcontent, mno_fk) values
-("내용2", 2);
+/*birthboard 샘플*/
+insert into birthboard(bbcontent, mno_fk) values
+("내용입니다1", 1);
+insert into birthboard(bbcontent, mno_fk) values
+("내용입니다2", 2);
 

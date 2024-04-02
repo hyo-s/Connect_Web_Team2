@@ -21,8 +21,6 @@ public class BoardDto {
     private int bview; //조회수
     private List<MultipartFile> gfile;
 
-
-
     public BoardEntity toEntity(){
         return BoardEntity.builder()
                 .bno(this.bno)
