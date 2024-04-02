@@ -23,3 +23,9 @@ insert into follow(tofollow, fromfollow) values
 (1, 2),
 (2, 1),
 (2, 3);
+
+/*anonym_board 샘플*/
+insert into anonym_board(abcontent, mno_fk) values
+("내용1", 1);
+insert into anonym_board(abcontent, mno_fk) values
+("내용2", 2);
