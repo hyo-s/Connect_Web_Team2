@@ -15,7 +15,7 @@ public class GalleryEntity {
     @Id
     private String gname; //주소
 
-    @JoinColumn(name = "bno_fk")
+    @JoinColumn(name = "bno")
     @ManyToOne
     private BoardEntity boardEntity; //게시물번호 (fk)
 

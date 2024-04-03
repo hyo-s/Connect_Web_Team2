@@ -2,6 +2,7 @@ package connectweb.connect_back.model.dto;
 
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.io.File;
 @Getter
 @Setter
 @ToString
-@Builder
+@SuperBuilder
 public class MemberDto {
 
     private int mno; // 회원번호

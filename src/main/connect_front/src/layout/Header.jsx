@@ -16,7 +16,6 @@ export default function Header(props){
         .catch(error=>{console.log(error)})
     },[])
 
-    // 2. 로그아웃
     const onLogout = ()=>{
         axios.get('/conn/m/logout/get.do')
         .then(r=>{

@@ -9,9 +9,12 @@ import connectweb.connect_back.service.FileService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -79,6 +82,11 @@ public class MemberService {
         memberDto.setFromfollow(followEntityRepository.doFollowerGet(memberDto.getMno()));
         return memberDto;
     }
+// ======================== [ 회원탈퇴 ] ======================== //
+    public boolean memberDelete(){
+        memberEntityRepository.deleteById(loginEntity().getMno());
+        return true;
+    }
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
     public boolean checkId(String mid){
         boolean result = memberEntityRepository.existsByMid(mid);
@@ -95,5 +103,12 @@ public class MemberService {
     public boolean checkPhoneNumber(String phoneNumber){
         boolean result = memberEntityRepository.existsByMphone(phoneNumber);
         return result;
+    }
+// ========================= [비밀번호 일치여부] ========================= //
+    public boolean checkPassword(String mpassword){
+        if(loginEntity().getMpw().equals(mpassword)){
+            return true;
+        }
+        return false;
     }
 }

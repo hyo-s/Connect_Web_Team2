@@ -24,8 +24,8 @@ public class BirthBoardEntity {
 
 
     //Fk 필드
-    @JoinColumn(name = "mno_fk") // fk 필드명
-    @ManyToOne // 해당 필드 참조
+    @JoinColumn(name = "mno") // fk 필드명
+    @ManyToOne
     private MemberEntity memberEntity;
 
 

@@ -14,3 +14,5 @@ select count(*) from follow f join member m on m.mno = f.fromfollow where f.tofo
 # 팔로잉
 select f.fno, m.mno, m.mname, m.mnickname from follow f join member m on m.mno = f.tofollow where f.fromfollow = 1;
 select count(*) from follow f join member m on m.mno = f.tofollow where f.fromfollow = 1;
+
+select * from follow where tofollow = 4 or fromfollow = 4;

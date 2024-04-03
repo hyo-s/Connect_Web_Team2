@@ -2,13 +2,14 @@ package connectweb.connect_back.model.dto;
 
 import connectweb.connect_back.model.entity.board.BirthBoardEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Builder
+@SuperBuilder
 public class BirthBoardDto {
     private int bbno;
     private String bbcontent;
