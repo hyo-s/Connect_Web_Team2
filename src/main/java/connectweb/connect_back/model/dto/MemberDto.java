@@ -24,6 +24,9 @@ public class MemberDto {
     private String mbirth;	//생년월일
     private String mimg; // 회원사진 경로
 
+    private int fromfollow;
+    private int tofollow;
+
     private MultipartFile mfile; //회원사진
 
     public MemberEntity toEntity(){

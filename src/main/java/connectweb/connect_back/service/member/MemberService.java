@@ -25,6 +25,8 @@ public class MemberService {
     @Autowired
     MemberEntityRepository memberEntityRepository;
     @Autowired
+    FollowEntityRepository followEntityRepository;
+    @Autowired
     FileService fileService;
     //로그인
     @Autowired private HttpServletRequest request;
@@ -79,7 +81,8 @@ public class MemberService {
 // ======================== [개인페이지 출력할 회원정보] ======================== //
     public MemberDto memberView (String mnickname){
         MemberDto memberDto = memberEntityRepository.findByMnickname(mnickname).toDto();
-        memberDto.setMimg("/img/default.png");
+        memberDto.setTofollow(followEntityRepository.doFollowingGet(memberDto.getMno()));
+        memberDto.setFromfollow(followEntityRepository.doFollowerGet(memberDto.getMno()));
         return memberDto;
     }
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
