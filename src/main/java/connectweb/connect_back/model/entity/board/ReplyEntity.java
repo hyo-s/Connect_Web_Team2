@@ -16,12 +16,12 @@ public class ReplyEntity {
 
 
     // 단방향 : FK 필드
-    @JoinColumn(name ="bno_fk")
+    @JoinColumn(name ="bno")
     @ManyToOne // 해당 필드 참조
     private BoardEntity boardEntity;
 
     // 단방향 : FK 필드
-    @JoinColumn(name= "mno_fk")
+    @JoinColumn(name= "mno")
     @ManyToOne
     private MemberEntity memberEntity;
 

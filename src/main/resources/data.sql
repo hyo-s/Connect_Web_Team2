@@ -15,7 +15,7 @@ insert into gallery(gname, bno_fk) values
 ('바탕화면1.jpg',1),
 ('바탕화면2.jpg',1);
 
-insert into reply(rcontent,bno_fk,mno_fk) values
+insert into reply(rcontent,bno,mno) values
 ('댓글내용1',1,1),
 ('댓글내용2',2,2),
 ('댓글내용3',3,3),

@@ -135,20 +135,32 @@ public class BoardService {
 
     //=========================== 댓글 등록 ==========================//
     @Transactional
-    public boolean doPostReply(){
-        return false;
+    public boolean doPostReply(ReplyDto replyDto){
+        ReplyEntity replyEntity=replyDto.toEntity();
+        MemberEntity memberEntity = memberService.loginEntity();
+
+        BoardEntity boardEntity= BoardEntity.builder()
+                .bno(replyDto.getBno())
+                .build();
+        replyEntity.setMemberEntity(memberEntity);
+        replyEntity.setBoardEntity(boardEntity);
+        System.out.println("boardEntity = " + boardEntity);
+
+        replyEntityRepository.save(replyEntity);
+        return true;
     }
     //=========================== 댓글 출력 ==========================//
     @Transactional
     public List<ReplyDto> doGetReply(int bno){
-        List<Map<Object,Object>> list1=replyEntityRepository.findByBno_Fk(bno);
+        List<Map<Object,Object>> REList=replyEntityRepository.findByBno(bno);
         List<ReplyDto> list=new ArrayList<>();
-        list1.forEach((reply)->{
-         /*   ReplyDto replyDto= ReplyDto.builder()
-
-                    .build()
-            replyDto.setMnickname(list1.get(""));
-            list.add(replyDto);*/
+        REList.forEach((reply)->{
+            ReplyDto replyDto= ReplyDto.builder()
+                    .mnickname((String) reply.get("mnickname"))
+                    .rno((Integer)reply.get("rno"))
+                    .rcontent((String) reply.get("rcontent"))
+                    .build();
+            list.add(replyDto);
         });
         System.out.println("list = " + list);
         return list;
