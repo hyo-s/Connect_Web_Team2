@@ -3,11 +3,14 @@ package connectweb.connect_back.service.board;
 import connectweb.connect_back.model.dto.BoardDto;
 import connectweb.connect_back.model.dto.GalleryDto;
 import connectweb.connect_back.model.dto.MemberDto;
+import connectweb.connect_back.model.dto.ReplyDto;
 import connectweb.connect_back.model.entity.board.BoardEntity;
 import connectweb.connect_back.model.entity.board.GalleryEntity;
+import connectweb.connect_back.model.entity.board.ReplyEntity;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.board.BoardEntityRepository;
 import connectweb.connect_back.model.repository.board.GalleryEntityRepository;
+import connectweb.connect_back.model.repository.board.ReplyEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import connectweb.connect_back.service.FileService;
 import connectweb.connect_back.service.member.MemberService;
@@ -31,6 +34,8 @@ public class BoardService {
     @Autowired
     GalleryEntityRepository galleryEntityRepository;
     @Autowired
+    ReplyEntityRepository replyEntityRepository;
+    @Autowired
     FileService fileService;
     @Autowired
     MemberService memberService;
@@ -50,7 +55,7 @@ public class BoardService {
 
         //피드이미지----------------------------------------
         boardDto.getGfile().forEach((uploadFile)->{
-            String fileName = fileService.FileUpload(uploadFile);
+            String fileName = fileService.FileUpload2(uploadFile);
 
             GalleryEntity galleryEntity = GalleryEntity.builder()
                     .gname(fileName)
@@ -65,7 +70,7 @@ public class BoardService {
         return 0;
     }
 
-    // 전체 게시글 출력
+    // 전체 게시글 출력 ///
     @Transactional
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
@@ -93,18 +98,17 @@ public class BoardService {
     }
 
     //개별출력
-    public List<GalleryDto> getMyBoardList(){
-
-        List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.loginEntity().getMno());
+    public List<GalleryDto> getMyBoardList(String mnickname){
+        List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.memberView(mnickname).getMno());
         List<GalleryDto> galleryDtoList = new ArrayList<>();
         System.out.println("list = " + list);
         for(int i = 0; i< list.size();i++){
             Object object = list.get(i).get("bno");
             List<Map<Object,Object>> list1 = boardEntityRepository.findBno(object);
+            System.out.println("list1 = " + list1);
             for(int j=0; j<list1.size(); j++){
                 GalleryDto galleryDto = GalleryDto.builder()
                         .gname((String)list1.get(j).get("gname"))
-                        .gno((Integer) list1.get(j).get("gno"))
                         .boardEntity(BoardEntity.builder()
                                 .bno((Integer) list1.get(j).get("bno")).build())
                         .build();
@@ -136,8 +140,18 @@ public class BoardService {
     }
     //=========================== 댓글 출력 ==========================//
     @Transactional
-    public boolean doGetReply(){
-        return false;
+    public List<ReplyDto> doGetReply(int bno){
+        List<Map<Object,Object>> list1=replyEntityRepository.findByBno_Fk(bno);
+        List<ReplyDto> list=new ArrayList<>();
+        list1.forEach((reply)->{
+         /*   ReplyDto replyDto= ReplyDto.builder()
+
+                    .build()
+            replyDto.setMnickname(list1.get(""));
+            list.add(replyDto);*/
+        });
+        System.out.println("list = " + list);
+        return list;
     }
     //=========================== 댓글 수정 ==========================//
     @Transactional

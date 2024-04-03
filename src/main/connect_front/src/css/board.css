@@ -12,24 +12,19 @@
     height: 140px;
     margin-right: 100px;
 }
-.myInfo .imgBox > img{
-    border-radius: 50%;
-    width:150px;
-    height: 140px;
-    margin-right: 100px;
-}
 
 /* content */
 .content {
+    height: 500px;
     margin: 0 auto;
 }
 .content ul {
     padding: 0;
 }
-.content ul li {
+.content ul li{
     border : 1px solid red;
+    height: 450px;
     margin: 10px;
-    height: 100px;
 }
 
 /* maincontent */
@@ -37,7 +32,7 @@
     display: flex;
     margin-top: 20px;
 }
-.mainContent .topInfo p {
+.mainContent .topInfo p { 
     margin-top: 5px;
     margin-left: 5px;
 }
@@ -49,7 +44,6 @@
 }
 .mainContent ul li {
     margin: 10px auto;
-    height: 300px;
 }
 .btmBox {
     border: 1px solid red;
@@ -66,15 +60,17 @@
 }
 
 /* subcontent */
-.subContent {
+.subContent ul {
     width: 100%;
     margin: 0 auto;
 }
-.subContent ul{
+.subContent ul li{
     display: flex;
     justify-content: center;
+    width: 33.33%;
+    height: 150px;
 }
-.subContent ul li {
+.subContent ul li img {
     width: 100%;
 }
 .replyBox{

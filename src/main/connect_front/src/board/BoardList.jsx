@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Reply from "./Reply";
-import MediaCard from "./MediaCard";
 
 export default function BoardList(props){
    
@@ -48,7 +47,7 @@ export default function BoardList(props){
                                         </ul>
                                     </div>
                                     <div className="replyBox">
-                                        <Reply />
+                                        <Reply bno={board.bno} />
                                     </div>
 
                                 </div>

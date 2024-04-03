@@ -12,6 +12,7 @@ import Index from './index/Index';
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

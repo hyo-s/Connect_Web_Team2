@@ -8,6 +8,7 @@ import connectweb.connect_back.model.repository.member.FollowEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,11 @@ public class FollowService {
         return true;
     }
     // ======================== [팔로워 수 ] ======================== //
-    public int doFollowerGet(String mno){
+    public int doFollowerGet(int mno){
         return followEntityRepository.doFollowerGet(mno);
     }
     // ======================== [팔로워 이름 ] ======================== //
-    public List<FollowDto> doFollowerNameGet(String mno){
+    public List<FollowDto> doFollowerNameGet(int mno){
         List<Map<Object,Object>> mapList = followEntityRepository.doFollowerNameGet(mno);
         List<FollowDto> followList = new ArrayList<>();
         for (int i=0; i<mapList.size(); i++){
@@ -57,11 +58,11 @@ public class FollowService {
         return followList;
     }
     // ======================== [ 팔로잉 수 ] ======================== //
-    public int doFollowingGet(String mno){
+    public int doFollowingGet(int mno){
         return followEntityRepository.doFollowingGet(mno);
     }
     // ======================== [ 팔로잉 확인 ] ======================== //
-    public List<FollowDto> doFollowingNameGet(String mno){
+    public List<FollowDto> doFollowingNameGet(int mno){
         List<Map<Object,Object>> mapList = followEntityRepository.doFollowingNameGet(mno);
         List<FollowDto> followList = new ArrayList<>();
         for (int i=0; i<mapList.size(); i++){

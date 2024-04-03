@@ -1,5 +1,5 @@
+import '../css/board.css';
 import axios from 'axios';
-import './board.css';
 import Reply from './Reply.jsx';
 import BoardList from './BoardList.jsx';
 export default function MainBoard(props){

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import styles from './Member.css';
+import '../css/member.css';
 
 
 export default function Login(props){

@@ -19,10 +19,13 @@ public class BoardDto {
     private int bno; // 게시물 번호
     private String bcontent; //내용
     private int bview; //조회수
+    private int mno_fk; //회원번호
+    private List<MultipartFile> gfile = new ArrayList<>();
     private String mnickname; // 작성자 닉네임
 //    private int mno_fk;     // (memberEntity) 회원 번호
-    private List<MultipartFile> gfile;
 
+    //출력용
+    private List<String> gnameList = new ArrayList<>();
 
 
     public BoardEntity toEntity(){

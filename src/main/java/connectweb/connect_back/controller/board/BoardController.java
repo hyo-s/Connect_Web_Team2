@@ -2,6 +2,7 @@ package connectweb.connect_back.controller.board;
 
 import connectweb.connect_back.model.dto.BoardDto;
 import connectweb.connect_back.model.dto.GalleryDto;
+import connectweb.connect_back.model.dto.ReplyDto;
 import connectweb.connect_back.model.entity.board.BoardEntity;
 import connectweb.connect_back.model.entity.board.GalleryEntity;
 import connectweb.connect_back.service.board.BoardService;
@@ -32,8 +33,9 @@ public class BoardController {
     }
 
     @GetMapping("/myboard/get.do")
-    public List<GalleryDto> getMyBoardList(){
-        return boardService.getMyBoardList();
+    public List<GalleryDto> getMyBoardList(String mnickname){
+        System.out.println("mnickname = " + mnickname);
+        return boardService.getMyBoardList(mnickname);
     }
 
     @PutMapping("/put.do")
@@ -53,8 +55,8 @@ public class BoardController {
     }
     //=========================== 댓글 출력 ==========================//
     @GetMapping("/r/get.do")
-    public boolean doGetReply(){
-        return boardService.doGetReply();
+    public List<ReplyDto> doGetReply(int bno){
+        return boardService.doGetReply(bno);
     }
     //=========================== 댓글 수정 ==========================//
     @PutMapping("/r/put.do")

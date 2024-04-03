@@ -1,9 +1,7 @@
 package connectweb.connect_back.service.member;
 
-import connectweb.connect_back.model.dto.FollowDto;
 import connectweb.connect_back.model.dto.LoginDto;
 import connectweb.connect_back.model.dto.MemberDto;
-import connectweb.connect_back.model.entity.member.FollowEntity;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.member.FollowEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
@@ -11,11 +9,7 @@ import connectweb.connect_back.service.FileService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +18,8 @@ import java.util.Optional;
 public class MemberService {
     @Autowired
     MemberEntityRepository memberEntityRepository;
+    @Autowired
+    FollowEntityRepository followEntityRepository;
     @Autowired
     FileService fileService;
     //로그인
@@ -79,7 +75,8 @@ public class MemberService {
 // ======================== [개인페이지 출력할 회원정보] ======================== //
     public MemberDto memberView (String mnickname){
         MemberDto memberDto = memberEntityRepository.findByMnickname(mnickname).toDto();
-        memberDto.setMimg("/img/default.png");
+        memberDto.setTofollow(followEntityRepository.doFollowingGet(memberDto.getMno()));
+        memberDto.setFromfollow(followEntityRepository.doFollowerGet(memberDto.getMno()));
         return memberDto;
     }
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
