@@ -32,7 +32,7 @@ public class BoardController {
     }
 
     @GetMapping("/myboard/get.do")
-    public List<GalleryDto> getMyBoardList(){
+    public List<BoardDto> getMyBoardList(){
         return boardService.getMyBoardList();
     }
 

@@ -87,7 +87,6 @@ public class BoardService {
             for(int j=0; j<list1.size(); j++){
                 GalleryDto galleryDto = GalleryDto.builder()
                         .gname((String)list1.get(j).get("gname"))
-                        .gno((Integer) list1.get(j).get("gno"))
                         .boardEntity(BoardEntity.builder()
                                 .bno((Integer) list1.get(j).get("bno")).build())
                         .build();
