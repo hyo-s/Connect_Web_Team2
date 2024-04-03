@@ -65,7 +65,7 @@ public class BoardService {
         return 0;
     }
 
-    // 전체 게시글 출력
+    // 전체 게시글 출력 ///
     @Transactional
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
