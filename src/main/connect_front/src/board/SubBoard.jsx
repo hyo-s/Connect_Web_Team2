@@ -1,13 +1,18 @@
 import '../css/board.css';
+import { useParams } from 'react-router-dom';
+import '../css/board.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function SubBoard(props) {
 
     const [myBoard, setMyBoard] = useState([]);
+    const {mnickname} = useParams();
+    console.log(myBoard)
 
     useEffect(()=>{
-        axios.get('/conn/b/myboard/get.do')
+
+        axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}})
             .then((r)=>{
                 console.log(r)
                 setMyBoard(r.data);
@@ -27,9 +32,11 @@ export default function SubBoard(props) {
                 </div>
                 <div className="content subContent">
                     {myBoard.map((r)=>{
+                        console.log(r);
+                        console.log(r.gname);
                         return(<>
-                            <ul className='potoList'>
-                            <li>{r.gname}</li>
+                            <ul className='potoList' >
+                            <li><img src={"/img/mimg/" +r.gname} className='gname'></img></li>
                             </ul>
                         </>)
 

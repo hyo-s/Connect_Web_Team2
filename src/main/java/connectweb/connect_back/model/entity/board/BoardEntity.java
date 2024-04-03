@@ -7,7 +7,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="board")
@@ -41,12 +44,25 @@ public class BoardEntity extends BaseTime {
     @ManyToOne // 해당 필드 참조
     private MemberEntity memberEntity;
 
+    //양방향 갤러리
+    @OneToMany(mappedBy = "boardEntity")
+    @ToString.Exclude
+    @Builder.Default
+    private List<GalleryEntity> galleryEntityList = new ArrayList<>();
+
+
    //- 엔티티를 dto로 변환하는 메소드
     public BoardDto toDto(){
         return BoardDto.builder()
                 .bno(this.bno)
                 .bcontent(this.bcontent)
                 .bview(this.bview)
-                .build();
+                .mno_fk(memberEntity.getMno())
+                .gnameList(
+                        this.galleryEntityList.stream().map(
+                                (r)->{return r.getGname();}
+                        ).collect(Collectors.toList())
+                )
+        .build();
     }
 }

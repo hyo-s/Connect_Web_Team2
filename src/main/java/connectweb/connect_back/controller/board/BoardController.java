@@ -32,8 +32,9 @@ public class BoardController {
     }
 
     @GetMapping("/myboard/get.do")
-    public List<GalleryDto> getMyBoardList(){
-        return boardService.getMyBoardList();
+    public List<GalleryDto> getMyBoardList(String mnickname){
+        System.out.println("mnickname = " + mnickname);
+        return boardService.getMyBoardList(mnickname);
     }
 
     @PutMapping("/put.do")

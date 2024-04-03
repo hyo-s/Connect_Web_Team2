@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../css/board.css';
+import '../css/board.css'
 import axios from 'axios';
 export default function BoardWrite(props){
 

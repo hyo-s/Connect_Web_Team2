@@ -12,8 +12,8 @@ insert into board(bcontent, mno_fk) values
 ('게시물내용4',4);
 
 insert into gallery(gname, bno_fk) values
-('C:\Users\504\Desktop\Connect_Web_Team2\src\main\resources\img\boardimg\바탕화면1.jpg',1),
-('C:\Users\504\Desktop\Connect_Web_Team2\src\main\resources\img\boardimg\바탕화면2.jpg',1);
+('바탕화면1.jpg',1),
+('바탕화면2.jpg',1);
 
 insert into reply(rcontent,bno_fk,mno_fk) values
 ('댓글내용1',1,1),
