@@ -14,15 +14,16 @@ import lombok.*;
 public class ReplyDto {
     private int rno;
     private String rcontent;
-    private BoardEntity boardEntity;
-    private MemberEntity memberEntity;
+    private String mnickname;
+    /*private BoardEntity boardEntity;
+    private MemberEntity memberEntity;*/
 
     public ReplyEntity toEntity(){
         return ReplyEntity.builder()
                 .rno(this.rno)
                 .rcontent((this.rcontent))
-                .boardEntity(this.boardEntity)
-                .memberEntity(this.memberEntity)
+                /*.boardEntity(this.boardEntity)
+                .memberEntity(this.memberEntity)*/
                 .build();
     }
 }

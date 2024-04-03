@@ -3,11 +3,14 @@ package connectweb.connect_back.service.board;
 import connectweb.connect_back.model.dto.BoardDto;
 import connectweb.connect_back.model.dto.GalleryDto;
 import connectweb.connect_back.model.dto.MemberDto;
+import connectweb.connect_back.model.dto.ReplyDto;
 import connectweb.connect_back.model.entity.board.BoardEntity;
 import connectweb.connect_back.model.entity.board.GalleryEntity;
+import connectweb.connect_back.model.entity.board.ReplyEntity;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.board.BoardEntityRepository;
 import connectweb.connect_back.model.repository.board.GalleryEntityRepository;
+import connectweb.connect_back.model.repository.board.ReplyEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import connectweb.connect_back.service.FileService;
 import connectweb.connect_back.service.member.MemberService;
@@ -30,6 +33,8 @@ public class BoardService {
     MemberEntityRepository memberEntityRepository;
     @Autowired
     GalleryEntityRepository galleryEntityRepository;
+    @Autowired
+    ReplyEntityRepository replyEntityRepository;
     @Autowired
     FileService fileService;
     @Autowired
@@ -136,8 +141,18 @@ public class BoardService {
     }
     //=========================== 댓글 출력 ==========================//
     @Transactional
-    public boolean doGetReply(){
-        return false;
+    public List<ReplyDto> doGetReply(int bno){
+        List<Map<Object,Object>> list1=replyEntityRepository.findByBno_Fk(bno);
+        List<ReplyDto> list=new ArrayList<>();
+        list1.forEach((reply)->{
+         /*   ReplyDto replyDto= ReplyDto.builder()
+
+                    .build()
+            replyDto.setMnickname(list1.get(""));
+            list.add(replyDto);*/
+        });
+        System.out.println("list = " + list);
+        return list;
     }
     //=========================== 댓글 수정 ==========================//
     @Transactional
