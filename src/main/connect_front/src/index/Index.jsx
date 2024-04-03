@@ -8,6 +8,7 @@ import SubBoard from "../board/SubBoard";
 import BoardWrite from "../board/BoardWrite";
 import Board from "../board/Board";
 import Member from "../member/Member";
+import BirthBoardWrite from "../birthBoard/BirthBoardWrite";
 import Profile from "../member/Profile";
 import React, { useState } from "react";
 import Edit from "../member/Edit";
@@ -28,6 +29,7 @@ export default function Index(props){
                 <Route path="/board/write" element={<BoardWrite/>}/>
                 <Route path="/board" element={<Board/>}/>
                 <Route path="/member" element={<Member/>}/>
+                <Route path="/birthboard/post" element={<BirthBoardWrite/>}/>
                 <Route path={"/board/sub/:mnickname"} element={<Profile/>}/>
                 <Route path={"/member/edit"} element={<Edit/>}/>
                 <Route path={"/member/delete"} element={<Delete/>}/>
