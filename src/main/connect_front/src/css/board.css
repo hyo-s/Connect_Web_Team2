@@ -21,7 +21,7 @@
 .content ul {
     padding: 0;
 }
-.content ul li {
+.content ul li{
     border : 1px solid red;
     height: 450px;
     margin: 10px;
@@ -60,15 +60,17 @@
 }
 
 /* subcontent */
-.subContent {
+.subContent ul {
     width: 100%;
     margin: 0 auto;
 }
-.subContent ul{
+.subContent ul li{
     display: flex;
     justify-content: center;
+    width: 33.33%;
+    height: 150px;
 }
-.subContent ul li {
+.subContent ul li img {
     width: 100%;
 }
 .replyBox{

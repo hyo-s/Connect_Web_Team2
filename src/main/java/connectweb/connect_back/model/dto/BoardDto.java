@@ -19,6 +19,7 @@ public class BoardDto {
     private int bno; // 게시물 번호
     private String bcontent; //내용
     private int bview; //조회수
+    private int mno_fk; //회원번호
     private List<MultipartFile> gfile = new ArrayList<>();
 
     //출력용

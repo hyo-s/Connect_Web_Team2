@@ -50,7 +50,7 @@ public class BoardService {
 
         //피드이미지----------------------------------------
         boardDto.getGfile().forEach((uploadFile)->{
-            String fileName = fileService.FileUpload(uploadFile);
+            String fileName = fileService.FileUpload2(uploadFile);
 
             GalleryEntity galleryEntity = GalleryEntity.builder()
                     .gname(fileName)
@@ -77,9 +77,8 @@ public class BoardService {
     }
 
     //개별출력
-    public List<GalleryDto> getMyBoardList(){
-
-        List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.loginEntity().getMno());
+    public List<GalleryDto> getMyBoardList(String mnickname){
+        List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.memberView(mnickname).getMno());
         List<GalleryDto> galleryDtoList = new ArrayList<>();
         System.out.println("list = " + list);
         for(int i = 0; i< list.size();i++){
