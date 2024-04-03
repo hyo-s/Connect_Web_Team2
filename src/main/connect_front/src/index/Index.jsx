@@ -32,7 +32,7 @@ export default function Index(props){
                 <Route path="/birthboard/post" element={<BirthBoardWrite/>}/>
                 <Route path={"/board/sub/:mnickname"} element={<Profile/>}/>
                 <Route path={"/member/edit"} element={<Edit/>}/>
-                <Route path={"/member/delete"} element={<Delete/>}/>
+                {/* <Route path={"/member/delete"} element={<Delete/>}/> */}
             </Routes>
             <Footer/>
         </BrowserRouter>

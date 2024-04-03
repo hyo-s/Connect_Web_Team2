@@ -14,6 +14,7 @@ public class ReplyEntity {
     private int rno;
     private String rcontent;
 
+
     // 단방향 : FK 필드
     @JoinColumn(name ="bno_fk")
     @ManyToOne // 해당 필드 참조
@@ -29,8 +30,8 @@ public class ReplyEntity {
         return ReplyDto.builder()
                 .rno(this.rno)
                 .rcontent(this.rcontent)
-                .boardEntity(this.boardEntity)
-                .memberEntity(this.memberEntity)
+//                .boardEntity(this.boardEntity)
+//                .memberEntity(this.memberEntity)
                 .build();
     }
 }

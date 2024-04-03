@@ -3,6 +3,7 @@ package connectweb.connect_back.service.member;
 import connectweb.connect_back.model.dto.LoginDto;
 import connectweb.connect_back.model.dto.MemberDto;
 import connectweb.connect_back.model.entity.member.MemberEntity;
+import connectweb.connect_back.model.repository.member.FollowEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import connectweb.connect_back.service.FileService;
 import jakarta.servlet.http.HttpServletRequest;

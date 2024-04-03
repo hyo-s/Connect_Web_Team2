@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 
 export default function Reply (props){
     return(<>
-        <div>{props.mnikname}</div>
-        <input type="text"/>
+        <ReplyView bno={props.bno} />
+        {/* <div>{props.mnikname}</div>
+        <input type="text"/> */}
 
     </>)
 }
+
 
 export function ReplyView(props){
       //1. useState 변수
@@ -15,7 +17,7 @@ export function ReplyView(props){
 
       console.log(replyList);
       useEffect(()=>{
-          axios.get('')
+          axios.get('/conn/b/r/get.do',{params:{bno:props.bno}})
           .then((r)=> {
               //서버로 받은 데이터를 setState 넣어주면 재렌더링
               console.log(r);
@@ -28,8 +30,9 @@ export function ReplyView(props){
       return(<>
           {
               replyList.map((reply)=>{
+                // const nik=reply.boardEntity.memberEntity.mnickname
                   return(<>
-                            <div>{reply.mnikname}</div>
+                            {/* <div>{nik}</div> */}
                             <p>{reply.rcontent}</p>
                         </>
                   )

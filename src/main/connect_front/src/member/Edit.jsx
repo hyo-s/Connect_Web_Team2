@@ -11,7 +11,7 @@ export default function Edit(props){
                     닉네임 : <input type="text" value="aaa"/><br/>
                     전화번호 : <input type="text" value="010-1111-1111"/><br/>
                     이메일 : <input type="text" value="aaa@aaa.aaa"/><br/>
-                    <Link to="/member/delete">회원탈퇴하기</Link>
+                    {/* <Link to="/member/delete">회원탈퇴하기</Link> */}
                     <button>수정</button>
                 </div>  
             </div>
