@@ -44,10 +44,12 @@ public class BoardEntity extends BaseTime {
     @ManyToOne // 해당 필드 참조
     private MemberEntity memberEntity;
 
+    //양방향 갤러리
     @OneToMany(mappedBy = "boardEntity")
     @ToString.Exclude
     @Builder.Default
-    private List<GalleryEntity> gfileList = new ArrayList<>();
+    private List<GalleryEntity> galleryEntityList = new ArrayList<>();
+
 
    //- 엔티티를 dto로 변환하는 메소드
     public BoardDto toDto(){
@@ -55,11 +57,11 @@ public class BoardEntity extends BaseTime {
                 .bno(this.bno)
                 .bcontent(this.bcontent)
                 .bview(this.bview)
-                .gfileList(
-                        this.gfileList.stream().map((r)->{
-                            return r.getGname();
-                        }).collect(Collectors.toList())
+                .gnameList(
+                        this.galleryEntityList.stream().map(
+                                (r)->{return r.getGname();}
+                        ).collect(Collectors.toList())
                 )
-                .build();
+        .build();
     }
 }

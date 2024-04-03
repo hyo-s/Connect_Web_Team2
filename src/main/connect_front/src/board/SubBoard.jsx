@@ -15,7 +15,6 @@ export default function SubBoard(props) {
             })
     },[])
 
-
     // const {mnickname} = useParams();
     // const [user, setUser] = useState({});
     // const [mno, setMno] = useState();
@@ -46,7 +45,6 @@ export default function SubBoard(props) {
     //     .catch(error=>{console.log(error)})
     // },[mno])
 
-    console.log(myBoard)
 
     return(<>
         <section id="container">
@@ -66,7 +64,7 @@ export default function SubBoard(props) {
                         console.log(r);
                         return(<>
                             <ul className='potoList'>
-                                <li><img src={'/mimg/'+r.gfileList[0]} className='gfileList'></img></li>
+                            <img src={r.gname} className='gname'></img>
                             </ul>
                         </>)
 

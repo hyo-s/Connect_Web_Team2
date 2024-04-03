@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './board.css';
+import '../css/board.css';
 import Reply from './Reply.jsx';
 export default function Board(props){
 

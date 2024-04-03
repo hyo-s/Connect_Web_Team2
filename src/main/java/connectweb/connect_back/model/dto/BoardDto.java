@@ -21,7 +21,8 @@ public class BoardDto {
     private int bview; //조회수
     private List<MultipartFile> gfile = new ArrayList<>();
 
-    private List<String> gfileList = new ArrayList<>();
+    //출력용
+    private List<String> gnameList = new ArrayList<>();
 
 
     public BoardEntity toEntity(){
