@@ -13,16 +13,16 @@ import lombok.*;
 public class GalleryEntity {
 
     @Id
-    private String gname; //주소
+        private String gname; //주소
 
-    @JoinColumn(name = "bno_fk")
-    @ManyToOne
-    private BoardEntity boardEntity; //게시물번호 (fk)
+        @JoinColumn(name = "bno_fk")
+        @ManyToOne
+        private BoardEntity boardEntity; //게시물번호 (fk)
 
-    //엔티티를 dto로 변환
-    public GalleryDto toGalleryDto(){
+        //엔티티를 dto로 변환
+        public GalleryDto toGalleryDto(){
         return GalleryDto.builder()
-                .boardEntity(this.boardEntity)
+                .bno_fk(boardEntity.getBno())
                 .gname(this.gname)
                 .build();
     }
