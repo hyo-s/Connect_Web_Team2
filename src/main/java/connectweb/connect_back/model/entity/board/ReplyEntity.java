@@ -19,13 +19,13 @@ public class ReplyEntity {
 
 
     // 단방향 : FK 필드
-    @JoinColumn(name ="bno_fk")
+    @JoinColumn(name ="bno")
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private BoardEntity boardEntity;
 
     // 단방향 : FK 필드
-    @JoinColumn(name= "mno_fk")
+    @JoinColumn(name= "mno")
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private MemberEntity memberEntity;

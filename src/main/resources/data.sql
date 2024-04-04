@@ -18,7 +18,7 @@ insert into gallery(gname, bno_fk) values
 ('반가워.jpg',1),
 ('세로이미지.jpg',5);
 
-insert into reply(rcontent,bno_fk,mno_fk) values
+insert into reply(rcontent,bno,mno) values
 ('댓글내용1',1,1),
 ('댓글내용2',2,2),
 ('댓글내용3',3,3),

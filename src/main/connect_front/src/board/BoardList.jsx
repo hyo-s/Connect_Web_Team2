@@ -47,7 +47,7 @@ export default function BoardList(props){
                                         </ul>
                                     </div>
                                     <div className="replyBox">
-                                        <Reply bno={board.bno} />
+                                        <Reply board={board} />
                                     </div>
 
                                 </div>
