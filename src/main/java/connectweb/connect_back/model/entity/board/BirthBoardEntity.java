@@ -1,6 +1,7 @@
 package connectweb.connect_back.model.entity.board;
 
 import connectweb.connect_back.model.dto.BirthBoardDto;
+import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +14,7 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class BirthBoardEntity {
+public class BirthBoardEntity extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,7 +25,6 @@ export default function BoardList(props){
                  return(<>
                             <section id="container">
                                 <div className="innerContainer">
-                                    
                                     <div className="content mainContent">
                                         <div className="topInfo">
                                             <div className="topImg"></div>
@@ -49,13 +48,12 @@ export default function BoardList(props){
                                     <div className="replyBox">
                                         <Reply bno={board.bno} />
                                     </div>
-
                                 </div>
                             </section>
                         </>
                  )
              })
          }
-       
+
      </>)
 }

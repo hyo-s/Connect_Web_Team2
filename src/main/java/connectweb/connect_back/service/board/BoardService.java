@@ -70,11 +70,11 @@ public class BoardService {
         return 0;
     }
 
-    // 전체 게시글 출력 ///
+    // 전체 게시글 출력 //
     @Transactional
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
-        List<BoardDto> boardDtoList=new ArrayList<>();
+        List<BoardDto> boardDtoList = new ArrayList<>();
         list1.forEach((data)->{
             BoardDto boardDto=BoardDto.builder()
                     .bno((Integer)data.get("bno"))
@@ -93,8 +93,6 @@ public class BoardService {
             boardDtoList.add( data.toDto() );
         } );
         return boardDtoList;*/
-
-
     }
 
     //개별출력
