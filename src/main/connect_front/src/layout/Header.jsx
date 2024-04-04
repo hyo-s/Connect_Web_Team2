@@ -7,6 +7,8 @@ export default function Header(props){
 
     const {loginInfo, setLoginInfo } = useContext(LoginInfoContext);
 
+    console.log(loginInfo);
+
     useEffect(()=>{
         axios.get("/conn/m/login/info/get.do")
         .then(response=>{

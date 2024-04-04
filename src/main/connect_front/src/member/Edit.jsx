@@ -135,8 +135,9 @@ export default function Edit(props){
         .then(response=>{
             console.log(response);
             console.log(response.data);
-            setLoginInfo(response.data);
-            window.location.href = "/board/sub/"+response.data.mnickname
+            setLoginInfo(response.data );
+            // window.location.href = "/board/sub/"+response.data.mnickname; 
+            
         })
         .catch(error=>{console.log(error);})
     }
