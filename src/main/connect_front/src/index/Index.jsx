@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import Edit from "../member/Edit";
 import Delete from "../member/Delete";
 import SubBoardMain from "../board/SubBoardMain";
+import BirthBoardList from "../birthBoard/BirthBoardList";
 
 export const LoginInfoContext = React.createContext('');
 
@@ -34,7 +35,7 @@ export default function Index(props){
                 <Route path="/birthboard/post" element={<BirthBoardWrite/>}/>
                 <Route path={"/board/sub/:mnickname"} element={<Profile/>}/>
                 <Route path={"/member/edit"} element={<Edit/>}/>
-                {/* <Route path={"/member/delete"} element={<Delete/>}/> */}
+                <Route path="/birthboard/get" element={<BirthBoardList/>} />
                 <Route path={"/baord/submain/:mnickname"} element={<SubBoardMain/>}/>
                 <Route path={"/member/edit/:mnickname"} element={<Edit/>}/>
                 <Route path="/member/delete" element={<Delete/>}/>

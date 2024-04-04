@@ -19,7 +19,7 @@ export default function BirthBoardWrite (props){
             console.log(r);
             if(r){
                 alert("게시글 등록 성공")
-                window.location.href = '/'
+                window.location.href = '/birthboard/post'
             }else{
                 alert("게시글 등록 실패")
             }
