@@ -32,8 +32,9 @@ public class BoardController {
         return boardService.doGetBoard();
     }
 
+    //개별피드출력
     @GetMapping("/myboard/get.do")
-    public List<GalleryDto> getMyBoardList(String mnickname){
+    public List<BoardDto> getMyBoardList(String mnickname){
         System.out.println("mnickname = " + mnickname);
         return boardService.getMyBoardList(mnickname);
     }
@@ -50,8 +51,9 @@ public class BoardController {
 
     //=========================== 댓글 등록 ==========================//
     @PostMapping("/r/post.do")
-    public boolean doPostReply(){
-        return boardService.doPostReply();
+    public boolean doPostReply(ReplyDto replyDto){
+        System.out.println("replyDto = " + replyDto);
+        return boardService.doPostReply(replyDto);
     }
     //=========================== 댓글 출력 ==========================//
     @GetMapping("/r/get.do")

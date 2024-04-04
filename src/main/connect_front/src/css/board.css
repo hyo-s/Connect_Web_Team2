@@ -12,6 +12,12 @@
     height: 140px;
     margin-right: 100px;
 }
+.myInfo .imgBox > img {
+    border-radius: 50%;
+    width:150px;
+    height: 140px;
+    margin-right: 100px;
+}
 
 /* content */
 .content {
@@ -63,15 +69,19 @@
 .subContent ul {
     width: 100%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .subContent ul li{
     display: flex;
     justify-content: center;
-    width: 33.33%;
-    height: 150px;
+    width: 28.7%;
+    height: 137.8px;
 }
 .subContent ul li img {
     width: 100%;
+    object-fit: cover;
 }
 .replyBox{
     padding: 20px 0;

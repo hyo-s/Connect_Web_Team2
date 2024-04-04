@@ -25,7 +25,7 @@ public class MemberController {
     }
 // ========================= [회원가입] ========================= //
     @PostMapping("/signup.do")// 회원가입
-    public boolean signUpPost (@ModelAttribute MemberDto memberDto){
+    public boolean signUpPost (@RequestBody MemberDto memberDto){
         return memberService.signUpPost(memberDto);
     }
 // ========================= [로그인] ========================= //
@@ -48,19 +48,17 @@ public class MemberController {
     public MemberDto memberView (@RequestParam String mnickname){
         return memberService.memberView(mnickname);
     }
-
-// ======================== [ 회원탈퇴 ] ======================== //
+// ======================== [회원 탈퇴] ======================== //
     @DeleteMapping("/delete.do")
     public boolean memberDelete (){
         return memberService.memberDelete();
     }
-
-
-    @PutMapping("/mypage/put.do") // 회원수정
-    public boolean memberUpdate (){
-        return false;
+// ======================== [회원 수정] ======================== //
+    @PutMapping("/put.do")
+    public MemberEntity editMember (MemberDto memberDto){
+        System.out.println("memberDto = " + memberDto);
+        return memberService.editMember(memberDto);
     }
-
 
 
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
@@ -80,10 +78,9 @@ public class MemberController {
     public boolean checkPhoneNumber(String phoneNumber){
         return memberService.checkPhoneNumber(phoneNumber);
     }
-// ========================= [비밀번호 일치여부] ========================= //
+// ========================= [비밀번호 일치 확인] ========================= //
     @GetMapping("/check.password")
-    public boolean checkPassword(String mpassword){
-        System.out.println("mpassword = " + mpassword);
-        return memberService.checkPassword(mpassword);
+    public boolean checkPassword(String mpw){
+        return memberService.checkPassword(mpw);
     }
 }

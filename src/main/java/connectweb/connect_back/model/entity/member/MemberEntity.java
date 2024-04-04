@@ -5,6 +5,7 @@ import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.board.BoardEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @Setter
 @ToString
 @Builder
+@DynamicUpdate
 public class MemberEntity extends BaseTime {
 
     @Id

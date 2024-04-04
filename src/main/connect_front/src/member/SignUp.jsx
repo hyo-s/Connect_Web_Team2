@@ -42,10 +42,10 @@ export default function SignUp(props){
     // 정규표현식
     let nameRule = /^[가-힣a-zA-Z]{3,19}$/;
     let idRule = /^[a-z]+[a-z0-9]{5,19}$/;
-    let phoneNumberRule = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
     let passwordRule = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
     let nickNameRule = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{5,20}$/;
     let emailRule = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    let phoneNumberRule = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
 
     const onChangeNameCheck = async (e)=>{
         const inputName = e.target.value;
@@ -222,8 +222,10 @@ export default function SignUp(props){
 
     const onSignup = (e)=>{
         for(let i=0; i<checkArray.length; i++){
+            console.log(checkArray[i])
             if(!checkArray[i]){
                 setDisabled(false);
+                return
             }else{
                 setDisabled(true);
             }
@@ -240,7 +242,6 @@ export default function SignUp(props){
             <div className="innerContainer">
                 <div className="content">
                     <form id='signupForm'>
-                        프로필 사진 등록: <input name="mfile"type='file' /><br/>
                         <input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck} />
                         <p>{name!==''? msgName:''}</p>
                         <input type="text" name="mid" placeholder="아이디를 입력해주세요" value={id} onChange={onChangeIdCheck}/>

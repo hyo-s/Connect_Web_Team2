@@ -7,6 +7,8 @@ export default function Header(props){
 
     const {loginInfo, setLoginInfo } = useContext(LoginInfoContext);
 
+    console.log(loginInfo);
+
     useEffect(()=>{
         axios.get("/conn/m/login/info/get.do")
         .then(response=>{
@@ -29,7 +31,7 @@ export default function Header(props){
 
     return(<>
         <div className="header">
-            {loginInfo && <span>{loginInfo.memail}님</span> }
+            {loginInfo && <span>{loginInfo.memail}님 {loginInfo.mnickname}님</span> }
             <button type="button" onClick={onLogout}>로그아웃</button>
             <ul>
                 <li><Link to="/">홈</Link></li>
@@ -39,7 +41,7 @@ export default function Header(props){
                 <li><Link to="/board/write">쓰기</Link></li>
                 <li><Link to="/board">보드?</Link></li>
                 <li><Link to="/member">멤버</Link></li>
-                <li><Link to="/member/edit">수정</Link></li>
+                <li><Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link></li>
             </ul>
         </div>
     </>)

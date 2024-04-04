@@ -9,13 +9,13 @@ export default function BoardList(props){
 
      console.log(boardList);
      useEffect(()=>{
-         axios.get('/conn/b/get.do')
-         .then((r)=> {
-             console.log(r);
-             setBoardList(r.data);
-             
-         })
-         .catch(error=>{console.log(error)})
+        axios.get('/conn/b/get.do')
+        .then((r)=> {
+            console.log(r);
+            setBoardList(r.data);
+            
+        })
+        .catch(error=>{console.log(error)})
  
      },[])
  
@@ -25,7 +25,6 @@ export default function BoardList(props){
                  return(<>
                             <section id="container">
                                 <div className="innerContainer">
-                                    
                                     <div className="content mainContent">
                                         <div className="topInfo">
                                             <div className="topImg"></div>
@@ -47,15 +46,14 @@ export default function BoardList(props){
                                         </ul>
                                     </div>
                                     <div className="replyBox">
-                                        <Reply bno={board.bno} />
+                                        <Reply board={board} />
                                     </div>
-
                                 </div>
                             </section>
                         </>
                  )
              })
          }
-       
+
      </>)
 }

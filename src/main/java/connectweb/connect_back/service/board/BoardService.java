@@ -46,6 +46,7 @@ public class BoardService {
     public int doPostBoard(BoardDto boardDto){
 
         MemberEntity memberEntity = memberService.loginEntity();
+        if(memberEntity == null) return 2;
 
         //글쓰기
         BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
@@ -56,6 +57,7 @@ public class BoardService {
         //피드이미지----------------------------------------
         boardDto.getGfile().forEach((uploadFile)->{
             String fileName = fileService.FileUpload2(uploadFile);
+            System.out.println("fileName = " + fileName);
 
             GalleryEntity galleryEntity = GalleryEntity.builder()
                     .gname(fileName)
@@ -67,14 +69,14 @@ public class BoardService {
             //------------------------------------------------
             ;
         });
-        return 0;
+        return 1;
     }
 
-    // 전체 게시글 출력 ///
+    // 전체 게시글 출력 //
     @Transactional
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
-        List<BoardDto> boardDtoList=new ArrayList<>();
+        List<BoardDto> boardDtoList = new ArrayList<>();
         list1.forEach((data)->{
             BoardDto boardDto=BoardDto.builder()
                     .bno((Integer)data.get("bno"))
@@ -93,29 +95,22 @@ public class BoardService {
             boardDtoList.add( data.toDto() );
         } );
         return boardDtoList;*/
-
-
     }
 
-    //개별출력
-    public List<GalleryDto> getMyBoardList(String mnickname){
+    //개별피드출력
+    public List<BoardDto> getMyBoardList(String mnickname){
         List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.memberView(mnickname).getMno());
         List<GalleryDto> galleryDtoList = new ArrayList<>();
-        System.out.println("list = " + list);
-        for(int i = 0; i< list.size();i++){
-            Object object = list.get(i).get("bno");
-            List<Map<Object,Object>> list1 = boardEntityRepository.findBno(object);
-            System.out.println("list1 = " + list1);
-            for(int j=0; j<list1.size(); j++){
-                GalleryDto galleryDto = GalleryDto.builder()
-                        .gname((String)list1.get(j).get("gname"))
-                        .boardEntity(BoardEntity.builder()
-                                .bno((Integer) list1.get(j).get("bno")).build())
-                        .build();
-                galleryDtoList.add(galleryDto);
-            }
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        for(int i =0; i< list.size(); i++) {
+            Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer)list.get(i).get("bno"));
+            BoardDto boardDto = boardEntity.get().toDto();
+            boardDtoList.add(boardDto);
+            System.out.println("boardEntity.toString() = " + boardEntity.toString());
+            System.out.println("list = " + list);
         }
-        return galleryDtoList ;
+
+        return boardDtoList ;
 
     }
 
@@ -135,20 +130,34 @@ public class BoardService {
 
     //=========================== 댓글 등록 ==========================//
     @Transactional
-    public boolean doPostReply(){
-        return false;
+    public boolean doPostReply(ReplyDto replyDto){
+        ReplyEntity replyEntity=replyDto.toEntity();
+        System.out.println(replyEntity);
+        MemberEntity memberEntity = memberService.loginEntity();
+
+        BoardEntity boardEntity= BoardEntity.builder()
+                .bno(replyDto.getBno())
+                .build();
+        replyEntity.setMemberEntity(memberEntity);
+        replyEntity.setBoardEntity(boardEntity);
+
+        System.out.println("boardEntity = " + boardEntity);
+
+        replyEntityRepository.save(replyEntity);
+        return true;
     }
     //=========================== 댓글 출력 ==========================//
     @Transactional
     public List<ReplyDto> doGetReply(int bno){
-        List<Map<Object,Object>> list1=replyEntityRepository.findByBno_Fk(bno);
+        List<Map<Object,Object>> REList=replyEntityRepository.findByBno(bno);
         List<ReplyDto> list=new ArrayList<>();
-        list1.forEach((reply)->{
-         /*   ReplyDto replyDto= ReplyDto.builder()
-
-                    .build()
-            replyDto.setMnickname(list1.get(""));
-            list.add(replyDto);*/
+        REList.forEach((reply)->{
+            ReplyDto replyDto= ReplyDto.builder()
+                    .mnickname((String) reply.get("mnickname"))
+                    .rno((Integer)reply.get("rno"))
+                    .rcontent((String) reply.get("rcontent"))
+                    .build();
+            list.add(replyDto);
         });
         System.out.println("list = " + list);
         return list;
@@ -161,6 +170,7 @@ public class BoardService {
     //=========================== 댓글 삭제 ==========================//
     @Transactional
     public boolean doDeleteReply(){
-        return false;
+        replyEntityRepository.deleteById(6);
+        return true;
     }
 }

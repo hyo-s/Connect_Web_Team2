@@ -2,11 +2,14 @@ drop database if exists connectweb;
 create database connectweb;
 use connectweb;
 
+
 select * from board;
 select * from member;
 select * from gallery;
 select * from reply;
 select * from follow;
+
+update member set mname = "유재석", mnickname = "aac", memail = "aaa@aab.com", mphone = "010-1111-1112" where mno=1;
 
 # 팔로워
 select f.fno, m.mno, m.mname, m.mnickname from follow f join member m on m.mno = f.fromfollow where f.tofollow = 1;

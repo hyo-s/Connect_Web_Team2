@@ -12,6 +12,9 @@ import BirthBoardWrite from "../birthBoard/BirthBoardWrite";
 import Profile from "../member/Profile";
 import React, { useState } from "react";
 import Edit from "../member/Edit";
+import Delete from "../member/Delete";
+import SubBoardMain from "../board/SubBoardMain";
+import BirthBoardList from "../birthBoard/BirthBoardList";
 
 export const LoginInfoContext = React.createContext('');
 
@@ -25,14 +28,17 @@ export default function Index(props){
                 <Route path="/" element={<MainBoard/>}/>
                 <Route path="/member/signup" element ={<SignUp/>}/>
                 <Route path="/member/login" element ={<Login/>}/>
-                <Route path="/board/sub" element={<SubBoard/>}/>
+                {/* <Route path="/board/sub/:mnickname" element={<SubBoard/>}/> */}
                 <Route path="/board/write" element={<BoardWrite/>}/>
                 <Route path="/board" element={<Board/>}/>
                 <Route path="/member" element={<Member/>}/>
                 <Route path="/birthboard/post" element={<BirthBoardWrite/>}/>
                 <Route path={"/board/sub/:mnickname"} element={<Profile/>}/>
                 <Route path={"/member/edit"} element={<Edit/>}/>
-                {/* <Route path={"/member/delete"} element={<Delete/>}/> */}
+                <Route path="/birthboard/get" element={<BirthBoardList/>} />
+                <Route path={"/baord/submain/:mnickname"} element={<SubBoardMain/>}/>
+                <Route path={"/member/edit/:mnickname"} element={<Edit/>}/>
+                <Route path="/member/delete" element={<Delete/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

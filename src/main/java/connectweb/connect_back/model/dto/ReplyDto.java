@@ -13,6 +13,8 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class ReplyDto {
+    private int mno; // 회원 참조
+    private int bno; // 게시물 참조
     private int rno;
     private String rcontent;
     private String mnickname;

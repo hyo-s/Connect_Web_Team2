@@ -12,6 +12,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 @Service
 public class BirthBoardService {
@@ -41,5 +44,18 @@ public class BirthBoardService {
         BirthBoardEntity saverBoard = birthBoardEntityRepository.save(birthBoardDto.birthEntity());
         if(saverBoard.getBbno()>0)return true;
         return false;
+    }
+    @Transactional
+    public List<BirthBoardDto> doGetBirthBoard(){
+        List<Map<Object,Object>> listA=birthBoardEntityRepository.findAllBirthBoardSQL();
+        List<BirthBoardDto> birthBoardDtoList = new ArrayList<>();
+        listA.forEach((data)->{
+            BirthBoardDto birthBoardDto = BirthBoardDto.builder()
+                    .bbno((Integer)data.get("bbno"))
+                    .bbcontent((String) data.get("bbcontent"))
+                    .build();
+            birthBoardDtoList.add(birthBoardDto);
+        });
+        return birthBoardDtoList;
     }
 }

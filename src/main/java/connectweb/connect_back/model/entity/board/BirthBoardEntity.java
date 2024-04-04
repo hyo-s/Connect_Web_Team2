@@ -1,9 +1,12 @@
 package connectweb.connect_back.model.entity.board;
 
 import connectweb.connect_back.model.dto.BirthBoardDto;
+import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "birthboard")
@@ -13,7 +16,7 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class BirthBoardEntity {
+public class BirthBoardEntity extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +29,7 @@ public class BirthBoardEntity {
     //Fk 필드
     @JoinColumn(name = "mno") // fk 필드명
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private MemberEntity memberEntity;
 
 
