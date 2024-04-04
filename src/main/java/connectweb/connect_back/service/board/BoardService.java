@@ -137,6 +137,7 @@ public class BoardService {
     @Transactional
     public boolean doPostReply(ReplyDto replyDto){
         ReplyEntity replyEntity=replyDto.toEntity();
+        System.out.println(replyEntity);
         MemberEntity memberEntity = memberService.loginEntity();
 
         BoardEntity boardEntity= BoardEntity.builder()
@@ -144,6 +145,7 @@ public class BoardService {
                 .build();
         replyEntity.setMemberEntity(memberEntity);
         replyEntity.setBoardEntity(boardEntity);
+
         System.out.println("boardEntity = " + boardEntity);
 
         replyEntityRepository.save(replyEntity);
@@ -173,6 +175,7 @@ public class BoardService {
     //=========================== 댓글 삭제 ==========================//
     @Transactional
     public boolean doDeleteReply(){
-        return false;
+        replyEntityRepository.deleteById(6);
+        return true;
     }
 }

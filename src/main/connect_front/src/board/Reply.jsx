@@ -1,17 +1,20 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { LoginInfoContext } from "../index/Index";
 
 export default function Reply (props){
     const {loginInfo}=useContext(LoginInfoContext); // 현재 로그인 정보 불러옴
+    //1. 재렌더링 고정 참조 변수
+    const replyFormRef=useRef();
+    console.log(replyFormRef)
 
     const onSubmit = (e)=>{ // 등록 통신
-        const replyForm = document.querySelector(".replyForm");
-        const replyFormData = new FormData(replyForm);
+        console.log(replyFormRef.current);
+        
+        const replyFormData = new FormData(replyFormRef.current);
         console.log(replyFormData);
 
         replyFormData.set("mno", loginInfo.mno)
-        replyFormData.set("mnickname", loginInfo.mnickname)// 회원 닉네임 담아서 보내기
         replyFormData.set("bno", props.board.bno) // 게시물 번호
 
         axios.post("/conn/b/r/post.do", replyFormData)
@@ -19,7 +22,7 @@ export default function Reply (props){
             console.log(response);
             if(response){
                 alert('등록성공')
-                window.location.href = '/board/myboard' // 재렌더링 생각
+               // window.location.href = '/board/myboard' // 재렌더링 생각
             }else{
                 alert('등록실패')
             }
@@ -29,7 +32,7 @@ export default function Reply (props){
 
     return(<>
         <ReplyView bno={props.board.bno} />
-        <form className="replyForm">
+        <form ref={replyFormRef}>
             <div>{loginInfo.mnickname}</div> 
             <input name="rcontent" type="text"/>
             <button type="button" onClick={onSubmit}>등록</button>
