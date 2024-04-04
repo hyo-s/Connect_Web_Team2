@@ -4,6 +4,8 @@ import connectweb.connect_back.model.dto.BirthBoardDto;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "birthboard")
@@ -25,7 +27,8 @@ public class BirthBoardEntity {
 
     //Fk 필드
     @JoinColumn(name = "mno_fk") // fk 필드명
-    @ManyToOne // 해당 필드 참조
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private MemberEntity memberEntity;
 
 

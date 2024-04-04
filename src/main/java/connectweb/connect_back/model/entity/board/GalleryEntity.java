@@ -3,7 +3,8 @@ package connectweb.connect_back.model.entity.board;
 import connectweb.connect_back.model.dto.GalleryDto;
 import jakarta.persistence.*;
 import lombok.*;
-
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity
@@ -17,6 +18,7 @@ public class GalleryEntity {
 
     @JoinColumn(name = "bno_fk")
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private BoardEntity boardEntity; //게시물번호 (fk)
 
     //엔티티를 dto로 변환

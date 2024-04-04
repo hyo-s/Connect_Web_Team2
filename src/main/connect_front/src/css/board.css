@@ -12,6 +12,12 @@
     height: 140px;
     margin-right: 100px;
 }
+.myInfo .imgBox > img {
+    border-radius: 50%;
+    width:150px;
+    height: 140px;
+    margin-right: 100px;
+}
 
 /* content */
 .content {

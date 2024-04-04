@@ -6,6 +6,8 @@ import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,13 +23,7 @@ import java.util.stream.Collectors;
 @ToString
 @Builder
 public class BoardEntity extends BaseTime {
-    /*
-    bno	// 게시물 번호
-	bcontent	// 내용
-	mno	// 작성자
-	bdate	// 작성일 - 상속 받음
-	bview	// 조회수
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bno; // 게시물 번호
@@ -42,10 +38,11 @@ public class BoardEntity extends BaseTime {
     //================ FK 필드
     @JoinColumn(name="mno_fk") //fk 필드명
     @ManyToOne // 해당 필드 참조
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private MemberEntity memberEntity;
 
     //양방향 갤러리
-    @OneToMany(mappedBy = "boardEntity")
+    @OneToMany(mappedBy = "boardEntity", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<GalleryEntity> galleryEntityList = new ArrayList<>();

@@ -19,4 +19,8 @@ public interface MemberEntityRepository extends JpaRepository<MemberEntity, Inte
     boolean existsByMnickname(String mnickname);
     boolean existsByMemail(String memail);
     boolean existsByMphone(String mphone);
+// ========================= [비밀번호 일치확인] ========================= //
+    @Query(value = "select count(*) from member where mpw = :mpw and mno = :mno", nativeQuery = true)
+    int existsByMpwAndMno(String mpw, int mno);
+
 }

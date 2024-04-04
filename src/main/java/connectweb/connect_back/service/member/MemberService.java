@@ -7,9 +7,13 @@ import connectweb.connect_back.model.repository.member.FollowEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import connectweb.connect_back.service.FileService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -79,6 +83,26 @@ public class MemberService {
         memberDto.setFromfollow(followEntityRepository.doFollowerGet(memberDto.getMno()));
         return memberDto;
     }
+// ======================== [회원 탈퇴] ======================== //
+    public boolean memberDelete (){
+        memberEntityRepository.deleteById(loginEntity().getMno());
+        return true;
+    }
+// ======================== [회원 수정] ======================== //
+    @Transactional
+    public MemberEntity editMember (MemberDto memberDto){
+        Optional<MemberEntity> memberEntity = memberEntityRepository.findById(loginEntity().getMno());
+        if(memberEntity.isPresent()){
+            memberEntity.get().setMname(memberDto.getMname());
+            memberEntity.get().setMemail(memberDto.getMemail());
+            memberEntity.get().setMnickname(memberDto.getMnickname());
+            memberEntity.get().setMphone(memberDto.getMphone());
+            System.out.println("memberEntity.get() = " + memberEntity.get());
+            return memberEntity.get();
+        }
+
+        return null;
+    }
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //
     public boolean checkId(String mid){
         boolean result = memberEntityRepository.existsByMid(mid);
@@ -96,4 +120,13 @@ public class MemberService {
         boolean result = memberEntityRepository.existsByMphone(phoneNumber);
         return result;
     }
+// ========================= [비밀번호 일치 확인] ========================= //
+    public boolean checkPassword(String mpw){
+        int exits = memberEntityRepository.existsByMpwAndMno(mpw, loginEntity().getMno());
+        if(exits == 1){
+            return true;
+        }
+        return false;
+    }
+
 }

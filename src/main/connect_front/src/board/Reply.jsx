@@ -17,13 +17,13 @@ export function ReplyView(props){
 
       console.log(replyList);
       useEffect(()=>{
-          axios.get('/conn/b/r/get.do',{params:{bno:props.bno}})
-          .then((r)=> {
-              //서버로 받은 데이터를 setState 넣어주면 재렌더링
-              console.log(r);
-              setReplyList(r.data);
-          })
-          .catch(error=>{console.log(error)})
+        axios.get('/conn/b/r/get.do',{params:{bno:props.bno}})
+        .then((r)=> {
+            //서버로 받은 데이터를 setState 넣어주면 재렌더링
+            console.log(r);
+            setReplyList(r.data);
+        })
+        .catch(error=>{console.log(error)})
   
       },[])
   
