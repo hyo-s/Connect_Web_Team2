@@ -46,6 +46,7 @@ public class BoardService {
     public int doPostBoard(BoardDto boardDto){
 
         MemberEntity memberEntity = memberService.loginEntity();
+        if(memberEntity == null) return 2;
 
         //글쓰기
         BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
@@ -56,6 +57,7 @@ public class BoardService {
         //피드이미지----------------------------------------
         boardDto.getGfile().forEach((uploadFile)->{
             String fileName = fileService.FileUpload2(uploadFile);
+            System.out.println("fileName = " + fileName);
 
             GalleryEntity galleryEntity = GalleryEntity.builder()
                     .gname(fileName)
@@ -67,7 +69,7 @@ public class BoardService {
             //------------------------------------------------
             ;
         });
-        return 0;
+        return 1;
     }
 
     // 전체 게시글 출력 ///
@@ -97,25 +99,20 @@ public class BoardService {
 
     }
 
-    //개별출력
-    public List<GalleryDto> getMyBoardList(String mnickname){
+    //개별피드출력
+    public List<BoardDto> getMyBoardList(String mnickname){
         List<Map<Object,Object>> list = boardEntityRepository.findMyBoardList(memberService.memberView(mnickname).getMno());
         List<GalleryDto> galleryDtoList = new ArrayList<>();
-        System.out.println("list = " + list);
-        for(int i = 0; i< list.size();i++){
-            Object object = list.get(i).get("bno");
-            List<Map<Object,Object>> list1 = boardEntityRepository.findBno(object);
-            System.out.println("list1 = " + list1);
-            for(int j=0; j<list1.size(); j++){
-                GalleryDto galleryDto = GalleryDto.builder()
-                        .gname((String)list1.get(j).get("gname"))
-                        .boardEntity(BoardEntity.builder()
-                                .bno((Integer) list1.get(j).get("bno")).build())
-                        .build();
-                galleryDtoList.add(galleryDto);
-            }
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        for(int i =0; i< list.size(); i++) {
+            Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer)list.get(i).get("bno"));
+            BoardDto boardDto = boardEntity.get().toDto();
+            boardDtoList.add(boardDto);
+            System.out.println("boardEntity.toString() = " + boardEntity.toString());
+            System.out.println("list = " + list);
         }
-        return galleryDtoList ;
+
+        return boardDtoList ;
 
     }
 

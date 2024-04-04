@@ -32,8 +32,9 @@ public class BoardController {
         return boardService.doGetBoard();
     }
 
+    //개별피드출력
     @GetMapping("/myboard/get.do")
-    public List<GalleryDto> getMyBoardList(String mnickname){
+    public List<BoardDto> getMyBoardList(String mnickname){
         System.out.println("mnickname = " + mnickname);
         return boardService.getMyBoardList(mnickname);
     }

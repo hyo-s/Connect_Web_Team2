@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class GalleryDto {
 
     private String gname;               //피드사진경로
-    private BoardEntity boardEntity;    //fk
+    private int bno_fk;    //fk
 
     private MultipartFile gfile; //피드사진
 
@@ -20,7 +20,6 @@ public class GalleryDto {
     public GalleryEntity toGalleryEntity(){
         return GalleryEntity.builder()
                 .gname(this.gname)
-                .boardEntity(this.boardEntity)
                 .build();
     }
 
