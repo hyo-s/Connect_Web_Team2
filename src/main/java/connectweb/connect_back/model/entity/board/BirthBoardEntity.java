@@ -27,7 +27,7 @@ public class BirthBoardEntity extends BaseTime {
 
 
     //Fk 필드
-    @JoinColumn(name = "mno_fk") // fk 필드명
+    @JoinColumn(name = "mno") // fk 필드명
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private MemberEntity memberEntity;

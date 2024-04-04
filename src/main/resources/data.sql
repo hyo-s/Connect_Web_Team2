@@ -5,14 +5,14 @@ insert into member(mname, mphone, mid, mnickname, mpw, memail, mbirth) values
 ('서장훈','010-4444-4444','ddd','ddd','ddd','ddd@ddd.com','970404');
 
 
-insert into board(bcontent, mno_fk) values
+insert into board(bcontent, mno) values
 ('게시물내용1',1),
 ('게시물내용2',2),
 ('게시물내용3',3),
 ('게시물내용4',4),
 ('게시물내용5',1);
 
-insert into gallery(gname, bno_fk) values
+insert into gallery(gname, bno) values
 ('바탕화면1.jpg',1),
 ('바탕화면2.jpg',2),
 ('반가워.jpg',1),
@@ -36,8 +36,8 @@ insert into follow(tofollow, fromfollow) values
 (4, 1);
 
 /*birthboard 샘플*/
-insert into birthboard(bbcontent, mno_fk) values
+insert into birthboard(bbcontent, mno) values
 ("내용입니다1", 1);
-insert into birthboard(bbcontent, mno_fk) values
+insert into birthboard(bbcontent, mno) values
 ("내용입니다2", 2);
 

@@ -36,7 +36,7 @@ public class BoardEntity extends BaseTime {
     private int bview; //조회수
 
     //================ FK 필드
-    @JoinColumn(name="mno_fk") //fk 필드명
+    @JoinColumn(name="mno") //fk 필드명
     @ManyToOne // 해당 필드 참조
     @OnDelete(action = OnDeleteAction.CASCADE)
     private MemberEntity memberEntity;
