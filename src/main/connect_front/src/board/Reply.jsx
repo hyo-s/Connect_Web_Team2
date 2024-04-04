@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { LoginInfoContext } from "../index/Index";
+import ReplyView from "./ReplyList";
 
 export default function Reply (props){
     const {loginInfo}=useContext(LoginInfoContext); // 현재 로그인 정보 불러옴
@@ -40,6 +41,7 @@ export default function Reply (props){
     </>)
 }
 
+/*
 // 게시물에 해당하는 댓글 출력하기
 export function ReplyView(props){ 
       const [replyList , setReplyList]=useState( [] );
@@ -67,4 +69,4 @@ export function ReplyView(props){
           }
         
       </>)
-}
+}*/
