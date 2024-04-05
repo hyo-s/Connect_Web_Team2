@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
 
 export default function Edit(props){
 
-    const {loginInfo, setLoginInfo } = useContext(LoginInfoContext);
+    const {setLoginInfo} = useContext(LoginInfoContext);
+    const nav = useNavigate();
 
     // useParams, useEffect
     const {mnickname} = useParams('');
@@ -25,7 +26,12 @@ export default function Edit(props){
     const [disabled, setDisabled] = useState(false);
 
     // 초기값 State
-    const [member, setMember] = useState({});
+    const [member, setMember] = useState({
+        mname : '',
+        mnickname : '',
+        memail : '',
+        mphone : ''
+    });
 
     // 메시지 State
     const [msgName, setMsgName] = useState('');
@@ -120,7 +126,19 @@ export default function Edit(props){
 
     let checkArray = [checkName, checkNickName, checkEmail, checkPhoneNumber]
 
-    const onEditMember = ()=>{
+    const [img, setImg] = useState("");
+
+    const onChangeProfile  = (e)=>{
+        console.log(e.target.files[0]);
+        const file = e.target.files[0];
+        const imgFile = new FileReader();
+        imgFile.readAsDataURL(file);
+        imgFile.onloadend = ()=>{
+            setImg(imgFile.result)
+        }
+    }
+
+    const onEditMember = async()=>{
         for(let i=0; i<checkArray.length; i++){
             console.log(checkArray[i])
             if(!checkArray[i]){
@@ -130,13 +148,10 @@ export default function Edit(props){
                 setDisabled(true);
             }
         }
-
-        axios.put("/conn/m/put.do", editMember.current)
+        await axios.put("/conn/m/put.do", editMember.current)
         .then(response=>{
-            console.log(response);
-            console.log(response.data);
             setLoginInfo(response.data);
-            window.location.href = "/board/sub/"+response.data.mnickname
+            nav("/board/sub/"+response.data.mnickname)
         })
         .catch(error=>{console.log(error);})
     }
@@ -145,14 +160,15 @@ export default function Edit(props){
         <div className="myInfo">
             <div>
                 <div className='imgBox'>
-                    <img src="/img/default.png" alt="" />
+                    <img src={img?img:"/img/default.png"} alt="" />
                 </div>
                 <div className="content">
                     <form ref={editMember}>
+                        <input name="mfile" type="file" accept="img/*" onChange={onChangeProfile}/>
                         이름 : <input type="text" name="mname" value={member.mname} onChange={onChangeNameCheck}/>
-                        <p>{member.name!==''? msgName:''}</p>
+                        <p>{member.mname !== ''? msgName:''}</p>
                         닉네임 : <input type="text" name="mnickname" value={member.mnickname} onChange={onChangeFindNickNameCheck}/>
-                        <p>{member.mnickName!==''?msgNickName:''}</p>
+                        <p>{member.mnickname !==''?msgNickName:''}</p>
                         이메일 : <input type="text" name="memail" value={member.memail} onChange={onChangeFindEmailCheck}/>
                         <p>{member.memail!==''?msgEmail:''}</p>
                         전화번호 : <input type="text" name="mphone" value={member.mphone} onChange={onChangeFindPhoneNumberCheck}/>

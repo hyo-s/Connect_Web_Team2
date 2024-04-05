@@ -122,10 +122,19 @@ public class BoardService {
         return 0;
     }
 
+    //게시글 삭제
     @Transactional
-    public int doDeleteBoard(int bno){
-        boardEntityRepository.deleteById(bno);
-        return 0;
+    public boolean doDeleteBoard(int bno){
+        MemberDto loginDto = memberService.loginInfo();
+        if(loginDto == null) return false;
+
+        Optional<BoardEntity> optionalBoardEntity = boardEntityRepository.findById(bno);
+        System.out.println("optionalBoardEntity = " + optionalBoardEntity);
+        if(optionalBoardEntity.get().getMemberEntity().getMno() == loginDto.getMno()){
+            boardEntityRepository.deleteById(bno);
+            return true;
+        }
+        return false;
     }
 
     //=========================== 댓글 등록 ==========================//

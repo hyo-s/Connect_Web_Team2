@@ -1,27 +1,31 @@
 import axios from 'axios';
 import '../css/member.css';
+import { useContext } from 'react';
+import { LoginInfoContext } from '../index/Index';
 
 
 export default function Login(props){
 
-    const login = ()=>{
+    const {loginInfo} = useContext(LoginInfoContext);
+
+    const login = async()=>{
 
         const loginForm = document.querySelector('#loginForm');
         const loginFormData = new FormData(loginForm);
         console.log(loginForm);
 
-        axios.post('/conn/m/login.do',loginFormData)
+        await axios.post('/conn/m/login.do',loginFormData)
         .then((r)=>{
             console.log(r);
             if(r.data){
                 alert('로그인성공');
-                window.location.href = "/board/myboard"
-                
+                console.log(loginInfo);
+                window.location.href = "/board/sub"
             }else{
                 alert('로그인실패');
             }
-
         })
+        .catch(error=>{console.log(error)})
     }
 
     return(<>

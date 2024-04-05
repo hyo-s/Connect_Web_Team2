@@ -10,12 +10,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -90,17 +93,17 @@ public class MemberService {
     }
 // ======================== [회원 수정] ======================== //
     @Transactional
-    public MemberEntity editMember (MemberDto memberDto){
+    public MemberDto editMember (MemberDto memberDto){
         Optional<MemberEntity> memberEntity = memberEntityRepository.findById(loginEntity().getMno());
         if(memberEntity.isPresent()){
+            memberEntity.get().setMimg(fileService.FileUpload(memberDto.getMfile()));
             memberEntity.get().setMname(memberDto.getMname());
             memberEntity.get().setMemail(memberDto.getMemail());
             memberEntity.get().setMnickname(memberDto.getMnickname());
             memberEntity.get().setMphone(memberDto.getMphone());
             System.out.println("memberEntity.get() = " + memberEntity.get());
-            return memberEntity.get();
+            return memberEntity.get().toDto();
         }
-
         return null;
     }
 // ========================= [아이디, 닉네임, 이메일, 전화번호 중복검사] ========================= //

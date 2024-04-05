@@ -25,7 +25,7 @@ export default function BoardWrite(props){
             imgPre.push(URL.createObjectURL(i));
             console.log(imgPre);
         });
-        setImgPre(...imgPre);
+        setImgPre(imgPre);
         console.log(imgPre);
     }
     
@@ -57,21 +57,23 @@ export default function BoardWrite(props){
                 </div>
                 <div className="content mainContent">
                 <Carousel>                
-                    {                      
-                        imgPre.map((i)=>{
-                            console.log(i)
-                            return(<>
-                                <img src={imgPre[i]}></img>
-                            </>)
-                        })
-                    }         
+                {
+                    imgPre.length!=0 &&
+                    imgPre.map((i)=>{
+                        return(<>
+                            <img src={i} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                        </>)
+                    })
+                }
+                                
+                           
                 </Carousel>
                 </div>
                 
 
                 
                 <div className="btmBox">
-                    <input type="file" name="gfile" multiple onChange={(e)=>onChangeImg(e)}/>
+                    <input type="file" name="gfile" multiple onChange={(e)=>onChangeImg(e)}  accept='image/*' />
                 </div>
                 <div className="btmBox">
                     <textarea value={bcontent} onChange={onChangeBcontent}></textarea>
