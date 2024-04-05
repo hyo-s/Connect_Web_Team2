@@ -3,9 +3,6 @@ import axios from 'axios';
 
 export default function SignUp(props){
 
-    // 버튼 State
-    const [disabled, setDisabled] = useState(false);
-
     // 초기값 State
     const [name, setName] = useState('');
     const [id, setId] = useState('');
@@ -224,10 +221,7 @@ export default function SignUp(props){
         for(let i=0; i<checkArray.length; i++){
             console.log(checkArray[i])
             if(!checkArray[i]){
-                setDisabled(false);
                 return
-            }else{
-                setDisabled(true);
             }
         }
         const axiosForm=document.querySelector('#signupForm')
