@@ -7,28 +7,29 @@ import { useLocation } from 'react-router-dom';
 
 export default function MainBoard(props){
 
-    console.log(props);
-
-    //1. useState 변수
-    const [boardList , setBoardList]=useState([]);
-    console.log(boardList);
     const location = useLocation();
-    console.log(location.state.myBoard.myBoard[1].bno)
+    //console.log(location.state.myBoard.r.bno)
     
     let boardArray = Array.from(location.state.myBoard.myBoard);
-    console.log(boardArray)
+    //console.log(boardArray)
 
 
     const onUpdate = () =>{
         alert('수정')
     }
 
-    const onDelete = ()=>{
-        alert('삭제')
+    
+    const onDelete = (bno)=>{
+        const info = location.state.myBoard.r.bno
+        console.log(info)
+        axios.delete('/conn/b/delete.do',info)
+            .then((r)=>{
+                console.log(r)
+                alert('삭제')
+            })
     }
 
     return(<>
-        ㅎㅇ
         {
              boardArray.map((board)=>{
                  return(<>
@@ -38,6 +39,8 @@ export default function MainBoard(props){
                                         <div className="topInfo">
                                             <div className="topImg"></div>
                                             <p>{board.mnickname}</p>
+                                            <button onClick={onUpdate}>수정</button>
+                                        <button onClick={()=>onDelete(board.bno)}>삭제</button>
                                         </div>
                                         <ul>
                                             <li>
