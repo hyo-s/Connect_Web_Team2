@@ -45,7 +45,9 @@ public class BoardController {
     }
 
     @DeleteMapping("/delete.do")
-    public int doDeleteBoard(int bno){
+    public boolean doDeleteBoard(int bno){
+        System.out.println("bno = " + bno);
+        System.out.println("BoardController.doDeleteBoard");
         return boardService.doDeleteBoard(bno);
     }
 
