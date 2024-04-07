@@ -15,8 +15,11 @@ insert into board(bcontent, mno) values
 insert into gallery(gname, bno) values
 ('바탕화면1.jpg',1),
 ('바탕화면2.jpg',2),
-('반가워.jpg',1),
+('반가워1.jpg',1),
+('반가워2.jpg',3),
+('반가워3.jpg',4),
 ('세로이미지.jpg',5);
+
 
 insert into reply(rcontent, bno, mno) values
 ('댓글내용1',1,1),

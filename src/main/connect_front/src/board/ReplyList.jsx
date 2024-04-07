@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useRef, useState } from "react";
-import { LoginInfoContext } from "../index/Index";
+import {  useEffect,  useState } from "react";
 
 
 // 게시물에 해당하는 댓글 출력하기
@@ -9,7 +8,7 @@ export default function ReplyView(props){
 
     console.log(replyList);
     useEffect(()=>{
-        axios.get('/conn/b/r/get.do',{params:{bno:props.bno}}) // bno 매개변수로 넘겨줌
+        axios.get('/conn/b/r/get.do',{params:{bno:props.board.bno}}) // bno 매개변수로 넘겨줌
         .then((r)=> {
             console.log(r);
             setReplyList(r.data);
@@ -17,19 +16,27 @@ export default function ReplyView(props){
         .catch(error=>{console.log(error)})
 
     },[])
+    
 
-    return(<>
-        {
-            replyList.map((reply)=>{
-                return(<>
-                          <div>{reply.mnickname}</div>
-                          <p>{reply.rcontent}</p>
-                      </>
-                )
-            })
-        }
-      
-    </>)
+    return (
+        <>
+            {props.look === 1 ? (
+                // props.look이 1인 경우 마지막 인덱스만 출력
+                <div>
+                    <div>{replyList.length > 0 ? replyList[replyList.length - 1].mnickname : ""}</div>
+                    <p>{replyList.length > 0 ? replyList[replyList.length - 1].rcontent : ""}</p>
+                </div>
+            ) : props.look2 === 2 ? (
+                // props.look2가 2인 경우 전체 출력
+                replyList.map((reply, index) => (
+                    <div key={index}>
+                        <div>{reply.mnickname}</div>
+                        <p>{reply.rcontent}</p>
+                    </div>
+                ))
+            ) : null}
+        </>
+    );
 }
 
 // export default function Reply (props){
