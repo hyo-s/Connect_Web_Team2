@@ -3,19 +3,25 @@
     align-items: center;
     justify-content: space-around;
     height: 100%;
-    
 }
+
 #loginBox{
-    border: solid 1px red;
+    border: solid 1px rgb(219, 219, 219);
+    border-radius: 5px;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-#loginBox input{
-    margin-bottom: 10px;
-    height: 30px;
+
+.loginImg{
+    margin-bottom: 20px;
 }
-#loginBox button{
-    width: 177px;
-    height: 30px;
+.loginForm div{
+    margin: 10px 5px;
 }
-#logoImg{
-    margin-bottom: 10px;
+
+.signUp{
+    text-align: center;
+    padding: 20px 0px;
 }

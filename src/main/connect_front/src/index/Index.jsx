@@ -25,9 +25,9 @@ export default function Index(props){
         <BrowserRouter>
             <Header/>
             <Routes>
-                <Route path="/" element={<MainBoard/>}/>
+                <Route path="/conn" element={<MainBoard/>}/>
                 <Route path="/member/signup" element ={<SignUp/>}/>
-                <Route path="/member/login" element ={<Login/>}/>
+                <Route path="/" element ={<Login/>}/>
                 <Route path="/board/write" element={<BoardWrite/>}/>
                 <Route path="/board" element={<Board/>}/>
                 <Route path="/member" element={<Member/>}/>

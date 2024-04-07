@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Input from '@mui/joy/Input';
 
 export default function SignUp(props){
 
@@ -235,39 +236,41 @@ export default function SignUp(props){
         <section id="container">
             <div className="innerContainer">
                 <div className="content">
-                    <form id='signupForm'>
-                        <input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck} />
-                        <p>{name!==''? msgName:''}</p>
-                        <input type="text" name="mid" placeholder="아이디를 입력해주세요" value={id} onChange={onChangeIdCheck}/>
-                        <p>{id!==''?msgId:''}</p>
-                        <input type="password" name="mpw" placeholder='비밀번호를 입력해주세요' value={password} onChange={onChangePasswordcheck}/>
-                        <p>{password!==''? msgPassword:''}</p>
-                        <input type="password" placeholder='비밀번호를 확인해주세요' value={passwordConfirm} onChange={onChangePasswordConfirm} disabled={passwordRule.test(password)?false:true}/>
-                        <p>{passwordConfirm!==''? msgPasswordConfirm:''}</p>
-                        <input type="text" name="mnickname" placeholder="닉네임을 입력해주세요" value={nickName} onChange={onChangeFindNickNameCheck}/>
-                        <p>{nickName!==''?msgNickName:''}</p>
-                        <input type="text" name="memail" placeholder="이메일을 입력해주세요" value={email} onChange={onChangeFindEmailCheck}/>
-                        <p>{email!==''?msgEmail:''}</p>
-                        <input type="text" name="mphone" placeholder="전화번호를 입력해주세요" value={phoneNumber} onChange={onChangeFindPhoneNumberCheck}/>
-                        <p>{phoneNumber!==''?msgPhoneNumber:''}</p>
-                        <select value={year} onChange={onChangeYear}>
-                            {years.map(year=>{
-                                return <option value={year} key={year}>{year}</option>
-                            })}
-                        </select>
-                        <select value={month} onChange={onChangeMonth}>
-                            {months.map(month=>{
-                                return <option value={month} key={month}>{month}</option>
-                            })}
-                        </select>
-                        <select value={day} onChange={onChangeDay}>
-                            {days.map(day=>{
-                                return <option value={day} key={day}>{day}</option>
-                            })}
-                        </select>
-                        <input name="mbirth" style={{display:'none'}} type='text' value={year+month+day} readOnly/>
-                    </form>
-                    <button type="button" onClick={onSignup}>Signup</button>
+                    <div className='loginForm'>
+                        <form id='signupForm'>
+                            <Input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck} />
+                            <p>{name!==''? msgName:''}</p>
+                            <Input type="text" name="mid" placeholder="아이디를 입력해주세요" value={id} onChange={onChangeIdCheck}/>
+                            <p>{id!==''?msgId:''}</p>
+                            <Input type="password" name="mpw" placeholder='비밀번호를 입력해주세요' value={password} onChange={onChangePasswordcheck}/>
+                            <p>{password!==''? msgPassword:''}</p>
+                            <Input type="password" placeholder='비밀번호를 확인해주세요' value={passwordConfirm} onChange={onChangePasswordConfirm} disabled={passwordRule.test(password)?false:true}/>
+                            <p>{passwordConfirm!==''? msgPasswordConfirm:''}</p>
+                            <Input type="text" name="mnickname" placeholder="닉네임을 입력해주세요" value={nickName} onChange={onChangeFindNickNameCheck}/>
+                            <p>{nickName!==''?msgNickName:''}</p>
+                            <Input type="text" name="memail" placeholder="이메일을 입력해주세요" value={email} onChange={onChangeFindEmailCheck}/>
+                            <p>{email!==''?msgEmail:''}</p>
+                            <Input type="text" name="mphone" placeholder="전화번호를 입력해주세요" value={phoneNumber} onChange={onChangeFindPhoneNumberCheck}/>
+                            <p>{phoneNumber!==''?msgPhoneNumber:''}</p>
+                            <select value={year} onChange={onChangeYear}>
+                                {years.map(year=>{
+                                    return <option value={year} key={year}>{year}</option>
+                                })}
+                            </select>
+                            <select value={month} onChange={onChangeMonth}>
+                                {months.map(month=>{
+                                    return <option value={month} key={month}>{month}</option>
+                                })}
+                            </select>
+                            <select value={day} onChange={onChangeDay}>
+                                {days.map(day=>{
+                                    return <option value={day} key={day}>{day}</option>
+                                })}
+                            </select>
+                            <input name="mbirth" style={{display:'none'}} type='text' value={year+month+day} readOnly/>
+                        </form>
+                        <button type="button" onClick={onSignup}>Signup</button>
+                    </div>
                 </div>
             </div>
         </section>

@@ -29,20 +29,37 @@ p {padding: 0; margin: 0;}
     width: 480px;
     height: 800px;
     margin: 0 auto;
-    border: 1px solid red;
+    border: 1px solid rgb(219, 219, 219);
     display: flex;
     justify-content: center;
     align-items: center;
-    
-
 }
 .innerContainer {
     width: 90%;
     margin: 0 auto;
 }
 .header {
+    display: flex;
     height: 50px;
-    border: 1px solid red;;
+    border: 1px solid rgb(219, 219, 219);;
+}
+.headerImg img{
+  width: 100px;
+}
+.headerProfile {
+  display: flex;
+  justify-content: end;
+
+}
+.headerProfile div {
+  display: flex;
+  flex-direction: column;
+}
+.headerProfile img{
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 50%
 }
 .header ul {
     display: flex;
@@ -53,6 +70,6 @@ p {padding: 0; margin: 0;}
 }
 .footer{
     height: 50px;
-    border: 1px solid red;
+    border: 1px solid rgb(219, 219, 219);
     text-align: center;
 }
