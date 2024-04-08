@@ -16,7 +16,7 @@ public class BaseTime {
     private String cdate;
 
     // 2. 레코드/엔티티 수정날짜
-//    @LastModifiedDate
-//    private LocalDateTime udate;
+    @LastModifiedDate
+    private LocalDateTime udate;
 }
 

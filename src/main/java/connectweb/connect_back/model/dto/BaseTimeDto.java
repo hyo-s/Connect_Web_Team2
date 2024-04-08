@@ -12,5 +12,5 @@ import java.time.LocalDateTime;
 @ToString
 public class BaseTimeDto {
     public String cdate;
-//    public LocalDateTime udate;
+    public LocalDateTime udate;
 }
