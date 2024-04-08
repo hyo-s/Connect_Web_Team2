@@ -25,7 +25,7 @@ public class MemberController {
     }
 // ========================= [회원가입] ========================= //
     @PostMapping("/signup.do")// 회원가입
-    public boolean signUpPost (@RequestBody MemberDto memberDto){
+    public boolean signUpPost (MemberDto memberDto){
         return memberService.signUpPost(memberDto);
     }
 // ========================= [로그인] ========================= //

@@ -23,12 +23,15 @@ public class BoardDto {
     private int mno_fk; //회원번호
 
     private String mnickname; // 작성자 닉네임
+    private String profilename; // 작성자 사진
 
     // 등록용
     private List<MultipartFile> gfile;
     // 출력용
     private List<String> gnameList;
 
+    // 출력용
+    private List<GalleryDto> galleryDtoList;
 
     public BoardEntity toEntity(){
         return BoardEntity.builder()

@@ -75,27 +75,19 @@ public class BoardService {
     // 전체 게시글 출력 //
     @Transactional
     public List<BoardDto> doGetBoard(){
-        List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
+        List<Map<Object, Object>> galleryBoardList = boardEntityRepository.findAllGallerySQL();
+        List<Map<Object, Object>> boardMemberList = boardEntityRepository.findAllBoardSQL();
+
         List<BoardDto> boardDtoList = new ArrayList<>();
-        list1.forEach((data)->{
-            BoardDto boardDto=BoardDto.builder()
-                    .bno((Integer)data.get("bno"))
-                    .bcontent((String) data.get("bcontent"))
-                    .mnickname((String)data.get("mnickname"))
-                    .build();
+
+        for(int i =0; i< galleryBoardList.size(); i++) {
+            Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer)galleryBoardList.get(i).get("bno"));
+            BoardDto boardDto = boardEntity.get().toDto();
             boardDtoList.add(boardDto);
-        });
+        }
         return boardDtoList;
-       /* return boardEntityRepository.findAll().stream().map(((boardEntity)->{
-            return boardEntity.toDto();
-        })).collect(Collectors.toList());*/
-        /*List<BoardEntity> entityList = boardEntityRepository.findAll();
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        entityList.forEach( (data)->{
-            boardDtoList.add( data.toDto() );
-        } );
-        return boardDtoList;*/
     }
+
     public List<GalleryDto> dogetBoardImg(int bno){
         List<Map<Object,Object>> list = galleryEntityRepository.fineGallery(bno);
         List<GalleryDto> galleryDtoList = new ArrayList<>();

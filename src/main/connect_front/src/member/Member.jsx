@@ -15,10 +15,12 @@ export default function Member(){
     },[])
 
     return(<>
+        <div id="container">
             {member.map((data)=>{
                 return (<div key={data.mno}>
                     <Link to={"/board/sub/"+data.mnickname}><li key={data.mno}>{data.mname}</li></Link>
                 </div>)
             })}
+        </div>
     </>)
 }

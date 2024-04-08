@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import Input from '@mui/joy/Input';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Button from '@mui/joy/Button';
 
 export default function SignUp(props){
+
+    const signup = useRef(null);
 
     // 초기값 State
     const [name, setName] = useState('');
@@ -225,9 +232,7 @@ export default function SignUp(props){
                 return
             }
         }
-        const axiosForm=document.querySelector('#signupForm')
-        const axiosFormData= new FormData(axiosForm)
-        axios.post('/conn/m/signup.do',axiosFormData)
+        axios.post('/conn/m/signup.do',signup.current)
             .then(response=>{console.log(response);})
             .catch(error=>{console.log(error);})
     }
@@ -237,8 +242,8 @@ export default function SignUp(props){
             <div className="innerContainer">
                 <div className="content">
                     <div className='loginForm'>
-                        <form id='signupForm'>
-                            <Input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck} />
+                        <form ref={signup}>
+                            <Input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck}/>
                             <p>{name!==''? msgName:''}</p>
                             <Input type="text" name="mid" placeholder="아이디를 입력해주세요" value={id} onChange={onChangeIdCheck}/>
                             <p>{id!==''?msgId:''}</p>
@@ -252,24 +257,33 @@ export default function SignUp(props){
                             <p>{email!==''?msgEmail:''}</p>
                             <Input type="text" name="mphone" placeholder="전화번호를 입력해주세요" value={phoneNumber} onChange={onChangeFindPhoneNumberCheck}/>
                             <p>{phoneNumber!==''?msgPhoneNumber:''}</p>
-                            <select value={year} onChange={onChangeYear}>
-                                {years.map(year=>{
-                                    return <option value={year} key={year}>{year}</option>
-                                })}
-                            </select>
-                            <select value={month} onChange={onChangeMonth}>
-                                {months.map(month=>{
-                                    return <option value={month} key={month}>{month}</option>
-                                })}
-                            </select>
-                            <select value={day} onChange={onChangeDay}>
-                                {days.map(day=>{
-                                    return <option value={day} key={day}>{day}</option>
-                                })}
-                            </select>
+                            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                                <InputLabel id="demo-select-small-label">year</InputLabel>
+                                <Select labelId="demo-select-small-label" id="demo-select-small" value={year} onChange={onChangeYear} autoWidth label="year">
+                                    {years.map(year=>{
+                                        return <MenuItem value={year} key={year}>{year}</MenuItem >
+                                    })}
+                                </Select>
+                            </FormControl>
+                            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                                <InputLabel id="demo-select-small-label">month</InputLabel>
+                                <Select labelId="demo-select-small-label" id="demo-select-small" value={month} onChange={onChangeMonth} autoWidth label="month">
+                                    {months.map(month=>{
+                                        return <MenuItem value={month} key={month}>{month}</MenuItem >
+                                    })}
+                                </Select>
+                            </FormControl>
+                            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                                <InputLabel id="demo-select-small-label">day</InputLabel>
+                                <Select labelId="demo-select-small-label" id="demo-select-small" value={day} onChange={onChangeDay} autoWidth label="day">
+                                    {days.map(day=>{
+                                        return <MenuItem value={day} key={day}>{day}</MenuItem >
+                                    })}
+                                </Select>
+                            </FormControl>
                             <input name="mbirth" style={{display:'none'}} type='text' value={year+month+day} readOnly/>
                         </form>
-                        <button type="button" onClick={onSignup}>Signup</button>
+                        <Button type="button" onClick={onSignup} fullWidth>Signup</Button>
                     </div>
                 </div>
             </div>

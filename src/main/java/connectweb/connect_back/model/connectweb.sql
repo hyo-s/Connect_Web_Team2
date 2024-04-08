@@ -19,3 +19,8 @@ select f.fno, m.mno, m.mname, m.mnickname from follow f join member m on m.mno =
 select count(*) from follow f join member m on m.mno = f.tofollow where f.fromfollow = 1;
 
 select * from follow where tofollow = 4 or fromfollow = 4;
+
+select * from member m inner join board b on m.mno = b.mno;
+select * from gallery g inner join board b on g.bno = b.bno;
+
+select * from board b inner join member m on b.mno = m.mno inner join gallery g on b.bno = g.bno;

@@ -17,8 +17,9 @@
 .loginImg{
     margin-bottom: 20px;
 }
-.loginForm div{
-    margin: 10px 5px;
+
+.loginForm p{
+    margin: 10px 0px;
 }
 
 .signUp{
