@@ -125,6 +125,7 @@ public class BoardService {
     //게시글 삭제
     @Transactional
     public boolean doDeleteBoard(int bno){
+        System.out.println("bno = " + bno);
         MemberDto loginDto = memberService.loginInfo();
         if(loginDto == null) return false;
 

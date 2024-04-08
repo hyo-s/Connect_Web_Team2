@@ -15,16 +15,16 @@ export default function SubBaordMain(props){
 
     const nav = useNavigate();
 
+    //게시글수정
     const onUpdate = (board) =>{
         //console.log(board)
         nav('/board/update',{state:{board:board}})        
     }
 
-    
+    //게시글삭제
     const onDelete = (bno)=>{
-        const info = location.state.myBoard.r.bno
-        console.log(info)
-        axios.delete('/conn/b/delete.do',info)
+        console.log(bno);
+        axios.delete('/conn/b/delete.do',{params:{bno:bno}})
             .then((r)=>{
                 console.log(r)
                 alert('삭제')
