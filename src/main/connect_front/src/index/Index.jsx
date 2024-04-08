@@ -26,19 +26,17 @@ export default function Index(props){
         <BrowserRouter>
             <Header/>
             <Routes>
-                <Route path="/" element={<MainBoard/>}/>
+                <Route path="/conn" element={<MainBoard/>}/>
                 <Route path="/member/signup" element ={<SignUp/>}/>
-                <Route path="/member/login" element ={<Login/>}/>
-                <Route path="/board/sub/:mnickname" element={<SubBoard/>}/>
+                <Route path="/" element ={<Login/>}/>
                 <Route path="/board/write" element={<BoardWrite/>}/>
                 <Route path="/board" element={<Board/>}/>
                 <Route path="/member" element={<Member/>}/>
                 <Route path="/birthboard/post" element={<BirthBoardWrite/>}/>
-                <Route path={"/board/sub/:mnickname"} element={<Profile/>}/>
-                <Route path={"/member/edit"} element={<Edit/>}/>
+                <Route path="/board/sub/:mnickname" element={<Profile/>}/>
+                <Route path="/member/edit" element={<Edit/>}/>
                 <Route path="/birthboard/get" element={<BirthBoardList/>} />
-                <Route path="/baord/submain" element={<SubBoardMain/>}/>
-                <Route path={"/member/edit/:mnickname"} element={<Edit/>}/>
+                <Route path="/baord/submain/:mnickname" element={<SubBoardMain/>}/>
                 <Route path="/member/delete" element={<Delete/>}/>
                 <Route path="/board/update" element={<BoardUpdate/>}/>
             </Routes>

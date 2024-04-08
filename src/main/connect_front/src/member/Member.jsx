@@ -1,8 +1,8 @@
 import axios from "axios"
-import { createContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 
-export default function Member(props){
+export default function Member(){
 
     const [member, setMember] = useState([]);
 
@@ -16,7 +16,9 @@ export default function Member(props){
 
     return(<>
             {member.map((data)=>{
-                return (<Link to={"/board/sub/"+data.mnickname}><li key={data.mno}>{data.mname}</li></Link>)
+                return (<div key={data.mno}>
+                    <Link to={"/board/sub/"+data.mnickname}><li key={data.mno}>{data.mname}</li></Link>
+                </div>)
             })}
     </>)
 }

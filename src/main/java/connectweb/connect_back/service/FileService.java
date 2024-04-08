@@ -9,7 +9,7 @@ import java.util.UUID;
 @Service
 public class FileService {
 
-    String buildUpload="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\mimg\\";
+    String buildUpload="C:\\Users\\504\\Desktop\\team2_Web\\build\\resources\\main\\static\\img\\mimg\\";
 
     String buildUpload2 ="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\boardimg\\";
     // 프로필 사진 업데이트
@@ -21,10 +21,14 @@ public class FileService {
         System.out.println("file.exists() = " + file.exists());
         //2.
         try {
-            multipartFile.transferTo(file);
+            if(multipartFile.isEmpty()){
+                return "default.png";
+            }else{
+                multipartFile.transferTo(file);
+            }
         }catch (Exception e){
             System.out.println("e = " + e);
-            return null;
+            return "default.png";
         }
         return filename;
     }
