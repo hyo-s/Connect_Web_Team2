@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, } from "react";
 import { LoginInfoContext } from "../index/Index";
-import ReplyView from "./ReplyList";
 
 export default function Reply (props){
     const {loginInfo}=useContext(LoginInfoContext); // 현재 로그인 정보 불러옴
@@ -32,7 +31,6 @@ export default function Reply (props){
     }
 
     return(<>
-        <ReplyView bno={props.board.bno} />
         <form ref={replyFormRef}>
             <div>{loginInfo.mnickname}</div>
             <input name="rcontent" type="text"/>
@@ -59,7 +57,7 @@ export function ReplyView(props){
   
       return(<>
           {
-              replyList.map((reply)=>{
+              replyList.map((reply)=>{s
                   return(<>
                             <div>{reply.mnickname}</div>
                             <p>{reply.rcontent}</p>

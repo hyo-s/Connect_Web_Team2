@@ -1,13 +1,12 @@
 import '../css/board.css';
 import axios from 'axios';
-import Reply from './Reply.jsx';
 import BoardList from './BoardList.jsx';
 export default function MainBoard(props){
 
     //axios.get('/conn/b/get.do')
 
 
-    return(<>
+    return(<div id='scroll'>
                 <BoardList />
         {/* <section id="container">
             <div className="innerContainer">
@@ -37,5 +36,5 @@ export default function MainBoard(props){
             </div>
         </section> */}
     
-    </>)
+    </div>)
 }
