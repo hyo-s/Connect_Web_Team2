@@ -15,6 +15,7 @@ import Edit from "../member/Edit";
 import Delete from "../member/Delete";
 import SubBoardMain from "../board/SubBoardMain";
 import BirthBoardList from "../birthBoard/BirthBoardList";
+import BoardUpdate from "../board/BoardUpdate";
 
 export const LoginInfoContext = React.createContext('');
 
@@ -25,9 +26,9 @@ export default function Index(props){
         <BrowserRouter>
             <Header/>
             <Routes>
-                <Route path="/" element={<MainBoard/>}/>
+                <Route path="/conn" element={<MainBoard/>}/>
                 <Route path="/member/signup" element ={<SignUp/>}/>
-                <Route path="/member/login" element ={<Login/>}/>
+                <Route path="/" element ={<Login/>}/>
                 <Route path="/board/write" element={<BoardWrite/>}/>
                 <Route path="/board" element={<Board/>}/>
                 <Route path="/member" element={<Member/>}/>
@@ -37,6 +38,7 @@ export default function Index(props){
                 <Route path="/birthboard/get" element={<BirthBoardList/>} />
                 <Route path="/baord/submain/:mnickname" element={<SubBoardMain/>}/>
                 <Route path="/member/delete" element={<Delete/>}/>
+                <Route path="/board/update" element={<BoardUpdate/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

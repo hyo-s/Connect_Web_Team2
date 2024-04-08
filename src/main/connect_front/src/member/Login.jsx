@@ -2,6 +2,10 @@ import axios from 'axios';
 import '../css/member.css';
 import { useContext } from 'react';
 import { LoginInfoContext } from '../index/Index';
+import Input from '@mui/joy/Input';
+import Button from '@mui/joy/Button';
+import { Link } from 'react-router-dom';
+
 
 
 export default function Login(props){
@@ -20,7 +24,7 @@ export default function Login(props){
             if(r.data){
                 alert('로그인성공');
                 console.log(loginInfo);
-                window.location.href = "/board/sub"
+                window.location.href = "/conn"
             }else{
                 alert('로그인실패');
             }
@@ -32,12 +36,25 @@ export default function Login(props){
          <div id="container">
             <div id='totalBox'>
                 <div id="loginBox">
-                    <p id='logoImg'>로고이미지</p>
-                    <form id='loginForm'>
-                        <input type="text" placeholder='아이디' name='mid' /><br/>
-                        <input type="text" placeholder='비밀번호' name='mpw'/><br/>
-                        <button type="button" onClick={login}>로그인</button>
-                    </form>                    
+                    <div className='loginImg'>
+                        <img src="/img/connect_logo.png"/>
+                    </div>
+                    <div className='loginForm'>
+                        <form id='loginForm'>
+                            <div>
+                                <Input type="text" placeholder='아이디' name='mid' />
+                            </div>
+                            <div>
+                                <Input type="text" placeholder='비밀번호' name='mpw'/>
+                            </div>
+                            <div>
+                                <Button type="button" color='warning' fullWidth onClick={login}>로그인</Button>
+                            </div>
+                            <div className='signUp'>
+                                <Link to="/member/signup">회원가입</Link>
+                            </div>
+                        </form> 
+                    </div>                   
                 </div>
             </div>
          </div>
