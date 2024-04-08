@@ -29,14 +29,32 @@ export default function Header(props){
         setLoginInfo('');
     }
 
+    if(window.location.pathname === "/"){
+        return null;
+    }
+    if(window.location.pathname === "/member/signup"){
+        return null;
+    }
+
     return(<>
         <div className="header">
-            {loginInfo && <span>{loginInfo.memail}님 {loginInfo.mnickname}님</span> }
-            <button type="button" onClick={onLogout}>로그아웃</button>
+            <div className="headerImg">
+                <Link to="/conn"><img src="/img/connect_logo.png"/></Link>
+            </div>
+            <div>
+                <div className="headerProfile">
+                    <img src={"/img/mimg/"+loginInfo.mimg}/>
+                    <div>
+                        {loginInfo && <span> {loginInfo.mnickname}</span>}
+                        <button type="button" onClick={onLogout}>로그아웃</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
             <ul>
                 <li><Link to="/">홈</Link></li>
                 <li><Link to="/member/signup">회원가입</Link></li>
-                <li><Link to="/member/login">로그인</Link></li>
                 <li><Link to="/board/sub">서브</Link></li>
                 <li><Link to="/board/write">쓰기</Link></li>
                 <li><Link to="/board">보드?</Link></li>

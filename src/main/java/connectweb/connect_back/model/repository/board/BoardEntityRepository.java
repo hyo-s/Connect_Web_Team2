@@ -1,5 +1,6 @@
 package connectweb.connect_back.model.repository.board;
 
+import connectweb.connect_back.model.dto.GalleryDto;
 import connectweb.connect_back.model.entity.board.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,7 @@ public interface BoardEntityRepository extends JpaRepository<BoardEntity, Intege
     @Query(value = " select * from member m inner join board b on m.mno = b.mno;" , nativeQuery = true )
     List<Map<Object,Object>> findAllBoardSQL();
 
+
+
 }
+

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class GalleryDto {
 
     private String gname;               //피드사진경로
-    private int bno_fk;    //fk
+    private int bno;    //fk
 
     private MultipartFile gfile; //피드사진
 
