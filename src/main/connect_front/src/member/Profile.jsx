@@ -3,12 +3,17 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
+import { useNavigate} from "react-router-dom";
+
 
 export default function Profile(){
     const {loginInfo} = useContext(LoginInfoContext);
     const {mnickname} = useParams();
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
+    const [myBoard, setMyBoard] = useState([]);
+    
+    const navigate = useNavigate();
 
     const isLinkDisabled = loginInfo === '';
 
@@ -28,6 +33,21 @@ export default function Profile(){
         getMember();
     }, [mnickname])
 
+    useEffect(()=>{
+
+        axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}})
+            .then((r)=>{
+                console.log(r)
+                setMyBoard(r.data);
+            })
+    },[])   
+
+    const onClickImg = (myBoard,r) =>{
+        console.log(myBoard)
+        navigate('../baord/submain',{state:{myBoard:myBoard, r:r}})
+    }
+
+
     if (loading) {
         return <div>Loading...</div>
     }
@@ -35,8 +55,10 @@ export default function Profile(){
     console.log(loginInfo);
     console.log(user);
     return(<>
-        <div className="myInfo">
+        <section id="container">
             <div>
+                <div className="myInfo">
+                <div>
                 <div className='imgBox'>
                     <img src={user.mimg != 'default.png' ? "/img/mimg/"+user.mimg : "/img/mimg/default.png"} alt="" />
                 </div>
@@ -51,6 +73,20 @@ export default function Profile(){
             <div>
                 {isLinkDisabled?(<></>):loginInfo.mno === user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
             </div>
-        </div>
+                </div>
+                <div className="content subContent">
+                <ul className='potoList' >
+                    {myBoard.map((r)=>{ 
+                        console.log(r);
+                        console.log(r.bno);
+                        return(<>                           
+                                <li><img src={"/img/boardimg/" +r.gnameList[0]} className='gnameList' onClick={()=>onClickImg({myBoard,r})}></img></li>                  
+                            
+                        </>)
+                    })}
+                </ul>
+                </div>
+            </div>
+        </section>
     </>)
 }
