@@ -76,15 +76,24 @@ public class BoardService {
     @Transactional
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
+        System.out.println("list1 = " + list1);
+
         List<BoardDto> boardDtoList = new ArrayList<>();
         list1.forEach((data)->{
-            BoardDto boardDto=BoardDto.builder()
+            Optional<BoardEntity>boardEntity=boardEntityRepository.findById((Integer)data.get("bno"));
+            BoardDto boardDto=boardEntity.get().toDto();
+            boardDto.setMnickname((String)data.get("mnickname"));
+           /* BoardDto boardDto=BoardDto.builder()
                     .bno((Integer)data.get("bno"))
                     .bcontent((String) data.get("bcontent"))
                     .mnickname((String)data.get("mnickname"))
-                    .build();
+                    .gnameList((List<String>) data.get("gname"))
+                    .build();*/
             boardDtoList.add(boardDto);
+            System.out.println(boardDtoList);
         });
+        System.out.println("boardDtoList = " + boardDtoList);
+
         return boardDtoList;
        /* return boardEntityRepository.findAll().stream().map(((boardEntity)->{
             return boardEntity.toDto();

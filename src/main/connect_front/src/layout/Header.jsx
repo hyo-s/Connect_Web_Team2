@@ -53,7 +53,7 @@ export default function Header(props){
         </div>
         <div>
             <ul>
-                <li><Link to="/">홈</Link></li>
+                <li><Link to="/conn">홈</Link></li>
                 <li><Link to="/member/signup">회원가입</Link></li>
                 <li><Link to="/board/sub">서브</Link></li>
                 <li><Link to="/board/write">쓰기</Link></li>

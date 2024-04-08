@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ReplyEntityRepository extends JpaRepository<ReplyEntity, Integer> {
-    @Query(value ="select * from reply r inner join member m on m.mno = r.mno where bno=:bno", nativeQuery = true)
+    @Query(value ="select * from reply r inner join member m on m.mno = r.mno where bno=:bno ORDER BY r.cdate asc", nativeQuery = true)
     List<Map<Object,Object>>findByBno(int bno);
 
 }

@@ -1,6 +1,7 @@
 package connectweb.connect_back.model.entity.board;
 
 import connectweb.connect_back.model.dto.ReplyDto;
+import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +12,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "reply")
 @AllArgsConstructor@NoArgsConstructor
 @Getter@Setter@Builder@ToString
-public class ReplyEntity {
+public class ReplyEntity extends BaseTime {
     @Id // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int rno;

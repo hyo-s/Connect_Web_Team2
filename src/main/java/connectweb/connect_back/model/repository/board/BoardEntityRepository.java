@@ -19,7 +19,7 @@ public interface BoardEntityRepository extends JpaRepository<BoardEntity, Intege
     public List<Map<Object,Object>> findBno(Object bno);
 
     // 전체글 출력 / 닉네임 + 이미지+ 내용만 일단 가져올 예정
-    @Query(value = " select * from member m inner join board b on m.mno = b.mno;" , nativeQuery = true )
+    @Query(value = " select * from member m inner join board b on m.mno = b.mno order by b.cdate desc;" , nativeQuery = true )
     List<Map<Object,Object>> findAllBoardSQL();
 
 
