@@ -24,7 +24,7 @@ public class GalleryEntity {
         //엔티티를 dto로 변환
         public GalleryDto toGalleryDto(){
         return GalleryDto.builder()
-                .bno_fk(boardEntity.getBno())
+                .bno(boardEntity.getBno())
                 .gname(this.gname)
                 .build();
     }

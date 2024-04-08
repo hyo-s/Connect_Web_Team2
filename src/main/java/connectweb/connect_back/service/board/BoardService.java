@@ -96,6 +96,18 @@ public class BoardService {
         } );
         return boardDtoList;*/
     }
+    public List<GalleryDto> dogetBoardImg(int bno){
+        List<Map<Object,Object>> list = galleryEntityRepository.fineGallery(bno);
+        List<GalleryDto> galleryDtoList = new ArrayList<>();
+        list.forEach((img)->{
+            GalleryDto galleryDto=GalleryDto.builder()
+                    .bno((Integer)img.get("bno"))
+                    .gname((String) img.get("gname"))
+                    .build();
+            galleryDtoList.add(galleryDto);
+        });
+        return galleryDtoList;
+    }
 
     //개별피드출력
     public List<BoardDto> getMyBoardList(String mnickname){
