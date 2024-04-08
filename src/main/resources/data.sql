@@ -36,8 +36,8 @@ insert into follow(tofollow, fromfollow) values
 (4, 1);
 
 /*birthboard 샘플*/
-insert into birthboard(bbcontent, mno) values
-("내용입니다1", 1);
+insert into birthboard(bbcontent, mno, cdate) values
+("내용입니다1", 1, '2024-04-08');
 insert into birthboard(bbcontent, mno) values
 ("내용입니다2", 2);
 

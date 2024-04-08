@@ -16,7 +16,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @ToString
 @Builder
-public class BirthBoardEntity extends BaseTime {
+public class BirthBoardEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

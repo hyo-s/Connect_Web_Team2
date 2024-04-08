@@ -49,12 +49,14 @@ public class BirthBoardService {
     public List<BirthBoardDto> doGetBirthBoard(){
         List<Map<Object,Object>> listA=birthBoardEntityRepository.findAllBirthBoardSQL();
         List<BirthBoardDto> birthBoardDtoList = new ArrayList<>();
+
         listA.forEach((data)->{
             BirthBoardDto birthBoardDto = BirthBoardDto.builder()
                     .bbno((Integer)data.get("bbno"))
                     .bbcontent((String) data.get("bbcontent"))
                     .build();
             birthBoardDtoList.add(birthBoardDto);
+            System.out.println("birthBoardDtoList = " + birthBoardDtoList);
         });
         return birthBoardDtoList;
     }
