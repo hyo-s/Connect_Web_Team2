@@ -4,15 +4,16 @@ import connectweb.connect_back.model.entity.board.BoardEntity;
 import connectweb.connect_back.model.entity.board.GalleryEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.web.multipart.MultipartFile;
 
 
 @AllArgsConstructor @NoArgsConstructor
-@Getter @Setter @ToString @Builder
+@Getter @Setter @ToString @SuperBuilder
 public class GalleryDto {
 
     private String gname;               //피드사진경로
-    private int bno_fk;    //fk
+    private int bno;    //fk
 
     private MultipartFile gfile; //피드사진
 

@@ -55,7 +55,7 @@ public class MemberController {
     }
 // ======================== [회원 수정] ======================== //
     @PutMapping("/put.do")
-    public MemberEntity editMember (MemberDto memberDto){
+    public MemberDto editMember (MemberDto memberDto){
         System.out.println("memberDto = " + memberDto);
         return memberService.editMember(memberDto);
     }

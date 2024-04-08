@@ -3,6 +3,7 @@ package connectweb.connect_back.model.dto;
 import connectweb.connect_back.model.entity.member.FollowEntity;
 import connectweb.connect_back.model.entity.member.MemberEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.boot.context.properties.source.ConfigurationPropertyName;
 
 @AllArgsConstructor
@@ -10,7 +11,7 @@ import org.springframework.boot.context.properties.source.ConfigurationPropertyN
 @Getter
 @Setter
 @ToString
-@Builder
+@SuperBuilder
 public class FollowDto {
     public int fno;
     public int fromfollow;
