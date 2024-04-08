@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 public class BaseTime {
     // 1. 레코드/엔티티 등록날짜
     @CreatedDate
-    private LocalDateTime cdate;
+    private String cdate;
 
     // 2. 레코드/엔티티 수정날짜
-    @LastModifiedDate
-    private LocalDateTime udate;
+//    @LastModifiedDate
+//    private LocalDateTime udate;
 }
 

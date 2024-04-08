@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder
 @ToString
-
 public class BaseTimeDto {
-    public LocalDateTime cdate;
-    public LocalDateTime udate;
+    public String cdate;
+//    public LocalDateTime udate;
 }

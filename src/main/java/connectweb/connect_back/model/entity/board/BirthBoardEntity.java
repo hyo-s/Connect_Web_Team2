@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "birthboard")
@@ -16,7 +19,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @ToString
 @Builder
-public class BirthBoardEntity extends BaseTimeEntity {
+public class BirthBoardEntity extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +27,6 @@ public class BirthBoardEntity extends BaseTimeEntity {
 
     @Column(columnDefinition = "longtext")
     private String bbcontent; // 게시판 내용
-
 
     //Fk 필드
     @JoinColumn(name = "mno") // fk 필드명

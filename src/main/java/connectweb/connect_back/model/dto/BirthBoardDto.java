@@ -5,13 +5,15 @@ import connectweb.connect_back.model.entity.board.BirthBoardEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @SuperBuilder
-public class BirthBoardDto extends BaseTimeDto {
+public class BirthBoardDto extends BaseTimeDto{
     private int bbno;
     private String bbcontent;
 

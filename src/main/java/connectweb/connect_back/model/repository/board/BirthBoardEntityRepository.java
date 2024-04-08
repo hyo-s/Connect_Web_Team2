@@ -11,6 +11,6 @@ public interface BirthBoardEntityRepository extends JpaRepository<BirthBoardEnti
 
 
     // 전체글 출력
-    @Query(value = "select bbno, mno, cdate, udate, bbcontent from birthboard", nativeQuery = true)
+    @Query(value = "select * from birthboard", nativeQuery = true)
     List<Map<Object,Object>> findAllBirthBoardSQL();
 }

@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,7 @@ public class BirthBoardService {
             BirthBoardDto birthBoardDto = BirthBoardDto.builder()
                     .bbno((Integer)data.get("bbno"))
                     .bbcontent((String) data.get("bbcontent"))
+                    .cdate((String) data.get("cdate"))  ////======================
                     .build();
             birthBoardDtoList.add(birthBoardDto);
             System.out.println("birthBoardDtoList = " + birthBoardDtoList);
