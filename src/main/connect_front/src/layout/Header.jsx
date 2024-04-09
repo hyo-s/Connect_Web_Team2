@@ -59,6 +59,7 @@ export default function Header(props){
                 <li><Link to="/board/write">쓰기</Link></li>
                 <li><Link to="/board">보드?</Link></li>
                 <li><Link to="/member">멤버</Link></li>
+                <li><Link to="/chat">채팅</Link></li>
             </ul>
         </div>
     </>)

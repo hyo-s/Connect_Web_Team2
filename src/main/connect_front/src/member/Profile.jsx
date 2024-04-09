@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
 import { useNavigate} from "react-router-dom";
+import styles from "../css/board.css";
 
 
 export default function Profile(){

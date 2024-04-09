@@ -14,11 +14,11 @@ export default function BirthBoardView(props){
             })
     },[])
 
-    const onClickView = (view) => {
-        console.log(view)
+    // const onClickView = (view) => {
+    //     console.log(view)
 
         
-    }
+    // }
 
     return(<>
         <div>
