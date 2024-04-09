@@ -14,15 +14,13 @@ export default function BirthBoardView(props){
             })
     },[])
 
-    const onClickView = (view) => {
-        console.log(view)
+    // const onClickView = (view) => {
+    //     console.log(view)
 
         
-    }
+    // }
 
     return(<>
-        <div>
-            내용 : 
-        </div>
+        <button type='button'>생일카드</button>
     </>)
 }

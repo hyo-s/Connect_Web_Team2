@@ -1,9 +1,21 @@
+import * as React from 'react';
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
+import SendIcon from '@mui/icons-material/Send';
+import Input from '@mui/joy/Input';
+import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/joy/Button';
 
 export default function Header(props){
+
+    const [value, setValue] = React.useState('recents');
+
+    const handleChange = (event, newValue) => {
+    setValue(newValue);
+    };
+
 
     const {loginInfo, setLoginInfo } = useContext(LoginInfoContext);
 
@@ -18,17 +30,6 @@ export default function Header(props){
         .catch(error=>{console.log(error)})
     },[])
 
-    const onLogout = ()=>{
-        axios.get('/conn/m/logout/get.do')
-        .then(r=>{
-            if(r.data){
-                alert('로그아웃 성공');
-                window.location.href = "/member/login"
-            }else{alert('로그아웃실패')}
-        })
-        setLoginInfo('');
-    }
-
     if(window.location.pathname === "/"){
         return null;
     }
@@ -42,23 +43,22 @@ export default function Header(props){
                 <Link to="/conn"><img src="/img/connect_logo.png"/></Link>
             </div>
             <div>
+                <Input startDecorator={<SearchIcon />} endDecorator={<Button>Search</Button>}/>
+            </div>
+            <div>
                 <div className="headerProfile">
-                    <img src={"/img/mimg/"+loginInfo.mimg}/>
                     <div>
-                        {loginInfo && <span> {loginInfo.mnickname}</span>}
-                        <button type="button" onClick={onLogout}>로그아웃</button>
+                        <Link to='#'>
+                            <SendIcon />
+                        </Link>
                     </div>
                 </div>
             </div>
         </div>
         <div className="header">
             <ul>
-                <li><Link to="/conn">홈</Link></li>
-                <li><Link to="/member/signup">회원가입</Link></li>
-                <li><Link to="/board/sub">서브</Link></li>
-                <li><Link to="/board/write">쓰기</Link></li>
-                <li><Link to="/board">보드?</Link></li>
                 <li><Link to="/member">멤버</Link></li>
+                <li><Link to="/chat">채팅</Link></li>
             </ul>
         </div>
     </>)
