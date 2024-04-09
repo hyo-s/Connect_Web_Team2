@@ -136,19 +136,23 @@ public class BoardService {
 
     }
 
-
+    //게시글 수정
     @Transactional
     public int doPutBoard(BoardDto boardDto){
+        System.out.println("BoardService.doPutBoard");
+        System.out.println("boardDto = " + boardDto);
         BoardEntity boardEntity = boardEntityRepository.findById(boardDto.getBno()).get();
-        boardEntity.setBcontent("수정합니다.");
+        boardEntity.setBcontent(boardDto.getBcontent());
+
+
         return 0;
     }
 
     //게시글 삭제
     @Transactional
     public boolean doDeleteBoard(int bno){
+        System.out.println("bno = " + bno);
         MemberDto loginDto = memberService.loginInfo();
-        if(loginDto == null) return false;
 
         Optional<BoardEntity> optionalBoardEntity = boardEntityRepository.findById(bno);
         System.out.println("optionalBoardEntity = " + optionalBoardEntity);
