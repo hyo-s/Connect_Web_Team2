@@ -31,7 +31,8 @@ export default function BoardList(props){
                                 <div className="innerContainer">
                                     <div className="content mainContent">
                                         <div className="topInfo">
-                                            <div className="topImg"></div>
+                                            <div>{board.cdate} </div>
+                                            <div className="topImg"> <img src={'/img/mimg/'+board.profilename} /> </div>
                                             <p>{board.mnickname}</p>
                                         </div>
                                         <ul>

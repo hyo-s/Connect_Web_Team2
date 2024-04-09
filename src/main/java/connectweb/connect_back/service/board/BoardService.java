@@ -83,6 +83,8 @@ public class BoardService {
             Optional<BoardEntity>boardEntity=boardEntityRepository.findById((Integer)data.get("bno"));
             BoardDto boardDto=boardEntity.get().toDto();
             boardDto.setMnickname((String)data.get("mnickname"));
+            boardDto.setCdate((String) data.get("b.cdate"));
+            boardDto.setProfilename((String) data.get("mimg"));
            /* BoardDto boardDto=BoardDto.builder()
                     .bno((Integer)data.get("bno"))
                     .bcontent((String) data.get("bcontent"))

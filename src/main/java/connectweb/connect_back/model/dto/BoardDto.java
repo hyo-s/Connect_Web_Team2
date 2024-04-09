@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @ToString
 @SuperBuilder
-public class BoardDto {
+public class BoardDto extends BaseTimeDto {
 
     private int bno; // 게시물 번호
     private String bcontent; //내용
