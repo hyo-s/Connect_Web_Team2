@@ -16,6 +16,7 @@ import Delete from "../member/Delete";
 import SubBoardMain from "../board/SubBoardMain";
 import BirthBoardList from "../birthBoard/BirthBoardList";
 import BoardUpdate from "../board/BoardUpdate";
+import Chatting from "../chatting/Chatting";
 
 export const LoginInfoContext = React.createContext('');
 
@@ -39,6 +40,7 @@ export default function Index(props){
                 <Route path="/baord/submain" element={<SubBoardMain/>}/>
                 <Route path="/member/delete" element={<Delete/>}/>
                 <Route path="/board/update" element={<BoardUpdate/>}/>
+                <Route path="/chat" element={<Chatting/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>

@@ -5,10 +5,10 @@
 // export default function BirthBoardList(){
 
 
-//     // 1. useState 
+//     // 1. useState
 //     const [birthBoardList, setBirthBoardList] = useState([]);
 
-//     console.log(birthBoardList); 
+//     console.log(birthBoardList);
 
 //     useEffect(()=>{
 //         axios.get('/birthboard/get.do')
@@ -26,11 +26,11 @@
         
 //     {
 //         birthBoardList.map((birthboard)=>{
-//             return(<>    
+//             return(<>
 //                 <li><a href="" onClick={()=>onClickView({view})}><img src="" alt="icon" /></a></li>
                                     
 //             </>)  // return 2
-//         })    
+//         })
 //     }
 //     </ul>
 //     </>) // return 1

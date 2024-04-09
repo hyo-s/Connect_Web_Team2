@@ -1,5 +1,4 @@
 import '../css/board.css';
-import '../css/board.css'
 import { useEffect, useState} from 'react';
 import axios from 'axios';
 import { useNavigate , useParams  } from "react-router-dom";

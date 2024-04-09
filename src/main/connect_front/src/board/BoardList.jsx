@@ -8,6 +8,7 @@ export default function BoardList(props){
    
      //1. useState 변수
      const [boardList , setBoardList]=useState( [] );
+     console.log(boardList);
 
      console.log(boardList);
      useEffect(()=>{

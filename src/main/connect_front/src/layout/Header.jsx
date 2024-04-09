@@ -58,6 +58,7 @@ export default function Header(props){
         <div className="header">
             <ul>
                 <li><Link to="/member">멤버</Link></li>
+                <li><Link to="/chat">채팅</Link></li>
             </ul>
         </div>
     </>)

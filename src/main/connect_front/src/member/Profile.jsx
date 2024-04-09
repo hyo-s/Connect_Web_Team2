@@ -9,6 +9,7 @@ import Button from '@mui/joy/Button';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Stack from '@mui/material/Stack';
+import styles from "../css/board.css";
 
 
 export default function Profile(){
@@ -72,7 +73,7 @@ export default function Profile(){
                     <li>{user.mnickname}</li>
                     <li>{user.memail}</li>
                 </ul>
-                <span>팔로우{user.tofollow}명</span>    
+                <span>팔로우{user.tofollow}명</span>
                 <span>팔로워{user.fromfollow}명</span>
             </div>
             <div>

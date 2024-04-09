@@ -13,6 +13,7 @@ export default function SubBaordMain(props){
     
     let boardArray = Array.from(location.state.myBoard.myBoard);
     console.log(boardArray)
+    //let imgArray = Array.from(location.state.myboard.r.gnameList);
 
     const nav = useNavigate();
 
@@ -55,11 +56,9 @@ export default function SubBaordMain(props){
                                             <li>
                                             <Carousel>                
                                                 {
-                                                    boardArray.length!=0 &&
-                                                    boardArray.map((i)=>{
-                                                        console.log(i.gnameList);
-                                                        return(<>                                        
-                                                            <img src={'/img/boardimg/'+i.gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                                    boardArray.map((img)=>{
+                                                        return(<>
+                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
                                                         </>)
                                                     })
                                                 }
