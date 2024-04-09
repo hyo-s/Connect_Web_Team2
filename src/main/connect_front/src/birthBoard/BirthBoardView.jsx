@@ -21,8 +21,6 @@ export default function BirthBoardView(props){
     // }
 
     return(<>
-        <div>
-            내용 : 
-        </div>
+        <button type='button'>생일카드</button>
     </>)
 }

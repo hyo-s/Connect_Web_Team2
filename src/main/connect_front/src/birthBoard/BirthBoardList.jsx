@@ -23,12 +23,12 @@
 //     return(<>
 
 //     <ul className="birthList" >
-        
+
 //     {
 //         birthBoardList.map((birthboard)=>{
 //             return(<>
 //                 <li><a href="" onClick={()=>onClickView({view})}><img src="" alt="icon" /></a></li>
-                                    
+
 //             </>)  // return 2
 //         })
 //     }
