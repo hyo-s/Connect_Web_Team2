@@ -12,7 +12,6 @@ import Stack from '@mui/material/Stack';
 import styles from "../css/board.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
@@ -81,6 +80,14 @@ export default function Profile(){
         return <div>Loading...</div>
     }
 
+    const onFollow = (e)=>{
+
+    }
+
+    const onUnfollow = (e)=>{
+        
+    }
+
     console.log(loginInfo);
     console.log(user);
     return(<>
@@ -100,14 +107,10 @@ export default function Profile(){
                 <span>팔로워{user.fromfollow}명</span>
             </div>
             <div>
-                <Stack direction="row" spacing={2}>
-                    <Button variant="outlined" startIcon={<PersonOffIcon />}>
-                        Unfollow
-                    </Button>
-                    <Button variant="contained" endIcon={<PersonAddIcon />}>
-                        follow
-                    </Button>
-                </Stack>
+                <div>
+                    <button type="button" onClick={onFollow}>팔로우</button>
+                    <button type="button" onClick={onUnfollow}>언팔로우</button>
+                </div>
                 <Button onClick={handleOpen}>생일카드</Button>
                 <Modal
                     open={open}
