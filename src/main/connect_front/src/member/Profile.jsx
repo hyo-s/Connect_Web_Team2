@@ -12,9 +12,9 @@ import Stack from '@mui/material/Stack';
 import styles from "../css/board.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Carousel from "react-material-ui-carousel";
 
 
 export default function Profile(){
@@ -100,6 +100,7 @@ export default function Profile(){
                 <span>팔로워{user.fromfollow}명</span>
             </div>
             <div>
+            
                 <Stack direction="row" spacing={2}>
                     <Button variant="outlined" startIcon={<PersonOffIcon />}>
                         Unfollow
@@ -108,22 +109,32 @@ export default function Profile(){
                         follow
                     </Button>
                 </Stack>
+
                 <Button onClick={handleOpen}>생일카드</Button>
+                 
                 <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                     >
+                
                     <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                        생일축하카드
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        </Typography>
+                    <div className="cardLayout">
+                        <Carousel> 
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                            생일축하카드
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                            </Typography>
+                        </Carousel>
+                    </div>
                     </Box>
+                
                 </Modal>
+                
+           
             </div>
             <div>
                 {isLinkDisabled?(<></>):loginInfo.mno === user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
