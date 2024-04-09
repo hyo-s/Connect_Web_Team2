@@ -59,7 +59,7 @@ export default function SubBaordMain(props){
                                                     boardArray.map((i)=>{
                                                         console.log(i.gnameList);
                                                         return(<>                                        
-                                                            <img src={i.gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                                            <img src={'/img/boardimg/'+i.gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
                                                         </>)
                                                     })
                                                 }
