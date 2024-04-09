@@ -21,7 +21,8 @@ export default function Chatting(props){
         clientSocket.current.onopen = (e) => {console.log(e);}     
 
     }
- 
+
+    //메세지 보내기
     const onSend = (e)=>{
 
         let info = {
@@ -36,7 +37,9 @@ export default function Chatting(props){
 
     //입력창
     const [msgInput, setMsgInput] = useState('');
+    //보기창
     const [msgList, setMsgList] = useState([]);
+    //입력창 엔터
     const activeEnter = (e)=>{
         //console.log(e);
         if(e.keyCode == 13 && e.ctrlKey){
@@ -46,8 +49,8 @@ export default function Chatting(props){
             onSend(e); return
         }
     }
-
-
+    
+    
 
 
 
