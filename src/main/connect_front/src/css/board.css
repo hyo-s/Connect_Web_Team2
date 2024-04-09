@@ -48,6 +48,10 @@
     border-radius: 50%;
     border: 1px solid red;
 }
+.topImg img {
+    width: 100%;
+    border-radius: 50%;
+}
 .mainContent ul li {
     margin: 10px auto;
 }
