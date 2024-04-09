@@ -34,7 +34,7 @@ export default function Index(props){
                 <Route path="/member" element={<Member/>}/>
                 <Route path="/birthboard/post" element={<BirthBoardWrite/>}/>
                 <Route path="/board/sub/:mnickname" element={<Profile/>}/>
-                <Route path="/member/edit" element={<Edit/>}/>
+                <Route path="/member/edit/:mnickname" element={<Edit/>}/>
                 <Route path="/birthboard/get" element={<BirthBoardList/>} />
                 <Route path="/baord/submain" element={<SubBoardMain/>}/>
                 <Route path="/member/delete" element={<Delete/>}/>

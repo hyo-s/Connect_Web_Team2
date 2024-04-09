@@ -4,6 +4,11 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
 import { useNavigate} from "react-router-dom";
+import '../css/birthboard.css'
+import Button from '@mui/joy/Button';
+import PersonOffIcon from '@mui/icons-material/PersonOff';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import Stack from '@mui/material/Stack';
 
 
 export default function Profile(){
@@ -67,8 +72,18 @@ export default function Profile(){
                     <li>{user.mnickname}</li>
                     <li>{user.memail}</li>
                 </ul>
-                <span>팔로우{user.tofollow}명</span>
+                <span>팔로우{user.tofollow}명</span>    
                 <span>팔로워{user.fromfollow}명</span>
+            </div>
+            <div>
+                <Stack direction="row" spacing={2}>
+                    <Button variant="outlined" startIcon={<PersonOffIcon />}>
+                        Unfollow
+                    </Button>
+                    <Button variant="contained" endIcon={<PersonAddIcon />}>
+                        follow
+                    </Button>
+                </Stack>
             </div>
             <div>
                 {isLinkDisabled?(<></>):loginInfo.mno === user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
