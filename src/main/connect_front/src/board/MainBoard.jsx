@@ -32,7 +32,6 @@ export default function MainBoard(props){
                 <div className="replyBox">
                     <Reply />
                 </div>
-
             </div>
         </section> */}
     

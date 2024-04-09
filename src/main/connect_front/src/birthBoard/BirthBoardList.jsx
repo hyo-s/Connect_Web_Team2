@@ -21,17 +21,23 @@ export default function BirthBoardList(){
     
 
     return(<>
-
-    <ul className="birthList" >
-        
-    {
-        birthBoardList.map((birthboard)=>{
-            return(<>    
-                <li><a href="" onClick={()=>onClickView({view})}><img src="" alt="icon" /></a></li>
-                                    
-            </>)  // return 2
-        })    
-    }
-    </ul>
+<section id="container">
+    <div className="innerContainer">
+        <ul className="birthList" >
+            
+        {
+            birthBoardList.map((birthboard)=>{
+                
+                return(<>    
+                
+                    
+                    <li></li>
+                    
+                </>)  // return 2
+            })    
+        }
+        </ul>
+    </div>
+</section>
     </>) // return 1
 }
