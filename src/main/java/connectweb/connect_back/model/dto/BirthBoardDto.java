@@ -1,8 +1,11 @@
 package connectweb.connect_back.model.dto;
 
+import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.board.BirthBoardEntity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @ToString
 @SuperBuilder
-public class BirthBoardDto {
+public class BirthBoardDto extends BaseTimeDto{
     private int bbno;
     private String bbcontent;
 

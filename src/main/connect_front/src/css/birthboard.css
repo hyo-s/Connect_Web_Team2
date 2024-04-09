@@ -1,0 +1,16 @@
+.birthList {
+    display: flex;
+    justify-content: left;
+    border: 1px solid red;
+}
+.birthList li{
+    margin-left: 10px;
+    border: 1px solid red;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.birthList li img {
+    width: 100%;
+    height: 100%;
+}
