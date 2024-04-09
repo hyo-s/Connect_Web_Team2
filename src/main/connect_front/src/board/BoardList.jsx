@@ -25,6 +25,7 @@ export default function BoardList(props){
      return(<>
          {
              boardList.map((board)=>{
+                console.log(board.gnameList)
                  return(<>
                             <section id="container">
                                 <div className="innerContainer">
@@ -36,7 +37,13 @@ export default function BoardList(props){
                                         <ul>
                                             <li>
                                                 <Carousel>                
-                                                <BoardImg bno={board.bno}/>
+                                                 {
+                                                    board.gnameList.map((img)=>{
+                                                        return(<>
+                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                                        </>)
+                                                    })
+                                                }
                                                 </Carousel>
                                             </li>
                                         </ul>

@@ -1,6 +1,7 @@
 package connectweb.connect_back.model.entity.board;
 
 import connectweb.connect_back.model.dto.GalleryDto;
+import connectweb.connect_back.model.entity.BaseTime;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;

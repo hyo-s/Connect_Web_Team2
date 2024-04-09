@@ -75,17 +75,35 @@ public class BoardService {
     // 전체 게시글 출력 //
     @Transactional
     public List<BoardDto> doGetBoard(){
-        List<Map<Object, Object>> galleryBoardList = boardEntityRepository.findAllGallerySQL();
-        List<Map<Object, Object>> boardMemberList = boardEntityRepository.findAllBoardSQL();
+        List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
+        System.out.println("list1 = " + list1);
 
         List<BoardDto> boardDtoList = new ArrayList<>();
-
-        for(int i =0; i< galleryBoardList.size(); i++) {
-            Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer)galleryBoardList.get(i).get("bno"));
-            BoardDto boardDto = boardEntity.get().toDto();
+        list1.forEach((data)->{
+            Optional<BoardEntity>boardEntity=boardEntityRepository.findById((Integer)data.get("bno"));
+            BoardDto boardDto=boardEntity.get().toDto();
+            boardDto.setMnickname((String)data.get("mnickname"));
+           /* BoardDto boardDto=BoardDto.builder()
+                    .bno((Integer)data.get("bno"))
+                    .bcontent((String) data.get("bcontent"))
+                    .mnickname((String)data.get("mnickname"))
+                    .gnameList((List<String>) data.get("gname"))
+                    .build();*/
             boardDtoList.add(boardDto);
-        }
+            System.out.println(boardDtoList);
+        });
+        System.out.println("boardDtoList = " + boardDtoList);
+
         return boardDtoList;
+       /* return boardEntityRepository.findAll().stream().map(((boardEntity)->{
+            return boardEntity.toDto();
+        })).collect(Collectors.toList());*/
+        /*List<BoardEntity> entityList = boardEntityRepository.findAll();
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        entityList.forEach( (data)->{
+            boardDtoList.add( data.toDto() );
+        } );
+        return boardDtoList;*/
     }
 
     public List<GalleryDto> dogetBoardImg(int bno){
