@@ -49,7 +49,7 @@ export default function BoardUpdate(props){
 
         contentFormData.set("bcontent", bcontent)       
 
-        axios.post("/conn/b/put.do", contentFormData)
+        axios.put("/conn/b/put.do", contentFormData)
         .then(response => {
             console.log(response);
             if(response.data == 1){

@@ -43,11 +43,15 @@ public class BoardController {
         return boardService.getMyBoardList(mnickname);
     }
 
+    //게시글수정
     @PutMapping("/put.do")
-    public int doPutBoard(@RequestBody BoardDto boardDto){
+    public int doPutBoard(BoardDto boardDto){
+        System.out.println("BoardController.doPutBoard");
+        System.out.println("boardDto = " + boardDto);
         return boardService.doPutBoard(boardDto);
     }
 
+    //게시물삭제
     @DeleteMapping("/delete.do")
     public boolean doDeleteBoard(int bno){
         System.out.println("bno = " + bno);

@@ -4,14 +4,15 @@ import Reply from './Reply.jsx';
 import BoardList from './BoardList.jsx';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Carousel from "react-material-ui-carousel";
 
 export default function SubBaordMain(props){
 
     const location = useLocation();
-    //console.log(location.state)
+    console.log(location.state)
     
     let boardArray = Array.from(location.state.myBoard.myBoard);
-    //console.log(boardArray)
+    console.log(boardArray)
 
     const nav = useNavigate();
 
@@ -26,8 +27,14 @@ export default function SubBaordMain(props){
         console.log(bno);
         axios.delete('/conn/b/delete.do',{params:{bno:bno}})
             .then((r)=>{
-                console.log(r)
-                alert('삭제')
+                if(r.data){
+                    console.log(r)
+                    alert('삭제완료')
+                    //window.location.href = '/board/sub/:mnickname'
+                }else{
+                    alert('삭제실패')
+                }
+                
             })
     }
 
@@ -46,7 +53,19 @@ export default function SubBaordMain(props){
                                         </div>
                                         <ul>
                                             <li>
-                                               d
+                                            <Carousel>                
+                                                {
+                                                    boardArray.length!=0 &&
+                                                    boardArray.map((i)=>{
+                                                        console.log(i.gnameList);
+                                                        return(<>                                        
+                                                            <img src={i.gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                                        </>)
+                                                    })
+                                                }
+                                                                
+                                                        
+                                            </Carousel>
                                             </li>
                                         </ul>
                                     </div>
