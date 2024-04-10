@@ -76,6 +76,11 @@ export default function Profile(){
         navigate('../baord/submain',{state:{myBoard:myBoard, r:r}})
     }
 
+    //채팅클릭
+    const onChat = () =>{
+        navigate('../chat',{state:{mnickname : user.mnickname}})        
+    }
+
 
     if (loading) {
         return <div>Loading...</div>
@@ -109,6 +114,7 @@ export default function Profile(){
                     </Button>
                 </Stack>
                 <Button onClick={handleOpen}>생일카드</Button>
+                <Button onClick={()=>onChat()}>채팅</Button>
                 <Modal
                     open={open}
                     onClose={handleClose}

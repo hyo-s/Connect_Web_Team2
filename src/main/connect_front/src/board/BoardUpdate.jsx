@@ -11,9 +11,14 @@ export default function BoardUpdate(props){
     console.log(location.state.board);
 
 
-    const [bcontent, setBcontent] = useState(
-        {bcontent:location.state.board.bcontent}
-    );
+    const [board, setBoard] = useState({
+        bno : location.state.board.bno,
+        bcontent : location.state.board.bcontent,
+        gnameList : location.state.board.bcontent
+    });
+
+    const {bno, bcontent, gnameList} = board;
+
     const [imgPre, setImgPre] = useState([]);
 
  
@@ -21,8 +26,8 @@ export default function BoardUpdate(props){
     console.log(boardArray);
 
     const onChangeBcontent = (e)=>{
-        setBcontent(e.target.value)
-
+        setBoard(e.target.value)
+        //console.log(board);
     }
 
     const onChangeImg = (e) =>{
@@ -43,20 +48,15 @@ export default function BoardUpdate(props){
     
     
     const onSubmit = (e)=>{
-        const contentForm = document.querySelector(".innerContainer");
-        const contentFormData = new FormData(contentForm);
-        console.log(contentFormData);
-
-        contentFormData.set("bcontent", bcontent)       
-
-        axios.put("/conn/b/put.do", contentFormData)
+        console.log(board);
+        axios.put("/conn/b/put.do", board)
         .then(response => {
             console.log(response);
             if(response.data == 1){
-                alert('등록성공')
+                alert('수정성공')
                 //window.location.href = '/board/myboard'
             }else if(response.data == 2){
-                alert('등록실패')
+                alert('수정실패')
             }
         })
         .catch(error => {console.log(error)})
@@ -66,7 +66,7 @@ export default function BoardUpdate(props){
             <form className="innerContainer">
                 <div className="header">
                     HEADER
-                    <button type="button" onClick={onSubmit}>쓰기</button>
+                    <button type="button" onClick={onSubmit}>수정</button>
                 </div>
                 <div className="content mainContent">
                 <Carousel>                
@@ -77,8 +77,7 @@ export default function BoardUpdate(props){
                             <img src={i} style={{width:"100%", height:400, objectFit:"cover"}}/>
                         </>)
                     })
-                }
-                                
+                }                  
                            
                 </Carousel>
                 </div>
@@ -89,7 +88,7 @@ export default function BoardUpdate(props){
                     <input type="file" name="gfile" multiple onChange={(e)=>onChangeImg(e)}  accept='image/*' />
                 </div>
                 <div className="btmBox">
-                    <textarea value={location.state.board.bcontent} onChange={onChangeBcontent}></textarea>
+                    <textarea value={bcontent} onChange={onChangeBcontent}></textarea>
                 </div>
                 <div className="footer">
                     FOOTER

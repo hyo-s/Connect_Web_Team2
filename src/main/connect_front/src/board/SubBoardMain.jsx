@@ -5,6 +5,7 @@ import BoardList from './BoardList.jsx';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Carousel from "react-material-ui-carousel";
+import ReplyView from "./ReplyList";
 
 export default function SubBaordMain(props){
 
@@ -40,31 +41,31 @@ export default function SubBaordMain(props){
     }
 
     return(<>
-        {
+       {
              boardArray.map((board)=>{
+                console.log(board.gnameList)
                  return(<>
                             <section id="container">
                                 <div className="innerContainer">
                                     <div className="content mainContent">
                                         <div className="topInfo">
-                                            <div className="topImg"></div>
+                                            <div>{board.cdate} </div>
+                                            <div className="topImg"> <img src={'/img/mimg/'+board.profilename} /> </div>
                                             <p>{board.mnickname}</p>
                                             <button onClick={()=>onUpdate(board)}>수정</button>
-                                        <button onClick={()=>onDelete(board.bno)}>삭제</button>
+                                            <button onClick={()=>onDelete(board.bno)}>삭제</button>
                                         </div>
                                         <ul>
-                                            <li>
-                                            <Carousel>                
-                                                {
-                                                    boardArray.map((img)=>{
+                                            <li data-interval="false"> 
+                                                <Carousel>                
+                                                 {
+                                                    board.gnameList.map((img)=>{
                                                         return(<>
                                                             <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
                                                         </>)
                                                     })
                                                 }
-                                                                
-                                                        
-                                            </Carousel>
+                                                </Carousel>
                                             </li>
                                         </ul>
                                     </div>
@@ -77,7 +78,8 @@ export default function SubBaordMain(props){
                                             <li>{board.bcontent}</li>
                                         </ul>
                                     </div>
-                                    <div className="replyBox">
+                                    <div className="replyBox" >
+                                        <ReplyView board={board} look={1} />
                                         <Reply board={board} />
                                     </div>
                                 </div>

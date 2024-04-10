@@ -1,15 +1,21 @@
 import { useContext, useRef, useState } from "react"
 import { LoginInfoContext } from "../index/Index";
+import { useLocation} from 'react-router-dom';
 
 export default function Chatting(props){
 
     let clientSocket = useRef(null);
 
+    //받는사람정보
+    const location = useLocation();
+    console.log(location.state.mnickname);
+
     //로그인정보가져오기
     const {loginInfo} = useContext(LoginInfoContext);
+    
 
     if(!clientSocket.current){
-        clientSocket.current = new WebSocket('ws://192.168.17.128:80/chat');
+        clientSocket.current = new WebSocket('ws://175.212.253.226:80/chat');
         clientSocket.current.onclose = (e) => {console.log(e);}
         clientSocket.current.onerror = (e) => {console.log(e);}
         clientSocket.current.onmessage = (e) => {
@@ -28,6 +34,7 @@ export default function Chatting(props){
         let info = {
             msg : msgInput,
             forMnickname : loginInfo.mnickname,
+            toMnickname : location.state.mnickname,
             img : loginInfo.mimg
         }
         clientSocket.current.send(JSON.stringify(info));
@@ -59,6 +66,7 @@ export default function Chatting(props){
         <div>
             {
                 msgList.map((msg)=>{
+                    console.log(msg);
                     return(<>
                         {loginInfo.mnickname == msg.forMnickname ?  <div>{msg.msg}</div> : 
                         <div><img src={"/img/mimg/default.png"} style={{height:20}}/>{msg.forMnickname}:{msg.msg}
