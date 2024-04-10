@@ -19,7 +19,8 @@ public class FollowController {
 
     // ======================== [팔로우] ======================== //
     @PostMapping("/follow/post.do")
-    public boolean doFollowPost(FollowDto followDto){
+    public boolean doFollowPost(@RequestBody FollowDto followDto){
+        System.out.println("followDto = " + followDto);
         return followService.doFollowPost(followDto);
     }
     // ======================== [언팔로우] ======================== //
@@ -46,5 +47,11 @@ public class FollowController {
     @GetMapping("/following/name/get.do")
     public List<FollowDto> doFollowingNameGet(@RequestParam int mno){
         return followService.doFollowingNameGet(mno);
+    }
+    // ======================== [ 팔로우 확인 ] ======================== //
+    @GetMapping("/follow/get.do")
+    public boolean doFollowFind(@RequestParam int tofollow){
+        System.out.println("tofollow = " + tofollow);
+        return followService.doFollowFind(tofollow);
     }
 }

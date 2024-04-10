@@ -35,6 +35,7 @@ export default function Profile(){
     const {mnickname} = useParams();
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
+    const [follow, setFollow] = useState(false);
     const [myBoard, setMyBoard] = useState([]);
 
     const [open, setOpen] = React.useState(false);
@@ -62,13 +63,22 @@ export default function Profile(){
     }, [mnickname])
 
     useEffect(()=>{
-
         axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}})
-            .then((r)=>{
-                console.log(r)
-                setMyBoard(r.data);
-            })
-    },[])   
+        .then((r)=>{
+            console.log(r)
+            setMyBoard(r.data);
+        })
+        .catch(error=>{console.log(error)})
+    },[])
+
+    useEffect(()=>{
+        axios.get("/conn/m/follow/get.do", {params:{tofollow : user.mno}})
+        .then(reponse=>{console.log(reponse)
+            setFollow(reponse)
+            console.log(follow)
+        })
+        .catch(error=>{console.log(error)})
+    },[user.mno])
 
     const onClickImg = (myBoard,r) =>{
         console.log(myBoard)
@@ -81,12 +91,19 @@ export default function Profile(){
     }
 
     const onFollow = (e)=>{
-
+        console.log(user.mno)
+        axios.post('/conn/m/follow/post.do', {tofollow : user.mno})
+        .then(respnse =>{console.log(respnse)})
+        .catch(error => {console.log(error)})
     }
 
     const onUnfollow = (e)=>{
-        
+        axios.delete('/conn/m/follow/delete.do', {tofollow:user.mno})
+        .then(response=>{console.log(response)})
+        .catch(error=>console.log(error))
     }
+ 
+
 
     console.log(loginInfo);
     console.log(user);
@@ -108,8 +125,8 @@ export default function Profile(){
             </div>
             <div>
                 <div>
-                    <button type="button" onClick={onFollow}>팔로우</button>
                     <button type="button" onClick={onUnfollow}>언팔로우</button>
+                    <button type="button" onClick={onFollow}>팔로우</button>
                 </div>
                 <Button onClick={handleOpen}>생일카드</Button>
                 <Modal

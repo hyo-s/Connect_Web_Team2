@@ -1,5 +1,6 @@
 package connectweb.connect_back.model.repository.member;
 
+import connectweb.connect_back.model.dto.FollowDto;
 import connectweb.connect_back.model.entity.member.FollowEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,5 +22,10 @@ public interface FollowEntityRepository extends JpaRepository<FollowEntity, Inte
     // ======================== [팔로잉 확인] ======================== //
     @Query(value = "select f.fno, m.mno, m.mname, m.mnickname from follow f join member m on m.mno = f.tofollow where f.fromfollow = :mno", nativeQuery = true)
     List<Map<Object,Object>> doFollowingNameGet(int mno);
+
+    // ======================== [팔로잉 확인] ======================== //
+
+    @Query(value = "select count(*) from follow where fromfollow = :fromfollow  and tofollow = :tofollow", nativeQuery = true)
+    int findByFromfollowAndTofollow(int fromfollow, int tofollow);
 
 }
