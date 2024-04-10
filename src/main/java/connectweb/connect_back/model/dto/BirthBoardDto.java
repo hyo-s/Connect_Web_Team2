@@ -2,10 +2,15 @@ package connectweb.connect_back.model.dto;
 
 import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.board.BirthBoardEntity;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,10 +23,16 @@ public class BirthBoardDto extends BaseTimeDto{
     private String bbcontent;
 
 
+    // 1. 등록용 게시물 이미지 필드
+    private List<MultipartFile> uploadList;
+    // 2. 출력용 게시물 이미지 필드
+    private List<String> bimglist;
+
     public BirthBoardEntity birthEntity(){
         return BirthBoardEntity.builder()
                 .bbno(this.bbno)
                 .bbcontent(this.bbcontent)
                 .build();
+
     }
 }

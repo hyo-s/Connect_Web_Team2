@@ -32,6 +32,9 @@ export default function BirthBoardWrite (props){
         <section id="container">
             <form id="birthForm" className="innerContainer">
                <textarea value={bbcontent} onChange={onChangeBbcontent} name="bbcontent"></textarea>
+               <div className="btmBox">
+                    <input type="file" name="uploadList" multiple accept='image/*' />
+                </div>
                <button type="button" onClick={submit}>등록</button>
             </form>
         </section>

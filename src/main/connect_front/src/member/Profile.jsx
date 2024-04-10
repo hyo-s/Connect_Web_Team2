@@ -37,10 +37,16 @@ export default function Profile(){
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [myBoard, setMyBoard] = useState([]);
+    const [bbcontent, setBbcontent] = useState('');
+    
+    const onChangeBbcontent = (e)=>{
+        setBbcontent(e.target.value)
+    }
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
 
     const navigate = useNavigate();
 
@@ -69,7 +75,27 @@ export default function Profile(){
                 console.log(r)
                 setMyBoard(r.data);
             })
-    },[])   
+    },[])
+
+    // 생일카드 쓰기
+    const submit =()=>{
+        const birthForm = document.querySelector("#birthForm");
+        const birthFormData = new FormData(birthForm);
+        console.log(birthFormData);
+
+        axios.post("/birthboard/post.do", birthFormData)
+        .then(r =>{
+            console.log(r);
+            if(r){
+                alert("게시글 등록 성공")
+                window.location.href = '/'
+            }else{
+                alert("게시글 등록 실패")
+            }
+        })
+        .catch(e=>{console.log(e)})
+    }
+
 
     const onClickImg = (myBoard,r) =>{
         console.log(myBoard)
@@ -110,8 +136,7 @@ export default function Profile(){
                     </Button>
                 </Stack>
 
-                <Button onClick={handleOpen}>생일카드</Button>
-                 
+                <Button onClick={handleOpen}>생일카드쓰기</Button>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -121,14 +146,16 @@ export default function Profile(){
                 
                     <Box sx={style}>
                     <div className="cardLayout">
-                        <Carousel> 
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                            생일축하카드
-                            </Typography>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                            </Typography>
-                        </Carousel>
+                           <Typography id="modal-modal-title" variant="h6" component="h2">
+                                <form id="birthForm" className="innerContainer">
+                                <h3 style={{margin : 0}}>생일카드</h3>
+                                <textarea value={bbcontent} onChange={onChangeBbcontent} name="bbcontent" cols="42" rows="12"></textarea>
+                                <div className="cardFileBox">
+                                        <input type="file" name="uploadList" multiple accept='image/*' />
+                                    </div>
+                                <button className="CardBtn" type="button" onClick={submit}>등록</button>
+                                </form>
+                          </Typography>
                     </div>
                     </Box>
                 

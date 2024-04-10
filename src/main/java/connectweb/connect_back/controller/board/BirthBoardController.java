@@ -26,9 +26,9 @@ public class BirthBoardController {
     }
 
     // view
-    @GetMapping("/view.do")
-    public List<BirthBoardDto> ViewBirthBoard(String mnickname){
-        System.out.println("mnickname = " + mnickname);
-        return birthBoardService.ViewBirthBoard(mnickname);
-    }
+//    @GetMapping("/view.do")
+//    public List<BirthBoardDto> ViewBirthBoard(String mnickname){
+//        System.out.println("mnickname = " + mnickname);
+//        return birthBoardService.ViewBirthBoard(mnickname);
+//    }
 }

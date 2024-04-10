@@ -10,6 +10,9 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "birthboard")
@@ -34,11 +37,21 @@ public class BirthBoardEntity extends BaseTime {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private MemberEntity memberEntity;
 
+    // 양방향 설정
+    @OneToMany( mappedBy = "birthBoardEntity", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @Builder.Default
+    private List<BirthBoardImgEntity> birthBoardImgEntityList = new ArrayList<>();
 
     public BirthBoardDto birthDto(){
         return BirthBoardDto.builder()
                 .bbno(this.bbno)
                 .bbcontent(this.bbcontent)
+                .bimglist(
+                        this.birthBoardImgEntityList.stream().map(
+                                (imgEntity)->{return imgEntity.getBbimg();}
+                        ).collect(Collectors.toList())
+                )
                 .build();
     }
 }
