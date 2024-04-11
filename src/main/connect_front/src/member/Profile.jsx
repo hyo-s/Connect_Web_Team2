@@ -6,9 +6,6 @@ import { LoginInfoContext } from "../index/Index";
 import { useNavigate} from "react-router-dom";
 import '../css/birthboard.css'
 import Button from '@mui/joy/Button';
-import PersonOffIcon from '@mui/icons-material/PersonOff';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import Stack from '@mui/material/Stack';
 import styles from "../css/board.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -33,10 +30,14 @@ export default function Profile(){
 
     const {loginInfo} = useContext(LoginInfoContext);
     const {mnickname} = useParams();
-    const [user, setUser] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [follow, setFollow] = useState(false);
-    const [myBoard, setMyBoard] = useState([]);
+
+    const [profileData, setProfileData] = useState({
+        user : {},
+        loading : true,
+        follow : {},
+        myBoard : [],
+        followChange : false
+    })
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -46,87 +47,108 @@ export default function Profile(){
 
     const isLinkDisabled = loginInfo === '';
 
-    useEffect( ()=>{
-        const getMember = async ()=>{
-            await axios.get("/conn/m/page/get.do",{params:{'mnickname':mnickname}})
-            .then(response=>{
-                console.log(response)
-                setUser(response.data);
-                setLoading(false);
-            })
-            .catch(error=>{
-                console.log(error);
-                setLoading(false);
-            })
-        } 
-        getMember();
-    }, [mnickname])
-
     useEffect(()=>{
-        axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}})
-        .then((r)=>{
-            console.log(r)
-            setMyBoard(r.data);
-        })
-        .catch(error=>{console.log(error)})
-    },[])
-
-    useEffect(()=>{
-        axios.get("/conn/m/follow/get.do", {params:{tofollow : user.mno}})
-        .then(reponse=>{console.log(reponse)
-            setFollow(reponse)
-            console.log(follow)
-        })
-        .catch(error=>{console.log(error)})
-    },[user.mno])
-
-    const onClickImg = (myBoard,r) =>{
-        console.log(myBoard)
-        navigate('../baord/submain',{state:{myBoard:myBoard, r:r}})
-    }
+        const data = async ()=>{
+            try{
+                const userDataResponse = await axios.get("/conn/m/page/get.do",{params:{mnickname:mnickname}});
+                const userData = userDataResponse.data;
+                const boardDataResponse = await axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}});
+                const boardData = boardDataResponse.data;
+                const followDataResponse = await axios.get("/conn/m/follow/get.do", {params:{tofollow : userData.mno}});
+                const followData = followDataResponse.data;
 
 
-    if (loading) {
+                if(followData==""){
+                    setProfileData({
+                        user : userData,
+                        loading : false,
+                        follow : followData,
+                        myBoard : boardData,
+                        followChange : false
+                    })
+                }else{
+                    setProfileData({
+                        user : userData,
+                        loading : false,
+                        follow : followData,
+                        myBoard : boardData,
+                        followChange : true
+                    })
+                }
+                // setProfileData({
+                //     user : userData,
+                //     loading : false,
+                //     follow : followData,
+                //     myBoard : boardData,
+                //     followChange : false
+                // })
+            
+            }catch(error){
+                console.log(error)
+                setProfileData(prevState =>({
+                    ...prevState,
+                    loading:false
+                }));
+            }
+        }
+        data();
+    },[mnickname,profileData.followChange])
+
+    const onClickImg = (board) => {
+        navigate(`../baord/submain`, { state: { myBoard:profileData.myBoard, r: board } });
+    };
+
+    if (profileData.loading) {
         return <div>Loading...</div>
     }
 
     const onFollow = (e)=>{
-        console.log(user.mno)
-        axios.post('/conn/m/follow/post.do', {tofollow : user.mno})
-        .then(respnse =>{console.log(respnse)})
+        axios.post('/conn/m/follow/post.do', {tofollow : profileData.user.mno})
+        .then(respnse =>{
+            console.log(respnse);
+            setProfileData({
+                ...profileData,
+                followChange : true
+            })
+        })
         .catch(error => {console.log(error)})
     }
 
-    const onUnfollow = (e)=>{
-        axios.delete('/conn/m/follow/delete.do', {tofollow:user.mno})
-        .then(response=>{console.log(response)})
+    const onUnfollow = (fno)=>{
+        axios.delete('/conn/m/follow/delete.do', {params:{fno:fno}})
+        .then(response=>{
+            console.log(response);
+            setProfileData({
+                ...profileData,
+                followChange : false
+            })
+        })
         .catch(error=>console.log(error))
     }
  
-
-
     console.log(loginInfo);
-    console.log(user);
+    console.log(profileData);
     return(<>
         <section id="container">
             <div>
                 <div className="myInfo">
                 <div>
                 <div className='imgBox'>
-                    <img src={user.mimg != 'default.png' ? "/img/mimg/"+user.mimg : "/img/mimg/default.png"} alt="" />
+                    <img src={profileData.user.mimg != 'default.png' ? "/img/mimg/"+profileData.user.mimg : "/img/mimg/default.png"} alt="" />
                 </div>
                 <ul>
-                    <li>{user.mname}</li>
-                    <li>{user.mnickname}</li>
-                    <li>{user.memail}</li>
+                    <li>{profileData.user.mname}</li>
+                    <li>{profileData.user.mnickname}</li>
+                    <li>{profileData.user.memail}</li>
                 </ul>
-                <span>팔로우{user.tofollow}명</span>
-                <span>팔로워{user.fromfollow}명</span>
+                <span>팔로우{profileData.user.tofollow}명</span>
+                <span>팔로워{profileData.user.fromfollow}명</span>
             </div>
             <div>
                 <div>
-                    <button type="button" onClick={onUnfollow}>언팔로우</button>
-                    <button type="button" onClick={onFollow}>팔로우</button>
+                    {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
+                    <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
+                    <button type="button" onClick={onFollow}>팔로우</button>}
                 </div>
                 <Button onClick={handleOpen}>생일카드</Button>
                 <Modal
@@ -146,16 +168,16 @@ export default function Profile(){
                 </Modal>
             </div>
             <div>
-                {isLinkDisabled?(<></>):loginInfo.mno === user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
+                {isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
             </div>
                 </div>
                 <div className="content subContent">
                 <ul className='potoList' >
-                    {myBoard.map((r)=>{ 
-                        console.log(r);
-                        console.log(r.bno);
+                    {profileData.myBoard.map((board,index)=>{ 
                         return(<>                           
-                                <li><img src={"/img/boardimg/" +r.gnameList[0]} className='gnameList' onClick={()=>onClickImg({myBoard,r})}></img></li>
+                                <li key={index}>
+                                    <img src={"/img/boardimg/" +board.gnameList[0]} className='gnameList' onClick={()=>onClickImg(board)}/>
+                                </li>
                         </>)
                     })}
                 </ul>

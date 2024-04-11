@@ -65,16 +65,19 @@ public class BoardController {
         System.out.println("replyDto = " + replyDto);
         return boardService.doPostReply(replyDto);
     }
+
     //=========================== 댓글 출력 ==========================//
     @GetMapping("/r/get.do")
     public List<ReplyDto> doGetReply(int bno){
         return boardService.doGetReply(bno);
     }
+
     //=========================== 댓글 수정 ==========================//
     @PutMapping("/r/put.do")
     public boolean doPutReply(){
         return boardService.doPutReply();
     }
+
     //=========================== 댓글 삭제 ==========================//
     @DeleteMapping("/r/delete.do")
     public boolean doDeleteReply(){

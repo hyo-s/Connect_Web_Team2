@@ -2,12 +2,12 @@ drop database if exists connectweb;
 create database connectweb;
 use connectweb;
 
-
 select * from board;
 select * from member;
 select * from gallery;
 select * from reply;
 select * from follow;
+select * from boardlike;
 
 update member set mname = "유재석", mnickname = "aac", memail = "aaa@aab.com", mphone = "010-1111-1112" where mno=1;
 

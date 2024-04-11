@@ -26,6 +26,7 @@ public class FollowController {
     // ======================== [언팔로우] ======================== //
     @DeleteMapping("/follow/delete.do")
     public boolean doFollowDelete(int fno){
+        System.out.println("fno = " + fno);
         return followService.doFollowDelete(fno);
     }
     // ======================== [ 팔로워 수 ] ======================== //
@@ -50,7 +51,7 @@ public class FollowController {
     }
     // ======================== [ 팔로우 확인 ] ======================== //
     @GetMapping("/follow/get.do")
-    public boolean doFollowFind(@RequestParam int tofollow){
+    public FollowDto doFollowFind(@RequestParam int tofollow){
         System.out.println("tofollow = " + tofollow);
         return followService.doFollowFind(tofollow);
     }

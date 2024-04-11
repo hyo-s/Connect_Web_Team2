@@ -78,12 +78,18 @@ public class FollowService {
         return followList;
     }
     // ======================== [ 팔로우 확인 ] ======================== //
-    public boolean doFollowFind(int tofollow){
+    public FollowDto doFollowFind(int tofollow){
+        if(memberService.loginInfo().getMno() == tofollow){
+            return null;
+        }
         if(memberService.loginInfo()!=null){
-            if(followEntityRepository.findByFromfollowAndTofollow(memberService.loginInfo().getMno(), tofollow)==1){
-                return true;
+            FollowEntity followEntity = followEntityRepository.findByFromfollowAndTofollow(memberService.loginInfo().getMno(), tofollow);
+            if(followEntity != null){
+                return followEntity.toDto();
+            }else{
+                return null;
             }
         }
-        return false;
+        return null;
     }
 }

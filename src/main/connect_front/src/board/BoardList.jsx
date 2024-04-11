@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Reply from "./Reply";
 import ReplyView from "./ReplyList";
 import Carousel from "react-material-ui-carousel";
+import Like from "./Like";
 
 export default function BoardList(props){
    
@@ -52,7 +53,7 @@ export default function BoardList(props){
                                     </div>
                                     <div className="btmBox">
                                         <ul>
-                                            <li>♥</li>
+                                            <Like bno={board.bno}/>
                                         </ul>
                                         <ul className="btmInfo">
                                             <li><a href="#">{board.mnickname}</a></li>

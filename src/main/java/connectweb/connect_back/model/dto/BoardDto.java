@@ -19,7 +19,6 @@ public class BoardDto extends BaseTimeDto {
 
     private int bno; // 게시물 번호
     private String bcontent; //내용
-    private int bview; //조회수
     private int mno_fk; //회원번호
 
     private String mnickname; // 작성자 닉네임
@@ -37,7 +36,6 @@ public class BoardDto extends BaseTimeDto {
         return BoardEntity.builder()
                 .bno(this.bno)
                 .bcontent(this.bcontent)
-                .bview(this.bview)
                 .build();
     }
 }

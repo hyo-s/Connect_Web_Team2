@@ -9,18 +9,20 @@ import Carousel from "react-material-ui-carousel";
 export default function SubBaordMain(props){
 
     const location = useLocation();
-    console.log(location.state)
-    
-    let boardArray = Array.from(location.state.myBoard.myBoard);
-    console.log(boardArray)
-    //let imgArray = Array.from(location.state.myboard.r.gnameList);
-
     const nav = useNavigate();
+    const { myBoard } = location.state || {};
+
+    useEffect(() => {
+        // myBoard가 유효한 배열인지 확인 후 로직 수행
+        if (myBoard && Array.isArray(myBoard)) {
+            console.log(myBoard);
+        }
+    }, [myBoard]); // myBoard가 변경될 때만 useEffect 실행
 
     //게시글수정
     const onUpdate = (board) =>{
         //console.log(board)
-        nav('/board/update',{state:{board:board}})        
+        nav('/board/update',{state:{board}})        
     }
 
     //게시글삭제
@@ -41,7 +43,7 @@ export default function SubBaordMain(props){
 
     return(<>
         {
-             boardArray.map((board)=>{
+             myBoard.map((board)=>{
                  return(<>
                             <section id="container">
                                 <div className="innerContainer">
@@ -56,7 +58,7 @@ export default function SubBaordMain(props){
                                             <li>
                                             <Carousel>                
                                                 {
-                                                    boardArray.map((img)=>{
+                                                    board.gnameList.map((img)=>{
                                                         return(<>
                                                             <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
                                                         </>)

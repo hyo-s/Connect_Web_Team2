@@ -25,7 +25,7 @@ public interface FollowEntityRepository extends JpaRepository<FollowEntity, Inte
 
     // ======================== [팔로잉 확인] ======================== //
 
-    @Query(value = "select count(*) from follow where fromfollow = :fromfollow  and tofollow = :tofollow", nativeQuery = true)
-    int findByFromfollowAndTofollow(int fromfollow, int tofollow);
+    @Query(value = "select * from follow where fromfollow = :fromfollow and tofollow = :tofollow", nativeQuery = true)
+    FollowEntity findByFromfollowAndTofollow(int fromfollow, int tofollow);
 
 }
