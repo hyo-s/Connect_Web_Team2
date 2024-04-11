@@ -58,7 +58,7 @@ export default function SubBaordMain(props){
             <div className="innerContainer">
                 <div className="content mainContent">
                     <div className="topInfo">
-                        <div>{r.cdate} </div>
+                        {/* <div>{r.cdate} </div> */}
                         <div className="topImg"> <img src={'/img/mimg/'+r.profilename} /> </div>
                         <p>{r.mnickname}</p>
                         {
