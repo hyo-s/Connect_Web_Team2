@@ -21,6 +21,12 @@ export default function BoardList(props){
         .catch(error=>{console.log(error)})
  
      },[])
+
+     const [replyList, setReplyList] = useState([]);
+
+     const handleReplyAdded = (newReply) => {
+         setReplyList([...replyList, newReply]);
+     };
     
      
      return(<>
@@ -32,9 +38,9 @@ export default function BoardList(props){
                                 <div className="innerContainer">
                                     <div className="content mainContent">
                                         <div className="topInfo">
-                                            <div>{board.cdate} </div>
                                             <div className="topImg"> <img src={'/img/mimg/'+board.profilename} /> </div>
                                             <p>{board.mnickname}</p>
+                                            <div>{board.cdate} </div>
                                         </div>
                                         <ul>
                                             <li>
@@ -61,7 +67,7 @@ export default function BoardList(props){
                                     </div>
                                     <div className="replyBox" >
                                         <ReplyView board={board} look={1} />
-                                        <Reply board={board} />
+                                        <Reply board={board} onReplyAdded={handleReplyAdded}/>
                                     </div>
                                 </div>
                             </section>

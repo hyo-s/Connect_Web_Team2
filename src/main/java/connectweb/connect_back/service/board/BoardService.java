@@ -83,7 +83,7 @@ public class BoardService {
             Optional<BoardEntity>boardEntity=boardEntityRepository.findById((Integer)data.get("bno"));
             BoardDto boardDto=boardEntity.get().toDto();
             boardDto.setMnickname((String)data.get("mnickname"));
-            boardDto.setCdate((String) data.get("b_cdate"));
+            boardDto.setCdate((String) data.get("cdate"));
             boardDto.setProfilename((String) data.get("mimg"));
            /* BoardDto boardDto=BoardDto.builder()
                     .bno((Integer)data.get("bno"))
@@ -193,6 +193,7 @@ public class BoardService {
                     .mnickname((String) reply.get("mnickname"))
                     .rno((Integer)reply.get("rno"))
                     .rcontent((String) reply.get("rcontent"))
+                    .mno((Integer)reply.get("mno"))
                     .build();
             list.add(replyDto);
         });
@@ -206,8 +207,8 @@ public class BoardService {
     }
     //=========================== 댓글 삭제 ==========================//
     @Transactional
-    public boolean doDeleteReply(){
-        replyEntityRepository.deleteById(6);
+    public boolean doDeleteReply(int rno){
+        replyEntityRepository.deleteById(rno);
         return true;
     }
 }

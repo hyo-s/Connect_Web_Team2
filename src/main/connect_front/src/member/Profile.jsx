@@ -12,7 +12,6 @@ import Stack from '@mui/material/Stack';
 import styles from "../css/board.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 

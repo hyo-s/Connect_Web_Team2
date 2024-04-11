@@ -77,7 +77,8 @@ public class BoardController {
     }
     //=========================== 댓글 삭제 ==========================//
     @DeleteMapping("/r/delete.do")
-    public boolean doDeleteReply(){
-        return boardService.doDeleteReply();
+    public boolean doDeleteReply(int rno){
+        System.out.println("rno = " + rno);
+        return boardService.doDeleteReply(rno);
     }
 }

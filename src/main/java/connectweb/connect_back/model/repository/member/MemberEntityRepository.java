@@ -22,5 +22,7 @@ public interface MemberEntityRepository extends JpaRepository<MemberEntity, Inte
 // ========================= [비밀번호 일치확인] ========================= //
     @Query(value = "select count(*) from member where mpw = :mpw and mno = :mno", nativeQuery = true)
     int existsByMpwAndMno(String mpw, int mno);
-
+//===========================[회원 검색]=========================================//
+   /* @Query(value = "", nativeQuery = true)
+    MemberEntity findBySearch(String search);*/
 }
