@@ -10,13 +10,6 @@ import Button from '@mui/joy/Button';
 
 export default function Header(props){
 
-    const [value, setValue] = React.useState('recents');
-
-    const handleChange = (event, newValue) => {
-    setValue(newValue);
-    };
-
-
     const {loginInfo, setLoginInfo } = useContext(LoginInfoContext);
 
     console.log(loginInfo);
