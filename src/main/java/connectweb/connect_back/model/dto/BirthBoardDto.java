@@ -24,15 +24,15 @@ public class BirthBoardDto extends BaseTimeDto{
 
 
     // 1. 등록용 게시물 이미지 필드
-    private List<MultipartFile> uploadList;
+    private List<MultipartFile> uploadList = new ArrayList<>();;
     // 2. 출력용 게시물 이미지 필드
-    private List<String> bimglist;
+    private String bbimg;
 
     public BirthBoardEntity birthEntity(){
         return BirthBoardEntity.builder()
                 .bbno(this.bbno)
                 .bbcontent(this.bbcontent)
+                .bbimg(this.bbimg)
                 .build();
-
     }
 }

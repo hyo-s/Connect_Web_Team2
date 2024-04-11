@@ -38,7 +38,8 @@ export default function Profile(){
     const [loading, setLoading] = useState(true);
     const [myBoard, setMyBoard] = useState([]);
     const [bbcontent, setBbcontent] = useState('');
-    
+    const [birthBoardList, setBirthBoardList] = useState([]);
+
     const onChangeBbcontent = (e)=>{
         setBbcontent(e.target.value)
     }
@@ -46,6 +47,11 @@ export default function Profile(){
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [open2, setOpen2] = React.useState(false);
+    const handleOpen2 = () => setOpen2(true);
+    const handleClose2 = () => setOpen2(false);
+
 
 
     const navigate = useNavigate();
@@ -75,6 +81,16 @@ export default function Profile(){
                 console.log(r)
                 setMyBoard(r.data);
             })
+    },[])
+
+    // 1. 생일카드리스트
+    useEffect(()=>{
+        axios.get('/birthboard/get.do')
+        .then((r)=>{
+            console.log(r);
+            setBirthBoardList(r.data);
+        })
+        .catch(e=>{console.log(e)})
     },[])
 
     // 생일카드 쓰기
@@ -107,6 +123,8 @@ export default function Profile(){
         return <div>Loading...</div>
     }
 
+    
+
     console.log(loginInfo);
     console.log(user);
     return(<>
@@ -136,7 +154,9 @@ export default function Profile(){
                     </Button>
                 </Stack>
 
-                <Button onClick={handleOpen}>생일카드쓰기</Button>
+                <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
+                
+                <Button onClick={handleOpen2}>생일카드보기</Button>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -158,6 +178,32 @@ export default function Profile(){
                           </Typography>
                     </div>
                     </Box>
+                
+                </Modal>
+
+                <Modal
+                    open={open2}
+                    onClose={handleClose2}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    >
+                    
+                        <Box sx={style}>
+                        <Carousel  sx={{ width: '100%', height: '300px' }}  autoPlay={false}>   
+                        {
+                            birthBoardList.map((birthboard)=>{
+                                console.log(birthboard.bimglist)
+                                return(<>
+                                        <button type="button">삭제</button>
+                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`, height: '300px', backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
+                                        
+                                </>)  // return 2
+                                
+                            })
+                        }
+                         </Carousel>
+                        </Box>
+                    
                 
                 </Modal>
                 

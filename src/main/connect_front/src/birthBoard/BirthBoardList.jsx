@@ -35,7 +35,7 @@ export default function BirthBoardList(){
                             {
                             birthboard.bimglist.map((img)=>{
                                 return(<>
-                                    <div></div>
+                                    <div>123123</div>
                                     <img src={"/img/birthboardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
                                 </>)
                             })

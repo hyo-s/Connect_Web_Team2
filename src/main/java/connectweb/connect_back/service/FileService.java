@@ -13,7 +13,7 @@ public class FileService {
 
     String buildUpload2 ="C:\\Users\\504\\Desktop\\team2_Web\\build\\resources\\main\\static\\img\\boardimg\\";
 
-    String buildUpload3 ="C:\\Users\\kimmi\\OneDrive\\바탕 화면\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\birthboardimg\\";
+    String buildUpload3 ="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\birthboardimg\\";
 
     // 프로필 사진 업데이트
     public String FileUpload(MultipartFile multipartFile){
