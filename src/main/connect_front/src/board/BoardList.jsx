@@ -11,7 +11,7 @@ export default function BoardList(props){
      const [boardList , setBoardList]=useState( [] );
      console.log(boardList);
 
-     console.log(boardList);
+
      useEffect(()=>{
         axios.get('/conn/b/get.do')
         .then((r)=> {

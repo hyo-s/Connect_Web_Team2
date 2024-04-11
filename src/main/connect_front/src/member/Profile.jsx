@@ -91,13 +91,6 @@ export default function Profile(){
                         followChange : true
                     })
                 }
-                // setProfileData({
-                //     user : userData,
-                //     loading : false,
-                //     follow : followData,
-                //     myBoard : boardData,
-                //     followChange : false
-                // })
 
             }catch(error){
                 console.log(error)
@@ -184,22 +177,21 @@ export default function Profile(){
 
 
     const onClickImg = (myBoard,r) =>{
+    const onClickImg = (myBoard,r,user) =>{
         console.log(myBoard)
-        navigate('../baord/submain',{state:{myBoard:myBoard, r:r}})
+        navigate('../baord/submain',{state:{myBoard, r, user}})
+    }
+
+    //채팅클릭
+    const onChat = () =>{
+        navigate('../chat',{state:{mnickname : user.mnickname}})
     }
 
 
     if (loading) {
         return <div>Loading...</div>
-        })
-        .catch(error=>console.log(error))
     }
 
-
-
-
-    console.log(loginInfo);
-    console.log(profileData);
     return(<>
         <section id="container">
             <div>
@@ -236,6 +228,7 @@ export default function Profile(){
                     <button type="button" onClick={onFollow}>팔로우</button>}
                 </div>
                 <Button onClick={handleOpen}>생일카드</Button>
+                <Button onClick={()=>onChat()}>채팅</Button>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -285,8 +278,6 @@ export default function Profile(){
 
 
                 </Modal>
-
-
             </div>
             <div>
                 {isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
@@ -295,7 +286,7 @@ export default function Profile(){
                 <div className="content subContent">
                 <ul className='potoList' >
                     {profileData.myBoard.map((board,index)=>{
-                        return(<>                           
+                        return(<>
                                 <li key={index}>
                                     <img src={"/img/boardimg/" +board.gnameList[0]} className='gnameList' onClick={()=>onClickImg(board)}/>
                                 </li>

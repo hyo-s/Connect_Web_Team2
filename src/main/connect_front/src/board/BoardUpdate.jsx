@@ -11,9 +11,14 @@ export default function BoardUpdate(props){
     console.log(location.state.board);
 
 
-    const [bcontent, setBcontent] = useState(
-        {bcontent:location.state.board.bcontent}
-    );
+    const [board, setBoard] = useState({
+        bno : location.state.board.bno,
+        bcontent : location.state.board.bcontent
+        //gnameList : location.state.board.bcontent
+    });
+
+    const {bno, bcontent, gnameList} = board;
+
     const [imgPre, setImgPre] = useState([]);
 
  
@@ -21,8 +26,8 @@ export default function BoardUpdate(props){
     console.log(boardArray);
 
     const onChangeBcontent = (e)=>{
-        setBcontent(e.target.value)
-
+        setBoard({bno:location.state.board.bno,bcontent:e.target.value})
+        console.log(e.target.value);
     }
 
     const onChangeImg = (e) =>{
@@ -43,44 +48,44 @@ export default function BoardUpdate(props){
     
     
     const onSubmit = (e)=>{
-        const contentForm = document.querySelector(".innerContainer");
-        const contentFormData = new FormData(contentForm);
-        console.log(contentFormData);
-
-        contentFormData.set("bcontent", bcontent)       
-
-        axios.put("/conn/b/put.do", contentFormData)
+        console.log(board);
+        axios.put("/conn/b/put.do", board)
         .then(response => {
             console.log(response);
             if(response.data == 1){
-                alert('등록성공')
+                alert('수정성공')
                 //window.location.href = '/board/myboard'
             }else if(response.data == 2){
-                alert('등록실패')
+                alert('수정실패')
             }
         })
         .catch(error => {console.log(error)})
     }
+    
+    const imgDelete = (e, i)=>{
+            alert(i)
+    }
+
     return(<>
         <section id="container">
             <form className="innerContainer">
                 <div className="header">
                     HEADER
-                    <button type="button" onClick={onSubmit}>쓰기</button>
+                    <button type="button" onClick={onSubmit}>수정</button>
                 </div>
                 <div className="content mainContent">
-                <Carousel>                
+                <Carousel autoPlay={false}>                
                 {
                     boardArray.length!=0 &&
                     boardArray.map((i)=>{
                         return(<>
-                            <img src={i} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                            <img src={"/img/boardimg/"+i} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>         
                         </>)
                     })
                 }
-                                
-                           
                 </Carousel>
+
                 </div>
                 
 
@@ -89,7 +94,7 @@ export default function BoardUpdate(props){
                     <input type="file" name="gfile" multiple onChange={(e)=>onChangeImg(e)}  accept='image/*' />
                 </div>
                 <div className="btmBox">
-                    <textarea value={location.state.board.bcontent} onChange={onChangeBcontent}></textarea>
+                    <textarea value={bcontent} onChange={onChangeBcontent}></textarea>
                 </div>
                 <div className="footer">
                     FOOTER
