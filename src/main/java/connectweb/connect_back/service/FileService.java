@@ -9,12 +9,11 @@ import java.util.UUID;
 @Service
 public class FileService {
 
-    String buildUpload="C:\\Users\\504\\Desktop\\team2_Web\\build\\resources\\main\\static\\img\\mimg\\";
-
-    String buildUpload2 ="C:\\Users\\504\\Desktop\\team2_Web\\build\\resources\\main\\static\\img\\boardimg\\";
+    String buildUpload="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\mimg\\";
 
     String buildUpload3 ="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\birthboardimg\\";
 
+    String buildUpload2 ="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\boardimg\\";
     // 프로필 사진 업데이트
     public String FileUpload(MultipartFile multipartFile){
         String uuid= UUID.randomUUID().toString();

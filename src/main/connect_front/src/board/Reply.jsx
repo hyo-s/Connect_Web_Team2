@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useContext, useRef, } from "react";
+import { useContext, useRef,useState } from "react";
 import { LoginInfoContext } from "../index/Index";
 
 export default function Reply (props){
+
     const {loginInfo}=useContext(LoginInfoContext); // 현재 로그인 정보 불러옴
     //1. 재렌더링 고정 참조 변수
     const replyFormRef=useRef();
     console.log(replyFormRef)
+    const [rcontent, setRcontent]=useState(props.rcontent || '');
 
     const onSubmit = (e)=>{ // 등록 통신
         console.log(replyFormRef.current);
@@ -21,8 +23,13 @@ export default function Reply (props){
         .then(response => {
             console.log(response);
             if(response){
+                console.log(response.data);
                 alert('등록성공')
-               // window.location.href = '/board/myboard' // 재렌더링 생각
+               
+                // 새로운 댓글 추가 알림
+                props.onReplyAdded(response.data);
+                setRcontent('')
+               //window.location.href = '/conn' // 재렌더링 생각
             }else{
                 alert('등록실패')
             }
@@ -31,10 +38,19 @@ export default function Reply (props){
     }
 
     return(<>
+        {/* {props.rno>0 ?
+             <form ref={replyFormRef}>
+             <div>{loginInfo.mnickname}</div>
+             <input value={rcontent} name="rcontent" type="text" onChange={(e)=>{setRcontent(e.target.value)}}/>
+             <button type="button" onClick={onSubmit}>수정</button>
+         </form>
+         :
+         ""
+        } */}
         <form ref={replyFormRef}>
             <div>{loginInfo.mnickname}</div>
-            <input name="rcontent" type="text"/>
-            <button type="button" onClick={onSubmit}>등록</button>
+            <input value={rcontent} name="rcontent" type="text" onChange={(e)=>{setRcontent(e.target.value)}}/>
+            <button type="button" onClick={onSubmit}>{props.rno > 0 ? "수정" : "등록"}</button>
         </form>
     </>)
 }
