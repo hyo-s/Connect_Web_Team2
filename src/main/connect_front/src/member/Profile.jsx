@@ -71,9 +71,9 @@ export default function Profile(){
             })
     },[])   
 
-    const onClickImg = (myBoard,r) =>{
+    const onClickImg = (myBoard,r,user) =>{
         console.log(myBoard)
-        navigate('../baord/submain',{state:{myBoard:myBoard, r:r}})
+        navigate('../baord/submain',{state:{myBoard, r, user}})
     }
 
     //채팅클릭
@@ -86,8 +86,8 @@ export default function Profile(){
         return <div>Loading...</div>
     }
 
-    console.log(loginInfo);
-    console.log(user);
+    //console.log(loginInfo);
+    //console.log(user);
     return(<>
         <section id="container">
             <div>
@@ -141,7 +141,7 @@ export default function Profile(){
                         console.log(r);
                         console.log(r.bno);
                         return(<>                           
-                                <li><img src={"/img/boardimg/" +r.gnameList[0]} className='gnameList' onClick={()=>onClickImg({myBoard,r})}></img></li>
+                                <li><img src={"/img/boardimg/" +r.gnameList[0]} className='gnameList' onClick={()=>onClickImg({myBoard,r,user})}></img></li>
                         </>)
                     })}
                 </ul>

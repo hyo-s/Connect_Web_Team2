@@ -45,7 +45,7 @@ public class BoardController {
 
     //게시글수정
     @PutMapping("/put.do")
-    public int doPutBoard(BoardDto boardDto){
+    public int doPutBoard(@RequestBody BoardDto boardDto){
         System.out.println("BoardController.doPutBoard");
         System.out.println("boardDto = " + boardDto);
         return boardService.doPutBoard(boardDto);

@@ -8,14 +8,14 @@ export default function Chatting(props){
 
     //받는사람정보
     const location = useLocation();
-    console.log(location.state.mnickname);
+    console.log(location);
 
     //로그인정보가져오기
     const {loginInfo} = useContext(LoginInfoContext);
     
 
     if(!clientSocket.current){
-        clientSocket.current = new WebSocket('ws://175.212.253.226:80/chat');
+        clientSocket.current = new WebSocket('ws://192.168.17.128:80/chat');
         clientSocket.current.onclose = (e) => {console.log(e);}
         clientSocket.current.onerror = (e) => {console.log(e);}
         clientSocket.current.onmessage = (e) => {

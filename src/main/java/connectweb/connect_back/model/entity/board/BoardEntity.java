@@ -55,6 +55,7 @@ public class BoardEntity extends BaseTime {
                 .bcontent(this.bcontent)
                 .bview(this.bview)
                 .mno_fk(memberEntity.getMno())
+                .mnickname(memberEntity.getMnickname())
                 .gnameList(
                         this.galleryEntityList.stream().map(
                                 (r)->{return r.getGname();}

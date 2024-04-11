@@ -38,6 +38,7 @@ public class BoardDto extends BaseTimeDto {
                 .bno(this.bno)
                 .bcontent(this.bcontent)
                 .bview(this.bview)
+
                 .build();
     }
 }

@@ -13,8 +13,8 @@ export default function BoardUpdate(props){
 
     const [board, setBoard] = useState({
         bno : location.state.board.bno,
-        bcontent : location.state.board.bcontent,
-        gnameList : location.state.board.bcontent
+        bcontent : location.state.board.bcontent
+        //gnameList : location.state.board.bcontent
     });
 
     const {bno, bcontent, gnameList} = board;
@@ -26,8 +26,8 @@ export default function BoardUpdate(props){
     console.log(boardArray);
 
     const onChangeBcontent = (e)=>{
-        setBoard(e.target.value)
-        //console.log(board);
+        setBoard({bno:location.state.board.bno,bcontent:e.target.value})
+        console.log(e.target.value);
     }
 
     const onChangeImg = (e) =>{
@@ -61,6 +61,11 @@ export default function BoardUpdate(props){
         })
         .catch(error => {console.log(error)})
     }
+    
+    const imgDelete = (e, i)=>{
+            alert(i)
+    }
+
     return(<>
         <section id="container">
             <form className="innerContainer">
@@ -69,17 +74,18 @@ export default function BoardUpdate(props){
                     <button type="button" onClick={onSubmit}>수정</button>
                 </div>
                 <div className="content mainContent">
-                <Carousel>                
+                <Carousel autoPlay={false}>                
                 {
                     boardArray.length!=0 &&
                     boardArray.map((i)=>{
                         return(<>
-                            <img src={i} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                            <img src={"/img/boardimg/"+i} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>         
                         </>)
                     })
-                }                  
-                           
+                }
                 </Carousel>
+
                 </div>
                 
 
