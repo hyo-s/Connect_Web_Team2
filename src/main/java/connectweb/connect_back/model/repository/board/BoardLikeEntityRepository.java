@@ -10,4 +10,7 @@ public interface BoardLikeEntityRepository extends JpaRepository<BoardLikeEntity
 
     @Query(value = "delete from boardlike where mno = :mno and bno = :bno", nativeQuery = true)
     boolean doLikeDelete(int mno, int bno);
+
+    @Query(value = "select count(*) from boardlike where mno = :mno and bno = :bno", nativeQuery = true)
+    int doLike(int mno, int bno);
 }

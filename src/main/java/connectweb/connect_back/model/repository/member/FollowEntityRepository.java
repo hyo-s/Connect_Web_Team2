@@ -24,7 +24,6 @@ public interface FollowEntityRepository extends JpaRepository<FollowEntity, Inte
     List<Map<Object,Object>> doFollowingNameGet(int mno);
 
     // ======================== [팔로잉 확인] ======================== //
-
     @Query(value = "select * from follow where fromfollow = :fromfollow and tofollow = :tofollow", nativeQuery = true)
     FollowEntity findByFromfollowAndTofollow(int fromfollow, int tofollow);
 

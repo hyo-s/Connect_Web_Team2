@@ -33,6 +33,15 @@ public class BoardLikeService {
     public boolean doLikeDelete(int mno, int bno){
         return boardLikeEntityRepository.doLikeDelete(mno,bno);
     }
+// =============================== 게시물 좋아요 여부 확인 =============================== //
+    public boolean doLike(int mno, int bno){
+        if(memberService.loginInfo() != null){
+            if(boardLikeEntityRepository.doLike(mno, bno)==1){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }
