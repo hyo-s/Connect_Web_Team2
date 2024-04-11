@@ -26,9 +26,17 @@ public class BirthBoardController {
     }
 
     // view
-    @GetMapping("/view.do")
-    public List<BirthBoardDto> ViewBirthBoard(String mnickname){
-        System.out.println("mnickname = " + mnickname);
-        return birthBoardService.ViewBirthBoard(mnickname);
+//    @GetMapping("/view.do")
+//    public List<BirthBoardDto> ViewBirthBoard(String mnickname){
+//        System.out.println("mnickname = " + mnickname);
+//        return birthBoardService.ViewBirthBoard(mnickname);
+//    }
+
+    // delete
+    @DeleteMapping("/delete.do")
+    public boolean doDeleteBirthBoard(int mno){
+        System.out.println("mno = " + mno);
+        System.out.println("BirthBoardController.doDeleteBirthBoard");
+        return birthBoardService.doDeleteBirthBoard(mno);
     }
 }

@@ -6,11 +6,16 @@ import { LoginInfoContext } from "../index/Index";
 import { useNavigate} from "react-router-dom";
 import '../css/birthboard.css'
 import Button from '@mui/joy/Button';
+import PersonOffIcon from '@mui/icons-material/PersonOff';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import Stack from '@mui/material/Stack';
 import styles from "../css/board.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import Carousel from "react-material-ui-carousel";
 
 
 export default function Profile(){
@@ -38,10 +43,22 @@ export default function Profile(){
         myBoard : [],
         followChange : false
     })
+    const [bbcontent, setBbcontent] = useState('');
+    const [birthBoardList, setBirthBoardList] = useState([]);
+
+    const onChangeBbcontent = (e)=>{
+        setBbcontent(e.target.value)
+    }
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [open2, setOpen2] = React.useState(false);
+    const handleOpen2 = () => setOpen2(true);
+    const handleClose2 = () => setOpen2(false);
+
+
 
     const navigate = useNavigate();
 
@@ -82,7 +99,7 @@ export default function Profile(){
                 //     myBoard : boardData,
                 //     followChange : false
                 // })
-            
+
             }catch(error){
                 console.log(error)
                 setProfileData(prevState =>({
@@ -122,10 +139,66 @@ export default function Profile(){
                 ...profileData,
                 followChange : false
             })
+            .catch(error=>{
+                console.log(error);
+                setLoading(false);
+            })
+        }
+
+    useEffect(()=>{
+
+        axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}})
+            .then((r)=>{
+                console.log(r)
+                setMyBoard(r.data);
+            })
+    },[])
+
+    // 1. 생일카드리스트
+    useEffect(()=>{
+        axios.get('/birthboard/get.do')
+        .then((r)=>{
+            console.log(r);
+            setBirthBoardList(r.data);
+        })
+        .catch(e=>{console.log(e)})
+    },[])
+
+    // 생일카드 쓰기
+    const submit =()=>{
+        const birthForm = document.querySelector("#birthForm");
+        const birthFormData = new FormData(birthForm);
+        console.log(birthFormData);
+
+        axios.post("/birthboard/post.do", birthFormData)
+        .then(r =>{
+            console.log(r);
+            if(r){
+                alert("게시글 등록 성공")
+                window.location.href = '/'
+            }else{
+                alert("게시글 등록 실패")
+            }
+        })
+        .catch(e=>{console.log(e)})
+    }
+
+
+    const onClickImg = (myBoard,r) =>{
+        console.log(myBoard)
+        navigate('../baord/submain',{state:{myBoard:myBoard, r:r}})
+    }
+
+
+    if (loading) {
+        return <div>Loading...</div>
         })
         .catch(error=>console.log(error))
     }
- 
+
+
+
+
     console.log(loginInfo);
     console.log(profileData);
     return(<>
@@ -145,6 +218,19 @@ export default function Profile(){
                 <span>팔로워{profileData.user.fromfollow}명</span>
             </div>
             <div>
+
+                <Stack direction="row" spacing={2}>
+                    <Button variant="outlined" startIcon={<PersonOffIcon />}>
+                        Unfollow
+                    </Button>
+                    <Button variant="contained" endIcon={<PersonAddIcon />}>
+                        follow
+                    </Button>
+                </Stack>
+
+                <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
+
+                <Button onClick={handleOpen2}>생일카드보기</Button>
                 <div>
                     {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
                     <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
@@ -157,15 +243,51 @@ export default function Profile(){
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                     >
+
                     <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                        생일축하카드
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                        </Typography>
+                    <div className="cardLayout">
+                           <Typography id="modal-modal-title" variant="h6" component="h2">
+                                <form id="birthForm" className="innerContainer">
+                                <h3 style={{margin : 0}}>생일카드</h3>
+                                <textarea value={bbcontent} onChange={onChangeBbcontent} name="bbcontent" cols="42" rows="12"></textarea>
+                                <div className="cardFileBox">
+                                        <input type="file" name="uploadList" multiple accept='image/*' />
+                                    </div>
+                                <button className="CardBtn" type="button" onClick={submit}>등록</button>
+                                </form>
+                          </Typography>
+                    </div>
                     </Box>
+
                 </Modal>
+
+                <Modal
+                    open={open2}
+                    onClose={handleClose2}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    >
+
+                        <Box sx={style}>
+                        <Carousel  sx={{ width: '100%', height: '300px' }}  autoPlay={false}>
+                        {
+                            birthBoardList.map((birthboard)=>{
+                                console.log(birthboard.bimglist)
+                                return(<>
+                                        <button type="button">삭제</button>
+                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`, height: '300px', backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
+
+                                </>)  // return 2
+
+                            })
+                        }
+                         </Carousel>
+                        </Box>
+
+
+                </Modal>
+
+
             </div>
             <div>
                 {isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
@@ -173,7 +295,7 @@ export default function Profile(){
                 </div>
                 <div className="content subContent">
                 <ul className='potoList' >
-                    {profileData.myBoard.map((board,index)=>{ 
+                    {profileData.myBoard.map((board,index)=>{
                         return(<>                           
                                 <li key={index}>
                                     <img src={"/img/boardimg/" +board.gnameList[0]} className='gnameList' onClick={()=>onClickImg(board)}/>

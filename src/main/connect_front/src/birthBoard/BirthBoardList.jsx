@@ -1,6 +1,7 @@
 import axios from "axios";
 import '../css/birthboard.css'
 import { useEffect, useState } from "react"
+import Carousel from "react-material-ui-carousel";
 
 export default function BirthBoardList(){
 
@@ -22,15 +23,28 @@ export default function BirthBoardList(){
 
     return(<>
 
-    <ul className="birthList" >
 
     {
         birthBoardList.map((birthboard)=>{
+            console.log(birthboard.bimglist)
             return(<>
-
+                <ul>
+                    <li>
+                        <div>{birthboard.bbcontent}</div>
+                        <Carousel>               
+                            {
+                            birthboard.bimglist.map((img)=>{
+                                return(<>
+                                    <div>123123</div>
+                                    <img src={"/img/birthboardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                </>)
+                            })
+                        }
+                        </Carousel>
+                    </li>
+                </ul>
             </>)  // return 2
         })
     }
-    </ul>
     </>) // return 1
 }
