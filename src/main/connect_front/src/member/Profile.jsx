@@ -40,10 +40,10 @@ export default function Profile(){
         loading : true,
         follow : {},
         myBoard : [],
-        followChange : false
+        followChange : false,
+        birthBoardList : []
     })
     const [bbcontent, setBbcontent] = useState('');
-    const [birthBoardList, setBirthBoardList] = useState([]);
 
     const onChangeBbcontent = (e)=>{
         setBbcontent(e.target.value)
@@ -56,8 +56,6 @@ export default function Profile(){
     const [open2, setOpen2] = React.useState(false);
     const handleOpen2 = () => setOpen2(true);
     const handleClose2 = () => setOpen2(false);
-
-
 
     const navigate = useNavigate();
 
@@ -72,6 +70,8 @@ export default function Profile(){
                 const boardData = boardDataResponse.data;
                 const followDataResponse = await axios.get("/conn/m/follow/get.do", {params:{tofollow : userData.mno}});
                 const followData = followDataResponse.data;
+                const birthBoardListDataResponse = await axios.get('/birthboard/get.do')
+                const birthBoardListData = birthBoardListDataResponse.data
 
 
                 if(followData==""){
@@ -80,7 +80,8 @@ export default function Profile(){
                         loading : false,
                         follow : followData,
                         myBoard : boardData,
-                        followChange : false
+                        followChange : false,
+                        birthBoardList : birthBoardListData
                     })
                 }else{
                     setProfileData({
@@ -88,7 +89,8 @@ export default function Profile(){
                         loading : false,
                         follow : followData,
                         myBoard : boardData,
-                        followChange : true
+                        followChange : true,
+                        birthBoardList : birthBoardListData
                     })
                 }
 
@@ -104,7 +106,7 @@ export default function Profile(){
     },[mnickname,profileData.followChange])
 
     const onClickImg = (board) => {
-        navigate(`../baord/submain`, { state: { myBoard:profileData.myBoard, r: board } });
+        navigate(`../baord/submain`, { state: { myBoard:profileData.myBoard, r: board }});
     };
 
     if (profileData.loading) {
@@ -133,28 +135,9 @@ export default function Profile(){
             })
             .catch(error=>{
                 console.log(error);
-                setLoading(false);
             })
-        }
-
-    useEffect(()=>{
-
-        axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}})
-            .then((r)=>{
-                console.log(r)
-                setMyBoard(r.data);
-            })
-    },[])
-
-    // 1. 생일카드리스트
-    useEffect(()=>{
-        axios.get('/birthboard/get.do')
-        .then((r)=>{
-            console.log(r);
-            setBirthBoardList(r.data);
         })
-        .catch(e=>{console.log(e)})
-    },[])
+    }
 
     // 생일카드 쓰기
     const submit =()=>{
@@ -176,19 +159,13 @@ export default function Profile(){
     }
 
 
-    const onClickImg = (myBoard,r) =>{
-    const onClickImg = (myBoard,r,user) =>{
-        console.log(myBoard)
-        navigate('../baord/submain',{state:{myBoard, r, user}})
-    }
-
     //채팅클릭
     const onChat = () =>{
-        navigate('../chat',{state:{mnickname : user.mnickname}})
+        navigate('../chat',{state:{mnickname : profileData.user.mnickname}})
     }
 
 
-    if (loading) {
+    if (profileData.loading) {
         return <div>Loading...</div>
     }
 
@@ -209,25 +186,13 @@ export default function Profile(){
                 <span>팔로워{profileData.user.fromfollow}명</span>
             </div>
             <div>
-
-                <Stack direction="row" spacing={2}>
-                    <Button variant="outlined" startIcon={<PersonOffIcon />}>
-                        Unfollow
-                    </Button>
-                    <Button variant="contained" endIcon={<PersonAddIcon />}>
-                        follow
-                    </Button>
-                </Stack>
-
                 <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
-
                 <Button onClick={handleOpen2}>생일카드보기</Button>
                 <div>
                     {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
                     <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
                     <button type="button" onClick={onFollow}>팔로우</button>}
                 </div>
-                <Button onClick={handleOpen}>생일카드</Button>
                 <Button onClick={()=>onChat()}>채팅</Button>
                 <Modal
                     open={open}
@@ -263,7 +228,7 @@ export default function Profile(){
                         <Box sx={style}>
                         <Carousel  sx={{ width: '100%', height: '300px' }}  autoPlay={false}>
                         {
-                            birthBoardList.map((birthboard)=>{
+                            profileData.birthBoardList.map((birthboard)=>{
                                 console.log(birthboard.bimglist)
                                 return(<>
                                         <button type="button">삭제</button>

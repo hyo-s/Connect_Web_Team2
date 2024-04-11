@@ -18,6 +18,8 @@ export default function SubBaordMain(props){
     const nav = useNavigate();
     const { myBoard } = location.state || {};
 
+    console.log(myBoard);
+
     useEffect(() => {
         // myBoard가 유효한 배열인지 확인 후 로직 수행
         if (myBoard && Array.isArray(myBoard)) {
