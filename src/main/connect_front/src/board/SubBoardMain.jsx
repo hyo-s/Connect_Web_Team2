@@ -84,7 +84,7 @@ export default function SubBaordMain(props){
                 <div className="btmBox">
                     <ul>
                         <li>
-                            <Like/>
+                            {/* <Like/> */}
                         </li>
                     </ul>
                     <ul className="btmInfo">

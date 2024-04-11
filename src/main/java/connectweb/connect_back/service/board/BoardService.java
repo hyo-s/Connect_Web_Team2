@@ -17,6 +17,7 @@ import connectweb.connect_back.service.member.MemberService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,6 +150,21 @@ public class BoardService {
 
         return 0;
     }
+
+    //이미지삭제 (게시글 수정용)
+    public boolean doDeleteImg(String gname){
+        System.out.println("BoardService.doDeleteImg");
+        System.out.println("gname = " + gname);
+        int gno = galleryEntityRepository.findGno(gname);
+        if(gno != 0){
+            galleryEntityRepository.deleteById(gno);
+            return true;
+        }
+
+
+        return false;
+    }
+
 
     //게시글 삭제
     @Transactional

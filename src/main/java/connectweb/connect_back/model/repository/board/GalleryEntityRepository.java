@@ -13,4 +13,8 @@ public interface GalleryEntityRepository extends JpaRepository<GalleryEntity, In
     @Query(value = "select* from Gallery where bno= :bno" ,  nativeQuery = true)
     List<Map<Object,Object>> fineGallery(int bno);
 
+    //이미지삭제(게시물 수정용)
+    @Query(value = "select gno from gallery where gname = :gname", nativeQuery = true)
+    int findGno(String gname);
+
 }

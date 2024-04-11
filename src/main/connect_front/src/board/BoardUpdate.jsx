@@ -63,7 +63,17 @@ export default function BoardUpdate(props){
     }
     
     const imgDelete = (e, i)=>{
-            alert(i)
+        console.log(i)
+        axios.delete("/conn/b/imgdelete.do",{params:{gname:i}})
+        .then(r=>{
+            console.log(r);
+            if(r.data){
+                alert("삭제성공")
+                
+            }else(
+                alert("삭제실패")
+            )
+        })
     }
 
     return(<>
