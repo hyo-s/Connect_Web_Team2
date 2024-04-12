@@ -15,6 +15,10 @@ import org.hibernate.annotations.OnDeleteAction;
 public class GalleryEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int gno; //사진식별번호
+
+    @Column(columnDefinition = "longtext")
     private String gname; //주소
 
     @JoinColumn(name = "bno")

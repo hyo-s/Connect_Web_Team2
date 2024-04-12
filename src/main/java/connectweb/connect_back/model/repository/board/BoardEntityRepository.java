@@ -22,9 +22,6 @@ public interface BoardEntityRepository extends JpaRepository<BoardEntity, Intege
     @Query(value = " select m.mno, m.mnickname, m.mname, m.mimg, b.bno, b.bcontent, b.cdate from member m inner join board b on m.mno = b.mno order by b.cdate desc;" , nativeQuery = true )
     List<Map<Object,Object>> findAllBoardSQL();
 
-//    //글수정
-//    @Query(value = "update board set bcontent = :bcnotent where bno = :bno", nativeQuery = true)
-//    public List<Map<Object,Object>> updateBaordSQL(int bno, String bcontent);
 
 
 
