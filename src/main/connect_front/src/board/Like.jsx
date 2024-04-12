@@ -48,6 +48,7 @@ export default function Like(props){
         .then(response=>{
             console.log(response)
             setLikeOnOff(false);
+            getLike();
         })
         .catch(error=>{console.log(error)})
     }

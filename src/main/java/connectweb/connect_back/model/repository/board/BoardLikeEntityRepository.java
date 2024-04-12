@@ -9,7 +9,7 @@ public interface BoardLikeEntityRepository extends JpaRepository<BoardLikeEntity
     @Query(value = "select count(*) from boardlike where bno = :bno", nativeQuery = true)
     int doLikeGet(int bno);
 
-    @Query(value = "select lno from boardlike where mno = :mno and bno = :bno", nativeQuery = true)
+    @Query(value = "select * from boardlike where mno = :mno and bno = :bno", nativeQuery = true)
     BoardLikeEntity doSelectLno(int mno, int bno);
 
     @Query(value = "select count(*) from boardlike where mno = :mno and bno = :bno", nativeQuery = true)
