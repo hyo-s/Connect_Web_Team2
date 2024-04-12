@@ -45,6 +45,7 @@ public class BirthBoardEntity extends BaseTime {
         return BirthBoardDto.builder()
                 .bbno(this.bbno)
                 .bbcontent(this.bbcontent)
+                .mno(memberEntity.getMno())
                 .bbimg(this.bbimg)
                 .build();
     }
