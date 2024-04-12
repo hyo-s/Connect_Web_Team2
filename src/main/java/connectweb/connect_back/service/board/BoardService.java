@@ -160,8 +160,7 @@ public class BoardService {
             galleryEntityRepository.deleteById(gno);
             return true;
         }
-
-
+        
         return false;
     }
 

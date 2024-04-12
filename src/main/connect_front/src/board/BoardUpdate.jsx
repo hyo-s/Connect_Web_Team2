@@ -13,8 +13,8 @@ export default function BoardUpdate(props){
 
     const [board, setBoard] = useState({
         bno : location.state.board.bno,
-        bcontent : location.state.board.bcontent
-        //gnameList : location.state.board.bcontent
+        bcontent : location.state.board.bcontent,
+        gnameList : location.state.board.bcontent
     });
 
     const {bno, bcontent, gnameList} = board;
@@ -69,6 +69,8 @@ export default function BoardUpdate(props){
             console.log(r);
             if(r.data){
                 alert("삭제성공")
+                board.gnameList.splice(board.gnameList.indexOf(i),1)
+                setBoard({...board})
                 
             }else(
                 alert("삭제실패")
