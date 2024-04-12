@@ -1,6 +1,7 @@
 package connectweb.connect_back.service.board;
 
 import connectweb.connect_back.model.dto.BoardLikeDto;
+import connectweb.connect_back.model.entity.board.BoardLikeEntity;
 import connectweb.connect_back.model.repository.board.BoardEntityRepository;
 import connectweb.connect_back.model.repository.board.BoardLikeEntityRepository;
 import connectweb.connect_back.service.member.MemberService;
@@ -31,7 +32,12 @@ public class BoardLikeService {
     }
 // =============================== 게시물 좋아요 취소 =============================== //
     public boolean doLikeDelete(int mno, int bno){
-        return boardLikeEntityRepository.doLikeDelete(mno,bno);
+        BoardLikeEntity boardLikeEntity = boardLikeEntityRepository.doSelectLno(mno, bno);
+        if(boardLikeEntity != null) {
+            boardLikeEntityRepository.deleteById(boardLikeEntity.getLno());
+            return true;
+        }
+        return false;
     }
 // =============================== 게시물 좋아요 여부 확인 =============================== //
     public boolean doLike(int mno, int bno){

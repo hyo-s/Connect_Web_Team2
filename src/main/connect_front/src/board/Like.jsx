@@ -56,7 +56,7 @@ export default function Like(props){
 
     return(<>
         <li>
-            {likeOnOff?<button onClick={onLikePost}>♥</button>:<button onClick={onLikeDelete}>♡</button>}
+            {likeOnOff?<button onClick={onLikeDelete}>♡</button>:<button onClick={onLikePost}>♥</button>} 
         </li>
         <li>{likeValue}</li>
     </>)
