@@ -55,7 +55,7 @@ export default function Profile(){
 
     const [open2, setOpen2] = React.useState(false);
     const handleOpen2 = () => setOpen2(true);
-    const handleClose2 = () => setOpen2(false);
+    const handleClose2 = () => setOpen2(false); 
 
     const navigate = useNavigate();
 

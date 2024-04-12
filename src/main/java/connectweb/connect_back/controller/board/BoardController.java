@@ -51,6 +51,14 @@ public class BoardController {
         return boardService.doPutBoard(boardDto);
     }
 
+    //이미지삭제 (게시글 수정용)
+    @DeleteMapping("/imgdelete.do")
+    public boolean doDeleteImg(@RequestParam String gname){
+        System.out.println("BoardController.doDeleteImg");
+        System.out.println("gname = " + gname);
+        return boardService.doDeleteImg(gname);
+    }
+
     //게시물삭제
     @DeleteMapping("/delete.do")
     public boolean doDeleteBoard(int bno){

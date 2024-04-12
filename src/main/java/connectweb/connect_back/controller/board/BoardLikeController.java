@@ -26,6 +26,12 @@ public class BoardLikeController {
 // =============================== 게시물 좋아요 취소 =============================== //
     @DeleteMapping("/like/delete.do")
     public boolean doLikeDelete(int mno, int bno){
+        System.out.println("mno = " + mno + ", bno = " + bno);
         return boardLikeService.doLikeDelete(mno,bno);
+    }
+// =============================== 게시물 좋아요 여부 확인 =============================== //
+    @GetMapping("/like")
+    public boolean doLike(int mno, int bno){
+        return boardLikeService.doLike(mno, bno);
     }
 }
