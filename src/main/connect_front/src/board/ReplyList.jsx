@@ -19,8 +19,8 @@ export default function ReplyView(props){
 
     },[])
 
-    const onDelete= (e,rno)=>{
-        console.log(rno);
+    const onDelete= (rno)=>{
+        console.log(rno);   
         axios.delete('/conn/b/r/delete.do',{params:{rno:rno}})
         .then((re)=>{
             console.log(re);
@@ -36,14 +36,15 @@ export default function ReplyView(props){
     }
 
     const onUpdate=(rno,rcontent)=>{
+        console.log('onUpdate')
         return <Reply rno={rno} rcontent={rcontent}/>
         // axios.get
     }
 
     const replyBtn = (rno,rcontent)=>{
         return( <>
-            <button type="button" onClick={(e)=>onDelete(e, rno)}>삭제</button>
-            <button type="button" onClick={(e)=>onUpdate(e, rno,rcontent)}>수정</button>
+            <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
+            <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
         </>)
        
     }
