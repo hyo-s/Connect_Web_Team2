@@ -13,13 +13,13 @@ import java.util.List;
 public class BirthBoardController {
     @Autowired private BirthBoardService birthBoardService;
 
-    // write
+    // 게시물 쓰기
     @PostMapping("/post.do")
     public boolean postBirthBoard(BirthBoardDto birthBoardDto){
-        System.out.println("birthBoardDto = " + birthBoardDto);
+        System.out.println("postbirthBoardDto = " + birthBoardDto);
         return birthBoardService.postBirthBoard(birthBoardDto);
     }
-    // list
+    // 전체출력
     @GetMapping("/get.do")
     public List<BirthBoardDto> doGetBirthBoard(){
         return birthBoardService.doGetBirthBoard();
@@ -32,7 +32,7 @@ public class BirthBoardController {
 //        return birthBoardService.ViewBirthBoard(mnickname);
 //    }
 
-    // delete
+    // 게시글 삭제
     @DeleteMapping("/delete.do")
     public boolean doDeleteBirthBoard(int bbno){
         System.out.println("mno = " + bbno);

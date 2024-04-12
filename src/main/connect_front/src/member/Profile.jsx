@@ -143,6 +143,7 @@ export default function Profile(){
     const submit =()=>{
         const birthForm = document.querySelector("#birthForm");
         const birthFormData = new FormData(birthForm);
+        birthFormData.set("mno", profileData.user.mno);
         console.log(birthFormData);
 
         axios.post("/birthboard/post.do", birthFormData)
@@ -150,14 +151,13 @@ export default function Profile(){
             console.log(r);
             if(r){
                 alert("게시글 등록 성공")
-                window.location.href = '/'
             }else{
                 alert("게시글 등록 실패")
             }
         })
         .catch(e=>{console.log(e)})
     }
-
+    console.log(profileData)
 
     //채팅클릭
     const onChat = () =>{
