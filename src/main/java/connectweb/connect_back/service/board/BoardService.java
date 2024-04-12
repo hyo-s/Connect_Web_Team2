@@ -147,6 +147,16 @@ public class BoardService {
         BoardEntity boardEntity = boardEntityRepository.findById(boardDto.getBno()).get();
         boardEntity.setBcontent(boardDto.getBcontent());
 
+        boardDto.getGfile().forEach((uploadFile)->{
+            String fileName = fileService.FileUpload2(uploadFile);
+            GalleryEntity galleryEntity = GalleryEntity.builder()
+                    .gname(fileName)
+                    .boardEntity(boardEntity)
+                    .build();
+            galleryEntityRepository.save(galleryEntity);
+            System.out.println("fileName = " + fileName);
+        });
+
 
         return 0;
     }
@@ -160,7 +170,7 @@ public class BoardService {
             galleryEntityRepository.deleteById(gno);
             return true;
         }
-        
+
         return false;
     }
 

@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../css/board.css'
 import axios from 'axios';
 import Carousel from "react-material-ui-carousel";
+import { LoginInfoContext } from "../index/Index";
 
 
 export default function BoardWrite(props){
 
     const [bcontent, setBcontent] = useState('');
     const [imgPre, setImgPre] = useState([]);
+    const {loginInfo, setLoginInfo } = useContext(LoginInfoContext);
+    const mnickname = loginInfo.mnickname
 
     const onChangeBcontent = (e)=>{
         setBcontent(e.target.value)
@@ -32,8 +35,6 @@ export default function BoardWrite(props){
     const onSubmit = (e)=>{
         const contentForm = document.querySelector(".innerContainer");
         const contentFormData = new FormData(contentForm);
-        console.log(contentFormData);
-
         contentFormData.set("bcontent", bcontent)       
 
         axios.post("/conn/b/post.do", contentFormData)
@@ -41,7 +42,7 @@ export default function BoardWrite(props){
             console.log(response);
             if(response.data == 1){
                 alert('등록성공')
-                //window.location.href = '/board/myboard'
+                window.location.href = '/board/sub/'+{mnickname}
             }else if(response.data == 2){
                 alert('등록실패')
             }
@@ -56,10 +57,11 @@ export default function BoardWrite(props){
                     <button type="button" onClick={onSubmit}>쓰기</button>
                 </div>
                 <div className="content mainContent">
-                <Carousel>                
+                <Carousel autoPlay={false}>                
                 {
                     imgPre.length!=0 &&
                     imgPre.map((i)=>{
+                        console.log(i);
                         return(<>
                             <img src={i} style={{width:"100%", height:400, objectFit:"cover"}}/>
                         </>)
