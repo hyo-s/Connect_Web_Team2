@@ -34,9 +34,9 @@ public class BirthBoardController {
 
     // delete
     @DeleteMapping("/delete.do")
-    public boolean doDeleteBirthBoard(int mno){
-        System.out.println("mno = " + mno);
+    public boolean doDeleteBirthBoard(int bbno){
+        System.out.println("mno = " + bbno);
         System.out.println("BirthBoardController.doDeleteBirthBoard");
-        return birthBoardService.doDeleteBirthBoard(mno);
+        return birthBoardService.doDeleteBirthBoard(bbno);
     }
 }
