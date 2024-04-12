@@ -69,15 +69,23 @@ public class MemberService {
         request.getSession().setAttribute("loginInfo",null);
         return true;
     }
-// ======================== [회원리스트] ======================== //
-    public List<MemberDto> memberList (){
-        List<MemberEntity> memberEntityList = memberEntityRepository.findAll();
+// ======================== [검색 회원리스트] ======================== //
+    public List<MemberDto> memberList (String search){
+       /* List<MemberEntity> memberEntityList = memberEntityRepository.findAll();
         List<MemberDto> memberDtoList = new ArrayList<>();
         for(int i=0; i<memberEntityList.size(); i++){
             MemberDto memberDto = memberEntityList.get(i).toDto();
             memberDtoList.add(memberDto);
         }
-        return memberDtoList;
+        return memberDtoList;*/
+        List<MemberEntity> memberEntities=memberEntityRepository.findBySearch(search);
+        List<MemberDto>memberDtos=new ArrayList<>();
+        memberEntities.forEach((list)->{
+            MemberDto memberDto=list.toDto();
+            memberDtos.add(memberDto);
+        });
+        System.out.println("memberDtos = " + memberDtos);
+        return memberDtos;
     }
 // ======================== [개인페이지 출력할 회원정보] ======================== //
     public MemberDto memberView (String mnickname){
