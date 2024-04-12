@@ -20,7 +20,7 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-
+    //게시글등록
     @PostMapping("/post.do")
     public int doPostBoard( BoardDto boardDto){
         System.out.println("boardDto = " + boardDto);
@@ -45,7 +45,7 @@ public class BoardController {
 
     //게시글수정
     @PutMapping("/put.do")
-    public int doPutBoard(@RequestBody BoardDto boardDto){
+    public int doPutBoard(BoardDto boardDto){
         System.out.println("BoardController.doPutBoard");
         System.out.println("boardDto = " + boardDto);
         return boardService.doPutBoard(boardDto);

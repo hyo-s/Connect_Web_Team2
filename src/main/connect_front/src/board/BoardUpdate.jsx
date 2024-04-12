@@ -14,12 +14,17 @@ export default function BoardUpdate(props){
     const [board, setBoard] = useState({
         bno : location.state.board.bno,
         bcontent : location.state.board.bcontent,
-        gnameList : location.state.board.bcontent
+        gnameList : location.state.board.gnameList
     });
 
     const {bno, bcontent, gnameList} = board;
+    console.log(board);
 
-    const [imgPre, setImgPre] = useState([]);
+    const [imgPre, setImgPre] = useState({
+        board : board.gnameList,
+        nImg : []
+    });
+    console.log(imgPre);
 
  
     let boardArray = Array.from(location.state.board.gnameList);
@@ -34,14 +39,13 @@ export default function BoardUpdate(props){
         console.log(e);
         console.log(e.target.files);
         const imgArray = Array.from(e.target.files);
-        console.log(imgArray)
-        let imgPre = [];
+        console.log(imgArray);
         imgArray.forEach((i) => {
             console.log(i)
-            imgPre.push(URL.createObjectURL(i));
+            imgPre.nImg.push(URL.createObjectURL(i));
             console.log(imgPre);
         });
-        setImgPre(imgPre);
+        setImgPre({...imgPre});
         console.log(imgPre);
     }
 
@@ -49,7 +53,15 @@ export default function BoardUpdate(props){
     
     const onSubmit = (e)=>{
         console.log(board);
-        axios.put("/conn/b/put.do", board)
+        const contentForm = document.querySelector(".innerContainer");
+        const contentFormData = new FormData(contentForm);
+ 
+
+        contentFormData.set("board",board)
+
+        console.log(contentFormData); 
+
+        axios.put("/conn/b/put.do", contentFormData)
         .then(response => {
             console.log(response);
             if(response.data == 1){
@@ -67,11 +79,9 @@ export default function BoardUpdate(props){
         axios.delete("/conn/b/imgdelete.do",{params:{gname:i}})
         .then(r=>{
             console.log(r);
-            if(r.data){
-                alert("삭제성공")
+            if(r.data){                
                 board.gnameList.splice(board.gnameList.indexOf(i),1)
-                setBoard({...board})
-                
+                setBoard({...board})                
             }else(
                 alert("삭제실패")
             )
@@ -86,12 +96,22 @@ export default function BoardUpdate(props){
                     <button type="button" onClick={onSubmit}>수정</button>
                 </div>
                 <div className="content mainContent">
-                <Carousel autoPlay={false}>                
-                {
-                    boardArray.length!=0 &&
-                    boardArray.map((i)=>{
+                <Carousel autoPlay={false}>
+                {imgPre.board.length!=0 &&
+                    imgPre.board.map((i)=>{
+                        console.log(i);
                         return(<>
-                            <img src={"/img/boardimg/"+i} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                            <img src={"/img/boardimg/"+i} value={gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>         
+                        </>)
+                    })
+                }                
+                {
+                    imgPre.nImg.length!=0 &&
+                    imgPre.nImg.map((i)=>{
+                        console.log(i);
+                        return(<>
+                            <img src={i} value={gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
                             <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>         
                         </>)
                     })
