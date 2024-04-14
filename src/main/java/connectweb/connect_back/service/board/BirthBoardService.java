@@ -85,6 +85,7 @@ public class BirthBoardService {
 
     // 게시글 삭제
     public boolean doDeleteBirthBoard(int bbno){
+        birthBoardEntityRepository.deleteById(bbno);
         System.out.println("bbno = " + bbno);
         return true;
     }

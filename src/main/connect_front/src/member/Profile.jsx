@@ -49,17 +49,25 @@ export default function Profile(){
         setBbcontent(e.target.value)
     }
 
+    // 생일카드 쓰기
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    // 생일카드 보기
     const [open2, setOpen2] = React.useState(false);
     const handleOpen2 = () => setOpen2(true);
     const handleClose2 = () => setOpen2(false); 
 
+
+
+    
+    const [cardList, setCardList] = useState([]);
+
     const navigate = useNavigate();
 
     const isLinkDisabled = loginInfo === '';
+    const btnDisabled = loginInfo === '';
 
     useEffect(()=>{
         const data = async ()=>{
@@ -139,6 +147,9 @@ export default function Profile(){
         })
     }
 
+
+    // 
+
     // 생일카드 쓰기
     const submit =()=>{
         const birthForm = document.querySelector("#birthForm");
@@ -157,7 +168,35 @@ export default function Profile(){
         })
         .catch(e=>{console.log(e)})
     }
+    
+    // 생일카드 삭제
+    const delteBtn = (bbno)=>{
+        console.log(delteBtn);
+        axios.delete('/birthboard/delete.do',{params : {bbno:bbno}})
+        .then((r)=>{
+            console.log(r);
+            if(r){
+                alert('삭제 성공')
+            }else{
+                alert('삭제 실패')
+            }
+        })
+        .catch(error=>{console.log(error)})
+    }
+
     console.log(profileData)
+    
+    // 생일 날짜 조건식
+    const today = new Date();
+    const birthdayInfo = profileData.user.mbirth;
+
+    // 생일 정보가 있고, 생일이 오늘이면
+    const isBirthdayToday = birthdayInfo && new Date(birthdayInfo).getDate() === today.getDate() && new Date(birthdayInfo).getMonth() === today.getMonth();
+
+    // 생일 정보가 있고, 생일이 일주일 이내이면
+    const isBirthdayWithinWeek = birthdayInfo && today.getTime() < new Date(birthdayInfo).getTime() + 7 * 24 * 60 * 60 * 1000;
+
+
 
     //채팅클릭
     const onChat = () =>{
@@ -186,8 +225,20 @@ export default function Profile(){
                 <span>팔로워{profileData.user.fromfollow}명</span>
             </div>
             <div>
-                <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
-                <Button onClick={handleOpen2}>생일카드보기</Button>
+                <div>
+                    {btnDisabled ? (
+                    <></>
+                    ) : (
+                    <>
+                        {loginInfo.mno === profileData.user.mno && isBirthdayToday && ( // 계정주 이면서 // 생일 당일
+                        <Button onClick={handleOpen2}>생일카드보기</Button>
+                        )}
+                        {loginInfo.mno !== profileData.user.mno && isBirthdayWithinWeek &&( // 당사자가 아니면서 // 계정주 생일 일주일 전 버튼 활성화 
+                        <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
+                        )}
+                    </>
+                    )}
+                </div>
                 <div>
                     {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
                     <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
@@ -224,24 +275,20 @@ export default function Profile(){
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                     >
-
                         <Box sx={style}>
-                        <Carousel  sx={{ width: '100%', height: '300px' }}  autoPlay={false}>
+                        <Carousel  sx={{ width: '100%', height:'300px'}}  autoPlay={false}>
                         {
-                            profileData.birthBoardList.map((birthboard)=>{
+                            profileData.birthBoardList.map((bbno, birthboard)=>{
                                 console.log(birthboard.bimglist)
                                 return(<>
-                                        <button type="button">삭제</button>
-                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`, height: '300px', backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
-
+                                        <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={(e)=>delteBtn(bbno)}>삭제</button>
+                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
+                                        
                                 </>)  // return 2
-
                             })
                         }
                          </Carousel>
                         </Box>
-
-
                 </Modal>
             </div>
             <div>
