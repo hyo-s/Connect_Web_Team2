@@ -59,7 +59,7 @@ export default function SubBaordMain(props){
                 <div className="content mainContent">
                     <div className="topInfo">
                         <div>{location.state.r.cdate} </div>
-                        <div className="topImg"> <img src={'/img/mimg/'+location.state.r.profilename} /> </div>
+                        <div className="topImg"> <img src={'/img/mimg/'+location.state.profilename} /> </div>
                         <p>{location.state.r.mnickname}</p>
                         {
 
