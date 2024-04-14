@@ -112,7 +112,7 @@ export default function BoardUpdate(props){
                         </>)
                     })
                 }
-                {
+                {/* {
                     imgPre.nImg.length!=0 &&
                     imgPre.nImg.map((i)=>{
                         console.log(i);
@@ -121,7 +121,7 @@ export default function BoardUpdate(props){
                             <button style={{marginLeft: 195}}type='button' onClick={(e)=>nImgDelete(e, i)} >삭제</button>         
                         </>)
                     })
-                }
+                } */}
                 </Carousel>
 
                 </div>
