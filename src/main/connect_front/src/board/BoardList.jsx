@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Reply from "./Reply";
-import ReplyView from "./ReplyList";
 import Carousel from "react-material-ui-carousel";
 import Like from "./Like";
 
