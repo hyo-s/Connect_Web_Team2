@@ -49,17 +49,22 @@ export default function Profile(){
         setBbcontent(e.target.value)
     }
 
+    // 생일카드 쓰기
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    // 생일카드 보기
     const [open2, setOpen2] = React.useState(false);
     const handleOpen2 = () => setOpen2(true);
     const handleClose2 = () => setOpen2(false); 
 
+    const [cardList, setCardList] = useState([]);
+
     const navigate = useNavigate();
 
     const isLinkDisabled = loginInfo === '';
+    const btnDisabled = loginInfo === '';
 
     useEffect(()=>{
         const data = async ()=>{
@@ -139,6 +144,39 @@ export default function Profile(){
         })
     }
 
+    // 생일 날짜 조건식
+    const today = new Date();
+    const birthdayInfo = profileData.user.mbirth;
+    console.log( birthdayInfo )
+    // 생일 정보가 있고, 생일이 오늘이면
+    const isBirthdayToday = birthdayInfo && new Date(birthdayInfo).getDate() === today.getDate() && new Date(birthdayInfo).getMonth() === today.getMonth();
+    console.log( isBirthdayToday )
+    // 생일 정보가 있고, 생일이 일주일(한달) 이내이면
+
+    const oldDate = new Date(birthdayInfo);
+        console.log( oldDate.getDate() );
+    const oldDateDay = oldDate.getDate();
+
+    const newDate = new Date();
+        console.log( newDate.getDate() );
+    const newDateDay = newDate.getDate()
+
+    // let diff = Math.abs(newDate.getTime() - oldDate.getTime());
+    // diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    // console.log(diff);
+
+    const isBirthdayWithinWeek = oldDateDay - newDateDay <= 7 && oldDateDay - newDateDay > 0 ;
+    console.log( isBirthdayToday );
+
+
+
+    // const isBirthdayWithinWeek = birthdayInfo && today.getTime() < new Date(birthdayInfo+"T00:00:00").getTime() + 7 * 24 * 60 * 60 * 1000;
+    // console.log( today.getTime() )
+    // console.log( new Date(birthdayInfo+"T00:00:00").getTime() );
+
+    // console.log( isBirthdayWithinWeek )
+
+
     // 생일카드 쓰기
     const submit =()=>{
         const birthForm = document.querySelector("#birthForm");
@@ -157,7 +195,24 @@ export default function Profile(){
         })
         .catch(e=>{console.log(e)})
     }
+
+    // 생일카드 삭제
+    const delteBtn = (bbno)=>{
+        console.log(delteBtn);
+        axios.delete('/birthboard/delete.do',{params : {bbno:bbno}})
+        .then((r)=>{
+            console.log(r);
+            if(r){
+                alert('삭제 성공')
+            }else{
+                alert('삭제 실패')
+            }
+        })
+        .catch(error=>{console.log(error)})
+    }
+
     console.log(profileData)
+
 
     //채팅클릭
     const onChat = () =>{
@@ -173,76 +228,88 @@ export default function Profile(){
         <section id="container">
             <div className="innerContainer">
                 <div className="myInfo">
-                    <div>
-                        <div className='imgBox'>
-                            <img src={profileData.user.mimg != 'default.png' ? "/img/mimg/"+profileData.user.mimg : "/img/mimg/default.png"} alt="" />
-                        </div>
-                        <ul>
-                            <li>{profileData.user.mname}</li>
-                            <li>{profileData.user.mnickname}</li>
-                            <li>{profileData.user.memail}</li>
-                            <li><span>팔로우{profileData.user.tofollow}명</span></li>
-                            <li><span>팔로워{profileData.user.fromfollow}명</span></li>
-                            <li>{isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
+                <div>
+                <div className='imgBox'>
+                    <img src={profileData.user.mimg != 'default.png' ? "/img/mimg/"+profileData.user.mimg : "/img/mimg/default.png"} alt="" />
+                </div>
+                <ul>
+                    <li>{profileData.user.mname}</li>
+                    <li>{profileData.user.mnickname}</li>
+                    <li>{profileData.user.memail}</li>
+                    <li>{isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}</li>
+                    <li><span>팔로우{profileData.user.tofollow}명</span></li>
+                    <li><span>팔로워{profileData.user.fromfollow}명</span></li>
+                </ul>
+
+
+            </div>
+            <div>
+                <div>
+                    {btnDisabled ? (
+                    <></>
+                    ) : (
+                    <>
+                        {loginInfo.mno === profileData.user.mno && isBirthdayToday && ( // 계정주 이면서 // 생일 당일
                         <Button onClick={handleOpen2}>생일카드보기</Button>
-                        <div>
-                            {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
-                            <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
-                            <button type="button" onClick={onFollow}>팔로우</button>}
+                        )}
+                        {loginInfo.mno !== profileData.user.mno && isBirthdayWithinWeek &&( // 당사자가 아니면서 // 계정주 생일 일주일 전 버튼 활성화
+                        <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
+                        )}
+                    </>
+                    )}
+                </div>
+                <div>
+                    {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
+                    <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
+                    <button type="button" onClick={onFollow}>팔로우</button>}
+                </div>
+                <Button onClick={()=>onChat()}>채팅</Button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    >
+
+                        <Box sx={style}>
+                        <div className="cardLayout">
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                    <form id="birthForm" className="innerContainer">
+                                    <h3 style={{margin : 0}}>생일카드</h3>
+                                    <textarea value={bbcontent} onChange={onChangeBbcontent} name="bbcontent" cols="42" rows="12"></textarea>
+                                    <div className="cardFileBox">
+                                            <input type="file" name="uploadList" multiple accept='image/*' />
+                                        </div>
+                                    <button className="CardBtn" type="button" onClick={submit}>등록</button>
+                                    </form>
+                            </Typography>
                         </div>
-                        <Button onClick={()=>onChat()}>채팅</Button>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                            >
+                        </Box>
 
-                            <Box sx={style}>
-                            <div className="cardLayout">
-                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                        <form id="birthForm" className="innerContainer">
-                                        <h3 style={{margin : 0}}>생일카드</h3>
-                                        <textarea value={bbcontent} onChange={onChangeBbcontent} name="bbcontent" cols="42" rows="12"></textarea>
-                                        <div className="cardFileBox">
-                                                <input type="file" name="uploadList" multiple accept='image/*' />
-                                            </div>
-                                        <button className="CardBtn" type="button" onClick={submit}>등록</button>
-                                        </form>
-                                </Typography>
-                            </div>
-                            </Box>
+                    </Modal>
 
-                        </Modal>
+                <Modal
+                    open={open2}
+                    onClose={handleClose2}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                        <Carousel  sx={{ width: '100%', height:'300px'}}  autoPlay={false}>
+                        {
+                            profileData.birthBoardList.map((bbno, birthboard)=>{
+                                console.log(birthboard.bimglist)
+                                return(<>
+                                        <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={(e)=>delteBtn(bbno)}>삭제</button>
+                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
 
-                        <Modal
-                            open={open2}
-                            onClose={handleClose2}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                            >
-
-                            <Box sx={style}>
-                            <Carousel  sx={{ width: '100%', height: '300px' }}  autoPlay={false}>
-                            {
-                                profileData.birthBoardList.map((birthboard)=>{
-                                    console.log(birthboard.bimglist)
-                                    return(<>
-                                            <button type="button">삭제</button>
-                                            <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`, height: '300px', backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
-
-                                    </>)  // return 2
-
-                                })
-                            }
-                                </Carousel>
-                            </Box>
-                        </Modal>
-                    </div>
+                                </>)  // return 2
+                            })
+                        }
+                         </Carousel>
+                        </Box>
+                </Modal>
+            </div>
                 </div>
                 <div className="content subContent">
                     <ul className='potoList' >

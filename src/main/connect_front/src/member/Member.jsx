@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link , useLocation  } from 'react-router-dom';
+import { Link , resolvePath, useLocation  } from 'react-router-dom';
 
 export default function Member(){
 
@@ -14,6 +14,7 @@ export default function Member(){
         axios.get("/conn/m/list/get.do", {params: {search: searchValue}})
         .then(response=>{
             setMember(response.data);
+            console.log(response.data)
         })
         .catch(error=>{console.log(error)})
     },[searchValue])
