@@ -74,30 +74,4 @@ export default function BoardList(props){
 
      </>)
 }
-
-export function BoardImg (props){
-    const [imgList , setImgList]=useState( [] );
-    console.log(props);
-
-    console.log(imgList);
-    useEffect(()=>{
-        axios.get('/conn/b/img/get.do',{params:props}) // bno 매개변수로 넘겨줌
-        .then((r)=> {
-            console.log(r);
-            setImgList(r.data);
-        })
-        .catch(error=>{console.log(error)})
-
-    },[])
-
-    return(<>
-            {
-                imgList.map((img)=>{
-                    return(<>
-                        <img src={img} style={{width:"100%", height:400, objectFit:"cover"}}/>
-                    </>)
-                })
-            }
-    </>)
-
-}
+    
