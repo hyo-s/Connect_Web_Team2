@@ -28,8 +28,8 @@ export default function BoardUpdate(props){
     console.log(imgPre);
 
  
-    let boardArray = Array.from(location.state.board.gnameList);
-    console.log(boardArray);
+    // let boardArray = Array.from(location.state.board.gnameList);
+    // console.log(boardArray);
 
     const onChangeBcontent = (e)=>{
         setBoard({bno:location.state.board.bno,bcontent:e.target.value})
@@ -68,8 +68,8 @@ export default function BoardUpdate(props){
             console.log(response);
             if(response.data == 0){
                 alert('수정성공')
-                //window.location.href = "/board/submain/"+location.state.board.bno
-                nav(-1)//뒤로가기
+                window.location.href = "/board/sub/"+location.state.board.mnickname
+                //nav(-1)//뒤로가기
             }else if(response.data == 1){
                 alert('사진없음')
             }else if(response.data == 2){
@@ -80,7 +80,8 @@ export default function BoardUpdate(props){
     }
     
     const imgDelete = (e, i)=>{
-        console.log(i)
+        console.log(i);
+        console.log(imgPre.board);
         axios.delete("/conn/b/imgdelete.do",{params:{gname:i}})
         .then(r=>{
             console.log(r);
@@ -91,13 +92,9 @@ export default function BoardUpdate(props){
                 alert("삭제실패")
             )
         })
+
     }
 
-    const nImgDelete = (e,i) => {
-        alert(i);
-        imgPre.nImg.splice(i,1);
-        setImgPre({...imgPre})
-    }
 
     return(<>
         <section id="container">
@@ -113,7 +110,11 @@ export default function BoardUpdate(props){
                         console.log(i);
                         return(<>
                             <img src={i.indexOf("http")<=0?"/img/boardimg/"+i:i} value={gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
-                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>
+                            {
+                                i.indexOf("http")<=0 &&
+                                <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>
+                            }
+                            
                         </>)
                     })
                 }
