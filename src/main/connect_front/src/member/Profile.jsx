@@ -293,7 +293,7 @@ export default function Profile(){
                     aria-describedby="modal-modal-description"
                     >
                         <Box sx={style}>
-                        <Carousel  sx={{ width: '100%', height:'300px'}} autoPlay={false}>
+                        <Carousel sx={{ width: '100%', height:'300px'}} autoPlay={false}>
                         {
                             profileData.birthBoardList.map((birthboard )=>{
                                 console.log(birthboard)
