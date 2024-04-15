@@ -2,10 +2,12 @@ import { useState } from 'react';
 import '../css/board.css'
 import axios from 'axios';
 import Carousel from "react-material-ui-carousel";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export default function BoardUpdate(props){
+
+    const nav = useNavigate();
 
     const location = useLocation();
     console.log(location.state.board);
@@ -22,7 +24,6 @@ export default function BoardUpdate(props){
 
     const [imgPre, setImgPre] = useState({
         board : board.gnameList,
-        nImg : []
     });
     console.log(imgPre);
 
@@ -42,7 +43,7 @@ export default function BoardUpdate(props){
         console.log(imgArray);
         imgArray.forEach((i) => {
             console.log(i)
-            imgPre.nImg.push(URL.createObjectURL(i));
+            imgPre.board.push(URL.createObjectURL(i));
             console.log(imgPre);
         });
         setImgPre({...imgPre});
@@ -57,16 +58,20 @@ export default function BoardUpdate(props){
         const contentFormData = new FormData(contentForm);
         const bno = board.bno
 
-        //contentFormData.set("board",board)
+        contentFormData.set("bno",board.bno)
+        contentFormData.set("bcontent",board.bcontent)
 
-        console.log(contentFormData); 
+        console.log(board.bno); 
 
-        axios.put("/conn/b/put.do", contentFormData,{bno:bno})
+        axios.put("/conn/b/put.do", contentFormData)
         .then(response => {
             console.log(response);
-            if(response.data == 1){
+            if(response.data == 0){
                 alert('수정성공')
-                //window.location.href = '/board/myboard'
+                //window.location.href = "/board/submain/"+location.state.board.bno
+                nav(-1)//뒤로가기
+            }else if(response.data == 1){
+                alert('사진없음')
             }else if(response.data == 2){
                 alert('수정실패')
             }
@@ -107,23 +112,12 @@ export default function BoardUpdate(props){
                     imgPre.board.map((i)=>{
                         console.log(i);
                         return(<>
-                            <img src={"/img/boardimg/"+i} value={gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
-                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>         
+                            <img src={i.indexOf("http")<=0?"/img/boardimg/"+i:i} value={gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>
                         </>)
                     })
                 }
-                {/* {
-                    imgPre.nImg.length!=0 &&
-                    imgPre.nImg.map((i)=>{
-                        console.log(i);
-                        return(<>
-                            <img src={i} value={gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
-                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>nImgDelete(e, i)} >삭제</button>         
-                        </>)
-                    })
-                } */}
                 </Carousel>
-
                 </div>
                 
 
