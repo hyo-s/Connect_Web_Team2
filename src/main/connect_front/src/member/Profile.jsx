@@ -147,8 +147,38 @@ export default function Profile(){
         })
     }
 
+    // 생일 날짜 조건식
+    const today = new Date();
+    const birthdayInfo = profileData.user.mbirth;
+    console.log( birthdayInfo )
+    // 생일 정보가 있고, 생일이 오늘이면
+    const isBirthdayToday = birthdayInfo && new Date(birthdayInfo).getDate() === today.getDate() && new Date(birthdayInfo).getMonth() === today.getMonth();
+    console.log( isBirthdayToday )
+    // 생일 정보가 있고, 생일이 일주일(한달) 이내이면
 
-    // 
+    const oldDate = new Date(birthdayInfo);
+        console.log( oldDate.getDate() );
+    const oldDateDay = oldDate.getDate();
+
+    const newDate = new Date();
+        console.log( newDate.getDate() );
+    const newDateDay = newDate.getDate()
+
+    // let diff = Math.abs(newDate.getTime() - oldDate.getTime());
+    // diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    // console.log(diff);
+
+    const isBirthdayWithinWeek = oldDateDay - newDateDay <= 7 && oldDateDay - newDateDay > 0 ;
+    console.log( isBirthdayToday );
+
+
+
+    // const isBirthdayWithinWeek = birthdayInfo && today.getTime() < new Date(birthdayInfo+"T00:00:00").getTime() + 7 * 24 * 60 * 60 * 1000;
+    // console.log( today.getTime() )
+    // console.log( new Date(birthdayInfo+"T00:00:00").getTime() );
+
+    // console.log( isBirthdayWithinWeek )
+
 
     // 생일카드 쓰기
     const submit =()=>{
@@ -186,17 +216,6 @@ export default function Profile(){
 
     console.log(profileData)
     
-    // 생일 날짜 조건식
-    const today = new Date();
-    const birthdayInfo = profileData.user.mbirth;
-
-    // 생일 정보가 있고, 생일이 오늘이면
-    const isBirthdayToday = birthdayInfo && new Date(birthdayInfo).getDate() === today.getDate() && new Date(birthdayInfo).getMonth() === today.getMonth();
-
-    // 생일 정보가 있고, 생일이 일주일 이내이면
-    const isBirthdayWithinWeek = birthdayInfo && today.getTime() < new Date(birthdayInfo).getTime() + 7 * 24 * 60 * 60 * 1000;
-
-
 
     //채팅클릭
     const onChat = () =>{
