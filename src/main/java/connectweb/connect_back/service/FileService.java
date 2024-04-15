@@ -37,6 +37,8 @@ public class FileService {
         return filename;
     }
     public String FileUpload2(MultipartFile multipartFile){
+        System.out.println("multipartFile.isEmpty() = " + multipartFile.isEmpty());
+
         String uuid= UUID.randomUUID().toString();
         String filename =uuid+"_"+multipartFile.getOriginalFilename().replace("_","-");
         File file= new File(buildUpload2+filename);

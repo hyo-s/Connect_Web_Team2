@@ -43,6 +43,8 @@ export default function BoardWrite(props){
             if(response.data == 1){
                 alert('등록성공')
                 window.location.href = '/board/sub/'+mnickname
+            }else if(response.data == 0){
+                alert('사진없음')
             }else if(response.data == 2){
                 alert('등록실패')
             }

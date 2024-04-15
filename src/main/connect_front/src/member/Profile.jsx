@@ -111,7 +111,7 @@ export default function Profile(){
     },[mnickname,profileData.followChange])
 
     const onClickImg = (board) => {
-
+        console.log(board);
         navigate(`../board/submain/${board.bno}`, { state: { myBoard:profileData.myBoard, r: board , profilename : profileData.user.mimg}});
     };
 
