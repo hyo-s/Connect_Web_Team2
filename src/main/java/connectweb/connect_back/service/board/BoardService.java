@@ -109,7 +109,7 @@ public class BoardService {
         return boardDtoList;*/
     }
 
-    public List<GalleryDto> dogetBoardImg(int bno){
+  /*  public List<GalleryDto> dogetBoardImg(int bno){
         List<Map<Object,Object>> list = galleryEntityRepository.fineGallery(bno);
         List<GalleryDto> galleryDtoList = new ArrayList<>();
         list.forEach((img)->{
@@ -120,7 +120,7 @@ public class BoardService {
             galleryDtoList.add(galleryDto);
         });
         return galleryDtoList;
-    }
+    }*/
 
     //개별피드출력
     public List<BoardDto> getMyBoardList(String mnickname){

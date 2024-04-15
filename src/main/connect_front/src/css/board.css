@@ -91,6 +91,9 @@
     padding: 20px 0;
     margin: 20px auto;
     border: 1px solid red;
-    height: 110px;
+   
+}
+.rcontent{
+    height: 130px;
     overflow-y: auto;
 }
