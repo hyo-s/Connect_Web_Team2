@@ -35,8 +35,7 @@ public class BirthBoardController {
     // 게시글 삭제
     @DeleteMapping("/delete.do")
     public boolean doDeleteBirthBoard(int bbno){
-        System.out.println("mno = " + bbno);
-        System.out.println("BirthBoardController.doDeleteBirthBoard");
+        System.out.println("controllerbbno = " + bbno);
         return birthBoardService.doDeleteBirthBoard(bbno);
     }
 }

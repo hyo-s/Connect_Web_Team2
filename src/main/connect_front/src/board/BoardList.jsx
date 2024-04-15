@@ -23,11 +23,7 @@ export default function BoardList(props){
  
      },[])
 
-     const [replyList, setReplyList] = useState([]);
-
-     const handleReplyAdded = (newReply) => {
-         setReplyList([...replyList, newReply]);
-     };
+  
     
      
      return(<>
@@ -67,8 +63,8 @@ export default function BoardList(props){
                                         </ul>
                                     </div>
                                     <div className="replyBox" >
-                                        <ReplyView board={board} look={1} />
-                                        <Reply board={board} onReplyAdded={handleReplyAdded}/>
+                                        {/* <ReplyView board={board} look={1} /> */}
+                                        <Reply board={board}/>
                                     </div>
                                 </div>
                             </section>
