@@ -41,7 +41,7 @@ export default function BoardList(props){
                                         </div>
                                         <ul>
                                             <li>
-                                                <Carousel sx={{ width: '100%', height:'300px'}}>                
+                                                <Carousel sx={{ width: '100%', height:'370px'}}>                
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
