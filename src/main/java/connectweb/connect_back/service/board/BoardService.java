@@ -106,29 +106,8 @@ public class BoardService {
         System.out.println("boardDtoList = " + boardDtoList);
 
         return boardDtoList;
-       /* return boardEntityRepository.findAll().stream().map(((boardEntity)->{
-            return boardEntity.toDto();
-        })).collect(Collectors.toList());*/
-        /*List<BoardEntity> entityList = boardEntityRepository.findAll();
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        entityList.forEach( (data)->{
-            boardDtoList.add( data.toDto() );
-        } );
-        return boardDtoList;*/
-    }
 
-  /*  public List<GalleryDto> dogetBoardImg(int bno){
-        List<Map<Object,Object>> list = galleryEntityRepository.fineGallery(bno);
-        List<GalleryDto> galleryDtoList = new ArrayList<>();
-        list.forEach((img)->{
-            GalleryDto galleryDto=GalleryDto.builder()
-                    .bno((Integer)img.get("bno"))
-                    .gname((String) img.get("gname"))
-                    .build();
-            galleryDtoList.add(galleryDto);
-        });
-        return galleryDtoList;
-    }*/
+    }
 
     //개별피드출력
     public List<BoardDto> getMyBoardList(String mnickname){
