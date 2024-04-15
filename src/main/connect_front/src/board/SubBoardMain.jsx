@@ -5,13 +5,14 @@ import BoardList from './BoardList.jsx';
 import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Carousel from "react-material-ui-carousel";
-import ReplyView from "./ReplyList";
+import Like from './Like.jsx';
+import { LoginInfoContext } from "../index/Index";
 
 export default function SubBaordMain(props){
 
     //로그인정보
-    //const {loginInfo} = useContext(LoginInfoContext);
-    //console.log(loginInfo);
+    const {loginInfo} = useContext(LoginInfoContext);
+    console.log(loginInfo);
 
     //보드정보
     const location = useLocation();
@@ -48,7 +49,7 @@ export default function SubBaordMain(props){
             })
     }
 
-    const r = location.state.myBoard.r;
+    const r = location.state.r;
     console.log(r);
 
     return(<>
@@ -57,21 +58,25 @@ export default function SubBaordMain(props){
             <div className="innerContainer">
                 <div className="content mainContent">
                     <div className="topInfo">
-                        <div>{location.state.r.cdate} </div>
-                        <div className="topImg"> <img src={'/img/mimg/'+location.state.r.profilename} /> </div>
-                        <p>{location.state.r.mnickname}</p>
-                        {
-
+                        {/* <div>{location.state.r.cdate} </div> */}
+                        <div className="topImg"> <img src={'/img/mimg/'+location.state.profilename} /> </div>
+                        <p>{r.mnickname}</p>
+                        {                       
+                            r.mnickname == loginInfo.mnickname &&
+                            <button onClick={()=>onUpdate(r)}>수정</button>
                         }
-                            <button onClick={()=>onUpdate(location.state.r)}>수정</button>
-                            <button onClick={()=>onDelete(location.state.r.bno, location.state.r.mnickname)}>삭제</button>
+                        {
+                            r.mnickname == loginInfo.mnickname &&
+                            <button onClick={()=>onDelete(r.bno, r.mnickname)}>삭제</button>
+                        }                          
+                            
 
                     </div>
                     <ul>
                         <li data-interval="false">
                             <Carousel autoPlay={false}>
                                 {
-                                location.state.r.gnameList.map((img)=>{
+                                r.gnameList.map((img)=>{
                                     return(<>
                                         <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
                                     </>)
@@ -84,17 +89,16 @@ export default function SubBaordMain(props){
                 <div className="btmBox">
                     <ul>
                         <li>
-                            {/* <Like/> */}
+                            <Like bno={r.bno}/>
                         </li>
                     </ul>
                     <ul className="btmInfo">
-                        <li><a href="#">{location.state.r.mnickname}</a></li>
-                        <li>{location.state.r.bcontent}</li>
+                        <li><a href="#">{r.mnickname}</a></li>
+                        <li>{r.bcontent}</li>   
                     </ul>
                 </div>
                 <div className="replyBox" >
-                    <ReplyView board={location.state.r} look={1} />
-                    <Reply board={location.state.r} />
+                    <Reply board={r} />
                 </div>
             </div>
         </section>

@@ -60,10 +60,5 @@ export default function Header(props){
                 </div>
             </div>
         </div>
-        <div className="header">
-            <ul>
-                <li><Link to="/member">멤버</Link></li>
-            </ul>
-        </div>
     </>)
 }

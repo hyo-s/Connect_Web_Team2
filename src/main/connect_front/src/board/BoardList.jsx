@@ -1,9 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Reply from "./Reply";
-import ReplyView from "./ReplyList";
 import Carousel from "react-material-ui-carousel";
 import Like from "./Like";
+import { Link  } from 'react-router-dom';
 
 export default function BoardList(props){
    
@@ -23,11 +23,7 @@ export default function BoardList(props){
  
      },[])
 
-     const [replyList, setReplyList] = useState([]);
-
-     const handleReplyAdded = (newReply) => {
-         setReplyList([...replyList, newReply]);
-     };
+  
     
      
      return(<>
@@ -40,16 +36,16 @@ export default function BoardList(props){
                                     <div className="content mainContent">
                                         <div className="topInfo">
                                             <div className="topImg"> <img src={'/img/mimg/'+board.profilename} /> </div>
-                                            <p>{board.mnickname}</p>
+                                            <Link to={"/board/sub/"+board.mnickname}><div key={board.mno}>{board.mnickname}</div></Link>
                                             <div>{board.cdate} </div>
                                         </div>
                                         <ul>
                                             <li>
-                                                <Carousel>                
+                                                <Carousel sx={{ width: '100%', height:'370px'}}>                
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
-                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:350, objectFit:"cover"}}/>
                                                         </>)
                                                     })
                                                 }
@@ -62,13 +58,13 @@ export default function BoardList(props){
                                             <Like bno={board.bno}/>
                                         </ul>
                                         <ul className="btmInfo">
-                                            <li><a href="#">{board.mnickname}</a></li>
+                                            <Link to={"/board/sub/"+board.mnickname}><div key={board.mno}>{board.mnickname}</div></Link>
                                             <li>{board.bcontent}</li>
                                         </ul>
                                     </div>
                                     <div className="replyBox" >
-                                        <ReplyView board={board} look={1} />
-                                        <Reply board={board} onReplyAdded={handleReplyAdded}/>
+                                        {/* <ReplyView board={board} look={1} /> */}
+                                        <Reply board={board}/>
                                     </div>
                                 </div>
                             </section>
@@ -78,31 +74,4 @@ export default function BoardList(props){
          }
 
      </>)
-}
-
-export function BoardImg (props){
-    const [imgList , setImgList]=useState( [] );
-    console.log(props);
-
-    console.log(imgList);
-    useEffect(()=>{
-        axios.get('/conn/b/img/get.do',{params:props}) // bno 매개변수로 넘겨줌
-        .then((r)=> {
-            console.log(r);
-            setImgList(r.data);
-        })
-        .catch(error=>{console.log(error)})
-
-    },[])
-
-    return(<>
-            {
-                imgList.map((img)=>{
-                    return(<>
-                        <img src={img} style={{width:"100%", height:400, objectFit:"cover"}}/>
-                    </>)
-                })
-            }
-    </>)
-
 }

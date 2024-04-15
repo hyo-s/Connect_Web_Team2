@@ -20,7 +20,7 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-
+    //게시글등록
     @PostMapping("/post.do")
     public int doPostBoard( BoardDto boardDto){
         System.out.println("boardDto = " + boardDto);
@@ -31,10 +31,7 @@ public class BoardController {
     public List<BoardDto> doGetBoard(){
         return boardService.doGetBoard();
     }
-    @GetMapping("/img/get.do")
-    public List<GalleryDto> dogetBoardImg(int bno){
-        return boardService.dogetBoardImg(bno);
-    }
+
 
     //개별피드출력
     @GetMapping("/myboard/get.do")
@@ -45,7 +42,7 @@ public class BoardController {
 
     //게시글수정
     @PutMapping("/put.do")
-    public int doPutBoard(@RequestBody BoardDto boardDto){
+    public int doPutBoard(BoardDto boardDto){
         System.out.println("BoardController.doPutBoard");
         System.out.println("boardDto = " + boardDto);
         return boardService.doPutBoard(boardDto);

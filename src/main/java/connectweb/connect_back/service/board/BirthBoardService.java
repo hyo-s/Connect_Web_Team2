@@ -1,8 +1,10 @@
 package connectweb.connect_back.service.board;
 
 import connectweb.connect_back.model.dto.BirthBoardDto;
+import connectweb.connect_back.model.dto.LoginDto;
 import connectweb.connect_back.model.dto.MemberDto;
 import connectweb.connect_back.model.entity.board.BirthBoardEntity;
+import connectweb.connect_back.model.entity.member.MemberEntity;
 import connectweb.connect_back.model.repository.board.BirthBoardEntityRepository;
 import connectweb.connect_back.model.repository.member.MemberEntityRepository;
 import connectweb.connect_back.service.FileService;
@@ -27,25 +29,12 @@ public class BirthBoardService {
     @Autowired
     private FileService fileService;
 
-
-
     // 1. 글쓰기
     @Transactional
     public boolean postBirthBoard(BirthBoardDto birthBoardDto){
-//        MemberDto loginDto = memberService.loginInfo();
-//        if(loginDto == null)
-//            return false;
-//
-//            // 1. 로그인된 회원 엔티티 찾기
-//            Optional<MemberEntity> optionalMemberEntity = memberEntityRepository.findById(loginDto.getMno());
-//
-//            // 2. 찾은 엔티티가 존재하지 않으면
-//            if(!optionalMemberEntity.isPresent()) return false;
-//
-//            //3. 엔티티 꺼내기
-//            MemberEntity memberEntity = optionalMemberEntity.get();
-
-
+        MemberDto loginDto = memberService.loginInfo();
+        if(loginDto == null)
+            return false;
 
         // 1. 첨부 파일 처리
         // 첨부파일이 존재하면
@@ -53,6 +42,7 @@ public class BirthBoardService {
             String file = fileService.FileUpload3(birthBoardDto.getUploadList().get(i));
             birthBoardDto.setBbimg(file);
         }
+
         // 글쓰기
         BirthBoardEntity saverBoard = birthBoardEntityRepository.save(birthBoardDto.birthEntity());
 
@@ -95,15 +85,8 @@ public class BirthBoardService {
 
     // 게시글 삭제
     public boolean doDeleteBirthBoard(int bbno){
-        System.out.println("bbno = " + bbno);
-        MemberDto loginDto = memberService.loginInfo();
-
-        Optional<BirthBoardEntity> optionalBirthBoardEntity = birthBoardEntityRepository.findById(bbno);
-        System.out.println("BirthBoardService.doDeleteBirthBoard");
-        if(optionalBirthBoardEntity.get().getMemberEntity().getMno() == loginDto.getMno()){
-            birthBoardEntityRepository.deleteById(bbno);
-            return true;
-        }
-        return false;
+        birthBoardEntityRepository.deleteById(bbno);
+        System.out.println("servicedeletebbno = " + bbno);
+        return true;
     }
 }

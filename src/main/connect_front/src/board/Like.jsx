@@ -48,6 +48,7 @@ export default function Like(props){
         .then(response=>{
             console.log(response)
             setLikeOnOff(false);
+            getLike();
         })
         .catch(error=>{console.log(error)})
     }
@@ -55,9 +56,10 @@ export default function Like(props){
     console.log(likeOnOff);
 
     return(<>
-        <li>
-            {likeOnOff?<button onClick={onLikeDelete}>♡</button>:<button onClick={onLikePost}>♥</button>} 
+        <li className="likeBtn">  
+            {likeOnOff?<button onClick={onLikeDelete}>Like ♥</button>:<button onClick={onLikePost}>Like ♡</button>} 
+            <span>{likeValue}</span>
         </li>
-        <li>{likeValue}</li>
+       
     </>)
 }

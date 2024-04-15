@@ -2,6 +2,7 @@ package connectweb.connect_back.model.dto;
 
 import connectweb.connect_back.model.entity.BaseTime;
 import connectweb.connect_back.model.entity.board.BirthBoardEntity;
+import connectweb.connect_back.model.entity.member.MemberEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
@@ -21,6 +22,7 @@ import java.util.List;
 public class BirthBoardDto extends BaseTimeDto{
     private int bbno;
     private String bbcontent;
+    private int mno;
 
 
     // 1. 등록용 게시물 이미지 필드
@@ -33,6 +35,7 @@ public class BirthBoardDto extends BaseTimeDto{
                 .bbno(this.bbno)
                 .bbcontent(this.bbcontent)
                 .bbimg(this.bbimg)
+                .memberEntity(MemberEntity.builder().mno(this.mno).build())
                 .build();
     }
 }

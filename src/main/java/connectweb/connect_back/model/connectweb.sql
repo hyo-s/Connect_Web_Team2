@@ -10,7 +10,7 @@ select * from reply;
 select * from follow;
 select * from boardlike;
 
-select lno from boardlike where mno = 1 and bno = 2;
+select lno from boardlike where mno = 1 and bno = 1;
 
 update member set mname = "유재석", mnickname = "aac", memail = "aaa@aab.com", mphone = "010-1111-1112" where mno=1;
 

@@ -41,6 +41,7 @@ public class MemberController {
 // ======================== [회원리스트] ======================== //
     @GetMapping("/list/get.do")
     public List<MemberDto> memberList (String search){
+        System.out.println("search = " + search);
         return memberService.memberList(search);
     }
 // ======================== [개인페이지 출력할 회원정보] ======================== //
