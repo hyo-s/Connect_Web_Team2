@@ -48,7 +48,7 @@ export default function Login(props){
                                 <Input type="text" placeholder='비밀번호' name='mpw'/>
                             </div>
                             <div>
-                                <Button type="button" color='warning' fullWidth onClick={login}>로그인</Button>
+                                <Button type="button" color='warning' className='logBtn' fullWidth onClick={login}>로그인</Button>
                             </div>
                             <div className='signUp'>
                                 <Link to="/member/signup">회원가입</Link>

@@ -38,3 +38,7 @@
     width: 100%;
     border-radius: 50%;
 }
+
+.logBtn {
+    background-color: #FAA332 !important;
+}
