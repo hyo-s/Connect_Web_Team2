@@ -55,13 +55,13 @@ export default function BoardUpdate(props){
         console.log(board);
         const contentForm = document.querySelector(".innerContainer");
         const contentFormData = new FormData(contentForm);
- 
+        const bno = board.bno
 
-        contentFormData.set("board",board)
+        //contentFormData.set("board",board)
 
         console.log(contentFormData); 
 
-        axios.put("/conn/b/put.do", contentFormData)
+        axios.put("/conn/b/put.do", contentFormData,{bno:bno})
         .then(response => {
             console.log(response);
             if(response.data == 1){
@@ -88,6 +88,12 @@ export default function BoardUpdate(props){
         })
     }
 
+    const nImgDelete = (e,i) => {
+        alert(i);
+        imgPre.nImg.splice(i,1);
+        setImgPre({...imgPre})
+    }
+
     return(<>
         <section id="container">
             <form className="innerContainer">
@@ -105,17 +111,17 @@ export default function BoardUpdate(props){
                             <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>         
                         </>)
                     })
-                }                
-                {
+                }
+                {/* {
                     imgPre.nImg.length!=0 &&
                     imgPre.nImg.map((i)=>{
                         console.log(i);
                         return(<>
                             <img src={i} value={gnameList} style={{width:"100%", height:400, objectFit:"cover"}}/>
-                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>imgDelete(e, i)} >삭제</button>         
+                            <button style={{marginLeft: 195}}type='button' onClick={(e)=>nImgDelete(e, i)} >삭제</button>         
                         </>)
                     })
-                }
+                } */}
                 </Carousel>
 
                 </div>

@@ -42,7 +42,7 @@ export default function BoardWrite(props){
             console.log(response);
             if(response.data == 1){
                 alert('등록성공')
-                window.location.href = '/board/sub/'+{mnickname}
+                window.location.href = '/board/sub/'+mnickname
             }else if(response.data == 2){
                 alert('등록실패')
             }
