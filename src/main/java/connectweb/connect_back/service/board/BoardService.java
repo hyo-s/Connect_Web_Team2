@@ -41,7 +41,7 @@ public class BoardService {
     @Autowired
     MemberService memberService;
 
-
+    int uploadBno = 0;
     //게시물등록(0은 실패 1은 성공)
     @Transactional
     public int doPostBoard(BoardDto boardDto){
@@ -49,27 +49,35 @@ public class BoardService {
         MemberEntity memberEntity = memberService.loginEntity();
         if(memberEntity == null) return 2;
 
-        //글쓰기
-        BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
-
-        boardEntity.setMemberEntity(memberEntity);
-        System.out.println("boardDto = " + boardDto);
 
         //피드이미지----------------------------------------
         boardDto.getGfile().forEach((uploadFile)->{
-            String fileName = fileService.FileUpload2(uploadFile);
-            System.out.println("fileName = " + fileName);
 
-            GalleryEntity galleryEntity = GalleryEntity.builder()
-                    .gname(fileName)
-                    .boardEntity(boardEntity)
-                    .build();
+            System.out.println("uploadFile.isEmpty() = " + uploadFile.isEmpty());
+            if (!uploadFile.isEmpty()) {
+                //글쓰기
+                BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
 
-            galleryEntityRepository.save(galleryEntity);
-            System.out.println("fileName = " + fileName);
+                boardEntity.setMemberEntity(memberEntity);
+                System.out.println("boardDto = " + boardDto);
+
+                String fileName = fileService.FileUpload2(uploadFile);
+                System.out.println("fileName = " + fileName);
+
+                GalleryEntity galleryEntity = GalleryEntity.builder()
+                        .gname(fileName)
+                        .boardEntity(boardEntity)
+                        .build();
+
+                galleryEntityRepository.save(galleryEntity);
+                uploadBno = galleryEntity.getBoardEntity().getBno();
+            }
             //------------------------------------------------
-            ;
+
         });
+        if (uploadBno == 0){
+            return 0;
+        }
         return 1;
     }
 
@@ -148,13 +156,17 @@ public class BoardService {
         boardEntity.setBcontent(boardDto.getBcontent());
 
         boardDto.getGfile().forEach((uploadFile)->{
-            String fileName = fileService.FileUpload2(uploadFile);
-            GalleryEntity galleryEntity = GalleryEntity.builder()
-                    .gname(fileName)
-                    .boardEntity(boardEntity)
-                    .build();
-            galleryEntityRepository.save(galleryEntity);
-            System.out.println("fileName = " + fileName);
+            System.out.println("uploadFile.isEmpty() = " + uploadFile.isEmpty());
+            if(!uploadFile.isEmpty()){
+                String fileName = fileService.FileUpload2(uploadFile);
+                GalleryEntity galleryEntity = GalleryEntity.builder()
+                        .gname(fileName)
+                        .boardEntity(boardEntity)
+                        .build();
+                galleryEntityRepository.save(galleryEntity);
+                System.out.println("fileName = " + fileName);
+            }
+            
         });
 
         if(galleryEntityRepository.fineGallery(boardDto.getBno()).isEmpty()){
@@ -171,7 +183,7 @@ public class BoardService {
         int gno = galleryEntityRepository.findGno(gname);
         if(gno != 0){
             galleryEntityRepository.deleteById(gno);
-            System.out.println("galleryEntityRepository = " + galleryEntityRepository.fineGallery(2));
+            
             return true;
         }
 
