@@ -41,8 +41,9 @@ export default function Reply(props) {
         axios.post("/conn/b/r/post.do", replyFormData)
             .then(response => {
                 if (response) {
-                    alert('등록 성공');
+                    alert('성공');
                     setRcontent('');
+                    setEditingCommentId(null)
 
                     axios.get('/conn/b/r/get.do', { params: { bno: props.board.bno } })
                         .then((res) => {
@@ -90,8 +91,8 @@ export default function Reply(props) {
 
     const replyBtn = (rno,rcontent)=>{
                 return( <>
-                    <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
                     <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
+                    <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
                 </>)
     }
     
