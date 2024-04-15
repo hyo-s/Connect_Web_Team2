@@ -40,7 +40,7 @@ export default function Footer(props){
 
     return (
     <div className='footer'>
-        <BottomNavigation sx={{ width: 500 }} value={value} onChange={handleChange}>
+        <BottomNavigation value={value} onChange={handleChange}>
             <Link to='/conn'>
                 <BottomNavigationAction label="Home" value="recents" icon={<HomeIcon />}/>
             </Link>

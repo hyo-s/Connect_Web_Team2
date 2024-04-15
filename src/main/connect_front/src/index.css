@@ -32,8 +32,8 @@ p {padding: 0; margin: 0;}
 
 /* 레이아웃 (width,height 가운데 정렬) */
 #container {
-    width: 480px;
-    height: 800px;
+    width: 100vw;
+    height: 100vh;
     margin: 0 auto;
     border: 1px solid rgb(219, 219, 219);
     display: flex;
@@ -45,10 +45,16 @@ p {padding: 0; margin: 0;}
     margin: 0 auto;
 }
 .header {
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-    border: 1px solid rgb(219, 219, 219);;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  justify-content: space-between;
+  right: 0px;
+  background-color: #ffffff;
+  z-index: 9999;
+  width: 100vw;
 }
 .headerImg img{
   width: 100px;
@@ -76,7 +82,13 @@ p {padding: 0; margin: 0;}
     margin-left: 10px;
 }
 .footer{
-    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: #ffffff;
     border: 1px solid rgb(219, 219, 219);
     text-align: center;
+    z-index: 9999;
+    width: 100vw;
 }
