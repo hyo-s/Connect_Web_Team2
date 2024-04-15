@@ -43,7 +43,8 @@ export default function Header(props){
                 <Link to="/conn"><img src="/img/connect_logo.png"/></Link>
             </div>
             <div>
-                <Input 
+                <Input
+                    size='small'
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)} 
                     startDecorator={<SearchIcon />} 
