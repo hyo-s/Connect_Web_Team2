@@ -45,10 +45,10 @@ export default function Login(props){
                                 <Input type="text" placeholder='아이디' name='mid' />
                             </div>
                             <div>
-                                <Input type="text" placeholder='비밀번호' name='mpw'/>
+                                <Input style={{marginTop : 10}} type="text" placeholder='비밀번호' name='mpw'/>
                             </div>
                             <div>
-                                <Button type="button" color='warning' className='logBtn' fullWidth onClick={login}>로그인</Button>
+                                <Button style={{backgroundColor : '#1B4288', padding : 10}} type="button" color='warning' className='logBtn' fullWidth onClick={login}>로그인</Button>
                             </div>
                             <div className='signUp'>
                                 <Link to="/member/signup">회원가입</Link>

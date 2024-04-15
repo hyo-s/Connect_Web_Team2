@@ -108,11 +108,11 @@ export default function Profile(){
             }
         }
         data();
-    },[mnickname,profileData.followChange])
+    },[mnickname])
 
     const onClickImg = (board) => {
 
-        navigate(`../baord/submain`, { state: { myBoard:profileData.myBoard, r: board , profilename : profileData.user.mimg}});
+        navigate(`../board/submain/${board.bno}`, { state: { myBoard:profileData.myBoard, r: board , profilename : profileData.user.mimg}});
     };
 
     if (profileData.loading) {
@@ -149,10 +149,12 @@ export default function Profile(){
     const today = new Date();
     const birthdayInfo = profileData.user.mbirth;
     console.log( birthdayInfo )
+
     // 생일 정보가 있고, 생일이 오늘이면
     const isBirthdayToday = birthdayInfo && new Date(birthdayInfo).getDate() === today.getDate() && new Date(birthdayInfo).getMonth() === today.getMonth();
     console.log( isBirthdayToday )
-    // 생일 정보가 있고, 생일이 일주일(한달) 이내이면
+
+    // 생일 정보가 있고, 생일이 일주일 이내이면
 
     const oldDate = new Date(birthdayInfo);
         console.log( oldDate.getDate() );
@@ -162,14 +164,12 @@ export default function Profile(){
         console.log( newDate.getDate() );
     const newDateDay = newDate.getDate()
 
-    // let diff = Math.abs(newDate.getTime() - oldDate.getTime());
-    // diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    // console.log(diff);
-
     const isBirthdayWithinWeek = oldDateDay - newDateDay <= 7 && oldDateDay - newDateDay > 0 ;
     console.log( isBirthdayToday );
 
-
+    // let diff = Math.abs(newDate.getTime() - oldDate.getTime());
+    // diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    // console.log(diff);
 
     // const isBirthdayWithinWeek = birthdayInfo && today.getTime() < new Date(birthdayInfo+"T00:00:00").getTime() + 7 * 24 * 60 * 60 * 1000;
     // console.log( today.getTime() )
@@ -190,6 +190,7 @@ export default function Profile(){
             console.log(r);
             if(r){
                 alert("게시글 등록 성공")
+                window.location.href = '/' 
             }else{
                 alert("게시글 등록 실패")
             }
@@ -199,15 +200,11 @@ export default function Profile(){
 
     // 생일카드 삭제
     const delteBtn = (bbno)=>{
-        console.log(delteBtn);
+        console.log(bbno);
         axios.delete('/birthboard/delete.do',{params : {bbno:bbno}})
         .then((r)=>{
             console.log(r);
-            if(r){
-                alert('삭제 성공')
-            }else{
-                alert('삭제 실패')
-            }
+            window.location.href = "/board/sub/"+profileData.user.mnickname;
         })
         .catch(error=>{console.log(error)})
     }
@@ -296,15 +293,16 @@ export default function Profile(){
                     aria-describedby="modal-modal-description"
                     >
                         <Box sx={style}>
-                        <Carousel  sx={{ width: '100%', height:'300px'}}  autoPlay={false}>
+                        <Carousel  sx={{ width: '100%', height:'300px'}} autoPlay={false}>
                         {
-                            profileData.birthBoardList.map((bbno, birthboard)=>{
-                                console.log(birthboard.bimglist)
-                                return(<>
-                                        <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={(e)=>delteBtn(bbno)}>삭제</button>
-                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
+                            profileData.birthBoardList.map((birthboard )=>{
+                                console.log(birthboard)
+                                console.log(profileData.birthBoardList)
+                                return(<div >
+                                        <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={()=>delteBtn(birthboard.bbno)}>삭제</button>
+                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
 
-                                </>)  // return 2
+                                </div>)  // return 2
                             })
                         }
                          </Carousel>
