@@ -1,6 +1,6 @@
 insert into member(mname, mphone, mid, mnickname, mpw, memail, mbirth, mimg) values
 ('유재석','010-1111-1111','aaa','aaa','aaa','aaa@aaa.com','980415', 'default.png'),
-('강호동','010-2222-2222','bbb','bbb','bbb','bbb@bbb.com','990425', 'default.png'),
+('강호동','010-2222-2222','bbb','bbb','bbb','bbb@bbb.com','990417', 'default.png'),
 ('신동엽','010-3333-3333','ccc','ccc','ccc','ccc@ccc.com','960303', 'default.png'),
 ('서장훈','010-4444-4444','ddd','ddd','ddd','ddd@ddd.com','970404', 'default.png');
 
@@ -44,4 +44,8 @@ insert into birthboard(bbcontent, mno, cdate) values
 ("내용입니다1", 1, '2024-04-09');
 insert into birthboard(bbcontent, mno, cdate) values
 ("내용입니다2", 2, '2024-04-09');
+insert into birthboard(bbcontent, mno, cdate) values
+("내용입니다3", 3, '2024-04-09');
+insert into birthboard(bbcontent, mno, cdate) values
+("내용입니다4", 4, '2024-04-09');
 
