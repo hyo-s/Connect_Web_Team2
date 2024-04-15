@@ -7,12 +7,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Carousel from "react-material-ui-carousel";
 import ReplyView from "./ReplyList";
 import Like from './Like.jsx';
+import { LoginInfoContext } from "../index/Index";
 
 export default function SubBaordMain(props){
 
     //로그인정보
-    //const {loginInfo} = useContext(LoginInfoContext);
-    //console.log(loginInfo);
+    const {loginInfo} = useContext(LoginInfoContext);
+    console.log(loginInfo);
 
     //보드정보
     const location = useLocation();
@@ -49,7 +50,7 @@ export default function SubBaordMain(props){
             })
     }
 
-    const r = location.state.myBoard.r;
+    const r = location.state.r;
     console.log(r);
 
     return(<>
@@ -62,10 +63,18 @@ export default function SubBaordMain(props){
                         <div className="topImg"> <img src={'/img/mimg/'+location.state.profilename} /> </div>
                         <p>{location.state.r.mnickname}</p>
                         {
-
-                        }
+                       
+                            location.state.r.mnickname == loginInfo.mnickname &&
                             <button onClick={()=>onUpdate(location.state.r)}>수정</button>
+                        }
+
+                        {
+                            location.state.r.mnickname == loginInfo.mnickname &&
                             <button onClick={()=>onDelete(location.state.r.bno, location.state.r.mnickname)}>삭제</button>
+                        }
+
+                            
+                            
 
                     </div>
                     <ul>
@@ -85,7 +94,7 @@ export default function SubBaordMain(props){
                 <div className="btmBox">
                     <ul>
                         <li>
-                            <Like />
+                            <Like bno={location.state.r.bno}/>
                         </li>
                     </ul>
                     <ul className="btmInfo">

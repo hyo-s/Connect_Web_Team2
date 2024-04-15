@@ -107,7 +107,7 @@ export default function Profile(){
 
     const onClickImg = (board) => {
 
-        navigate(`../baord/submain`, { state: { myBoard:profileData.myBoard, r: board , profilename : profileData.user.mimg}});
+        navigate(`../board/submain/${board.bno}`, { state: { myBoard:profileData.myBoard, r: board , profilename : profileData.user.mimg}});
     };
 
     if (profileData.loading) {
