@@ -46,7 +46,6 @@
 //             <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
 //             <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
 //         </>)
-       
 //     }
 //     const num=(replyList.length - 1);
     
