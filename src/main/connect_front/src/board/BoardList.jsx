@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Reply from "./Reply";
 import Carousel from "react-material-ui-carousel";
 import Like from "./Like";
+import { Link  } from 'react-router-dom';
 
 export default function BoardList(props){
    
@@ -35,7 +36,7 @@ export default function BoardList(props){
                                     <div className="content mainContent">
                                         <div className="topInfo">
                                             <div className="topImg"> <img src={'/img/mimg/'+board.profilename} /> </div>
-                                            <p>{board.mnickname}</p>
+                                            <Link to={"/board/sub/"+board.mnickname}><div key={board.mno}>{board.mnickname}</div></Link>
                                             <div>{board.cdate} </div>
                                         </div>
                                         <ul>
@@ -57,7 +58,7 @@ export default function BoardList(props){
                                             <Like bno={board.bno}/>
                                         </ul>
                                         <ul className="btmInfo">
-                                            <li><a href="#">{board.mnickname}</a></li>
+                                            <Link to={"/board/sub/"+board.mnickname}><div key={board.mno}>{board.mnickname}</div></Link>
                                             <li>{board.bcontent}</li>
                                         </ul>
                                     </div>
@@ -74,4 +75,3 @@ export default function BoardList(props){
 
      </>)
 }
-    

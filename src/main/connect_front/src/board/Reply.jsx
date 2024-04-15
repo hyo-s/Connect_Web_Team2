@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useRef, useState, useEffect } from "react";
 import { LoginInfoContext } from "../index/Index";
+import { Link  } from 'react-router-dom';
 
 export default function Reply(props) {
     const { loginInfo } = useContext(LoginInfoContext);
@@ -111,7 +112,7 @@ export default function Reply(props) {
                         <div key={index}>
                             {(index !== replyList.length - 1) && ( // 마지막 댓글이 아닌 경우에만 출력
                                 <>
-                                    <div>{reply.mnickname}</div>
+                                    <Link to={"/board/sub/"+reply.mnickname}><div key={reply.mno}>{reply.mnickname}</div></Link>
                                     <p>{reply.rcontent}</p>
                                     {loginInfo.mno == reply.mno &&
                                         replyBtn(reply.rno, reply.rcontent)
@@ -125,7 +126,7 @@ export default function Reply(props) {
 
             {replyList.length > 0 && (
                 <div onClick={toggleComments}>
-                    <div>{length.mnickname}</div>
+                    <Link to={"/board/sub/"+length.mnickname}><div key={length.mno}>{length.mnickname}</div></Link>
                     <p>{length.rcontent}</p>
                     {loginInfo.mno == length.mno &&
                         replyBtn(length.rno, length.rcontent)
