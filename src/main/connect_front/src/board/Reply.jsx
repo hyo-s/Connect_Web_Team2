@@ -6,12 +6,12 @@ export default function Reply(props) {
     const { loginInfo } = useContext(LoginInfoContext);
 
     const replyFormRef = useRef();
-    const [rcontent, setRcontent] = useState(props.rcontent || '');
     const [showAllComments, setShowAllComments] = useState(false); // 모든 댓글을 보여줄지 여부 상태
-    const [totalComments, setTotalComments] = useState(0); // 총 댓글 수
 
     const [replyList, setReplyList] = useState([]);
-
+    const [rcontent, setRcontent] = useState('');
+    const [editingCommentId, setEditingCommentId] = useState(null);
+    
     useEffect(() => {
         axios.get('/conn/b/r/get.do', { params: { bno: props.board.bno } })
             .then((r) => {
@@ -21,11 +21,22 @@ export default function Reply(props) {
                 console.log(error);
             });
     }, []);
+    
+    useEffect( ()=> {
+        // 1. 
+        let rcontent = document.querySelector('.rcontent')
+        rcontent.scrollTop = rcontent.scrollHeight ;    // 상단 위치를 최하단 위치로 변경 
+    })
+
 
     const onSubmit = (e) => {
         const replyFormData = new FormData(replyFormRef.current);
         replyFormData.set("mno", loginInfo.mno);
         replyFormData.set("bno", props.board.bno);
+        if(editingCommentId>0){
+            replyFormData.set("rno", editingCommentId);
+            console.log(editingCommentId)
+        }
 
         axios.post("/conn/b/r/post.do", replyFormData)
             .then(response => {
@@ -72,7 +83,9 @@ export default function Reply(props) {
     // 댓글 수정 함수
     const onUpdate = (rno, rcontent) => {
         console.log('onUpdate')
-        return <Reply rno={rno} rcontent={rcontent} />
+        console.log(rno, rcontent)
+        setRcontent(rcontent); // 수정할 댓글의 내용을 입력 폼에 설정
+        setEditingCommentId(rno); // 수정 중인 댓글의 ID 설정
     }
 
     const replyBtn = (rno,rcontent)=>{
@@ -80,11 +93,13 @@ export default function Reply(props) {
                     <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
                     <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
                 </>)
-            }
-
+    }
+    
+    const length= replyList[replyList.length - 1]
+        
  
     return (
-        <>
+        <div className="rcontent">
             <div>
                 <p>댓글: {replyList.length}</p> {/* 총 댓글 수 출력 */}
             </div>
@@ -98,7 +113,7 @@ export default function Reply(props) {
                                     <div>{reply.mnickname}</div>
                                     <p>{reply.rcontent}</p>
                                     {loginInfo.mno == reply.mno &&
-                                        replyBtn()
+                                        replyBtn(reply.rno, reply.rcontent)
                                     }
                                 </>
                             )}
@@ -109,17 +124,23 @@ export default function Reply(props) {
 
             {replyList.length > 0 && (
                 <div onClick={toggleComments}>
-                    <div>{replyList[replyList.length - 1].mnickname}</div>
-                    <p>{replyList[replyList.length - 1].rcontent}</p>
-                    {replyBtn()}
+                    <div>{length.mnickname}</div>
+                    <p>{length.rcontent}</p>
+                    {loginInfo.mno == length.mno &&
+                        replyBtn(length.rno, length.rcontent)
+                    }
                 </div>
             )}
 
             <form ref={replyFormRef}>
                 <div>{loginInfo.mnickname}</div>
                 <input value={rcontent} name="rcontent" type="text" onChange={(e) => { setRcontent(e.target.value) }} />
-                <button type="button" onClick={onSubmit}>{props.rno > 0 ? "수정" : "등록"}</button>
+                <button type="button" onClick={onSubmit}>{editingCommentId !== null ? "수정" : "등록"}</button>
+                {
+                    editingCommentId !== null ?
+                    <button type="button" onClick={() => {setEditingCommentId(null); setRcontent('');}}>취소</button> : <></>
+                }
             </form>
-        </>
+        </div>
     );
 }

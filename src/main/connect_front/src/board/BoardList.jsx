@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Reply from "./Reply";
-import ReplyView from "./ReplyList";
 import Carousel from "react-material-ui-carousel";
 import Like from "./Like";
 
@@ -41,11 +40,11 @@ export default function BoardList(props){
                                         </div>
                                         <ul>
                                             <li>
-                                                <Carousel>                
+                                                <Carousel sx={{ width: '100%', height:'370px'}}>                
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
-                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:350, objectFit:"cover"}}/>
                                                         </>)
                                                     })
                                                 }
