@@ -1,4 +1,9 @@
 
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
 /* myInfo */
 .myInfo{
     display: flex;
@@ -21,15 +26,15 @@
 
 /* content */
 .content {
-    height: 500px;
+    /* height: 470px; */
     margin: 0 auto;
 }
 .content ul {
     padding: 0;
 }
 .content ul li{
-    border : 1px solid red;
-    height: 450px;
+    /* border : 1px solid red; */
+    /* height: 450px; */
     margin: 10px;
 }
 
@@ -46,7 +51,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 .topImg img {
     width: 100%;
@@ -60,8 +65,10 @@
     margin: 20px auto;
 }
 
-.btmBox ul li:nth-child(1) {
-    font-size: 20px;
+.btmBox ul li:nth-child(1) a {
+    /* font-size: 20px; */
+    padding-right: 5px;
+    font-weight: 600;
 }
 .btmBox p {padding: 20px 0;}
 
@@ -96,4 +103,12 @@
 .rcontent{
     height: 130px;
     overflow-y: auto;
+}
+
+.likeBtn button{
+    background-color: #0B6BCB;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
 }

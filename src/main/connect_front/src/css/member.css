@@ -6,12 +6,12 @@
 }
 
 #loginBox{
-    border: solid 1px rgb(219, 219, 219);
     border-radius: 5px;
-    height: 60%;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* background-color: #f7f7f7; */
 }
 
 .loginImg{
@@ -27,11 +27,32 @@
     padding: 20px 0px;
 }
 
+.signUp a {
+    position: relative;
+    text-decoration: none;
+    color: #787a7d;
+    display: inline-block;
+    
+}
+
+.signUp a:before {
+    position: absolute; /* 절대 위치 */
+    bottom: -2px; /* 링크 아래에 배치 */
+    left: 0; /* 링크의 시작점부터 */
+    width: 100%; /* 가로폭 100% */
+    height: 2px; /* 높이 */
+    background-color: #000; /* 밑줄 색상 */
+    transform: scaleX(0); /* 초기에는 밑줄이 없도록 설정 */
+    transition: transform 0.3s ease; /* 변환 효과를 부드럽게 만듦 */
+}
+
+
+
 .topImg {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .topImg img {
@@ -40,5 +61,7 @@
 }
 
 .logBtn {
-    background-color: #FAA332 !important;
+    /* background-color: #1B4288 !important; */
+    margin-top: 10px !important;
 }
+
