@@ -1,96 +1,96 @@
-import axios from "axios";
-import {  useEffect,  useState,useContext } from "react";
-import { LoginInfoContext } from "../index/Index";
-import Reply from "./Reply";
+// import axios from "axios";
+// import {  useEffect,  useState,useContext } from "react";
+// import { LoginInfoContext } from "../index/Index";
+// import Reply from "./Reply";
 
-// 게시물에 해당하는 댓글 출력하기
-export default function ReplyView(props){ 
-    const [replyList , setReplyList]=useState( [] );
-    const {loginInfo}=useContext(LoginInfoContext); // 현재 로그인 정보 불러옴
+// // 게시물에 해당하는 댓글 출력하기
+// export default function ReplyView(props){ 
+//     const [replyList , setReplyList]=useState( [] );
+//     const {loginInfo}=useContext(LoginInfoContext); // 현재 로그인 정보 불러옴
 
-    console.log(replyList);
-    useEffect(()=>{
-        axios.get('/conn/b/r/get.do',{params:{bno:props.board.bno}}) // bno 매개변수로 넘겨줌
-        .then((r)=> {
-            console.log(r);
-            setReplyList(r.data);
-        })
-        .catch(error=>{console.log(error)})
+//     console.log(replyList);
+//     useEffect(()=>{
+//         axios.get('/conn/b/r/get.do',{params:{bno:props.board.bno}}) // bno 매개변수로 넘겨줌
+//         .then((r)=> {
+//             console.log(r);
+//             setReplyList(r.data);
+//         })
+//         .catch(error=>{console.log(error)})
 
-    },[])
+//     },[])
 
-    const onDelete= (rno)=>{
-        console.log(rno);   
-        axios.delete('/conn/b/r/delete.do',{params:{rno:rno}})
-        .then((re)=>{
-            console.log(re);
-            if(re){
-                alert('삭제 성공')
-                setReplyList(replyList.filter(reply => reply.rno !== rno));
-            }else{
-            alert('삭제 실패')
-            }
+//     const onDelete= (rno)=>{
+//         console.log(rno);   
+//         axios.delete('/conn/b/r/delete.do',{params:{rno:rno}})
+//         .then((re)=>{
+//             console.log(re);
+//             if(re){
+//                 alert('삭제 성공')
+//                 setReplyList(replyList.filter(reply => reply.rno !== rno));
+//             }else{
+//             alert('삭제 실패')
+//             }
 
-        })
-        .catch(error=>{console.log(error)})
-    }
+//         })
+//         .catch(error=>{console.log(error)})
+//     }
 
-    const onUpdate=(rno,rcontent)=>{
-        console.log('onUpdate')
-        return <Reply rno={rno} rcontent={rcontent}/>
-        // axios.get
-    }
+//     const onUpdate=(rno,rcontent)=>{
+//         console.log('onUpdate')
+//         return <Reply rno={rno} rcontent={rcontent}/>
+//         // axios.get
+//     }
 
-    const replyBtn = (rno,rcontent)=>{
-        return( <>
-            <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
-            <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
-        </>)
+//     const replyBtn = (rno,rcontent)=>{
+//         return( <>
+//             <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
+//             <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
+//         </>)
        
-    }
-    const num=(replyList.length - 1);
+//     }
+//     const num=(replyList.length - 1);
     
 
-    return (
-        <>
-            {props.look === 1 ? (
-                // props.look이 1인 경우 마지막 인덱스만 출력
-                <div>
-                    <p>댓글: {replyList.length}</p> {/* 댓글 전체 개수 출력 */}
-                    {replyList.length >0 ?
-                    <>
-                    <div>{replyList[num].mnickname}</div>
-                    <p>{replyList[num].rcontent}</p>
-                    {loginInfo.mno==replyList[num].mno ?
-                        replyBtn(replyList[num].rno, replyList[num].rcontent)
-                        :
-                        ""
-                    }
-                    </>
-                    :
-                    ""
-                }
-                </div>
-            ) : props.look2 === 2 ? (
-                <>
-                <p>댓글: {replyList.length}</p> {/* 댓글 전체 개수 출력 */}
-                {// props.look2가 2인 경우 전체 출력
-                replyList.map((reply, index) => (
-                    <div key={index}>
-                        <div>{reply.mnickname}</div>
-                        <p>{reply.rcontent}</p>
-                        {loginInfo.mno==reply.mno ?
-                        replyBtn( reply.rno, reply.rcontent)
-                        :
-                        ""
-                        }
-                    </div>
-                ))}
-                </>
-            ) : null}
-        </>
-    );
-}
+//     return (
+//         <>
+//             {props.look === 1 ? (
+//                 // props.look이 1인 경우 마지막 인덱스만 출력
+//                 <div>
+//                     <p>댓글: {replyList.length}</p> {/* 댓글 전체 개수 출력 */}
+//                     {replyList.length >0 ?
+//                     <>
+//                     <div>{replyList[num].mnickname}</div>
+//                     <p>{replyList[num].rcontent}</p>
+//                     {loginInfo.mno==replyList[num].mno ?
+//                         replyBtn(replyList[num].rno, replyList[num].rcontent)
+//                         :
+//                         ""
+//                     }
+//                     </>
+//                     :
+//                     ""
+//                 }
+//                 </div>
+//             ) : props.look2 === 2 ? (
+//                 <>
+//                 <p>댓글: {replyList.length}</p> {/* 댓글 전체 개수 출력 */}
+//                 {// props.look2가 2인 경우 전체 출력
+//                 replyList.map((reply, index) => (
+//                     <div key={index}>
+//                         <div>{reply.mnickname}</div>
+//                         <p>{reply.rcontent}</p>
+//                         {loginInfo.mno==reply.mno ?
+//                         replyBtn( reply.rno, reply.rcontent)
+//                         :
+//                         ""
+//                         }
+//                     </div>
+//                 ))}
+//                 </>
+//             ) : null}
+//         </>
+//     );
+// }
 
 // export default function Reply (props){
 //     const {loginInfo}=useContext(LoginInfoContext); // 현재 로그인 정보 불러옴

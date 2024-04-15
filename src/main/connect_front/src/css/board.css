@@ -91,4 +91,6 @@
     padding: 20px 0;
     margin: 20px auto;
     border: 1px solid red;
+    height: 110px;
+    overflow-y: auto;
 }
