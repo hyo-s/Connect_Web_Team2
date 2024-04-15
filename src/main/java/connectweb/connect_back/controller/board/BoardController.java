@@ -32,10 +32,6 @@ public class BoardController {
         return boardService.doGetBoard();
     }
 
-    /*@GetMapping("/img/get.do")
-    public List<GalleryDto> dogetBoardImg(int bno){
-        return boardService.dogetBoardImg(bno);
-    }*/
 
     //개별피드출력
     @GetMapping("/myboard/get.do")
