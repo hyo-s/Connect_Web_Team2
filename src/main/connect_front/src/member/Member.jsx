@@ -22,7 +22,7 @@ export default function Member(){
     },[searchValue])    
 
     return(<>
-        <div id="container">
+        <div id="container searchM">
             {member.map((data)=>{
                 console.log(data.profilename)
                 return (<div key={data.mno}>

@@ -244,7 +244,7 @@ export default function SignUp(props){
             <div className="innerContainer">
                 <div className="content">
                     <div className='loginForm'>
-                        <Link to="/"><img src="/img/connect_logo.png" style={{width:200, marginLeft:75}} /></Link>
+                        <Link to="/conn"><img src="/img/connect_logo.png" style={{width:200, marginLeft:75}} /></Link>
                         <form ref={signup}>
                             <Input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck} />
                             <p>{name!==''? msgName:''}</p>
@@ -260,7 +260,7 @@ export default function SignUp(props){
                             <p>{email!==''?msgEmail:''}</p>
                             <Input type="text" name="mphone" placeholder="전화번호를 입력해주세요" value={phoneNumber} onChange={onChangeFindPhoneNumberCheck}/>
                             <p>{phoneNumber!==''?msgPhoneNumber:''}</p>
-                            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                            <FormControl sx={{ m: 1, minWidth: 120 , '& .MuiSelect-select:focus': { borderColor: 'green' }}} size="small">
                                 <InputLabel id="demo-select-small-label">year</InputLabel>
                                 <Select labelId="demo-select-small-label" id="demo-select-small" value={year} onChange={onChangeYear} autoWidth label="year">
                                     {years.map(year=>{

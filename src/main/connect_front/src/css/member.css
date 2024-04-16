@@ -50,6 +50,7 @@
 .topImg {
     width: 30px;
     height: 30px;
+    display: flex;
     border-radius: 50%;
     /* border: 1px solid red; */
 }
@@ -91,4 +92,22 @@
 .editBtn{
     display: flex;
     justify-content: space-between;
+}
+.topInfo3 {
+    display: flex;
+    align-items: center;
+    padding: 25px 5px;
+    border-bottom: 1px solid #e8e8e8;
+
+}
+
+.topInfo4 {
+    display: flex;
+    justify-content: space-between;
+}
+.searchM {
+    display: block;
+}
+.subBbtn {
+
 }
