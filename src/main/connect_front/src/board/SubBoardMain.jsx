@@ -5,6 +5,7 @@ import BoardList from './BoardList.jsx';
 import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Carousel from "react-material-ui-carousel";
+import ReplyView from "./ReplyList";
 import Like from './Like.jsx';
 import { LoginInfoContext } from "../index/Index";
 

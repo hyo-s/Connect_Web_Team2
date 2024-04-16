@@ -22,7 +22,7 @@ export default function BoardList(props){
  
      },[])
 
-  
+
      return(<>
          {
              boardList.map((board)=>{
@@ -38,7 +38,7 @@ export default function BoardList(props){
                                         </div>
                                         <ul>
                                             <li>
-                                                <Carousel sx={{ width: '100%', height:'375px'}}>                
+                                                <Carousel sx={{ width: '100%', height:'370px'}} autoPlay={false}>
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
