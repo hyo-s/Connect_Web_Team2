@@ -12,7 +12,6 @@ export default function BirthBoardWrite (props){
     const submit =()=>{
         const birthForm = document.querySelector("#birthForm");
         const birthFormData = new FormData(birthForm);
-        console.log(birthFormData);
 
         axios.post("/birthboard/post.do", birthFormData)
         .then(r =>{

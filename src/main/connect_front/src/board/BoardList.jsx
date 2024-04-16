@@ -26,8 +26,7 @@ export default function BoardList(props) {
                 setLoading(false);
             });
     } , [ page ])
-
-    console.log( page );
+    
     useEffect(() => {
         const scrollDiv = document.getElementById('scroll');
         const handleScroll = () => {
@@ -68,7 +67,6 @@ export default function BoardList(props) {
      <div id='scroll'>
          {
              boardList.map((board)=>{
-                console.log(board.gnameList)
                  return(<>
                             <section id="container">
                                 <div className="innerContainer">
@@ -102,7 +100,6 @@ export default function BoardList(props) {
                                         </ul>
                                     </div>
                                     <div className="replyBox" >
-
                                         <Reply board={board}/>
                                     </div>
                                 </div>

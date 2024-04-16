@@ -16,7 +16,6 @@ public class BirthBoardController {
     // 게시물 쓰기
     @PostMapping("/post.do")
     public boolean postBirthBoard(BirthBoardDto birthBoardDto){
-        System.out.println("postbirthBoardDto = " + birthBoardDto);
         return birthBoardService.postBirthBoard(birthBoardDto);
     }
     // 전체출력
@@ -25,17 +24,9 @@ public class BirthBoardController {
         return birthBoardService.doGetBirthBoard();
     }
 
-    // view
-//    @GetMapping("/view.do")
-//    public List<BirthBoardDto> ViewBirthBoard(String mnickname){
-//        System.out.println("mnickname = " + mnickname);
-//        return birthBoardService.ViewBirthBoard(mnickname);
-//    }
-
     // 게시글 삭제
     @DeleteMapping("/delete.do")
     public boolean doDeleteBirthBoard(int bbno){
-        System.out.println("controllerdeletebbno = " + bbno);
         return birthBoardService.doDeleteBirthBoard(bbno);
     }
 }

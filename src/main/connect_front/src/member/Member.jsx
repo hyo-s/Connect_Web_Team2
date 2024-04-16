@@ -6,17 +6,13 @@ export default function Member(){
 
     const [member, setMember] = useState([]);
     const location = useLocation();
-    console.log(location);
     const searchParams = new URLSearchParams(location.search);
-    console.log(searchParams);
     const searchValue = searchParams.get('search');
-    console.log(searchValue);
 
     useEffect(()=>{
         axios.get("/conn/m/list/get.do", {params: {search: searchValue}})
         .then(response=>{
             setMember(response.data);
-            console.log(response.data)
         })
         .catch(error=>{console.log(error)})
     },[searchValue])    
@@ -24,7 +20,6 @@ export default function Member(){
     return(<>
         <div id="container searchM">
             {member.map((data)=>{
-                console.log(data.profilename)
                 return (<div key={data.mno}>
                     <div className="topInfo3">
                     <div className="topImg"><img src={'/img/mimg/'+data.mimg} /></div>

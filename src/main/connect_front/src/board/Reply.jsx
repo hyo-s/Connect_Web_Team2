@@ -39,7 +39,6 @@ export default function Reply(props) {
         replyFormData.set("bno", props.board.bno);
         if(editingCommentId>0){
             replyFormData.set("rno", editingCommentId);
-            console.log(editingCommentId)
         }
 
         axios.post("/conn/b/r/post.do", replyFormData)
@@ -87,8 +86,6 @@ export default function Reply(props) {
 
     // 댓글 수정 함수
     const onUpdate = (rno, rcontent) => {
-        console.log('onUpdate')
-        console.log(rno, rcontent)
         setRcontent(rcontent); // 수정할 댓글의 내용을 입력 폼에 설정
         setEditingCommentId(rno); // 수정 중인 댓글의 ID 설정
     }

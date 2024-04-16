@@ -16,14 +16,11 @@ export default function Login(props){
 
         const loginForm = document.querySelector('#loginForm');
         const loginFormData = new FormData(loginForm);
-        console.log(loginForm);
 
         await axios.post('/conn/m/login.do',loginFormData)
         .then((r)=>{
-            console.log(r);
             if(r.data){
                 alert('로그인성공');
-                console.log(loginInfo);
                 window.location.href = "/conn"
             }else{
                 alert('로그인실패');

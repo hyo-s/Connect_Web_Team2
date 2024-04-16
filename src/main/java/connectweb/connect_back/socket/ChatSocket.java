@@ -20,15 +20,12 @@ public class ChatSocket extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("session = " + session);
         sessionList.add(session);
-        System.out.println("sessionList = " + sessionList);
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         for(WebSocketSession client : sessionList){
-            System.out.println("session = " + session +", message = "+message);
             client.sendMessage(message);
         }
     }

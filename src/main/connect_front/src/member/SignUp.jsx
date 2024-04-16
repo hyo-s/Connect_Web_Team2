@@ -229,13 +229,12 @@ export default function SignUp(props){
 
     const onSignup = (e)=>{
         for(let i=0; i<checkArray.length; i++){
-            console.log(checkArray[i])
             if(!checkArray[i]){
                 return
             }
         }
         axios.post('/conn/m/signup.do',signup.current)
-            .then(response=>{console.log(response);})
+            .then(response=>{})
             .catch(error=>{console.log(error);})
     }
 

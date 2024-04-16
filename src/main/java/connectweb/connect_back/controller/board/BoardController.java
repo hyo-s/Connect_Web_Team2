@@ -23,7 +23,6 @@ public class BoardController {
     //게시글등록
     @PostMapping("/post.do")
     public int doPostBoard( BoardDto boardDto){
-        System.out.println("boardDto = " + boardDto);
         return boardService.doPostBoard(boardDto);
     }
 
@@ -38,38 +37,30 @@ public class BoardController {
     //개별피드출력
     @GetMapping("/myboard/get.do")
     public List<BoardDto> getMyBoardList(String mnickname){
-        System.out.println("mnickname = " + mnickname);
         return boardService.getMyBoardList(mnickname);
     }
 
     //게시글수정
     @PutMapping("/put.do")
     public int doPutBoard(BoardDto boardDto){
-        System.out.println("BoardController.doPutBoard");
-        System.out.println("boardDto = " + boardDto);
         return boardService.doPutBoard(boardDto);
     }
 
     //이미지삭제 (게시글 수정용)
     @DeleteMapping("/imgdelete.do")
     public boolean doDeleteImg(@RequestParam String gname){
-        System.out.println("BoardController.doDeleteImg");
-        System.out.println("gname = " + gname);
         return boardService.doDeleteImg(gname);
     }
 
     //게시물삭제
     @DeleteMapping("/delete.do")
     public boolean doDeleteBoard(int bno){
-        System.out.println("bno = " + bno);
-        System.out.println("BoardController.doDeleteBoard");
         return boardService.doDeleteBoard(bno);
     }
 
     //=========================== 댓글 등록 ==========================//
     @PostMapping("/r/post.do")
     public boolean doPostReply(ReplyDto replyDto){
-        System.out.println("replyDto = " + replyDto);
         return boardService.doPostReply(replyDto);
     }
 
@@ -88,7 +79,6 @@ public class BoardController {
     //=========================== 댓글 삭제 ==========================//
     @DeleteMapping("/r/delete.do")
     public boolean doDeleteReply(int rno){
-        System.out.println("rno = " + rno);
         return boardService.doDeleteReply(rno);
     }
 }

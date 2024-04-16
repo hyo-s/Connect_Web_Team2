@@ -19,7 +19,6 @@ export default function Edit(props){
     useEffect(()=>{
         axios.get("/conn/m/page/get.do", {params:{mnickname:mnickname}})
         .then(response =>{
-            console.log(response);
             setMember(response.data);
         })
         .catch(error=>{console.log(error);})
@@ -61,7 +60,6 @@ export default function Edit(props){
     const onChangeNameCheck = async (e)=>{
         member.mname = e.target.value;
         setMember({...member});
-        console.log(member);
         if(nameRule.test(member.mname)){
             setMsgName('사용가능한 이름입니다.')
             setCheckName(true);
@@ -136,7 +134,6 @@ export default function Edit(props){
     const [img, setImg] = useState("");
 
     const onChangeProfile  = (e)=>{
-        console.log(e.target.files[0]);
         const file = e.target.files[0];
         const imgFile = new FileReader();
         imgFile.readAsDataURL(file);
@@ -147,7 +144,6 @@ export default function Edit(props){
 
     const onEditMember = async()=>{
         for(let i=0; i<checkArray.length; i++){
-            console.log(checkArray[i])
             if(!checkArray[i]){
                 setDisabled(false);
                 return

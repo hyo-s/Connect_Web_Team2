@@ -24,7 +24,6 @@ export default function Like(props){
     const onLike = ()=>{
         axios.get("/conn/b/like",{params:{mno:loginInfo.mno, bno:props.bno}})
         .then(response=>{
-            console.log(response);
             setLikeOnOff(response.data);
         })
         .catch(error => {console.log(error)})
@@ -36,7 +35,6 @@ export default function Like(props){
         likeData.set("bno", props.bno);
         axios.post("/conn/b/like/post.do", likeData)
         .then(response =>{
-            console.log(response);
             getLike();
             onLike();
         })
@@ -46,14 +44,11 @@ export default function Like(props){
     const onLikeDelete = ()=>{
         axios.delete("/conn/b/like/delete.do", {params:{mno:loginInfo.mno, bno:props.bno}})
         .then(response=>{
-            console.log(response)
             setLikeOnOff(false);
             getLike();
         })
         .catch(error=>{console.log(error)})
     }
-
-    console.log(likeOnOff);
 
     return(<>
         <li className="likeBtn">  

@@ -33,7 +33,6 @@ public class BoardLikeService {
 // =============================== 게시물 좋아요 취소 =============================== //
     public boolean doLikeDelete(int mno, int bno){
         BoardLikeEntity boardLikeEntity = boardLikeEntityRepository.doSelectLno(mno, bno);
-        System.out.println("boardLikeEntity = " + boardLikeEntity);
         if(boardLikeEntity != null) {
             boardLikeEntityRepository.deleteById(boardLikeEntity.getLno());
             return true;

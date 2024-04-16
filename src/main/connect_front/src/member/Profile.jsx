@@ -115,7 +115,6 @@ export default function Profile(){
     },[mnickname, profileData.followChange])
 
     const onClickImg = (board) => {
-        console.log(board);
         navigate(`../board/submain/${board.bno}`, { state: { myBoard:profileData.myBoard, r: board , profilename : profileData.user.mimg}});
     };
 
@@ -126,7 +125,6 @@ export default function Profile(){
     const onFollow = (e)=>{
         axios.post('/conn/m/follow/post.do', {tofollow : profileData.user.mno})
         .then(respnse =>{
-            console.log(respnse);
             setProfileData({
                 ...profileData,
                 followChange : true
@@ -138,7 +136,6 @@ export default function Profile(){
     const onUnfollow = (fno)=>{
         axios.delete('/conn/m/follow/delete.do', {params:{fno:fno}})
         .then(response=>{
-            console.log(response);
             setProfileData({
                 ...profileData,
                 followChange : false
@@ -152,46 +149,28 @@ export default function Profile(){
     // 생일 날짜 조건식
     const today = new Date();
     const birthdayInfo = profileData.user.mbirth;
-    console.log( birthdayInfo )
 
     // 생일 정보가 있고, 생일이 오늘이면
     const isBirthdayToday = birthdayInfo && new Date(birthdayInfo).getDate() === today.getDate() && new Date(birthdayInfo).getMonth() === today.getMonth();
-    console.log( isBirthdayToday )
 
     // 생일 정보가 있고, 생일이 일주일 이내이면
 
     const oldDate = new Date(birthdayInfo);
-        console.log( oldDate.getDate() );
     const oldDateDay = oldDate.getDate();
 
     const newDate = new Date();
-        console.log( newDate.getDate() );
     const newDateDay = newDate.getDate()
 
     const isBirthdayWithinWeek = oldDateDay - newDateDay <= 7 && oldDateDay - newDateDay > 0 ;
-    console.log( isBirthdayToday );
-
-    // let diff = Math.abs(newDate.getTime() - oldDate.getTime());
-    // diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    // console.log(diff);
-
-    // const isBirthdayWithinWeek = birthdayInfo && today.getTime() < new Date(birthdayInfo+"T00:00:00").getTime() + 7 * 24 * 60 * 60 * 1000;
-    // console.log( today.getTime() )
-    // console.log( new Date(birthdayInfo+"T00:00:00").getTime() );
-
-    // console.log( isBirthdayWithinWeek )
-
 
     // 생일카드 쓰기
     const submit =()=>{
         const birthForm = document.querySelector("#birthForm");
         const birthFormData = new FormData(birthForm);
         birthFormData.set("mno", profileData.user.mno);
-        console.log(birthFormData);
 
         axios.post("/birthboard/post.do", birthFormData)
         .then(r =>{
-            console.log(r);
             if(r){
                 alert("게시글 등록 성공")
                 window.location.href = '/' 
@@ -199,22 +178,17 @@ export default function Profile(){
                 alert("게시글 등록 실패")
             }
         })
-        .catch(e=>{console.log(e)})
+        .catch(error=>{console.log(error)})
     }
 
     // 생일카드 삭제
     const delteBtn = (bbno)=>{
-        console.log(bbno);
         axios.delete('/birthboard/delete.do',{params : {bbno:bbno}})
         .then((r)=>{
-            console.log(r);
             window.location.href = "/board/sub/"+profileData.user.mnickname;
         })
         .catch(error=>{console.log(error)})
     }
-
-    console.log(profileData)
-
 
     //채팅클릭
     const onChat = () =>{
@@ -298,8 +272,6 @@ export default function Profile(){
                                 <Carousel sx={{ width: '100%', height:'300px'}} autoPlay={false}>
                                 {
                                     profileData.birthBoardList.map((birthboard )=>{
-                                        console.log(birthboard)
-                                        console.log(profileData.birthBoardList)
                                         return(<div >
                                                 <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={()=>delteBtn(birthboard.bbno)}>삭제</button>
                                                 <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>

@@ -14,15 +14,11 @@ public class FileService {
     String buildUpload3 ="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\birthboardimg\\";
 
     String buildUpload2 ="C:\\Users\\504\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\boardimg\\";
-
-    //String buildUpload2 ="C:\\Users\\User\\Desktop\\Connect_Web_Team2\\build\\resources\\main\\static\\img\\boardimg\\";
     // 프로필 사진 업데이트
     public String FileUpload(MultipartFile multipartFile){
         String uuid= UUID.randomUUID().toString();
         String filename =uuid+"_"+multipartFile.getOriginalFilename().replace("_","-");
         File file= new File(buildUpload+filename);
-        System.out.println("file = " + file);
-        System.out.println("file.exists() = " + file.exists());
         //2.
         try {
             if(multipartFile.isEmpty()){
@@ -42,8 +38,6 @@ public class FileService {
         String uuid= UUID.randomUUID().toString();
         String filename =uuid+"_"+multipartFile.getOriginalFilename().replace("_","-");
         File file= new File(buildUpload2+filename);
-        System.out.println("file = " + file);
-        System.out.println("file.exists() = " + file.exists());
         //2.
         try {
             multipartFile.transferTo(file);
@@ -58,8 +52,6 @@ public class FileService {
         String uuid= UUID.randomUUID().toString();
         String filename =uuid+"_"+multipartFile.getOriginalFilename().replace("_","-");
         File file= new File(buildUpload3+filename);
-        System.out.println("file = " + file);
-        System.out.println("file.exists() = " + file.exists());
         //2.
         try {
             if(multipartFile.isEmpty()){

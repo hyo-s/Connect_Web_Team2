@@ -7,8 +7,6 @@ export default function Board(props){
 
     axios.get("/conn/b/get.do")
     .then(response=>{
-        console.log(response);
-        console.log(response.data);
         // setBoardInfo(response.data)
     })
     .catch(error=>{console.log(error)})
