@@ -1,7 +1,9 @@
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { LoginInfoContext } from "../index/Index";
 import { useLocation} from 'react-router-dom';
-
+import '../index.css'
+import '../css/chat.css'
+import SendIcon from '@mui/icons-material/Send';
 export default function Chatting(props){
 
     let clientSocket = useRef(null);
@@ -34,7 +36,7 @@ export default function Chatting(props){
         let info = {
             msg : msgInput,
             forMnickname : loginInfo.mnickname,
-            toMnickname : location.state.mnickname,
+            //toMnickname : location.state.mnickname,
             img : loginInfo.mimg
         }
         clientSocket.current.send(JSON.stringify(info));
@@ -57,26 +59,63 @@ export default function Chatting(props){
         }
     }
     
+    useEffect (()=>{
+        //1.
+        let chatcont = document.querySelector('.chatcont');
+        console.log(chatcont.scroll);
+        console.log(chatcont.scrollTop);    // 현재 스크롤의 상단위치
+        console.log(chatcont.scrollHeight); //스크롤 전체 높이길이 (본문이 길어졌기 때문)
+        //2.
+        chatcont.scrollTop = chatcont.scrollHeight;
+    })
     
 
 
 
     return (<>
-        <div>채팅</div>
-        <div>
-            {
-                msgList.map((msg)=>{
-                    console.log(msg);
-                    return(<>
-                        {loginInfo.mnickname == msg.forMnickname ?  <div>{msg.msg}</div> : 
-                        <div><img src={"/img/mimg/default.png"} style={{height:20}}/>{msg.forMnickname}:{msg.msg}
-                        </div>}
-                        
-                    </>)
-                })
-            }
+        <div className="chatbox">
+            <div className="chatcont">
+                {
+                    msgList.map((msg)=>{
+                        console.log(msg);
+                        return(<>
+                            {
+                                loginInfo.mnickname == msg.forMnickname ?  
+                                (
+                                    <div className="rcont">
+                                        <div  className="subcont">
+                                            <div className="content">
+                                                {msg.msg}
+                                            </div>                                    
+                                        </div>
+                                    </div>
+                                ):
+                                (
+                                    
+                                    <div className="lcont">
+                                    <img className="pimg" src={"/img/mimg/default.png"} />
+                                        <div className="tocont">
+                                            <div className="name" >
+                                                {msg.forMnickname}</div> 
+                                                <div className="subcont">
+                                                    <div className="content">
+                                                        {msg.msg}
+                                                    </div>                                                
+                                                </div>
+                                                 
+                                        </div>                                    
+                                    </div>
+                                )
+                            }
+                            
+                        </>)
+                    })
+                }
+            </div>
         </div>
-        <textarea value={msgInput} onChange={(e)=>{setMsgInput(e.target.value)}} onKeyDown={activeEnter}></textarea>
-        <button type="button" onClick={onSend}>전송</button>
+        <div className="chatbottom">
+            <textarea value={msgInput} onChange={(e)=>{setMsgInput(e.target.value)}} onKeyDown={activeEnter}></textarea>
+            <button type="button" onClick={onSend}><SendIcon /></button>
+        </div>        
     </>)
 }

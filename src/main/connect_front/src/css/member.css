@@ -63,6 +63,10 @@
     /* background-color: #1B4288 !important; */
     margin-top: 10px !important;
 }
+
+.css-kf85qm-JoyInput-root:not([data-skip-inverted-colors]){
+    --Input-focusedHighlight:#FEC767 !important;
+}
  /* myInfo */
 .topInfo {
     display: flex;
@@ -70,4 +74,21 @@
 }
 .birCard {
     display: inline-block;
+}
+.myInfoEdit{
+    display: flex;
+    align-items: center;
+}
+
+.content div{
+    margin-bottom: 5px;
+}
+
+.content button{
+    margin-bottom: 5px;
+}
+
+.editBtn{
+    display: flex;
+    justify-content: space-between;
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
 import { useNavigate} from "react-router-dom";
@@ -19,6 +19,11 @@ import Carousel from "react-material-ui-carousel";
 
 export default function Profile(){
 
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const mnickname = searchParams.get('mnickname');
+
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -33,7 +38,6 @@ export default function Profile(){
     };
 
     const {loginInfo} = useContext(LoginInfoContext);
-    const {mnickname} = useParams();
 
     const [profileData, setProfileData] = useState({
         user : {},
@@ -108,7 +112,7 @@ export default function Profile(){
             }
         }
         data();
-    },[mnickname])
+    },[mnickname, profileData.followChange])
 
     const onClickImg = (board) => {
         console.log(board);
@@ -238,9 +242,9 @@ export default function Profile(){
                         </ul>
 
                     </div>
-  
+
                     <div className="infoBtn">
-                        {isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}
+                        {isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit?mnickname="+loginInfo.mnickname}>수정</Link>):(<></>)}
                         <div className="birCard">
                             {btnDisabled ? (
                             <></>

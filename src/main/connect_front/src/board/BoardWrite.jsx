@@ -37,6 +37,8 @@ export default function BoardWrite(props){
         const contentFormData = new FormData(contentForm);
         contentFormData.set("bcontent", bcontent)       
 
+        
+
         axios.post("/conn/b/post.do", contentFormData)
         .then(response => {
             console.log(response);
