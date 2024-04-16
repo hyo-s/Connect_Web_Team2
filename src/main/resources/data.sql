@@ -6,7 +6,7 @@ insert into member(mname, mphone, mid, mnickname, mpw, memail, mbirth, mimg) val
 
 
 insert into board(bcontent, mno) values
-('게시물내용1',1),
+('롯데월드에 놀러갔어요. 가서 자이로드롭 탔습니다~ 아주 재밌어요',1),
 ('게시물내용2',2),
 ('게시물내용3',3),
 ('게시물내용4',4),

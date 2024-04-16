@@ -5,7 +5,7 @@ import Carousel from "react-material-ui-carousel";
 import Like from "./Like";
 import { Link } from 'react-router-dom';
 
-export default function BoardList(props) {
+export default function BoardList() {
     const [boardList, setBoardList] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
