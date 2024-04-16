@@ -60,6 +60,7 @@ p {padding: 0; margin: 0;}
     top: 0px;
     background-color: #ffffff;
     z-index: 9999;
+    width: 100vw;
 }
 .headerImg img{
   width: 8vh;
