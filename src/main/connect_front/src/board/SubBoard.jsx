@@ -46,7 +46,7 @@ export default function SubBoard(props) {
                         console.log(r);
                         console.log(r.bno);
                         return(<>                           
-                                <li><img src={"/img/boardimg/" +r.gnameList[0]} className='gnameList' onClick={()=>onClickImg({myBoard,r})}></img></li>                  
+                                <li><img src={r.gnameList[0]} className='gnameList' onClick={()=>onClickImg({myBoard,r})}></img></li>
                             
                         </>)
                     })}

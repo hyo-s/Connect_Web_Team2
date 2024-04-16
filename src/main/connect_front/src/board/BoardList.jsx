@@ -74,7 +74,7 @@ export default function BoardList(props) {
                                 <div className="innerContainer">
                                     <div className="content mainContent">
                                         <div className="topInfo">
-                                            <div className="topImg"> <img src={'/img/mimg/'+board.profilename} /> </div>
+                                            <div className="topImg"> <img src={board.profilename} /> </div>
                                             <p><Link to={"/board/sub?mnickname="+board.mnickname}>{board.mnickname}</Link></p>
                                             <div>{board.cdate} </div>
                                         </div>

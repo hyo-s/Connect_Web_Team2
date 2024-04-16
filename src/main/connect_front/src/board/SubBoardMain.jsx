@@ -60,7 +60,7 @@ export default function SubBaordMain(props){
                 <div className="content mainContent">
                     <div className="topInfo topInfo4">
                         {/* <div>{location.state.r.cdate} </div> */}
-                        <div className="topImg"> <img src={'/img/mimg/'+location.state.profilename} /> <p>{r.mnickname}</p></div>
+                        <div className="topImg"> <img src={location.state.profilename} /> <p>{r.mnickname}</p></div>
                         
                         <div className='subBbtn'>
                             {                       
@@ -81,7 +81,7 @@ export default function SubBaordMain(props){
                                 {
                                 r.gnameList.map((img)=>{
                                     return(<>
-                                        <img src={"/img/boardimg/"+img} style={{width:"100%", height:400, objectFit:"cover"}}/>
+                                        <img src={img} style={{width:"100%", height:400, objectFit:"cover"}}/>
                                     </>)
                                 })
                             }
