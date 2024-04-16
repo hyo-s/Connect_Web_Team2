@@ -36,7 +36,8 @@ p {padding: 0; margin: 0;}
     width: 480px;
 
     margin: 0 auto;
-    border: 1px solid rgb(219, 219, 219);
+    /* border: 1px solid rgb(219, 219, 219); */
+    box-shadow: 1px 1px 10px #e8e8e8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,8 +49,11 @@ p {padding: 0; margin: 0;}
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 50px;
-    border: 1px solid rgb(219, 219, 219);;
+    /* border: 1px solid rgb(219, 219, 219); */
+    box-shadow: 1px 1px 10px #e8e8e8;
+    padding: 10px;
 }
 .headerImg img{
   width: 100px;
@@ -78,6 +82,6 @@ p {padding: 0; margin: 0;}
 }
 .footer{
     height: 50px;
-    border: 1px solid rgb(219, 219, 219);
+    /* border: 1px solid rgb(219, 219, 219); */
     text-align: center;
 }
