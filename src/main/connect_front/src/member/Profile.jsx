@@ -223,6 +223,7 @@ export default function Profile(){
     }
 
     return(<>
+    <div id="scroll">
         <section id="container">
             <div className="innerContainer">
                 <div className="myInfo">
@@ -323,5 +324,6 @@ export default function Profile(){
                 </div>
             </div>
         </section>
+    </div>
     </>)
 }
