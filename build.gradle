@@ -35,6 +35,7 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	// WebSocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE' // aws
 }
 
 tasks.named('test') {

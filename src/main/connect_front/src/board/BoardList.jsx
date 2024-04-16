@@ -84,7 +84,7 @@ export default function BoardList(props) {
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
-                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:350, objectFit:"cover"}}/>
+                                                            <img src={img} style={{width:"100%", height:350, objectFit:"cover"}}/>
                                                         </>)
                                                     })
                                                 }
