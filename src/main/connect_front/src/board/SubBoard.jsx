@@ -31,7 +31,7 @@ export default function SubBoard(props) {
 
     return(<>
         <section id="container">
-            <div>
+            <div >
                 <div className="myInfo">
                     <div className='imgBox'><img src="" alt="" /></div>
                     <ul>

@@ -49,6 +49,10 @@ public class BoardService {
         MemberEntity memberEntity = memberService.loginEntity();
         if(memberEntity == null) return 2;
 
+        BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
+
+        boardEntity.setMemberEntity(memberEntity);
+        System.out.println("boardDto = " + boardDto);
 
         //피드이미지----------------------------------------
         boardDto.getGfile().forEach((uploadFile)->{
@@ -56,10 +60,7 @@ public class BoardService {
             System.out.println("uploadFile.isEmpty() = " + uploadFile.isEmpty());
             if (!uploadFile.isEmpty()) {
                 //글쓰기
-                BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
 
-                boardEntity.setMemberEntity(memberEntity);
-                System.out.println("boardDto = " + boardDto);
 
                 String fileName = fileService.FileUpload2(uploadFile);
                 System.out.println("fileName = " + fileName);

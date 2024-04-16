@@ -40,7 +40,7 @@ export default function BoardList(props){
                                         </div>
                                         <ul>
                                             <li>
-                                                <Carousel sx={{ width: '100%', height:'370px'}}>                
+                                                <Carousel sx={{ width: '100%', height:'370px'}} autoPlay={false}>                
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
