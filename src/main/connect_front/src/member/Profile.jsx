@@ -112,7 +112,7 @@ export default function Profile(){
             }
         }
         data();
-    },[mnickname])
+    },[mnickname, profileData.followChange])
 
     const onClickImg = (board) => {
         console.log(board);

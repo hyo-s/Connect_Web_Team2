@@ -75,3 +75,20 @@
 .birCard {
     display: inline-block;
 }
+.myInfoEdit{
+    display: flex;
+    align-items: center;
+}
+
+.content div{
+    margin-bottom: 5px;
+}
+
+.content button{
+    margin-bottom: 5px;
+}
+
+.editBtn{
+    display: flex;
+    justify-content: space-between;
+}

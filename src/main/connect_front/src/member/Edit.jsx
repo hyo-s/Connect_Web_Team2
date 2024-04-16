@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
+import '../css/member.css';
 
 export default function Edit(props){
 
@@ -163,7 +164,7 @@ export default function Edit(props){
 
     return(
         <div className="myInfo">
-            <div>
+            <div className="myInfoEdit">
                 <div className='imgBox'>
                     <img src={img?img:"/img/default.png"} alt="" />
                 </div>
@@ -178,9 +179,11 @@ export default function Edit(props){
                         <p>{member.memail!==''?msgEmail:''}</p>
                         <Input type="text" name="mphone" value={member.mphone} onChange={onChangeFindPhoneNumberCheck}/>
                         <p>{member.mphone!==''?msgPhoneNumber:''}</p>
-                        <Link to="/member/delete">회원탈퇴하기</Link>
                     </form>
-                    <Button type="button" onClick={onEditMember}>수정</Button>
+                    <div className="editBtn">
+                        <Link to="/member/delete"><Button type="button" onClick={onEditMember}>회원탈퇴하기</Button></Link>
+                        <Button type="button" onClick={onEditMember}>수정</Button>
+                    </div>
                 </div>  
             </div>
         </div>

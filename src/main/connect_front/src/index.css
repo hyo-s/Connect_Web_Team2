@@ -16,7 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 14px;
 }
 button{
   font-family: GmarketSansMedium;
@@ -53,8 +53,8 @@ p {padding: 0; margin: 0;}
 .header {
     display: flex;
     justify-content: space-evenly;
+    box-shadow: 1px 1px 10px #e8e8e8;
     height: 50px;
-    border: 1px solid rgb(219, 219, 219);;
     align-items: center;
 }
 .headerImg img{
@@ -73,7 +73,6 @@ p {padding: 0; margin: 0;}
 .headerProfile img{
   width: 44px;
   height: 44px;
-  border: 1px solid rgb(219, 219, 219);
   border-radius: 50%
 }
 .header ul {
@@ -85,6 +84,5 @@ p {padding: 0; margin: 0;}
 }
 .footer{
     height: 50px;
-    border: 1px solid rgb(219, 219, 219);
     text-align: center;
 }
