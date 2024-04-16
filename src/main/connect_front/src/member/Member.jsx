@@ -22,11 +22,11 @@ export default function Member(){
     },[searchValue])    
 
     return(<>
-        <div id="container">
+        <div id="container searchM">
             {member.map((data)=>{
                 console.log(data.profilename)
                 return (<div key={data.mno}>
-                    <div className="topInfo">
+                    <div className="topInfo3">
                     <div className="topImg"><img src={'/img/mimg/'+data.mimg} /></div>
                     <Link to={"/board/sub?mnickname="+data.mnickname}><div key={data.mno}>{data.mnickname}</div></Link>
                     </div>

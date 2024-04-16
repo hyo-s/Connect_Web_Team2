@@ -260,7 +260,7 @@ export default function SignUp(props){
                             <p>{email!==''?msgEmail:''}</p>
                             <Input type="text" name="mphone" placeholder="전화번호를 입력해주세요" value={phoneNumber} onChange={onChangeFindPhoneNumberCheck}/>
                             <p>{phoneNumber!==''?msgPhoneNumber:''}</p>
-                            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                            <FormControl sx={{ m: 1, minWidth: 120 , '& .MuiSelect-select:focus': { borderColor: 'green' }}} size="small">
                                 <InputLabel id="demo-select-small-label">year</InputLabel>
                                 <Select labelId="demo-select-small-label" id="demo-select-small" value={year} onChange={onChangeYear} autoWidth label="year">
                                     {years.map(year=>{
