@@ -11,6 +11,23 @@ export default function BoardList(props) {
     const [loading, setLoading] = useState(false);
     const [initialLoad, setInitialLoad] = useState(true);
 
+    useEffect( ()=>{
+        axios.get(`/conn/b/get.do?page=${page}&limit=5`)
+            .then((response) => {
+                if (!initialLoad) {
+                    // 추가 데이터 로딩 시
+                    setBoardList(prevBoardList => [...prevBoardList, ...response.data]);
+                    
+                }
+                setLoading(false);
+            })
+            .catch(error => {
+                console.log(error);
+                setLoading(false);
+            });
+    } , [ page ])
+
+    console.log( page );
     useEffect(() => {
         const scrollDiv = document.getElementById('scroll');
         const handleScroll = () => {
@@ -21,19 +38,7 @@ export default function BoardList(props) {
             if ((scrollTop + clientHeight) >= (scrollHeight * 3 / 4)) {
                 // 스크롤이 최하단에 도달하면 새로운 데이터를 불러옴
                 setLoading(true);
-                axios.get(`/conn/b/get.do?page=${page}&limit=5`)
-                    .then((response) => {
-                        if (!initialLoad) {
-                            // 추가 데이터 로딩 시
-                            setBoardList(prevBoardList => [...prevBoardList, ...response.data]);
-                            setPage(prevPage => prevPage + 1);
-                        }
-                        setLoading(false);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        setLoading(false);
-                    });
+                setPage(prevPage => prevPage + 1);
             }
         };
     
@@ -45,6 +50,7 @@ export default function BoardList(props) {
                     setBoardList(response.data);
                     setLoading(false);
                     setInitialLoad(false);
+                    
                 })
                 .catch(error => {
                     console.log(error);
@@ -56,7 +62,7 @@ export default function BoardList(props) {
         return () => {
             scrollDiv.removeEventListener('scroll', handleScroll);
         };
-    }, [loading, page, initialLoad]);
+    }, [loading,  initialLoad]);
      
      return(<>
      <div id='scroll'>

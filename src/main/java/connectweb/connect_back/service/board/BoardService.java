@@ -18,6 +18,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,17 +50,18 @@ public class BoardService {
         MemberEntity memberEntity = memberService.loginEntity();
         if(memberEntity == null) return 2;
 
+        if ( boardDto.getGfile().get(0).isEmpty()) return 0;
+        //글쓰기
+        BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
+        boardEntity.setMemberEntity(memberEntity);
+        System.out.println("boardDto = " + boardDto);
 
         //피드이미지----------------------------------------
-        boardDto.getGfile().forEach((uploadFile)->{
+        for( int i = 0; i <boardDto.getGfile().size() ; i++ ){
+
+            MultipartFile uploadFile = boardDto.getGfile().get(i);
 
             System.out.println("uploadFile.isEmpty() = " + uploadFile.isEmpty());
-            if (!uploadFile.isEmpty()) {
-                //글쓰기
-                BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
-
-                boardEntity.setMemberEntity(memberEntity);
-                System.out.println("boardDto = " + boardDto);
 
                 String fileName = fileService.FileUpload2(uploadFile);
                 System.out.println("fileName = " + fileName);
@@ -71,12 +73,8 @@ public class BoardService {
 
                 galleryEntityRepository.save(galleryEntity);
                 uploadBno = galleryEntity.getBoardEntity().getBno();
-            }
             //------------------------------------------------
 
-        });
-        if (uploadBno == 0){
-            return 0;
         }
         return 1;
     }
@@ -90,13 +88,21 @@ public class BoardService {
 
         List<BoardDto> boardDtoList = new ArrayList<>();
         list1.forEach((data) -> {
+            System.out.println("data.toString() = " + data.toString());
             Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer) data.get("bno"));
-            BoardDto boardDto = boardEntity.get().toDto();
-            boardDto.setMnickname((String) data.get("mnickname"));
-            boardDto.setCdate((String) data.get("cdate"));
-            boardDto.setProfilename((String) data.get("mimg"));
+            System.out.println("boardEntity = " + boardEntity);
+            if( boardEntity.isPresent() ) {
+                System.out.println("boardEntity           = " + boardEntity.get() );
+                System.out.println("boardEntity222           = " + boardEntity.get().toDto() );
+                System.out.println("boardEntity.get().getGalleryEntityList() = " + boardEntity.get().getGalleryEntityList());
 
-            boardDtoList.add(boardDto);
+                 BoardDto boardDto = boardEntity.get().toDto();
+                boardDto.setMnickname((String) data.get("mnickname"));
+                boardDto.setCdate((String) data.get("cdate"));
+                boardDto.setProfilename((String) data.get("mimg"));
+
+                boardDtoList.add(boardDto);
+            }
         });
         System.out.println("boardDtoList = " + boardDtoList);
         return boardDtoList;
