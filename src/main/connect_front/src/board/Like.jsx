@@ -57,8 +57,8 @@ export default function Like(props){
 
     return(<>
         <li className="likeBtn">  
-            {likeOnOff?<button onClick={onLikeDelete}>Like ♥</button>:<button onClick={onLikePost}>Like ♡</button>} 
-            <span>{likeValue}</span>
+            {likeOnOff?<button onClick={onLikeDelete}>♥</button>:<button onClick={onLikePost}>♡</button>} 
+            <span className="likeTotal">좋아요 수 {likeValue}</span>
         </li>
        
     </>)

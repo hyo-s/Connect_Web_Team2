@@ -19,7 +19,7 @@ export default function Member(){
             console.log(response.data)
         })
         .catch(error=>{console.log(error)})
-    },[searchValue])
+    },[searchValue])    
 
     return(<>
         <div id="container">

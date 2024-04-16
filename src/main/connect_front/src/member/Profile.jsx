@@ -38,7 +38,6 @@ export default function Profile(){
     };
 
     const {loginInfo} = useContext(LoginInfoContext);
-    // const {mnickname} = useParams();
 
     const [profileData, setProfileData] = useState({
         user : {},
@@ -113,7 +112,7 @@ export default function Profile(){
             }
         }
         data();
-    },[mnickname])
+    },[mnickname, profileData.followChange])
 
     const onClickImg = (board) => {
         console.log(board);
@@ -230,91 +229,93 @@ export default function Profile(){
     return(<>
         <section id="container">
             <div className="innerContainer">
+
                 <div className="myInfo">
-                <div>
-                <div className='imgBox'>
-                    <img src={profileData.user.mimg != 'default.png' ? "/img/mimg/"+profileData.user.mimg : "/img/mimg/default.png"} alt="" />
+                    <div className="topInfo2">
+                        <div className='imgBox'>
+                            <img src={profileData.user.mimg != 'default.png' ? "/img/mimg/"+profileData.user.mimg : "/img/mimg/default.png"} alt="" />
+                        </div>
+                        <ul className="userInfo">
+                            <li>{profileData.user.mname}</li>
+                            <li>{profileData.user.mnickname}</li>
+                            <li>{profileData.user.memail}</li>
+                        </ul>
+
+                    </div>
+
+                    <div className="infoBtn">
+                        {isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit?mnickname="+loginInfo.mnickname}>수정</Link>):(<></>)}
+                        <div className="birCard">
+                            {btnDisabled ? (
+                            <></>
+                            ) : (
+                            <>
+                                {loginInfo.mno === profileData.user.mno && isBirthdayToday && ( // 계정주 이면서 // 생일 당일
+                                <Button onClick={handleOpen2}>생일카드보기</Button>
+                                )}
+                                {loginInfo.mno !== profileData.user.mno && isBirthdayWithinWeek &&( // 당사자가 아니면서 // 계정주 생일 일주일 전 버튼 활성화
+                                <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
+                                )}
+                            </>
+                            )}
+                        </div>
+                        <div>
+                            {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
+                            <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
+                            <button type="button" onClick={onFollow}>팔로우</button>}
+                        </div>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                            >
+
+                                <Box sx={style}>
+                                <div className="cardLayout">
+                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                            <form id="birthForm" className="innerContainer">
+                                            <h3 style={{margin : 0}}>생일카드</h3>
+                                            <textarea value={bbcontent} onChange={onChangeBbcontent} name="bbcontent" cols="42" rows="12"></textarea>
+                                            <div className="cardFileBox">
+                                                    <input type="file" name="uploadList" multiple accept='image/*' />
+                                                </div>
+                                            <button className="CardBtn" type="button" onClick={submit}>등록</button>
+                                            </form>
+                                    </Typography>
+                                </div>
+                                </Box>
+
+                            </Modal>
+
+                        <Modal
+                            open={open2}
+                            onClose={handleClose2}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={style}>
+                                <Carousel sx={{ width: '100%', height:'300px'}} autoPlay={false}>
+                                {
+                                    profileData.birthBoardList.map((birthboard )=>{
+                                        console.log(birthboard)
+                                        console.log(profileData.birthBoardList)
+                                        return(<div >
+                                                <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={()=>delteBtn(birthboard.bbno)}>삭제</button>
+                                                <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
+
+                                        </div>)  // return 2
+                                    })
+                                }
+                                </Carousel>
+                                </Box>
+                        </Modal>
+                    </div>
                 </div>
-                <ul>
-                    <li>{profileData.user.mname}</li>
-                    <li>{profileData.user.mnickname}</li>
-                    <li>{profileData.user.memail}</li>
-                    <li>{isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}</li>
+                <ul className="flowBox">
                     <li><span>팔로우{profileData.user.tofollow}명</span></li>
                     <li><span>팔로워{profileData.user.fromfollow}명</span></li>
                 </ul>
-
-
-            </div>
-            <div>
-                <div>
-                    {btnDisabled ? (
-                    <></>
-                    ) : (
-                    <>
-                        {loginInfo.mno === profileData.user.mno && isBirthdayToday && ( // 계정주 이면서 // 생일 당일
-                        <Button onClick={handleOpen2}>생일카드보기</Button>
-                        )}
-                        {loginInfo.mno !== profileData.user.mno && isBirthdayWithinWeek &&( // 당사자가 아니면서 // 계정주 생일 일주일 전 버튼 활성화
-                        <Button style={{marginBottom : 10, marginTop : 10}} onClick={handleOpen}>생일카드쓰기</Button>
-                        )}
-                    </>
-                    )}
-                </div>
-                <div>
-                    {loginInfo.mno === profileData.user.mno?(<></>):profileData.followChange?
-                    <button type="button" onClick={()=>{onUnfollow(profileData.follow.fno)}}>언팔로우</button>:
-                    <button type="button" onClick={onFollow}>팔로우</button>}
-                </div>
-                <Button onClick={()=>onChat()}>채팅</Button>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                    >
-
-                        <Box sx={style}>
-                        <div className="cardLayout">
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                    <form id="birthForm" className="innerContainer">
-                                    <h3 style={{margin : 0}}>생일카드</h3>
-                                    <textarea value={bbcontent} onChange={onChangeBbcontent} name="bbcontent" cols="42" rows="12"></textarea>
-                                    <div className="cardFileBox">
-                                            <input type="file" name="uploadList" multiple accept='image/*' />
-                                        </div>
-                                    <button className="CardBtn" type="button" onClick={submit}>등록</button>
-                                    </form>
-                            </Typography>
-                        </div>
-                        </Box>
-
-                    </Modal>
-
-                <Modal
-                    open={open2}
-                    onClose={handleClose2}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={style}>
-                        <Carousel  sx={{ width: '100%', height:'300px'}} autoPlay={false}>
-                        {
-                            profileData.birthBoardList.map((birthboard )=>{
-                                console.log(birthboard)
-                                console.log(profileData.birthBoardList)
-                                return(<div >
-                                        <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={()=>delteBtn(birthboard.bbno)}>삭제</button>
-                                        <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
-
-                                </div>)  // return 2
-                            })
-                        }
-                         </Carousel>
-                        </Box>
-                </Modal>
-            </div>
-                </div>
                 <div className="content subContent">
                     <ul className='potoList' >
                         {profileData.myBoard.map((board,index)=>{
