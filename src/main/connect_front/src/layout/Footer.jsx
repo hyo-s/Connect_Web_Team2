@@ -47,7 +47,7 @@ export default function Footer(props){
             <Link to='/board/write'>
                 <BottomNavigationAction label="Write" value="favorites" icon={<AddBoxIcon />}/>
             </Link>
-            <Link to={"/board/sub/"+loginInfo.mnickname}>
+            <Link to={"/board/sub?mnickname="+loginInfo.mnickname}>
                 <BottomNavigationAction label="Profile" value="nearby" icon={<AccountBoxIcon />}/>
             </Link>
             <Link>

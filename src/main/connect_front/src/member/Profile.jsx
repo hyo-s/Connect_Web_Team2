@@ -239,7 +239,7 @@ export default function Profile(){
                     <li>{profileData.user.mname}</li>
                     <li>{profileData.user.mnickname}</li>
                     <li>{profileData.user.memail}</li>
-                    <li>{isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit/"+loginInfo.mnickname}>수정</Link>):(<></>)}</li>
+                    <li>{isLinkDisabled?(<></>):loginInfo.mno === profileData.user.mno?(<Link to={"/member/edit?mnickname="+loginInfo.mnickname}>수정</Link>):(<></>)}</li>
                     <li><span>팔로우{profileData.user.tofollow}명</span></li>
                     <li><span>팔로워{profileData.user.fromfollow}명</span></li>
                 </ul>

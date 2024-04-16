@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
+import Input from '@mui/joy/Input';
+import Button from '@mui/joy/Button';
 
 export default function Edit(props){
 
@@ -9,7 +11,10 @@ export default function Edit(props){
     const nav = useNavigate();
 
     // useParams, useEffect
-    const {mnickname} = useParams('');
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const mnickname = searchParams.get('mnickname');
+
     useEffect(()=>{
         axios.get("/conn/m/page/get.do", {params:{mnickname:mnickname}})
         .then(response =>{
@@ -164,18 +169,18 @@ export default function Edit(props){
                 </div>
                 <div className="content">
                     <form ref={editMember}>
-                        <input name="mfile" type="file" accept="img/*" onChange={onChangeProfile}/>
-                        이름 : <input type="text" name="mname" value={member.mname} onChange={onChangeNameCheck}/>
+                        <Input name="mfile" type="file" accept="img/*" onChange={onChangeProfile}/>
+                        <Input type="text" name="mname" value={member.mname} onChange={onChangeNameCheck}/>
                         <p>{member.mname !== ''? msgName:''}</p>
-                        닉네임 : <input type="text" name="mnickname" value={member.mnickname} onChange={onChangeFindNickNameCheck}/>
+                        <Input type="text" name="mnickname" value={member.mnickname} onChange={onChangeFindNickNameCheck}/>
                         <p>{member.mnickname !==''?msgNickName:''}</p>
-                        이메일 : <input type="text" name="memail" value={member.memail} onChange={onChangeFindEmailCheck}/>
+                        <Input type="text" name="memail" value={member.memail} onChange={onChangeFindEmailCheck}/>
                         <p>{member.memail!==''?msgEmail:''}</p>
-                        전화번호 : <input type="text" name="mphone" value={member.mphone} onChange={onChangeFindPhoneNumberCheck}/>
+                        <Input type="text" name="mphone" value={member.mphone} onChange={onChangeFindPhoneNumberCheck}/>
                         <p>{member.mphone!==''?msgPhoneNumber:''}</p>
                         <Link to="/member/delete">회원탈퇴하기</Link>
                     </form>
-                    <button type="button" onClick={onEditMember}>수정</button>
+                    <Button type="button" onClick={onEditMember}>수정</Button>
                 </div>  
             </div>
         </div>
