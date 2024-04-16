@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
 import { useNavigate} from "react-router-dom";
@@ -19,6 +19,11 @@ import Carousel from "react-material-ui-carousel";
 
 export default function Profile(){
 
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const mnickname = searchParams.get('mnickname');
+
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -33,7 +38,7 @@ export default function Profile(){
     };
 
     const {loginInfo} = useContext(LoginInfoContext);
-    const {mnickname} = useParams();
+    // const {mnickname} = useParams();
 
     const [profileData, setProfileData] = useState({
         user : {},
