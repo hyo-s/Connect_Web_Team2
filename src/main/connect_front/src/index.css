@@ -61,6 +61,8 @@ p {padding: 0; margin: 0;}
     background-color: #ffffff;
     z-index: 9999;
     width: 100vw;
+    padding: 10px;
+    box-sizing: border-box;
 }
 .headerImg img{
   width: 8vh;

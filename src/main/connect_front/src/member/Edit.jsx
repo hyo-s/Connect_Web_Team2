@@ -36,7 +36,8 @@ export default function Edit(props){
         mname : '',
         mnickname : '',
         memail : '',
-        mphone : ''
+        mphone : '',
+        mimg : ''
     });
 
     // 메시지 State
@@ -166,7 +167,7 @@ export default function Edit(props){
         <div className="myInfo">
             <div className="myInfoEdit">
                 <div className='imgBox'>
-                    <img src={img?img:"/img/default.png"} alt="" />
+                <img src={member.mimg != 'default.png' ? "/img/mimg/"+member.mimg : "/img/mimg/default.png"} alt="" />
                 </div>
                 <div className="content">
                     <form ref={editMember}>
