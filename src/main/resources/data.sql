@@ -18,12 +18,12 @@ insert into board(bcontent, mno) values
 ('게시물내용8',1);
 
 insert into gallery(gname, bno) values
-('바탕화면1.jpg',1),
-('반가워.jpg',1),
-('바탕화면2.jpg',2),
-('환영해.jpg',3),
-('세로이미지.jpg',5),
-('왔구나.jpg',6);
+('https://elasticbeanstalk-ap-northeast-2-637423542236.s3.ap-northeast-2.amazonaws.com/반가워.jpg',1),
+('https://elasticbeanstalk-ap-northeast-2-637423542236.s3.ap-northeast-2.amazonaws.com/세로이미지.jpg',1),
+('https://elasticbeanstalk-ap-northeast-2-637423542236.s3.ap-northeast-2.amazonaws.com/환영해.jpg',2),
+('https://elasticbeanstalk-ap-northeast-2-637423542236.s3.ap-northeast-2.amazonaws.com/환영해.jpg',3),
+('https://elasticbeanstalk-ap-northeast-2-637423542236.s3.ap-northeast-2.amazonaws.com/세로이미지.jpg',5),
+('https://elasticbeanstalk-ap-northeast-2-637423542236.s3.ap-northeast-2.amazonaws.com/왔구나.jpg',6);
 
 
 insert into reply(rcontent, bno, mno) values

@@ -68,7 +68,7 @@ export default function BoardUpdate(props){
             console.log(response);
             if(response.data == 0){
                 alert('수정성공')
-                window.location.href = "/board/sub/"+location.state.board.mnickname
+                window.location.href = "/board/sub?mnickname="+location.state.board.mnickname
                 //nav(-1)//뒤로가기
             }else if(response.data == 1){
                 alert('사진없음')

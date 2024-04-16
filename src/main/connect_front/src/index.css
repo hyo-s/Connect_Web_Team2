@@ -46,7 +46,7 @@ p {padding: 0; margin: 0;}
 }
 .header {
     width: 380px;
-    margin: 0 atuo;
+    margin: 0 auto;
     display: flex;
     justify-content: space-evenly;
     box-shadow: 1px 1px 10px #e8e8e8;

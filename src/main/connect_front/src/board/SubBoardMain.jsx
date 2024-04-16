@@ -6,8 +6,9 @@ import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Carousel from "react-material-ui-carousel";
 import ReplyView from "./ReplyList";
-import Like from './Like.jsx';
+import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../index/Index";
+import Like from './Like.jsx';
 
 export default function SubBaordMain(props){
 
@@ -96,7 +97,7 @@ export default function SubBaordMain(props){
                         </li>
                     </ul>
                     <ul className="btmInfo">
-                        <li><a href="#">{r.mnickname}</a></li>
+                        <li><Link to={"/board/sub?mnickname="+r.mnickname}>{r.mnickname}</Link></li>
                         <li>{r.bcontent}</li>   
                     </ul>
                 </div>
