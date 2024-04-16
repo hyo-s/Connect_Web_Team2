@@ -82,54 +82,21 @@ public class BoardService {
     // 전체 게시글 출력 //
     @Transactional
     public List<BoardDto> doGetBoard(int page,int limit) {
-        System.out.println("page = " + page);
         int offset = (page - 1) * limit;
         List<Map<Object, Object>> list1 = boardEntityRepository.findBoardByPageSQL(offset, limit);
 
         List<BoardDto> boardDtoList = new ArrayList<>();
         list1.forEach((data) -> {
-            System.out.println("data.toString() = " + data.toString());
             Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer) data.get("bno"));
-            System.out.println("boardEntity = " + boardEntity);
             if( boardEntity.isPresent() ) {
-                System.out.println("boardEntity           = " + boardEntity.get() );
-                System.out.println("boardEntity222           = " + boardEntity.get().toDto() );
-                System.out.println("boardEntity.get().getGalleryEntityList() = " + boardEntity.get().getGalleryEntityList());
-
                  BoardDto boardDto = boardEntity.get().toDto();
                 boardDto.setMnickname((String) data.get("mnickname"));
                 boardDto.setCdate((String) data.get("cdate"));
                 boardDto.setProfilename((String) data.get("mimg"));
-
                 boardDtoList.add(boardDto);
             }
         });
-        System.out.println("boardDtoList = " + boardDtoList);
         return boardDtoList;
-
-        /*
-        // 전체 게시글 출력 //
-    public List<BoardDto> doGetBoard(){
-        List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
-        System.out.println("list1 = " + list1);
-
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        list1.forEach((data)->{
-            Optional<BoardEntity>boardEntity=boardEntityRepository.findById((Integer)data.get("bno"));
-            BoardDto boardDto=boardEntity.get().toDto();
-            boardDto.setMnickname((String)data.get("mnickname"));
-            boardDto.setCdate((String) data.get("cdate"));
-            boardDto.setProfilename((String) data.get("mimg"));
-
-        boardDtoList.add(boardDto);
-        System.out.println(boardDtoList);
-    });
-        System.out.println("boardDtoList = " + boardDtoList);
-
-        return boardDtoList;
-
-}
-         */
     }
 
     //개별피드출력
