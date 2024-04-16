@@ -1,6 +1,6 @@
 /* myInfo */
 .myInfo{
-    margin: 50px 0;
+    margin: 10px 0;
 }
 .myInfo .imgBox {
     /* border: 1px solid red; */
@@ -102,7 +102,7 @@
 .subContent ul li{
     display: flex;
     justify-content: center;
-    width: 28.7%;
+    width: 26.7%;
     height: 137.8px;
 }
 .subContent ul li img {

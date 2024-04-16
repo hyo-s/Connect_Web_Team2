@@ -42,7 +42,7 @@ export default function Header(props){
             <div className="headerImg">
                 <Link to="/conn"><img src="/img/mimg/connect_logo.png"/></Link>
             </div>
-            <div>
+            <div className="searchInput">
                 <Input
                     size='small'
                     value={searchValue}

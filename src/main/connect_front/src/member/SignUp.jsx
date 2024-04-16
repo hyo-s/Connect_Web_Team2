@@ -244,7 +244,7 @@ export default function SignUp(props){
             <div className="innerContainer">
                 <div className="content">
                     <div className='loginForm'>
-                        <Link to="/conn"><img src="/img/connect_logo.png" style={{width:200, marginLeft:75}} /></Link>
+                        <Link to="/"><img src="/img/mimg/connect_logo.png" style={{width:200, marginLeft:75}} /></Link>
                         <form ref={signup}>
                             <Input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck} />
                             <p>{name!==''? msgName:''}</p>
