@@ -84,7 +84,7 @@ export default function Chatting(props){
                                 (
                                     <div className="rcont">
                                         <div  className="subcont">
-                                            <div className="content">
+                                            <div className="ccontent">
                                                 {msg.msg}
                                             </div>                                    
                                         </div>
@@ -98,7 +98,7 @@ export default function Chatting(props){
                                             <div className="name" >
                                                 {msg.forMnickname}</div> 
                                                 <div className="subcont">
-                                                    <div className="content">
+                                                    <div className="ccontent">
                                                         {msg.msg}
                                                     </div>                                                
                                                 </div>
