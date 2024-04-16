@@ -37,7 +37,7 @@ export default function Login(props){
             <div id='totalBox'>
                 <div id="loginBox">
                     <div className='loginImg'>
-                        <img src="/img/connect_logo.png"/>
+                        <img src="/img/mimg/connect_logo.png"/>
                     </div>
                     <div className='loginForm'>
                         <form id='loginForm'>

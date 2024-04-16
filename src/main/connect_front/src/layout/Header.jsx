@@ -40,7 +40,7 @@ export default function Header(props){
     return(<>
         <div className="header" style={{backgroundColor:'white'}}>
             <div className="headerImg">
-                <Link to="/conn"><img src="/img/connect_logo.png"/></Link>
+                <Link to="/conn"><img src="/img/mimg/connect_logo.png"/></Link>
             </div>
             <div>
                 <Input
