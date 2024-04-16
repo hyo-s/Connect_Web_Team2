@@ -18,6 +18,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,18 +50,18 @@ public class BoardService {
         MemberEntity memberEntity = memberService.loginEntity();
         if(memberEntity == null) return 2;
 
+        if ( boardDto.getGfile().get(0).isEmpty()) return 0;
+        //글쓰기
         BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
-
         boardEntity.setMemberEntity(memberEntity);
         System.out.println("boardDto = " + boardDto);
 
         //피드이미지----------------------------------------
-        boardDto.getGfile().forEach((uploadFile)->{
+        for( int i = 0; i <boardDto.getGfile().size() ; i++ ){
+
+            MultipartFile uploadFile = boardDto.getGfile().get(i);
 
             System.out.println("uploadFile.isEmpty() = " + uploadFile.isEmpty());
-            if (!uploadFile.isEmpty()) {
-                //글쓰기
-
 
                 String fileName = fileService.FileUpload2(uploadFile);
                 System.out.println("fileName = " + fileName);
@@ -72,18 +73,42 @@ public class BoardService {
 
                 galleryEntityRepository.save(galleryEntity);
                 uploadBno = galleryEntity.getBoardEntity().getBno();
-            }
             //------------------------------------------------
 
-        });
-        if (uploadBno == 0){
-            return 0;
         }
         return 1;
     }
 
     // 전체 게시글 출력 //
     @Transactional
+    public List<BoardDto> doGetBoard(int page,int limit) {
+        System.out.println("page = " + page);
+        int offset = (page - 1) * limit;
+        List<Map<Object, Object>> list1 = boardEntityRepository.findBoardByPageSQL(offset, limit);
+
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        list1.forEach((data) -> {
+            System.out.println("data.toString() = " + data.toString());
+            Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer) data.get("bno"));
+            System.out.println("boardEntity = " + boardEntity);
+            if( boardEntity.isPresent() ) {
+                System.out.println("boardEntity           = " + boardEntity.get() );
+                System.out.println("boardEntity222           = " + boardEntity.get().toDto() );
+                System.out.println("boardEntity.get().getGalleryEntityList() = " + boardEntity.get().getGalleryEntityList());
+
+                 BoardDto boardDto = boardEntity.get().toDto();
+                boardDto.setMnickname((String) data.get("mnickname"));
+                boardDto.setCdate((String) data.get("cdate"));
+                boardDto.setProfilename((String) data.get("mimg"));
+
+                boardDtoList.add(boardDto);
+            }
+        });
+        System.out.println("boardDtoList = " + boardDtoList);
+        return boardDtoList;
+
+        /*
+        // 전체 게시글 출력 //
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
         System.out.println("list1 = " + list1);
@@ -95,19 +120,16 @@ public class BoardService {
             boardDto.setMnickname((String)data.get("mnickname"));
             boardDto.setCdate((String) data.get("cdate"));
             boardDto.setProfilename((String) data.get("mimg"));
-           /* BoardDto boardDto=BoardDto.builder()
-                    .bno((Integer)data.get("bno"))
-                    .bcontent((String) data.get("bcontent"))
-                    .mnickname((String)data.get("mnickname"))
-                    .gnameList((List<String>) data.get("gname"))
-                    .build();*/
-            boardDtoList.add(boardDto);
-            System.out.println(boardDtoList);
-        });
+
+        boardDtoList.add(boardDto);
+        System.out.println(boardDtoList);
+    });
         System.out.println("boardDtoList = " + boardDtoList);
 
         return boardDtoList;
 
+}
+         */
     }
 
     //개별피드출력

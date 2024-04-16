@@ -4,6 +4,7 @@ import { LoginInfoContext } from "../index/Index";
 import '../css/board.css';
 import '../css/common.css';
 
+import { Link  } from 'react-router-dom';
 
 export default function Reply(props) {
     const { loginInfo } = useContext(LoginInfoContext);
@@ -94,7 +95,7 @@ export default function Reply(props) {
 
     const replyBtn = (rno,rcontent)=>{
                 return( <>
-                <div className="rBtnBox">                    
+                <div className="rBtnBox">
                     <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
                     <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
                 </div>
@@ -119,7 +120,7 @@ export default function Reply(props) {
                                 <>
                                     <div className="myR">
                                         <div className="rCon">
-                                            <span>{reply.mnickname}</span>
+                                            <span><Link to={"/board/sub?mnickname="+reply.mnickname}>{reply.mnickname}</Link></span>
                                             <span>{reply.rcontent}</span>
                                         </div>
                                         <div className="rBtn">
@@ -138,7 +139,7 @@ export default function Reply(props) {
             {replyList.length > 0 && (
                 <div className="myR">
                     <div className="rCon">
-                        <span>{length.mnickname}</span>
+                        <span><Link to={"/board/sub?mnickname="+length.mnickname}>{length.mnickname}</Link></span>
                         <span>{length.rcontent}</span>
                     </div>
                     {loginInfo.mno == length.mno &&
