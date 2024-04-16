@@ -33,7 +33,7 @@
  /* 메시지 내용 */
  .subcont{ display: flex; align-items: flex-end; }
  .date{  font-size: 10px; margin: 0px 5px; } /* 메시지 시간 */
- .content{  
+ .ccontent{  
     padding: 12px; border-radius: 30px; 
     max-width: 80%; /* 최대 가로사이즈 */
     word-break: break-all; /* 내용일 넘쳤을때 자동줄바꿈 */
@@ -42,12 +42,12 @@
  
  /* 보냈을때 = 오른쪽 배치 , 노랑색배경 */
  .rcont{ display: flex; justify-content: flex-end; margin: 10px 0px; }
- .rcont .content{ background-color: #FAA331; color: #ffffff; }
+ .rcont .ccontent{ background-color: #FAA331; color: #ffffff; }
  .rcont .subcont{ justify-content: flex-end; }
  
  /* 받을을떄 = 왼쪽 배치 , 흰색 배경 */
  .lcont{ display: flex; justify-content: flex-start; margin: 10px 0px; }
- .lcont .content{ background-color: #d1d1d1; }
+ .lcont .ccontent{ background-color: #d1d1d1; }
  .lcont .subcont{ justify-content: flex-start; }
  
  .lcont .pimg{
