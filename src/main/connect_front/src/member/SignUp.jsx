@@ -6,6 +6,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/joy/Button';
+import '../css/member.css';
+import { Link } from 'react-router-dom';
 
 export default function SignUp(props){
 
@@ -242,8 +244,9 @@ export default function SignUp(props){
             <div className="innerContainer">
                 <div className="content">
                     <div className='loginForm'>
+                        <Link to="/conn"><img src="/img/connect_logo.png" style={{width:200, marginLeft:75}} /></Link>
                         <form ref={signup}>
-                            <Input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck}/>
+                            <Input type="text" name="mname" placeholder='이름을 입력해주세요' value={name} onChange={onChangeNameCheck} />
                             <p>{name!==''? msgName:''}</p>
                             <Input type="text" name="mid" placeholder="아이디를 입력해주세요" value={id} onChange={onChangeIdCheck}/>
                             <p>{id!==''?msgId:''}</p>
@@ -257,7 +260,7 @@ export default function SignUp(props){
                             <p>{email!==''?msgEmail:''}</p>
                             <Input type="text" name="mphone" placeholder="전화번호를 입력해주세요" value={phoneNumber} onChange={onChangeFindPhoneNumberCheck}/>
                             <p>{phoneNumber!==''?msgPhoneNumber:''}</p>
-                            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                            <FormControl sx={{ m: 1, minWidth: 120 , '& .MuiSelect-select:focus': { borderColor: 'green' }}} size="small">
                                 <InputLabel id="demo-select-small-label">year</InputLabel>
                                 <Select labelId="demo-select-small-label" id="demo-select-small" value={year} onChange={onChangeYear} autoWidth label="year">
                                     {years.map(year=>{
@@ -283,7 +286,7 @@ export default function SignUp(props){
                             </FormControl>
                             <input name="mbirth" style={{display:'none'}} type='text' value={year+month+day} readOnly/>
                         </form>
-                        <Button type="button" onClick={onSignup} fullWidth>Signup</Button>
+                        <Button type="button" style={{backgroundColor:'#87C55B'}} onClick={onSignup} fullWidth>Signup</Button>
                     </div>
                 </div>
             </div>

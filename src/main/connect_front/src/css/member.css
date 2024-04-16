@@ -47,10 +47,10 @@
 }
 
 
-
 .topImg {
     width: 30px;
     height: 30px;
+    display: flex;
     border-radius: 50%;
     /* border: 1px solid red; */
 }
@@ -65,3 +65,49 @@
     margin-top: 10px !important;
 }
 
+.css-kf85qm-JoyInput-root:not([data-skip-inverted-colors]){
+    --Input-focusedHighlight:#FEC767 !important;
+}
+ /* myInfo */
+.topInfo {
+    display: flex;
+    margin: 30px 0 20px;
+}
+.birCard {
+    display: inline-block;
+}
+.myInfoEdit{
+    display: flex;
+    align-items: center;
+}
+
+.content div{
+    margin-bottom: 5px;
+}
+
+.content button{
+    margin-bottom: 5px;
+}
+
+.editBtn{
+    display: flex;
+    justify-content: space-between;
+}
+.topInfo3 {
+    display: flex;
+    align-items: center;
+    padding: 25px 5px;
+    border-bottom: 1px solid #e8e8e8;
+
+}
+
+.topInfo4 {
+    display: flex;
+    justify-content: space-between;
+}
+.searchM {
+    display: block;
+}
+.subBbtn {
+
+}

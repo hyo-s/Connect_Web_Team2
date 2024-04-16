@@ -1,17 +1,21 @@
 insert into member(mname, mphone, mid, mnickname, mpw, memail, mbirth, mimg) values
-('유재석','010-1111-1111','aaa','aaa','aaa','aaa@aaa.com','980415', 'default.png'),
-('강호동','010-2222-2222','bbb','bbb','bbb','bbb@bbb.com','990417', 'default.png'),
+('유재석','010-1111-1111','aaa','aaa','aaa','aaa@aaa.com','980416', 'default.png'),
+('강호동','010-2222-2222','bbb','bbb','bbb','bbb@bbb.com','990419', 'default.png'),
 ('신동엽','010-3333-3333','ccc','ccc','ccc','ccc@ccc.com','960303', 'default.png'),
 ('서장훈','010-4444-4444','ddd','ddd','ddd','ddd@ddd.com','970404', 'default.png');
 
 
 insert into board(bcontent, mno) values
-('게시물내용1',1),
+('롯데월드에 놀러갔어요. 가서 자이로드롭 탔습니다~ 아주 재밌어요',1),
 ('게시물내용2',2),
 ('게시물내용3',3),
 ('게시물내용4',4),
 ('게시물내용5',1),
-('게시물내용6',1);
+('게시물내용5',1),
+('게시물내용6',1),
+('게시물내용5-1',1),
+('게시물내용7',1),
+('게시물내용8',1);
 
 insert into gallery(gname, bno) values
 ('바탕화면1.jpg',1),

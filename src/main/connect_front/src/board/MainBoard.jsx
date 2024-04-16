@@ -6,7 +6,7 @@ export default function MainBoard(props){
 
 
     return(
-        <div id='scroll'>
+        <div >
             <BoardList />
         </div>
         )
