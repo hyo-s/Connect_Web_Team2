@@ -27,9 +27,11 @@ public class BoardController {
         return boardService.doPostBoard(boardDto);
     }
 
+    //게시글 보기
     @GetMapping("/get.do")
-    public List<BoardDto> doGetBoard(){
-        return boardService.doGetBoard();
+    public List<BoardDto> doGetBoard(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int limit){
+        // page와 limit를 사용하여 적절한 처리를 수행하고, 해당하는 게시글 데이터를 조회하여 반환
+        return boardService.doGetBoard(page, limit);
     }
 
 

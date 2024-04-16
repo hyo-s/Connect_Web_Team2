@@ -102,7 +102,7 @@ export default function Reply(props) {
  
     return (
         <div className="rcontent">
-            <div>
+            <div onClick={toggleComments}>
                 <p>댓글: {replyList.length}</p> {/* 총 댓글 수 출력 */}
             </div>
 
@@ -125,7 +125,7 @@ export default function Reply(props) {
             )}
 
             {replyList.length > 0 && (
-                <div onClick={toggleComments}>
+                <div >
                     <Link to={"/board/sub/"+length.mnickname}><div key={length.mno}>{length.mnickname}</div></Link>
                     <p>{length.rcontent}</p>
                     {loginInfo.mno == length.mno &&

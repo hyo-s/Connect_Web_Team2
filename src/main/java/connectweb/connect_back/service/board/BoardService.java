@@ -83,6 +83,26 @@ public class BoardService {
 
     // 전체 게시글 출력 //
     @Transactional
+    public List<BoardDto> doGetBoard(int page,int limit) {
+        System.out.println("page = " + page);
+        int offset = (page - 1) * limit;
+        List<Map<Object, Object>> list1 = boardEntityRepository.findBoardByPageSQL(offset, limit);
+
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        list1.forEach((data) -> {
+            Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer) data.get("bno"));
+            BoardDto boardDto = boardEntity.get().toDto();
+            boardDto.setMnickname((String) data.get("mnickname"));
+            boardDto.setCdate((String) data.get("cdate"));
+            boardDto.setProfilename((String) data.get("mimg"));
+
+            boardDtoList.add(boardDto);
+        });
+        System.out.println("boardDtoList = " + boardDtoList);
+        return boardDtoList;
+
+        /*
+        // 전체 게시글 출력 //
     public List<BoardDto> doGetBoard(){
         List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
         System.out.println("list1 = " + list1);
@@ -94,19 +114,16 @@ public class BoardService {
             boardDto.setMnickname((String)data.get("mnickname"));
             boardDto.setCdate((String) data.get("cdate"));
             boardDto.setProfilename((String) data.get("mimg"));
-           /* BoardDto boardDto=BoardDto.builder()
-                    .bno((Integer)data.get("bno"))
-                    .bcontent((String) data.get("bcontent"))
-                    .mnickname((String)data.get("mnickname"))
-                    .gnameList((List<String>) data.get("gname"))
-                    .build();*/
-            boardDtoList.add(boardDto);
-            System.out.println(boardDtoList);
-        });
+
+        boardDtoList.add(boardDto);
+        System.out.println(boardDtoList);
+    });
         System.out.println("boardDtoList = " + boardDtoList);
 
         return boardDtoList;
 
+}
+         */
     }
 
     //개별피드출력
