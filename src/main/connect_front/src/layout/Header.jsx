@@ -46,15 +46,15 @@ export default function Header(props){
                 <Input 
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)} 
-                    startDecorator={<SearchIcon />} 
-                    endDecorator={<Button onClick={onSearch}>Search</Button>}
+                    startDecorator={<SearchIcon style={{color : '#87C55B'}} />} 
+                    endDecorator={<Button onClick={onSearch} style={{backgroundColor : '#87C55B'}}>Search</Button>}
                 />
             </div>
             <div>
                 <div className="headerProfile">
-                    <div>
-                        <Link to='#'>
-                            <SendIcon />
+                    <div> 
+                        <Link to='/chat'>
+                            <SendIcon style={{color : '#FAA331', marginTop: 5}}/>
                         </Link>
                     </div>
                 </div>

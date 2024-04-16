@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useContext, useRef, useState, useEffect } from "react";
 import { LoginInfoContext } from "../index/Index";
+import '../css/board.css';
+import '../css/common.css';
+
 import { Link  } from 'react-router-dom';
 
 export default function Reply(props) {
@@ -92,8 +95,11 @@ export default function Reply(props) {
 
     const replyBtn = (rno,rcontent)=>{
                 return( <>
+                <div className="rBtnBox">
                     <button type="button" onClick={(e)=>onUpdate(rno,rcontent)}>수정</button>
                     <button type="button" onClick={(e)=>onDelete(rno)}>삭제</button>
+                </div>
+
                 </>)
     }
     
@@ -102,8 +108,8 @@ export default function Reply(props) {
  
     return (
         <div className="rcontent">
-            <div onClick={toggleComments}>
-                <p>댓글: {replyList.length}</p> {/* 총 댓글 수 출력 */}
+            <div className="rTotal" onClick={toggleComments}>
+                <p>댓글 {replyList.length}개 모두 보기</p> {/* 총 댓글 수 출력 */}
             </div>
 
             {showAllComments && (
@@ -112,11 +118,17 @@ export default function Reply(props) {
                         <div key={index}>
                             {(index !== replyList.length - 1) && ( // 마지막 댓글이 아닌 경우에만 출력
                                 <>
-                                    <Link to={"/board/sub/"+reply.mnickname}><div key={reply.mno}>{reply.mnickname}</div></Link>
-                                    <p>{reply.rcontent}</p>
-                                    {loginInfo.mno == reply.mno &&
-                                        replyBtn(reply.rno, reply.rcontent)
-                                    }
+                                    <div className="myR">
+                                        <div className="rCon">
+                                            <span><Link to={"/board/sub?mnickname="+reply.mnickname}>{reply.mnickname}</Link></span>
+                                            <span>{reply.rcontent}</span>
+                                        </div>
+                                        <div className="rBtn">
+                                            {loginInfo.mno == reply.mno &&
+                                                replyBtn(reply.rno, reply.rcontent)
+                                            }
+                                        </div>
+                                    </div>
                                 </>
                             )}
                         </div>
@@ -125,18 +137,20 @@ export default function Reply(props) {
             )}
 
             {replyList.length > 0 && (
-                <div >
-                    <Link to={"/board/sub/"+length.mnickname}><div key={length.mno}>{length.mnickname}</div></Link>
-                    <p>{length.rcontent}</p>
+                <div className="myR">
+                    <div className="rCon">
+                        <span><Link to={"/board/sub?mnickname="+length.mnickname}>{length.mnickname}</Link></span>
+                        <span>{length.rcontent}</span>
+                    </div>
                     {loginInfo.mno == length.mno &&
                         replyBtn(length.rno, length.rcontent)
                     }
                 </div>
             )}
 
-            <form ref={replyFormRef}>
-                <div>{loginInfo.mnickname}</div>
-                <input value={rcontent} name="rcontent" type="text" onChange={(e) => { setRcontent(e.target.value) }} />
+            <form className="rFrom" ref={replyFormRef}>
+                <div className="rNick">{loginInfo.mnickname}</div>
+                <input sty value={rcontent} name="rcontent" placeholder="댓글 등록.." type="text" onChange={(e) => { setRcontent(e.target.value) }} />
                 <button type="button" onClick={onSubmit}>{editingCommentId !== null ? "수정" : "등록"}</button>
                 {
                     editingCommentId !== null ?

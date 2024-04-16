@@ -17,7 +17,7 @@ export default function BoardList(props) {
                 if (!initialLoad) {
                     // 추가 데이터 로딩 시
                     setBoardList(prevBoardList => [...prevBoardList, ...response.data]);
-                    
+
                 }
                 setLoading(false);
             })
@@ -34,14 +34,14 @@ export default function BoardList(props) {
             const scrollHeight = scrollDiv.scrollHeight;
             const scrollTop = scrollDiv.scrollTop;
             const clientHeight = scrollDiv.clientHeight;
-    
+
             if ((scrollTop + clientHeight) >= (scrollHeight * 3 / 4)) {
                 // 스크롤이 최하단에 도달하면 새로운 데이터를 불러옴
                 setLoading(true);
                 setPage(prevPage => prevPage + 1);
             }
         };
-    
+
         // 초기 로딩 시에만 한 번 데이터를 가져옴
         if (initialLoad) {
             setLoading(true);
@@ -50,14 +50,14 @@ export default function BoardList(props) {
                     setBoardList(response.data);
                     setLoading(false);
                     setInitialLoad(false);
-                    
+
                 })
                 .catch(error => {
                     console.log(error);
                     setLoading(false);
                 });
         }
-    
+
         scrollDiv.addEventListener('scroll', handleScroll);
         return () => {
             scrollDiv.removeEventListener('scroll', handleScroll);
@@ -75,12 +75,12 @@ export default function BoardList(props) {
                                     <div className="content mainContent">
                                         <div className="topInfo">
                                             <div className="topImg"> <img src={'/img/mimg/'+board.profilename} /> </div>
-                                            <Link to={"/board/sub/"+board.mnickname}><div key={board.mno}>{board.mnickname}</div></Link>
+                                            <p><Link to={"/board/sub?mnickname="+board.mnickname}>{board.mnickname}</Link></p>
                                             <div>{board.cdate} </div>
                                         </div>
                                         <ul>
                                             <li>
-                                                <Carousel style={{ width: '100%', height:'370px'}}>                
+                                                <Carousel sx={{ width: '100%', height:'370px'}} autoPlay={false}>
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
@@ -97,12 +97,12 @@ export default function BoardList(props) {
                                             <Like bno={board.bno}/>
                                         </ul>
                                         <ul className="btmInfo">
-                                            <Link to={"/board/sub/"+board.mnickname}><div key={board.mno}>{board.mnickname}</div></Link>
+                                            <li><Link to={"/board/sub?mnickname="+board.mnickname}>{board.mnickname}</Link></li>
                                             <li>{board.bcontent}</li>
                                         </ul>
                                     </div>
                                     <div className="replyBox" >
-                                        
+
                                         <Reply board={board}/>
                                     </div>
                                 </div>

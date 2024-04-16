@@ -6,7 +6,9 @@ export default function Member(){
 
     const [member, setMember] = useState([]);
     const location = useLocation();
+    console.log(location);
     const searchParams = new URLSearchParams(location.search);
+    console.log(searchParams);
     const searchValue = searchParams.get('search');
     console.log(searchValue);
 
@@ -26,7 +28,7 @@ export default function Member(){
                 return (<div key={data.mno}>
                     <div className="topInfo">
                     <div className="topImg"><img src={'/img/mimg/'+data.mimg} /></div>
-                    <Link to={"/board/sub/"+data.mnickname}><div key={data.mno}>{data.mnickname}</div></Link>
+                    <Link to={"/board/sub?mnickname="+data.mnickname}><div key={data.mno}>{data.mnickname}</div></Link>
                     </div>
                 </div>)
             })}
