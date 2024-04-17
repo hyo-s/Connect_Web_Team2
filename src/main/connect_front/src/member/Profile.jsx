@@ -321,7 +321,7 @@ export default function Profile(){
                         {profileData.myBoard.map((board,index)=>{
                             return(<>
                                     <li key={index}>
-                                        <img src={"/img/boardimg/" +board.gnameList[0]} className='gnameList' onClick={()=>onClickImg(board)}/>
+                                        <img src={board.gnameList[0]} className='gnameList' onClick={()=>onClickImg(board)}/>
                                     </li>
                             </>)
                         })}

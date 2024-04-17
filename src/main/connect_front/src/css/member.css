@@ -79,11 +79,15 @@
 .myInfoEdit{
     display: flex;
     align-items: center;
+    width: 390px;
+    margin: 0 auto;
 }
 
 .content div{
     margin-bottom: 5px;
+    width: 200px;
 }
+
 
 .content button{
     margin-bottom: 5px;
@@ -92,6 +96,7 @@
 .editBtn{
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
 .topInfo3 {
     display: flex;
@@ -107,7 +112,4 @@
 }
 .searchM {
     display: block;
-}
-.subBbtn {
-
 }
