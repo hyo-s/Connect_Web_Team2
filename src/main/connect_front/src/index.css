@@ -31,7 +31,20 @@ code {
   overflow-y: auto;
 
 }
+#scroll::-webkit-scrollbar {
+  width: 8px;  /* 스크롤바의 너비 */
+}
 
+#scroll::-webkit-scrollbar-thumb {
+  height: 10%; /* 스크롤바의 길이 */
+  background: #90c968; /* 스크롤바의 색상 */
+  
+  border-radius: 10px;
+}
+
+#scroll::-webkit-scrollbar-track {
+  background: #f7e7cd;  /*스크롤바 뒷 배경 색상*/
+}
 
 /* 초기값 */
 ul {list-style: none; padding: 0; margin: 0;}
