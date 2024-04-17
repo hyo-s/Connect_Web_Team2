@@ -154,7 +154,7 @@ export default function Edit(props){
         await axios.put("/conn/m/put.do", editMember.current)
         .then(response=>{
             setLoginInfo(response.data);
-            nav("/board/sub/"+response.data.mnickname)
+            nav("/board/sub?mnickname="+response.data.mnickname)
         })
         .catch(error=>{console.log(error);})
     }
