@@ -186,4 +186,17 @@
     justify-content: space-between;
 }
 
+.rcontent::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+  }
+  
+.rcontent::-webkit-scrollbar-thumb {
+height: 5%; /* 스크롤바의 길이 */
+background: #90ca67; /* 스크롤바의 색상 */
 
+border-radius: 10px;
+}
+
+.rcontent::-webkit-scrollbar-track {
+background: #f3eee6;  /*스크롤바 뒷 배경 색상*/
+}
