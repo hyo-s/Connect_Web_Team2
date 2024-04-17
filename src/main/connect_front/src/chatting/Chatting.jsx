@@ -17,7 +17,7 @@ export default function Chatting(props){
     
 
     if(!clientSocket.current){
-        clientSocket.current = new WebSocket('ws://192.168.17.128:80/chat');
+        clientSocket.current = new WebSocket('ws://192.168.17.131:80/chat');
         clientSocket.current.onclose = (e) => {console.log(e);}
         clientSocket.current.onerror = (e) => {console.log(e);}
         clientSocket.current.onmessage = (e) => {

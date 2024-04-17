@@ -11,3 +11,4 @@ public class ConnectWeb {
 		SpringApplication.run(ConnectWeb.class, args);
 	}
 }
+
