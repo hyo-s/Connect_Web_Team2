@@ -42,7 +42,7 @@ export default function Login(props){
                                 <Input type="text" placeholder='아이디' name='mid' />
                             </div>
                             <div>
-                                <Input style={{marginTop : 10}} type="text" placeholder='비밀번호' name='mpw'/>
+                                <Input style={{marginTop : 10}} type="password" placeholder='비밀번호' name='mpw'/>
                             </div>
                             <div>
                                 <Button style={{backgroundColor : '#87C55B', padding : 10}} type="button" color='warning' className='logBtn' fullWidth onClick={login}>로그인</Button>

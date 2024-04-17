@@ -234,7 +234,9 @@ export default function SignUp(props){
             }
         }
         axios.post('/conn/m/signup.do',signup.current)
-            .then(response=>{})
+            .then(response=>{
+                window.location.href="/"
+            })
             .catch(error=>{console.log(error);})
     }
 

@@ -70,7 +70,7 @@ export default function BoardList() {
                                                  {
                                                     board.gnameList.map((img)=>{
                                                         return(<>
-                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:350, objectFit:"cover"}}/>
+                                                            <img src={"/img/boardimg/"+img} style={{width:"100%", height:340, objectFit:"cover"}}/>
                                                         </>)
                                                     })
                                                 }

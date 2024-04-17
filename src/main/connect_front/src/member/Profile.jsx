@@ -274,9 +274,9 @@ export default function Profile(){
                                 <Carousel sx={{ width: '100%', height:'300px'}} autoPlay={false}>
                                 {
                                     profileData.birthBoardList.map((birthboard )=>{
-                                        return(<div >
+                                        return(<div>
                                                 <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={()=>delteBtn(birthboard.bbno)}>삭제</button>
-                                                <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'contain',backgroundColor : 'rgb(255,255,255,0.5)' }}>{birthboard.bbcontent}</div>
+                                                <div className="birthboardCon"style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'contain',backgroundColor : 'rgb(255,255,255,0.5)' }}>{birthboard.bbcontent}</div>
 
                                         </div>)  // return 2
                                     })
@@ -293,9 +293,10 @@ export default function Profile(){
                 <div className="content subContent">
                     <ul className='potoList' >
                         {profileData.myBoard.map((board,index)=>{
+                            console.log(profileData.myBoard);
                             return(<>
                                     <li key={index}>
-                                        <img src={"/img/boardimg/" +board.gnameList[0]} className='gnameList' onClick={()=>onClickImg(board)}/>
+                                        <img src={"/img/boardimg/"+board.gnameList[0]} className='gnameList' onClick={()=>onClickImg(board)}/>
                                     </li>
                             </>)
                         })}
