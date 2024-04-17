@@ -8,7 +8,7 @@
 
     insert into board(bcontent, mno) values
     ('눈 내린다~',1),
-    ('★',2),
+    ('별',2),
     ('별 너무 이쁘다',3),
     ('일본여행~☆',4),
     ('Coffee',5);
