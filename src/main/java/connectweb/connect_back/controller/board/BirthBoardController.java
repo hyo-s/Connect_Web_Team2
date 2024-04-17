@@ -25,13 +25,6 @@ public class BirthBoardController {
         return birthBoardService.doGetBirthBoard();
     }
 
-    // view
-//    @GetMapping("/view.do")
-//    public List<BirthBoardDto> ViewBirthBoard(String mnickname){
-//        System.out.println("mnickname = " + mnickname);
-//        return birthBoardService.ViewBirthBoard(mnickname);
-//    }
-
     // 게시글 삭제
     @DeleteMapping("/delete.do")
     public boolean doDeleteBirthBoard(int bbno){

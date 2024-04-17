@@ -24,7 +24,6 @@ public class BirthBoardDto extends BaseTimeDto{
     private String bbcontent;
     private int mno;
 
-
     // 1. 등록용 게시물 이미지 필드
     private List<MultipartFile> uploadList = new ArrayList<>();;
     // 2. 출력용 게시물 이미지 필드

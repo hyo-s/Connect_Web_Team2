@@ -15,6 +15,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Carousel from "react-material-ui-carousel";
+import { colors } from "@mui/material";
 
 
 export default function Profile(){
@@ -208,7 +209,7 @@ export default function Profile(){
         axios.delete('/birthboard/delete.do',{params : {bbno:bbno}})
         .then((r)=>{
             console.log(r);
-            window.location.href = "/board/sub/"+profileData.user.mnickname;
+            window.location.href = "/board/sub?mnickname="+profileData.user.mnickname;
         })
         .catch(error=>{console.log(error)})
     }
@@ -302,7 +303,7 @@ export default function Profile(){
                                         console.log(profileData.birthBoardList)
                                         return(<div >
                                                 <button style={{zIndex:9999}} className="bbBtn" type="button" onClick={()=>delteBtn(birthboard.bbno)}>삭제</button>
-                                                <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'cover'}}>{birthboard.bbcontent}</div>
+                                                <div style={{ backgroundImage: `url(/img/birthboardimg/${birthboard.bbimg})`,height : 250, backgroundRepeat:'no-repeat',  backgroundPosition: 'bottom', backgroundSize:'contain',backgroundColor : 'rgb(255,255,255,0.5)' }}>{birthboard.bbcontent}</div>
 
                                         </div>)  // return 2
                                     })
