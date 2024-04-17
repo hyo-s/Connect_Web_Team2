@@ -91,6 +91,14 @@
     margin-top: 10px;
 }
 
+/* .btmInfo li:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} */
+
+
+
 /* subcontent */
 .subContent ul {
     width: 100%;

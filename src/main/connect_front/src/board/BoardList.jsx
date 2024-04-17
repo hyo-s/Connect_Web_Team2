@@ -5,29 +5,35 @@ import Carousel from "react-material-ui-carousel";
 import Like from "./Like";
 import { Link } from 'react-router-dom';
 
-export default function BoardList(props) {
+export default function BoardList() {
     const [boardList, setBoardList] = useState([]);
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
     const [initialLoad, setInitialLoad] = useState(true);
 
     useEffect( ()=>{
         axios.get(`/conn/b/get.do?page=${page}&limit=5`)
             .then((response) => {
-                if (!initialLoad) {
-                    // 추가 데이터 로딩 시
+                if (!initialLoad) { // 추가 데이터 로딩 시
                     setBoardList(prevBoardList => [...prevBoardList, ...response.data]);
-
                 }
-                setLoading(false);
             })
             .catch(error => {
                 console.log(error);
-                setLoading(false);
             });
     } , [ page ])
-    
+
     useEffect(() => {
+         // 초기 로딩 시에만 한 번 데이터를 가져옴
+         if (initialLoad) {
+            axios.get(`/conn/b/get.do?page=${page}&limit=5`)
+                .then((response) => {
+                    setBoardList(response.data);
+                    setInitialLoad(false);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
         const scrollDiv = document.getElementById('scroll');
         const handleScroll = () => {
             const scrollHeight = scrollDiv.scrollHeight;
@@ -35,33 +41,15 @@ export default function BoardList(props) {
             const clientHeight = scrollDiv.clientHeight;
 
             if ((scrollTop + clientHeight) >= (scrollHeight * 3 / 4)) {
-                // 스크롤이 최하단에 도달하면 새로운 데이터를 불러옴
-                setLoading(true);
+                // 스크롤이 3/4 도달하면 새로운 데이터를 불러옴
                 setPage(prevPage => prevPage + 1);
             }
         };
-
-        // 초기 로딩 시에만 한 번 데이터를 가져옴
-        if (initialLoad) {
-            setLoading(true);
-            axios.get(`/conn/b/get.do?page=${page}&limit=5`)
-                .then((response) => {
-                    setBoardList(response.data);
-                    setLoading(false);
-                    setInitialLoad(false);
-
-                })
-                .catch(error => {
-                    console.log(error);
-                    setLoading(false);
-                });
-        }
-
         scrollDiv.addEventListener('scroll', handleScroll);
         return () => {
             scrollDiv.removeEventListener('scroll', handleScroll);
         };
-    }, [loading,  initialLoad]);
+    }, [ initialLoad]);
      
      return(<>
      <div id='scroll'>
