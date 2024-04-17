@@ -49,7 +49,6 @@ public class BirthBoardService {
         if(saverBoard.getBbno()>0)return true;
         return false;
     }
-
     // 전체출력
     @Transactional
     public List<BirthBoardDto> doGetBirthBoard(){
