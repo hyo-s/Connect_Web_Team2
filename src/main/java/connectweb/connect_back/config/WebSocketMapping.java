@@ -16,7 +16,6 @@ public class WebSocketMapping implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        System.out.println("registry = " + registry);
         registry.addHandler(socket,"/chat").setAllowedOrigins("*");
     }
 }

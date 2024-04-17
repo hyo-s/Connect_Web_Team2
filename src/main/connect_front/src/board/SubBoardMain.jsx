@@ -14,34 +14,28 @@ export default function SubBaordMain(props){
 
     //로그인정보
     const {loginInfo} = useContext(LoginInfoContext);
-    console.log(loginInfo);
 
     //보드정보
     const location = useLocation();
     const nav = useNavigate();
     const { myBoard } = location.state || {};
-    console.log(location.state);
 
     useEffect(() => {
         // myBoard가 유효한 배열인지 확인 후 로직 수행
         if (myBoard && Array.isArray(myBoard)) {
-            console.log(myBoard);
         }
     }, [myBoard]);
 
     //게시글수정
     const onUpdate = (board) =>{
-        //console.log(board)
         nav('/board/update',{state:{board}})
     }
 
     //게시글삭제
     const onDelete = (bno, mnickname)=>{
-        console.log(mnickname);
         axios.delete('/conn/b/delete.do',{params:{bno:bno}})
             .then((r)=>{
                 if(r.data){
-                    console.log(r)
                     alert('삭제완료')
                     window.location.href = '/board/sub/'+mnickname
                 }else{
@@ -52,7 +46,6 @@ export default function SubBaordMain(props){
     }
 
     const r = location.state.r;
-    console.log(r);
 
     return(<>
        {

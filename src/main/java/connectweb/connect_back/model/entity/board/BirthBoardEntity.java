@@ -39,8 +39,6 @@ public class BirthBoardEntity extends BaseTime {
 
     private String bbimg;
 
-
-
     public BirthBoardDto birthDto(){
         return BirthBoardDto.builder()
                 .bbno(this.bbno)

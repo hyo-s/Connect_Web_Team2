@@ -18,18 +18,12 @@ export default function BoardWrite(props){
     }
 
     const onChangeImg = (e) =>{
-        console.log(e);
-        console.log(e.target.files);
         const imgArray = Array.from(e.target.files);
-        console.log(imgArray)
         let imgPre = [];
         imgArray.forEach((i) => {
-            console.log(i)
             imgPre.push(URL.createObjectURL(i));
-            console.log(imgPre);
         });
         setImgPre(imgPre);
-        console.log(imgPre);
     }
     
     const onSubmit = (e)=>{
@@ -41,7 +35,6 @@ export default function BoardWrite(props){
 
         axios.post("/conn/b/post.do", contentFormData)
         .then(response => {
-            console.log(response);
             if(response.data == 1){
                 alert('등록성공')
                 window.location.href = '/board/sub?mnickname='+mnickname
@@ -65,7 +58,6 @@ export default function BoardWrite(props){
                 {
                     imgPre.length!=0 &&
                     imgPre.map((i)=>{
-                        console.log(i);
                         return(<>
                             <img src={i} style={{width:"100%", height:400, objectFit:"cover"}}/>
                         </>)

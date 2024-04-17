@@ -14,12 +14,9 @@ export default function Header(props){
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate();
 
-    console.log(loginInfo);
-
     useEffect(()=>{
         axios.get("/conn/m/login/info/get.do")
         .then(response=>{
-            console.log(response);
             setLoginInfo(response.data)
         })
         .catch(error=>{console.log(error)})
@@ -33,7 +30,6 @@ export default function Header(props){
     }
 
     const onSearch = ()=>{
-        console.log(searchValue);
         navigate(`/member?search=${searchValue}`);
     }
 

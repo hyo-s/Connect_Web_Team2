@@ -16,14 +16,11 @@ export default function Login(props){
 
         const loginForm = document.querySelector('#loginForm');
         const loginFormData = new FormData(loginForm);
-        console.log(loginForm);
 
         await axios.post('/conn/m/login.do',loginFormData)
         .then((r)=>{
-            console.log(r);
             if(r.data){
                 alert('로그인성공');
-                console.log(loginInfo);
                 window.location.href = "/conn"
             }else{
                 alert('로그인실패');
@@ -45,7 +42,7 @@ export default function Login(props){
                                 <Input type="text" placeholder='아이디' name='mid' />
                             </div>
                             <div>
-                                <Input style={{marginTop : 10}} type="text" placeholder='비밀번호' name='mpw'/>
+                                <Input style={{marginTop : 10}} type="password" placeholder='비밀번호' name='mpw'/>
                             </div>
                             <div>
                                 <Button style={{backgroundColor : '#87C55B', padding : 10}} type="button" color='warning' className='logBtn' fullWidth onClick={login}>로그인</Button>

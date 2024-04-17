@@ -49,7 +49,6 @@ public class BirthBoardService {
         if(saverBoard.getBbno()>0)return true;
         return false;
     }
-
     // 전체출력
     @Transactional
     public List<BirthBoardDto> doGetBirthBoard(){
@@ -65,28 +64,13 @@ public class BirthBoardService {
                     .build();
 
             birthBoardDtoList.add(birthBoardDto);
-            System.out.println("birthBoardDtoList = " + birthBoardDtoList);
         });
         return birthBoardDtoList;
     }
 
-    // 개별출력
-//    public List<BirthBoardDto> ViewBirthBoard(String mnickname){
-//        List<Map<Object,Object>> list = birthBoardEntityRepository.findViewBirthBoardSQL(memberService.memberView(mnickname).getMno());
-//        List<BirthBoardDto> birthDtoList = new ArrayList<>();
-//        for(int i =0; i< list.size(); i++) {
-//            Optional<BirthBoardEntity> birthBoardEntity = birthBoardEntityRepository.findById((Integer)list.get(i).get("bno"));
-//            BirthBoardDto birthBoardDto = birthBoardEntity.get().birthDto();
-//            birthDtoList.add(birthBoardDto);
-//        }
-//
-//        return birthDtoList ;
-//    }
-
     // 게시글 삭제
     public boolean doDeleteBirthBoard(int bbno){
         birthBoardEntityRepository.deleteById(bbno);
-        System.out.println("servicedeletebbno = " + bbno);
         return true;
     }
 }

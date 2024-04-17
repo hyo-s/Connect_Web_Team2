@@ -11,21 +11,16 @@ export default function SubBoard(props) {
 
     const navigate = useNavigate();
 
-    console.log(myBoard)
-
     useEffect(()=>{
 
         axios.get('/conn/b/myboard/get.do', {params:{mnickname : mnickname}})
             .then((r)=>{
-                console.log(r)
                 setMyBoard(r.data);
             })
     },[])
 
     
-    const onClickImg = (myBoard,r) =>{
-        console.log(myBoard)
-        
+    const onClickImg = (myBoard,r) =>{        
         navigate('/baord/submain',{state:{myBoard:myBoard, r:r}})
     }
 
@@ -42,9 +37,7 @@ export default function SubBoard(props) {
                 </div>
                 <div className="content subContent">
                 <ul className='potoList' >
-                    {myBoard.map((r)=>{ 
-                        console.log(r);
-                        console.log(r.bno);
+                    {myBoard.map((r)=>{
                         return(<>                           
                                 <li><img src={r.gnameList[0]} className='gnameList' onClick={()=>onClickImg({myBoard,r})}></img></li>
                             

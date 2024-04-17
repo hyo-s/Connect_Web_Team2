@@ -54,14 +54,11 @@ public class BoardService {
         //글쓰기
         BoardEntity boardEntity = boardEntityRepository.save(boardDto.toEntity());
         boardEntity.setMemberEntity(memberEntity);
-        System.out.println("boardDto = " + boardDto);
 
         //피드이미지----------------------------------------
         for( int i = 0; i <boardDto.getGfile().size() ; i++ ){
 
             MultipartFile uploadFile = boardDto.getGfile().get(i);
-
-            System.out.println("uploadFile.isEmpty() = " + uploadFile.isEmpty());
 
                 String fileName = fileService.FileUpload2(uploadFile);
                 System.out.println("fileName = " + fileName);
@@ -82,21 +79,14 @@ public class BoardService {
     // 전체 게시글 출력 //
     @Transactional
     public List<BoardDto> doGetBoard(int page,int limit) {
-        System.out.println("page = " + page);
         int offset = (page - 1) * limit;
         List<Map<Object, Object>> list1 = boardEntityRepository.findBoardByPageSQL(offset, limit);
 
         List<BoardDto> boardDtoList = new ArrayList<>();
         list1.forEach((data) -> {
-            System.out.println("data.toString() = " + data.toString());
             Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer) data.get("bno"));
-            System.out.println("boardEntity = " + boardEntity);
             if( boardEntity.isPresent() ) {
-                System.out.println("boardEntity           = " + boardEntity.get() );
-                System.out.println("boardEntity222           = " + boardEntity.get().toDto() );
-                System.out.println("boardEntity.get().getGalleryEntityList() = " + boardEntity.get().getGalleryEntityList());
-
-                 BoardDto boardDto = boardEntity.get().toDto();
+                BoardDto boardDto = boardEntity.get().toDto();
                 boardDto.setMnickname((String) data.get("mnickname"));
                 boardDto.setCdate((String) data.get("cdate"));
                 boardDto.setProfilename((String) data.get("mimg"));
@@ -104,32 +94,7 @@ public class BoardService {
                 boardDtoList.add(boardDto);
             }
         });
-        System.out.println("boardDtoList = " + boardDtoList);
         return boardDtoList;
-
-        /*
-        // 전체 게시글 출력 //
-    public List<BoardDto> doGetBoard(){
-        List<Map<Object,Object>> list1=boardEntityRepository.findAllBoardSQL();
-        System.out.println("list1 = " + list1);
-
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        list1.forEach((data)->{
-            Optional<BoardEntity>boardEntity=boardEntityRepository.findById((Integer)data.get("bno"));
-            BoardDto boardDto=boardEntity.get().toDto();
-            boardDto.setMnickname((String)data.get("mnickname"));
-            boardDto.setCdate((String) data.get("cdate"));
-            boardDto.setProfilename((String) data.get("mimg"));
-
-        boardDtoList.add(boardDto);
-        System.out.println(boardDtoList);
-    });
-        System.out.println("boardDtoList = " + boardDtoList);
-
-        return boardDtoList;
-
-}
-         */
     }
 
     //개별피드출력
@@ -141,8 +106,6 @@ public class BoardService {
             Optional<BoardEntity> boardEntity = boardEntityRepository.findById((Integer)list.get(i).get("bno"));
             BoardDto boardDto = boardEntity.get().toDto();
             boardDtoList.add(boardDto);
-            System.out.println("boardEntity.toString() = " + boardEntity.toString());
-            System.out.println("list = " + list);
         }
 
         return boardDtoList ;
@@ -152,13 +115,10 @@ public class BoardService {
     //게시글 수정
     @Transactional
     public int doPutBoard(BoardDto boardDto){
-        System.out.println("BoardService.doPutBoard");
-        System.out.println("boardDto = " + boardDto);
         BoardEntity boardEntity = boardEntityRepository.findById(boardDto.getBno()).get();
         boardEntity.setBcontent(boardDto.getBcontent());
 
         boardDto.getGfile().forEach((uploadFile)->{
-            System.out.println("uploadFile.isEmpty() = " + uploadFile.isEmpty());
             if(!uploadFile.isEmpty()){
                 String fileName = fileService.FileUpload2(uploadFile);
                 GalleryEntity galleryEntity = GalleryEntity.builder()
@@ -166,7 +126,6 @@ public class BoardService {
                         .boardEntity(boardEntity)
                         .build();
                 galleryEntityRepository.save(galleryEntity);
-                System.out.println("fileName = " + fileName);
             }
             
         });
@@ -180,15 +139,11 @@ public class BoardService {
 
     //이미지삭제 (게시글 수정용)
     public boolean doDeleteImg(String gname){
-        System.out.println("BoardService.doDeleteImg");
-        System.out.println("gname = " + gname);
         int gno = galleryEntityRepository.findGno(gname);
         if(gno != 0){
             galleryEntityRepository.deleteById(gno);
-            
             return true;
         }
-
         return false;
     }
 
@@ -196,11 +151,9 @@ public class BoardService {
     //게시글 삭제
     @Transactional
     public boolean doDeleteBoard(int bno){
-        System.out.println("bno = " + bno);
         MemberDto loginDto = memberService.loginInfo();
 
         Optional<BoardEntity> optionalBoardEntity = boardEntityRepository.findById(bno);
-        System.out.println("optionalBoardEntity = " + optionalBoardEntity);
         if(optionalBoardEntity.get().getMemberEntity().getMno() == loginDto.getMno()){
             boardEntityRepository.deleteById(bno);
             return true;
@@ -212,7 +165,6 @@ public class BoardService {
     @Transactional
     public boolean doPostReply(ReplyDto replyDto){
         ReplyEntity replyEntity=replyDto.toEntity();
-        System.out.println(replyEntity);
         MemberEntity memberEntity = memberService.loginEntity();
 
         BoardEntity boardEntity= BoardEntity.builder()
@@ -220,8 +172,6 @@ public class BoardService {
                 .build();
         replyEntity.setMemberEntity(memberEntity);
         replyEntity.setBoardEntity(boardEntity);
-
-        System.out.println("boardEntity = " + boardEntity);
 
         replyEntityRepository.save(replyEntity);
         return true;
@@ -240,7 +190,6 @@ public class BoardService {
                     .build();
             list.add(replyDto);
         });
-        System.out.println("list = " + list);
         return list;
     }
     //=========================== 댓글 수정 ==========================//
