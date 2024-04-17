@@ -233,7 +233,7 @@ export default function Profile(){
                 <div className="myInfo">
                     <div className="topInfo2">
                         <div className='imgBox'>
-                            <img src={profileData.user.mimg != 'default.png' ? "/img/mimg/"+profileData.user.mimg : "/img/mimg/default.png"} alt="" />
+                            <img src={profileData.user.mimg != 'default.png' ? profileData.user.mimg : "/img/mimg/default.png"} alt="" />
                         </div>
                         <ul className="userInfo">
                             <li>{profileData.user.mname}</li>
